@@ -1,0 +1,407 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		8F248DC51E93464000786B69 /* CustomTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F248DC41E93464000786B69 /* CustomTextField.m */; };
+		8F248DC81E9349EF00786B69 /* CustomButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F248DC71E9349EF00786B69 /* CustomButton.m */; };
+		8F248DCA1E935ACD00786B69 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8F248DC91E935ACC00786B69 /* Main.storyboard */; };
+		8F248DD51E9393E000786B69 /* KeyboardAvoidingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F248DD41E9393DF00786B69 /* KeyboardAvoidingViewController.m */; };
+		8F4D2D291E8CFBE800347F9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F4D2D281E8CFBE800347F9A /* main.m */; };
+		8F4D2D2C1E8CFBE800347F9A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F4D2D2B1E8CFBE800347F9A /* AppDelegate.m */; };
+		8F4D2D321E8CFBE800347F9A /* Account.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8F4D2D301E8CFBE800347F9A /* Account.storyboard */; };
+		8F4D2D341E8CFBE800347F9A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8F4D2D331E8CFBE800347F9A /* Assets.xcassets */; };
+		8F4D2D371E8CFBE800347F9A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8F4D2D351E8CFBE800347F9A /* LaunchScreen.storyboard */; };
+		8F93E3B21E8E267E008C02D4 /* SignInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F93E3B11E8E267E008C02D4 /* SignInViewController.m */; };
+		8F93E3B51E8E272C008C02D4 /* ForgotPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F93E3B41E8E272C008C02D4 /* ForgotPasswordViewController.m */; };
+		8F93E3B81E8E4F3E008C02D4 /* SignUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F93E3B71E8E4F3E008C02D4 /* SignUpViewController.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		8F248DC31E93464000786B69 /* CustomTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomTextField.h; sourceTree = "<group>"; };
+		8F248DC41E93464000786B69 /* CustomTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomTextField.m; sourceTree = "<group>"; };
+		8F248DC61E9349EF00786B69 /* CustomButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomButton.h; sourceTree = "<group>"; };
+		8F248DC71E9349EF00786B69 /* CustomButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomButton.m; sourceTree = "<group>"; };
+		8F248DC91E935ACC00786B69 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		8F248DD31E9393DF00786B69 /* KeyboardAvoidingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeyboardAvoidingViewController.h; sourceTree = "<group>"; };
+		8F248DD41E9393DF00786B69 /* KeyboardAvoidingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeyboardAvoidingViewController.m; sourceTree = "<group>"; };
+		8F4D2D241E8CFBE800347F9A /* RoomRent.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RoomRent.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		8F4D2D281E8CFBE800347F9A /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		8F4D2D2A1E8CFBE800347F9A /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		8F4D2D2B1E8CFBE800347F9A /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		8F4D2D311E8CFBE800347F9A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Account.storyboard; sourceTree = "<group>"; };
+		8F4D2D331E8CFBE800347F9A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		8F4D2D361E8CFBE800347F9A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		8F4D2D381E8CFBE800347F9A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8F93E3B01E8E267E008C02D4 /* SignInViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignInViewController.h; sourceTree = "<group>"; };
+		8F93E3B11E8E267E008C02D4 /* SignInViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignInViewController.m; sourceTree = "<group>"; };
+		8F93E3B31E8E272C008C02D4 /* ForgotPasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ForgotPasswordViewController.h; sourceTree = "<group>"; };
+		8F93E3B41E8E272C008C02D4 /* ForgotPasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForgotPasswordViewController.m; sourceTree = "<group>"; };
+		8F93E3B61E8E4F3E008C02D4 /* SignUpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignUpViewController.h; sourceTree = "<group>"; };
+		8F93E3B71E8E4F3E008C02D4 /* SignUpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignUpViewController.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		8F4D2D211E8CFBE800347F9A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		8F248DC21E9345D000786B69 /* Custom Views */ = {
+			isa = PBXGroup;
+			children = (
+				8F248DC31E93464000786B69 /* CustomTextField.h */,
+				8F248DC41E93464000786B69 /* CustomTextField.m */,
+				8F248DC61E9349EF00786B69 /* CustomButton.h */,
+				8F248DC71E9349EF00786B69 /* CustomButton.m */,
+			);
+			path = "Custom Views";
+			sourceTree = "<group>";
+		};
+		8F248DCB1E93618C00786B69 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		8F248DD21E9393AF00786B69 /* Custom Class */ = {
+			isa = PBXGroup;
+			children = (
+				8F248DD31E9393DF00786B69 /* KeyboardAvoidingViewController.h */,
+				8F248DD41E9393DF00786B69 /* KeyboardAvoidingViewController.m */,
+			);
+			path = "Custom Class";
+			sourceTree = "<group>";
+		};
+		8F4D2D1B1E8CFBE800347F9A = {
+			isa = PBXGroup;
+			children = (
+				8F4D2D261E8CFBE800347F9A /* RoomRent */,
+				8F4D2D251E8CFBE800347F9A /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		8F4D2D251E8CFBE800347F9A /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				8F4D2D241E8CFBE800347F9A /* RoomRent.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		8F4D2D261E8CFBE800347F9A /* RoomRent */ = {
+			isa = PBXGroup;
+			children = (
+				8F93E3AF1E8E260E008C02D4 /* Helpers */,
+				8F93E3AE1E8E2609008C02D4 /* Constants */,
+				8F248DC21E9345D000786B69 /* Custom Views */,
+				8F248DD21E9393AF00786B69 /* Custom Class */,
+				8F93E3AC1E8E25FE008C02D4 /* View Controllers */,
+				8F4D2D2A1E8CFBE800347F9A /* AppDelegate.h */,
+				8F4D2D2B1E8CFBE800347F9A /* AppDelegate.m */,
+				8F248DC91E935ACC00786B69 /* Main.storyboard */,
+				8F4D2D351E8CFBE800347F9A /* LaunchScreen.storyboard */,
+				8F4D2D301E8CFBE800347F9A /* Account.storyboard */,
+				8F4D2D331E8CFBE800347F9A /* Assets.xcassets */,
+				8F4D2D381E8CFBE800347F9A /* Info.plist */,
+				8F4D2D271E8CFBE800347F9A /* Supporting Files */,
+			);
+			path = RoomRent;
+			sourceTree = "<group>";
+		};
+		8F4D2D271E8CFBE800347F9A /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				8F4D2D281E8CFBE800347F9A /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		8F93E3AC1E8E25FE008C02D4 /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				8F93E3AD1E8E25FE008C02D4 /* Account Module */,
+				8F248DCB1E93618C00786B69 /* Main */,
+			);
+			path = "View Controllers";
+			sourceTree = "<group>";
+		};
+		8F93E3AD1E8E25FE008C02D4 /* Account Module */ = {
+			isa = PBXGroup;
+			children = (
+				8F93E3B01E8E267E008C02D4 /* SignInViewController.h */,
+				8F93E3B11E8E267E008C02D4 /* SignInViewController.m */,
+				8F93E3B31E8E272C008C02D4 /* ForgotPasswordViewController.h */,
+				8F93E3B41E8E272C008C02D4 /* ForgotPasswordViewController.m */,
+				8F93E3B61E8E4F3E008C02D4 /* SignUpViewController.h */,
+				8F93E3B71E8E4F3E008C02D4 /* SignUpViewController.m */,
+			);
+			path = "Account Module";
+			sourceTree = "<group>";
+		};
+		8F93E3AE1E8E2609008C02D4 /* Constants */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Constants;
+			sourceTree = "<group>";
+		};
+		8F93E3AF1E8E260E008C02D4 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		8F4D2D231E8CFBE800347F9A /* RoomRent */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8F4D2D3B1E8CFBE800347F9A /* Build configuration list for PBXNativeTarget "RoomRent" */;
+			buildPhases = (
+				8F4D2D201E8CFBE800347F9A /* Sources */,
+				8F4D2D211E8CFBE800347F9A /* Frameworks */,
+				8F4D2D221E8CFBE800347F9A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = RoomRent;
+			productName = RoomRent;
+			productReference = 8F4D2D241E8CFBE800347F9A /* RoomRent.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		8F4D2D1C1E8CFBE800347F9A /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0820;
+				ORGANIZATIONNAME = "Prashant Sah";
+				TargetAttributes = {
+					8F4D2D231E8CFBE800347F9A = {
+						CreatedOnToolsVersion = 8.2.1;
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = 8F4D2D1F1E8CFBE800347F9A /* Build configuration list for PBXProject "RoomRent" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 8F4D2D1B1E8CFBE800347F9A;
+			productRefGroup = 8F4D2D251E8CFBE800347F9A /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				8F4D2D231E8CFBE800347F9A /* RoomRent */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		8F4D2D221E8CFBE800347F9A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8F4D2D371E8CFBE800347F9A /* LaunchScreen.storyboard in Resources */,
+				8F4D2D341E8CFBE800347F9A /* Assets.xcassets in Resources */,
+				8F4D2D321E8CFBE800347F9A /* Account.storyboard in Resources */,
+				8F248DCA1E935ACD00786B69 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		8F4D2D201E8CFBE800347F9A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8F248DD51E9393E000786B69 /* KeyboardAvoidingViewController.m in Sources */,
+				8F93E3B51E8E272C008C02D4 /* ForgotPasswordViewController.m in Sources */,
+				8F93E3B81E8E4F3E008C02D4 /* SignUpViewController.m in Sources */,
+				8F4D2D2C1E8CFBE800347F9A /* AppDelegate.m in Sources */,
+				8F248DC81E9349EF00786B69 /* CustomButton.m in Sources */,
+				8F93E3B21E8E267E008C02D4 /* SignInViewController.m in Sources */,
+				8F248DC51E93464000786B69 /* CustomTextField.m in Sources */,
+				8F4D2D291E8CFBE800347F9A /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		8F4D2D301E8CFBE800347F9A /* Account.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				8F4D2D311E8CFBE800347F9A /* Base */,
+			);
+			name = Account.storyboard;
+			sourceTree = "<group>";
+		};
+		8F4D2D351E8CFBE800347F9A /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				8F4D2D361E8CFBE800347F9A /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		8F4D2D391E8CFBE800347F9A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		8F4D2D3A1E8CFBE800347F9A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		8F4D2D3C1E8CFBE800347F9A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = RoomRent/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = ebpearls.RoomRent;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		8F4D2D3D1E8CFBE800347F9A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = RoomRent/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = ebpearls.RoomRent;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		8F4D2D1F1E8CFBE800347F9A /* Build configuration list for PBXProject "RoomRent" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8F4D2D391E8CFBE800347F9A /* Debug */,
+				8F4D2D3A1E8CFBE800347F9A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		8F4D2D3B1E8CFBE800347F9A /* Build configuration list for PBXNativeTarget "RoomRent" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8F4D2D3C1E8CFBE800347F9A /* Debug */,
+				8F4D2D3D1E8CFBE800347F9A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 8F4D2D1C1E8CFBE800347F9A /* Project object */;
+}
