@@ -133,16 +133,16 @@
                                 </connections>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="GGl-BC-7yq" userLabel="SignUp Stack View">
-                                <rect key="frame" x="87" y="684" width="240.66666666666669" height="32"/>
+                                <rect key="frame" x="86.666666666666686" y="684" width="240.66666666666663" height="32"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Don't have an account?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aNO-x7-Skt">
-                                        <rect key="frame" x="0.0" y="0.0" width="169.66666666666669" height="32"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="169.66666666666663" height="32"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7az-aQ-STL">
-                                        <rect key="frame" x="179.66666666666669" y="0.0" width="61" height="32"/>
+                                        <rect key="frame" x="179.66666666666663" y="0.0" width="61" height="32"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
                                         <state key="normal" title="Sign Up">
                                             <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

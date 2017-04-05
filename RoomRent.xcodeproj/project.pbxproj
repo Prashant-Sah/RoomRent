@@ -7,21 +7,26 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		18DD39C8802283CF8C721A8A /* libPods-RoomRent.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8950A843D8D5D7990219AC35 /* libPods-RoomRent.a */; };
 		8F248DC51E93464000786B69 /* CustomTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F248DC41E93464000786B69 /* CustomTextField.m */; };
 		8F248DC81E9349EF00786B69 /* CustomButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F248DC71E9349EF00786B69 /* CustomButton.m */; };
 		8F248DCA1E935ACD00786B69 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8F248DC91E935ACC00786B69 /* Main.storyboard */; };
 		8F248DD51E9393E000786B69 /* KeyboardAvoidingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F248DD41E9393DF00786B69 /* KeyboardAvoidingViewController.m */; };
+		8F248DDF1E93AF2200786B69 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F248DDE1E93AF2200786B69 /* User.m */; };
 		8F4D2D291E8CFBE800347F9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F4D2D281E8CFBE800347F9A /* main.m */; };
 		8F4D2D2C1E8CFBE800347F9A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F4D2D2B1E8CFBE800347F9A /* AppDelegate.m */; };
 		8F4D2D321E8CFBE800347F9A /* Account.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8F4D2D301E8CFBE800347F9A /* Account.storyboard */; };
 		8F4D2D341E8CFBE800347F9A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8F4D2D331E8CFBE800347F9A /* Assets.xcassets */; };
 		8F4D2D371E8CFBE800347F9A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8F4D2D351E8CFBE800347F9A /* LaunchScreen.storyboard */; };
+		8F85F3951E94A44B00812C10 /* Alerter.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F85F3941E94A44B00812C10 /* Alerter.m */; };
 		8F93E3B21E8E267E008C02D4 /* SignInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F93E3B11E8E267E008C02D4 /* SignInViewController.m */; };
 		8F93E3B51E8E272C008C02D4 /* ForgotPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F93E3B41E8E272C008C02D4 /* ForgotPasswordViewController.m */; };
 		8F93E3B81E8E4F3E008C02D4 /* SignUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F93E3B71E8E4F3E008C02D4 /* SignUpViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		7B014657A9B12EFA19F2E978 /* Pods-RoomRent.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RoomRent.debug.xcconfig"; path = "Pods/Target Support Files/Pods-RoomRent/Pods-RoomRent.debug.xcconfig"; sourceTree = "<group>"; };
+		8950A843D8D5D7990219AC35 /* libPods-RoomRent.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-RoomRent.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8F248DC31E93464000786B69 /* CustomTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomTextField.h; sourceTree = "<group>"; };
 		8F248DC41E93464000786B69 /* CustomTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomTextField.m; sourceTree = "<group>"; };
 		8F248DC61E9349EF00786B69 /* CustomButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomButton.h; sourceTree = "<group>"; };
@@ -29,6 +34,8 @@
 		8F248DC91E935ACC00786B69 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		8F248DD31E9393DF00786B69 /* KeyboardAvoidingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeyboardAvoidingViewController.h; sourceTree = "<group>"; };
 		8F248DD41E9393DF00786B69 /* KeyboardAvoidingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeyboardAvoidingViewController.m; sourceTree = "<group>"; };
+		8F248DDD1E93AF2200786B69 /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
+		8F248DDE1E93AF2200786B69 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
 		8F4D2D241E8CFBE800347F9A /* RoomRent.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RoomRent.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8F4D2D281E8CFBE800347F9A /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		8F4D2D2A1E8CFBE800347F9A /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -37,12 +44,16 @@
 		8F4D2D331E8CFBE800347F9A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8F4D2D361E8CFBE800347F9A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8F4D2D381E8CFBE800347F9A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8F85F3931E94A44B00812C10 /* Alerter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Alerter.h; sourceTree = "<group>"; };
+		8F85F3941E94A44B00812C10 /* Alerter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Alerter.m; sourceTree = "<group>"; };
+		8F85F3961E94B08E00812C10 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
 		8F93E3B01E8E267E008C02D4 /* SignInViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignInViewController.h; sourceTree = "<group>"; };
 		8F93E3B11E8E267E008C02D4 /* SignInViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignInViewController.m; sourceTree = "<group>"; };
 		8F93E3B31E8E272C008C02D4 /* ForgotPasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ForgotPasswordViewController.h; sourceTree = "<group>"; };
 		8F93E3B41E8E272C008C02D4 /* ForgotPasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForgotPasswordViewController.m; sourceTree = "<group>"; };
 		8F93E3B61E8E4F3E008C02D4 /* SignUpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignUpViewController.h; sourceTree = "<group>"; };
 		8F93E3B71E8E4F3E008C02D4 /* SignUpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignUpViewController.m; sourceTree = "<group>"; };
+		CAA36AFDAE6448589F1273F8 /* Pods-RoomRent.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RoomRent.release.xcconfig"; path = "Pods/Target Support Files/Pods-RoomRent/Pods-RoomRent.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -50,6 +61,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				18DD39C8802283CF8C721A8A /* libPods-RoomRent.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -83,11 +95,22 @@
 			path = "Custom Class";
 			sourceTree = "<group>";
 		};
+		8F248DD61E93AB1C00786B69 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				8F248DDD1E93AF2200786B69 /* User.h */,
+				8F248DDE1E93AF2200786B69 /* User.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		8F4D2D1B1E8CFBE800347F9A = {
 			isa = PBXGroup;
 			children = (
 				8F4D2D261E8CFBE800347F9A /* RoomRent */,
 				8F4D2D251E8CFBE800347F9A /* Products */,
+				B4A6407CB338754CB7405F02 /* Pods */,
+				FF837D5CF97CAE7E54D15733 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -104,6 +127,7 @@
 			children = (
 				8F93E3AF1E8E260E008C02D4 /* Helpers */,
 				8F93E3AE1E8E2609008C02D4 /* Constants */,
+				8F248DD61E93AB1C00786B69 /* Model */,
 				8F248DC21E9345D000786B69 /* Custom Views */,
 				8F248DD21E9393AF00786B69 /* Custom Class */,
 				8F93E3AC1E8E25FE008C02D4 /* View Controllers */,
@@ -152,6 +176,7 @@
 		8F93E3AE1E8E2609008C02D4 /* Constants */ = {
 			isa = PBXGroup;
 			children = (
+				8F85F3961E94B08E00812C10 /* Constants.h */,
 			);
 			path = Constants;
 			sourceTree = "<group>";
@@ -159,8 +184,27 @@
 		8F93E3AF1E8E260E008C02D4 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				8F85F3931E94A44B00812C10 /* Alerter.h */,
+				8F85F3941E94A44B00812C10 /* Alerter.m */,
 			);
 			path = Helpers;
+			sourceTree = "<group>";
+		};
+		B4A6407CB338754CB7405F02 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				7B014657A9B12EFA19F2E978 /* Pods-RoomRent.debug.xcconfig */,
+				CAA36AFDAE6448589F1273F8 /* Pods-RoomRent.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		FF837D5CF97CAE7E54D15733 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				8950A843D8D5D7990219AC35 /* libPods-RoomRent.a */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -170,9 +214,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8F4D2D3B1E8CFBE800347F9A /* Build configuration list for PBXNativeTarget "RoomRent" */;
 			buildPhases = (
+				A1D1AE2886D0A072FB004AB7 /* [CP] Check Pods Manifest.lock */,
 				8F4D2D201E8CFBE800347F9A /* Sources */,
 				8F4D2D211E8CFBE800347F9A /* Frameworks */,
 				8F4D2D221E8CFBE800347F9A /* Resources */,
+				9D7E0D70CD1593E704E4EBD4 /* [CP] Embed Pods Frameworks */,
+				917B3255E219A1C294F5144B /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -230,6 +277,54 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		917B3255E219A1C294F5144B /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-RoomRent/Pods-RoomRent-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		9D7E0D70CD1593E704E4EBD4 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-RoomRent/Pods-RoomRent-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A1D1AE2886D0A072FB004AB7 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		8F4D2D201E8CFBE800347F9A /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -237,8 +332,10 @@
 			files = (
 				8F248DD51E9393E000786B69 /* KeyboardAvoidingViewController.m in Sources */,
 				8F93E3B51E8E272C008C02D4 /* ForgotPasswordViewController.m in Sources */,
+				8F248DDF1E93AF2200786B69 /* User.m in Sources */,
 				8F93E3B81E8E4F3E008C02D4 /* SignUpViewController.m in Sources */,
 				8F4D2D2C1E8CFBE800347F9A /* AppDelegate.m in Sources */,
+				8F85F3951E94A44B00812C10 /* Alerter.m in Sources */,
 				8F248DC81E9349EF00786B69 /* CustomButton.m in Sources */,
 				8F93E3B21E8E267E008C02D4 /* SignInViewController.m in Sources */,
 				8F248DC51E93464000786B69 /* CustomTextField.m in Sources */,
@@ -360,6 +457,7 @@
 		};
 		8F4D2D3C1E8CFBE800347F9A /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7B014657A9B12EFA19F2E978 /* Pods-RoomRent.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = RoomRent/Info.plist;
@@ -371,6 +469,7 @@
 		};
 		8F4D2D3D1E8CFBE800347F9A /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = CAA36AFDAE6448589F1273F8 /* Pods-RoomRent.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = RoomRent/Info.plist;

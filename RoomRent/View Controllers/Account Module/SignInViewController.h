@@ -7,9 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <AFNetworking.h>
 #import "AppDelegate.h"
 #import "KeyboardAvoidingViewController.h"
+#import "Constants.h"
+#import "Alerter.h"
 
 @interface SignInViewController : KeyboardAvoidingViewController <UITextFieldDelegate>
 
+-(void) makelogin;
 @end
