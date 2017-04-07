@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "KeyboardAvoidingViewController.h"
+#import "Constants.h"
 
 @interface SignUpViewController : KeyboardAvoidingViewController <UIImagePickerControllerDelegate, UITextFieldDelegate>
 

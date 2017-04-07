@@ -12,6 +12,9 @@
 @property (weak, nonatomic) IBOutlet UITextField *emailAddTextField;
 @property (weak, nonatomic) IBOutlet UITextField *passwordTextField;
 
+@property BOOL emailisValid;
+@property BOOL mobileisValid;
+
 @end
 
 @implementation SignInViewController
@@ -22,13 +25,16 @@
     
     _emailAddTextField.keyboardType = UIKeyboardTypeEmailAddress;
     
-    self.emailAddTextField.text = @"roomrent";
-    self.passwordTextField.text = @"roomrent";
+    _emailAddTextField.tag = EMAILADDRESSTEXTFIELD;
+    
+    
+    self.emailAddTextField.text = @"baby";
+    self.passwordTextField.text = @"baby";
     
     [self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
     self.navigationController.navigationBar.shadowImage = [UIImage new];
     self.navigationController.navigationBar.translucent = YES;
-
+    
 }
 
 -(void)makelogin{
@@ -36,40 +42,33 @@
     NSString *username = self.emailAddTextField.text;
     NSString *password = self.passwordTextField.text;
     
-    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
-    manager.requestSerializer = [AFJSONRequestSerializer serializer];
+    //_mobileisValid = [[Validator sharedInstance] validateMobile:_passwordTextField.text viewController:self];
+    //_emailisValid  = [[Validator sharedInstance] validateEmail:_emailAddTextField.text viewController:self];
     
-    NSDictionary *params = @{@"username": username,
+    NSDictionary *params = @{@"identity": username,
                              @"password": password,
                              @"device_type": DEVICE_TYPE,
                              @"device_id": DEVICE_TOKEN};
     
-    [manager.requestSerializer setValue:[@"Bearer " stringByAppendingString:APITOKEN] forHTTPHeaderField:@"Authorization"];
-    [manager POST: [BASEURL stringByAppendingString:@"login"] parameters:params progress:nil success:^(NSURLSessionTask *task, id responseObject) {
+    [[APICaller sharedInstance] callSome:@"login" parameters:params viewController:self completion:^(NSDictionary *responseObjectDictionary) {
         
-        NSString *code = [responseObject valueForKey:@"code"];
-        NSLog(@"%@", code);
-        if ([code isEqualToString:LOGIN_SUCCESS ])
-        {
+        NSString *code = [responseObjectDictionary valueForKey:@"code"];
+        
+        if ([code isEqualToString:LOGIN_SUCCESS ]){
+            
             [self gotoMain];
+            
         }
         else{
-            
-            NSString *errorMessage = [responseObject valueForKey:@"message"];
-            //Alerter *alertObject = [[Alerter alloc] init];
-            
+            NSString *errorMessage = [responseObjectDictionary valueForKey:@"message"];
             [[Alerter sharedInstance] createAlert:@"Error" message:errorMessage viewController:self completion:^{
-                NSLog(@"Error");
             }];
         }
-        
-        NSLog(@"JSON: %@", responseObject);
-        
-    } failure:^(NSURLSessionTask *operation, NSError *error) {
-        NSLog(@"Error: %@", error);
     }];
     
+    
 }
+
 
 -(void)gotoMain{
     
@@ -82,7 +81,6 @@
     window.rootViewController = tabBarController;
     [window makeKeyAndVisible];
     
-
 }
 
 // MARK: button handlers
@@ -100,10 +98,12 @@
     UINavigationController *navVC = [[UINavigationController alloc] initWithRootViewController:signUpVC];
     [self.navigationController presentViewController:navVC animated:true completion:nil];
 }
-- (IBAction)signInPressed:(UIButton *)sender {
 
+- (IBAction)signInPressed:(UIButton *)sender {
+    
     [self makelogin];
     
 }
+
 
 @end

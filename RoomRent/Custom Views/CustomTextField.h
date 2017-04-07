@@ -7,6 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "KeyboardAvoidingViewController.h"
+#import "Validator.h"
 
 @interface CustomTextField : UITextField <UITextFieldDelegate>
 

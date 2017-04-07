@@ -12,8 +12,13 @@
 #import "KeyboardAvoidingViewController.h"
 #import "Constants.h"
 #import "Alerter.h"
+#import "Validator.h"
+#import "APICaller.h"
+
 
 @interface SignInViewController : KeyboardAvoidingViewController <UITextFieldDelegate>
 
+
 -(void) makelogin;
+-(void) gotoMain;
 @end

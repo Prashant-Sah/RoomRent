@@ -20,6 +20,7 @@
 //    return true;
 //}
 
+
 -(void)drawPlaceholderInRect:(CGRect)rect {
     UIColor *color = [UIColor whiteColor];
     
@@ -39,6 +40,20 @@
 -(BOOL) textFieldShouldReturn:(UITextField *)textField{
     
     [self resignFirstResponder];
+    return true;
+}
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField{
+    
+    CGRect textfieldrect = [self.superview convertRect:textField.frame toView:[[[UIApplication sharedApplication] delegate ] window ]];
+    [KeyboardAvoidingViewController setActiveTextFieldPosition:textfieldrect.origin];
+    return true;
+}
+-(BOOL) textFieldShouldEndEditing:(UITextField *)textField{
+    
+    if(self.tag == 1){
+        NSLog(@"Inside Email");
+        [[Validator sharedInstance] validateEmail:self.text];
+    }
     return true;
 }
 

@@ -18,6 +18,8 @@
 		8F4D2D321E8CFBE800347F9A /* Account.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8F4D2D301E8CFBE800347F9A /* Account.storyboard */; };
 		8F4D2D341E8CFBE800347F9A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8F4D2D331E8CFBE800347F9A /* Assets.xcassets */; };
 		8F4D2D371E8CFBE800347F9A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8F4D2D351E8CFBE800347F9A /* LaunchScreen.storyboard */; };
+		8F63C1051E95FC82000790D6 /* Validator.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F63C1041E95FC82000790D6 /* Validator.m */; };
+		8F63C1081E962D90000790D6 /* APICaller.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F63C1071E962D90000790D6 /* APICaller.m */; };
 		8F85F3951E94A44B00812C10 /* Alerter.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F85F3941E94A44B00812C10 /* Alerter.m */; };
 		8F93E3B21E8E267E008C02D4 /* SignInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F93E3B11E8E267E008C02D4 /* SignInViewController.m */; };
 		8F93E3B51E8E272C008C02D4 /* ForgotPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F93E3B41E8E272C008C02D4 /* ForgotPasswordViewController.m */; };
@@ -44,6 +46,10 @@
 		8F4D2D331E8CFBE800347F9A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8F4D2D361E8CFBE800347F9A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8F4D2D381E8CFBE800347F9A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8F63C1031E95FC82000790D6 /* Validator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Validator.h; sourceTree = "<group>"; };
+		8F63C1041E95FC82000790D6 /* Validator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Validator.m; sourceTree = "<group>"; };
+		8F63C1061E962D90000790D6 /* APICaller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APICaller.h; sourceTree = "<group>"; };
+		8F63C1071E962D90000790D6 /* APICaller.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APICaller.m; sourceTree = "<group>"; };
 		8F85F3931E94A44B00812C10 /* Alerter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Alerter.h; sourceTree = "<group>"; };
 		8F85F3941E94A44B00812C10 /* Alerter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Alerter.m; sourceTree = "<group>"; };
 		8F85F3961E94B08E00812C10 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
@@ -186,6 +192,10 @@
 			children = (
 				8F85F3931E94A44B00812C10 /* Alerter.h */,
 				8F85F3941E94A44B00812C10 /* Alerter.m */,
+				8F63C1031E95FC82000790D6 /* Validator.h */,
+				8F63C1041E95FC82000790D6 /* Validator.m */,
+				8F63C1061E962D90000790D6 /* APICaller.h */,
+				8F63C1071E962D90000790D6 /* APICaller.m */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -339,7 +349,9 @@
 				8F248DC81E9349EF00786B69 /* CustomButton.m in Sources */,
 				8F93E3B21E8E267E008C02D4 /* SignInViewController.m in Sources */,
 				8F248DC51E93464000786B69 /* CustomTextField.m in Sources */,
+				8F63C1051E95FC82000790D6 /* Validator.m in Sources */,
 				8F4D2D291E8CFBE800347F9A /* main.m in Sources */,
+				8F63C1081E962D90000790D6 /* APICaller.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

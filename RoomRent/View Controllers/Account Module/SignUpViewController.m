@@ -23,14 +23,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
-    //self.profileImageButton.layer.cornerRadius = 60;
-    //self.profileImageButton.clipsToBounds = true;
     
-    self.userNameTextField.delegate = self;
-    self.emailAddTextField.delegate = self;
-    self.passwordTextField.delegate = self;
-    
+    _emailAddTextField.tag = EMAILADDRESSTEXTFIELD;
     //navigation Bar clear
     UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithTitle:@"Cancel" style:UIBarButtonItemStylePlain target:self action:@selector(onCancel)];
     self.navigationItem.leftBarButtonItem = cancelButton;

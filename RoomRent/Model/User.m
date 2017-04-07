@@ -10,12 +10,13 @@
 
 @implementation User
 
--(void)initUser:(NSString *)user password:(NSString *)pass email:(NSString *)email mobile:(NSString *)mob {
+-(void)initUser:(NSString*) fullname username:(NSString *)username password:(NSString *)password email:(NSString *)email mobile:(NSString *)mobile {
     
-    self.password = pass;
+    self.fullname = fullname;
+    self.username = username;
+    self.password = password;
     self.email = email;
-    self.username = user;
-    self.mobile = mob;
+    self.mobile = mobile;
     
 }
 
