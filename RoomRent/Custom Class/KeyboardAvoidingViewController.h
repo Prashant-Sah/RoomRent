@@ -11,4 +11,6 @@
 @interface KeyboardAvoidingViewController : UIViewController
 
 +(void) setActiveTextFieldPosition: (CGPoint) textFieldPosition;
+
 @end
+

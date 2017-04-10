@@ -8,12 +8,13 @@
 
 #import <Foundation/Foundation.h>
 #import "Alerter.h"
+#import "Constants.h"
 
 @interface Validator : NSObject
 
 +(Validator *) sharedInstance;
 
--(BOOL) validateEmail : (NSString*) candidate viewController:(UIViewController*) VC ;
--(BOOL) validateMobile : (NSString*) candidate viewController:(UIViewController*) VC ;
-- (BOOL)validateEmail:(NSString *)candidate;
+- (BOOL)validateText:(NSString *)text regularExpression:(NSString *)regex;
+
+- (void)startValidation:(UITextField *)textfield;
 @end

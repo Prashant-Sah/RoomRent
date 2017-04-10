@@ -8,11 +8,17 @@
 
 #import <Foundation/Foundation.h>
 
-static short EMAILADDRESSTEXTFIELD = 1;
-static short MOBILETEXTFIELD = 2;
 
-static NSString *BASEURL = @"http://192.168.0.143:81/api/v1/";
-static NSString *APITOKEN = @"OD44GCYFpHYHcwYFTG1QsQBGPOLcHjk8OMOMPkd3Ew3RTaLX0ox2ES3UASxE";
+enum {
+    NAME_TEXTFIELD = 1,
+    MOBILE_TEXTFIELD = 2,
+    USERNAME_TEXTFIELD = 3,
+    EMAIL_ADDRESS_TEXTFIELD = 4,
+    PASSWORD_TEXTFIELD = 5
+};
+
+static NSString *BASE_URL = @"http://192.168.0.143:81/api/v1/";
+static NSString *API_TOKEN = @"OD44GCYFpHYHcwYFTG1QsQBGPOLcHjk8OMOMPkd3Ew3RTaLX0ox2ES3UASxE";
 
 static NSString *DEVICE_TYPE = @"1";
 static NSString *DEVICE_TOKEN = @"";

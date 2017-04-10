@@ -20,43 +20,46 @@ static Validator * instance = nil;
     return instance;
 }
 
-- (BOOL)validateEmail:(NSString *)candidate viewController: (UIViewController*)VC {
-    NSString *emailRegEx = @"[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,10}";
-    NSPredicate *emailTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", emailRegEx];
+- (BOOL)validateText:(NSString *)text regularExpression:(NSString *)regex{
     
-    if ([emailTest evaluateWithObject:candidate] == NO) {
-        
-        [[Alerter sharedInstance] createAlert:@"Error" message:@"Email Address is invalid" viewController: VC  completion:^{
-            NSLog(@"Error");
-        }];
-        return false;
-    }
-    return true;
+    NSPredicate *test = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", regex];
+    return [test evaluateWithObject:text];
+    
 }
 
-- (BOOL)validateMobile:(NSString *)candidate viewController:(UIViewController *)VC{
+- (void)startValidation:(UITextField *)textfield{
     
-    NSString *mobileRegEx = @"((\\+){0,1}977(\\s){0,1}(\\-){0,1}(\\s){0,1}){0,1}9[7-8](\\s){0,1}(\\-){0,1}(\\s){0,1}[0-9]{1}[0-9]{7}$";
-    NSPredicate *mobileTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", mobileRegEx];
-
-    if ([mobileTest evaluateWithObject:candidate] == NO) {
-        
-        [[Alerter sharedInstance] createAlert:@"Error" message:@"Moible number is invalid" viewController: VC  completion:^{
-            NSLog(@"Error");
-        }];
-        return false;
-    }
-    return true;
-}
-
-- (BOOL)validateEmail:(NSString *)candidate  {
-    NSString *emailRegEx = @"[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,10}";
-    NSPredicate *emailTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", emailRegEx];
+    NSString *regEx = nil;
+    BOOL y = nil;
     
-    if ([emailTest evaluateWithObject:candidate] == NO) {
-            NSLog(@"Error in mail");
+    switch (textfield.tag) {
+        case NAME_TEXTFIELD:
+            regEx = @"^[A-Za-z]+([\\s][A-Za-z]+)*$";
+            break;
+        case USERNAME_TEXTFIELD:
+            regEx = @"[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,10}";
+            break;
+            
+        case MOBILE_TEXTFIELD:
+            regEx = @"((\\+){0,1}977(\\s){0,1}(\\-){0,1}(\\s){0,1}){0,1}9[7-8](\\s){0,1}(\\-){0,1}(\\s){0,1}[0-9]{1}[0-9]{7}$";
+            break;
+            
+        case EMAIL_ADDRESS_TEXTFIELD:
+            regEx =  @"[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,10}";
+            break;
+            
+        case PASSWORD_TEXTFIELD:
+            regEx = @"^.{4,50}$";
+            break;
+            
+        default:
+            break;
     }
-    return true;
+    
+    y = [self validateText:textfield.text regularExpression:regEx];
+    
+    textfield.textColor = y ?  [UIColor whiteColor] : [UIColor redColor] ;
+    y = nil;
 }
 
 @end

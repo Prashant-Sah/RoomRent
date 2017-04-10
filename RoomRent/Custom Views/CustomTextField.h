@@ -9,7 +9,9 @@
 #import <UIKit/UIKit.h>
 #import "KeyboardAvoidingViewController.h"
 #import "Validator.h"
+#import "Constants.h"
 
 @interface CustomTextField : UITextField <UITextFieldDelegate>
+-(void) startValidation:(UITextField *) textfield;
 
 @end

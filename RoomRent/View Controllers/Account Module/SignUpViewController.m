@@ -12,6 +12,8 @@
 @interface SignUpViewController ()
 
 @property (weak, nonatomic) IBOutlet UIButton *profileImageButton;
+@property (weak, nonatomic) IBOutlet UITextField *nameTextField;
+@property (weak, nonatomic) IBOutlet UITextField *mobileTextField;
 @property (weak, nonatomic) IBOutlet UITextField *userNameTextField;
 @property (weak, nonatomic) IBOutlet UITextField *emailAddTextField;
 @property (weak, nonatomic) IBOutlet UITextField *passwordTextField;
@@ -23,8 +25,14 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+
+    //Assigning tags to textfields
+    _nameTextField.tag = NAME_TEXTFIELD;
+    _mobileTextField.tag = MOBILE_TEXTFIELD;
+    _userNameTextField.tag = USERNAME_TEXTFIELD;
+    _emailAddTextField.tag = EMAIL_ADDRESS_TEXTFIELD;
+    _passwordTextField.tag = PASSWORD_TEXTFIELD;
     
-    _emailAddTextField.tag = EMAILADDRESSTEXTFIELD;
     //navigation Bar clear
     UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithTitle:@"Cancel" style:UIBarButtonItemStylePlain target:self action:@selector(onCancel)];
     self.navigationItem.leftBarButtonItem = cancelButton;
@@ -44,6 +52,7 @@
 
 #pragma-mark - add profile photo
 - (IBAction)addPhoto:(id)sender {
+    
     UIImagePickerController *pickerController = [[UIImagePickerController alloc]
                                                  init];
     pickerController.delegate = self ;

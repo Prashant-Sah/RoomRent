@@ -9,6 +9,7 @@
 #import "SignInViewController.h"
 
 @interface SignInViewController ()
+
 @property (weak, nonatomic) IBOutlet UITextField *emailAddTextField;
 @property (weak, nonatomic) IBOutlet UITextField *passwordTextField;
 
@@ -24,12 +25,10 @@
     [super viewDidLoad];
     
     _emailAddTextField.keyboardType = UIKeyboardTypeEmailAddress;
-    
-    _emailAddTextField.tag = EMAILADDRESSTEXTFIELD;
-    
-    
-    self.emailAddTextField.text = @"baby";
-    self.passwordTextField.text = @"baby";
+    _emailAddTextField.tag = EMAIL_ADDRESS_TEXTFIELD;
+    _passwordTextField.tag = PASSWORD_TEXTFIELD;
+    //self.emailAddTextField.text = @"baby";
+    //self.passwordTextField.text = @"baby";
     
     [self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
     self.navigationController.navigationBar.shadowImage = [UIImage new];

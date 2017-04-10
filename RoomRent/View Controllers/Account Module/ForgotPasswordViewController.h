@@ -7,6 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CustomTextField.h"
+#import "KeyboardAvoidingViewController.h"
 
 @interface ForgotPasswordViewController : UIViewController
 

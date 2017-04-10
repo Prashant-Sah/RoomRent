@@ -31,10 +31,7 @@
     [self dismissViewControllerAnimated:NO completion:nil];
 }
 
--(void) touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
-    [[self view] endEditing:TRUE];
-}
-
 //MARK -Button handlers
+
 
 @end

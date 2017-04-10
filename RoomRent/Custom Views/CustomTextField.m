@@ -8,18 +8,12 @@
 
 #import "CustomTextField.h"
 
+
 @implementation CustomTextField
 
 -(void)drawRect:(CGRect)rect{
     self.delegate = self;
 }
-
-//-(BOOL) textFieldShouldBeginEditing:(UITextField *)textField{
-//    
-//    textField.placeholder = nil;
-//    return true;
-//}
-
 
 -(void)drawPlaceholderInRect:(CGRect)rect {
     UIColor *color = [UIColor whiteColor];
@@ -42,19 +36,20 @@
     [self resignFirstResponder];
     return true;
 }
-- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField{
+- (BOOL)textFieldShouldBeginEditing:(CustomTextField *)textField{
     
     CGRect textfieldrect = [self.superview convertRect:textField.frame toView:[[[UIApplication sharedApplication] delegate ] window ]];
     [KeyboardAvoidingViewController setActiveTextFieldPosition:textfieldrect.origin];
+    textField.textColor = [UIColor whiteColor];
     return true;
 }
 -(BOOL) textFieldShouldEndEditing:(UITextField *)textField{
     
-    if(self.tag == 1){
-        NSLog(@"Inside Email");
-        [[Validator sharedInstance] validateEmail:self.text];
-    }
+    [[Validator sharedInstance] startValidation:textField];
     return true;
 }
+
+
+
 
 @end
