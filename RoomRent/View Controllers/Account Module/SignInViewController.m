@@ -27,8 +27,8 @@
     _emailAddTextField.keyboardType = UIKeyboardTypeEmailAddress;
     _emailAddTextField.tag = EMAIL_ADDRESS_TEXTFIELD;
     _passwordTextField.tag = PASSWORD_TEXTFIELD;
-    //self.emailAddTextField.text = @"baby";
-    //self.passwordTextField.text = @"baby";
+    self.emailAddTextField.text = @"Prashant";
+    self.passwordTextField.text = @"12345";
     
     [self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
     self.navigationController.navigationBar.shadowImage = [UIImage new];
@@ -41,19 +41,22 @@
     NSString *username = self.emailAddTextField.text;
     NSString *password = self.passwordTextField.text;
     
-    //_mobileisValid = [[Validator sharedInstance] validateMobile:_passwordTextField.text viewController:self];
-    //_emailisValid  = [[Validator sharedInstance] validateEmail:_emailAddTextField.text viewController:self];
-    
     NSDictionary *params = @{@"identity": username,
                              @"password": password,
                              @"device_type": DEVICE_TYPE,
                              @"device_id": DEVICE_TOKEN};
     
-    [[APICaller sharedInstance] callSome:@"login" parameters:params viewController:self completion:^(NSDictionary *responseObjectDictionary) {
+    [[APICaller sharedInstance] callApi:@"login" parameters:params headerFlag : false viewController:self completion:^(NSDictionary *responseObjectDictionary) {
         
+        NSLog(@"%@",responseObjectDictionary);
         NSString *code = [responseObjectDictionary valueForKey:@"code"];
         
+        NSLog(@"%@",responseObjectDictionary);
         if ([code isEqualToString:LOGIN_SUCCESS ]){
+            
+            [[NSUserDefaults standardUserDefaults] setObject:[responseObjectDictionary valueForKey:@"api_token"] forKey:@"userApiToken"];
+            
+            [[User alloc] initUser:[responseObjectDictionary valueForKey:@"name"] username:[responseObjectDictionary valueForKey:@"username"] email:[responseObjectDictionary valueForKey:@"email"] mobile:[responseObjectDictionary valueForKey:@"mobile"]];
             
             [self gotoMain];
             
@@ -65,37 +68,23 @@
         }
     }];
     
-    
 }
-
 
 -(void)gotoMain{
     
-    //AppDelegate* sharedDelegate = [AppDelegate appDelegate];
-    //AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
-    UIWindow *window = [[[UIApplication sharedApplication] delegate] window];
-    
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    UITabBarController *tabBarController = [storyboard instantiateViewControllerWithIdentifier:@"MyTabBarController"];
-    window.rootViewController = tabBarController;
-    [window makeKeyAndVisible];
-    
+    [[Navigator sharedInstance] makeRootViewController:@"Main" viewController:nil tabBarController:@"MyTabBarController"];
 }
 
 // MARK: button handlers
 
 - (IBAction)forgotPasswordPressed:(UIButton *)sender {
-    UIViewController *forgotPasswordVC = [self.storyboard instantiateViewControllerWithIdentifier:@"ForgotPasswordViewController"];
-    UINavigationController *navVC = [[UINavigationController alloc] initWithRootViewController:forgotPasswordVC];
-    [self presentViewController:navVC animated:true completion:nil];
+    
+    [[Navigator sharedInstance] presentWithNavigationController:self viewController:@"ForgotPasswordViewController"];
 }
 
 - (IBAction)signUpPressed:(UIButton *)sender {
     
-    UIViewController *signUpVC = [self.storyboard instantiateViewControllerWithIdentifier:@"SignUpViewController"];
-    //[self.navigationController pushViewController:signUpVC animated:true];
-    UINavigationController *navVC = [[UINavigationController alloc] initWithRootViewController:signUpVC];
-    [self.navigationController presentViewController:navVC animated:true completion:nil];
+    [[Navigator sharedInstance] presentWithNavigationController:self viewController:@"SignUpViewController"];
 }
 
 - (IBAction)signInPressed:(UIButton *)sender {

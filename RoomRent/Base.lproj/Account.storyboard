@@ -13,7 +13,7 @@
         <!--Sign In View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="SignInViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SignInViewController" id="BYZ-38-t0r" customClass="SignInViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -247,6 +247,9 @@
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                 <state key="normal" title="Send Password"/>
+                                <connections>
+                                    <action selector="sendPasswordButtonPressed:" destination="Ktg-RG-hV2" eventType="touchUpInside" id="NHA-cu-oEK"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -266,7 +269,7 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="passwordTextField" destination="ABP-Qm-rwk" id="tqb-iJ-zgq"/>
+                        <outlet property="emailAddressTextField" destination="ABP-Qm-rwk" id="3ES-v1-zf6"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cCu-eC-7YU" sceneMemberID="firstResponder"/>

@@ -17,4 +17,6 @@
 - (BOOL)validateText:(NSString *)text regularExpression:(NSString *)regex;
 
 - (void)startValidation:(UITextField *)textfield;
+-(void) addErrorButton:(UITextField *) textfield;
+-(void)tapOnError:(UITextField *) textfield;
 @end

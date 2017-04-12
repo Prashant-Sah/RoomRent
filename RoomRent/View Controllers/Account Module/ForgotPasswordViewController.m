@@ -9,7 +9,7 @@
 #import "ForgotPasswordViewController.h"
 
 @interface ForgotPasswordViewController ()
-@property (weak, nonatomic) IBOutlet UITextField *passwordTextField;
+@property (weak, nonatomic) IBOutlet UITextField *emailAddressTextField;
 
 @end
 
@@ -33,5 +33,30 @@
 
 //MARK -Button handlers
 
+- (IBAction)sendPasswordButtonPressed:(UIButton *)sender {
+    
+    NSDictionary *params = @{
+                             @"email" : _emailAddressTextField.text
+                             };
+    [[APICaller sharedInstance] callApi:@"forgetpassword" parameters: params headerFlag: false viewController:self completion:^(NSDictionary *responseObjectDictionary) {
+        NSString *code = [responseObjectDictionary valueForKey:@"code"];
+        
+        if ([code isEqualToString:USER_REGISTERED ]){
+            
+            NSString *message = [responseObjectDictionary valueForKey:@"message"];
+            [[Alerter sharedInstance] createAlert:@"Success" message:message viewController:self completion:^{
+            }];
+            [self dismissViewControllerAnimated:true  completion:nil];
+            
+        }
+        else{
+            
+            NSString *errorMessage = [responseObjectDictionary valueForKey:@"message"];
+            [[Alerter sharedInstance] createAlert:@"Error" message:errorMessage viewController:self completion:^{
+            }];
+        }
+    }];
+    
+}
 
 @end

@@ -37,7 +37,7 @@ static Validator * instance = nil;
             regEx = @"^[A-Za-z]+([\\s][A-Za-z]+)*$";
             break;
         case USERNAME_TEXTFIELD:
-            regEx = @"[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,10}";
+            regEx = @"(?!.*[\\.\\-\\_]{2,})^[a-zA-Z0-9\\.\\-\\_]{3,24}$";
             break;
             
         case MOBILE_TEXTFIELD:
@@ -57,9 +57,26 @@ static Validator * instance = nil;
     }
     
     y = [self validateText:textfield.text regularExpression:regEx];
-    
     textfield.textColor = y ?  [UIColor whiteColor] : [UIColor redColor] ;
-    y = nil;
+    if (!y) {
+        [self addErrorButton:textfield];
+    }
+    
 }
 
+- (void)addErrorButton:(UITextField *)textfield{
+    
+    UIButton *btnError= [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 20, 20)];
+    [btnError addTarget:self action:@selector(tapOnError:) forControlEvents:UIControlEventTouchUpInside];
+    [btnError setBackgroundImage:[UIImage imageNamed:@"error.png"] forState:UIControlStateNormal];
+    
+    textfield.rightView = btnError;
+    textfield.rightViewMode = UITextFieldViewModeUnlessEditing;
+    
+}
+
+- (void)tapOnError:(UITextField *)textfield{
+    
+    UILabel *label = [[UILabel alloc] initWithFrame: CGRectMake(0, 0, 200, 20)];
+}
 @end

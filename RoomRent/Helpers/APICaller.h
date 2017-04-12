@@ -15,7 +15,7 @@
 
 +(APICaller *) sharedInstance;
 
--(void)callSome:(NSString *)appendString parameters:(NSDictionary *)params viewController:(UIViewController*)VC completion:(void (^)(NSDictionary *responseObjectDictionary))completionBlock  ;
+-(void)callApi:(NSString *)appendString parameters:(NSDictionary *)params headerFlag:(BOOL) headerFlag viewController:(UIViewController*)VC completion:(void (^)(NSDictionary *responseObjectDictionary))completionBlock  ;
 
 //-(APICaller *) initAPICaller;
 

@@ -16,5 +16,5 @@
 @property NSString *email;
 @property NSString *mobile;
 
--(void) initUser : (NSString*)user  password:(NSString*)pass email:(NSString*)email mobile:(NSString*)mob ;
+-(void)initUser:(NSString*) fullname username:(NSString *)username email:(NSString *)email mobile:(NSString *)mobile;
 @end

@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "KeyboardAvoidingViewController.h"
 #import "Constants.h"
+#import "APICaller.h"
+#import "User.h"
 
 @interface SignUpViewController : KeyboardAvoidingViewController <UIImagePickerControllerDelegate>
 

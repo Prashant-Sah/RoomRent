@@ -15,7 +15,8 @@
 #import "Alerter.h"
 #import "Validator.h"
 #import "APICaller.h"
-
+#import "User.h"
+#import "Navigator.h"
 
 @interface SignInViewController : KeyboardAvoidingViewController
 

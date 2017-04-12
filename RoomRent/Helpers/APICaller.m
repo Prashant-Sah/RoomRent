@@ -7,7 +7,6 @@
 //
 
 #import "APICaller.h"
-
 @implementation APICaller
 
 static APICaller* instance = nil;
@@ -20,15 +19,17 @@ static APICaller* instance = nil;
     return instance;
 }
 
--(void)callSome:(NSString *)appendString parameters:(NSDictionary *)params viewController:(UIViewController*)VC completion:(void (^)(NSDictionary *responseObjectDictionary))completionBlock {
+-(void)callApi:(NSString *)appendString parameters:(NSDictionary *)params headerFlag:(BOOL) headerFlag viewController:(UIViewController*)VC completion:(void (^)(NSDictionary *responseObjectDictionary))completionBlock {
     
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
     
-    //[manager.requestSerializer setValue:[@"Bearer " stringByAppendingString:APITOKEN] forHTTPHeaderField:@"Authorization"];
-    
-    [manager POST: [BASE_URL stringByAppendingString:appendString] parameters:params progress:nil success:^
-     
+    if(headerFlag){
+        NSString *userApiToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"userApiToken"];
+        NSLog(@"%@",userApiToken);
+        [manager.requestSerializer setValue:[@"Bearer " stringByAppendingString:userApiToken] forHTTPHeaderField:@"Authorization"];
+    }
+    [manager POST: [PUSP_BASE_URL stringByAppendingString:appendString] parameters:params progress:nil success:^
      (NSURLSessionTask *task, id responseObject) {
          
          NSDictionary *responseObjectDictionary = (NSDictionary*) responseObject;
@@ -37,8 +38,6 @@ static APICaller* instance = nil;
      } failure:^(NSURLSessionTask *operation, NSError *error) {
          
          [[Alerter sharedInstance] createAlert:@"Error" message:@"Error in API Call" viewController:VC completion:^{
-             NSLog(@"Error");
-             
          }];
      }];
     

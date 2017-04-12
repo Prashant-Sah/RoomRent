@@ -47,10 +47,10 @@
             </objects>
             <point key="canvasLocation" x="154" y="246"/>
         </scene>
-        <!--Offer-->
+        <!--Offers View Controller-->
         <scene sceneID="hv5-lL-Tzh">
             <objects>
-                <viewController id="28Z-NT-7xW" sceneMemberID="viewController">
+                <viewController id="28Z-NT-7xW" customClass="OffersViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="nIA-D1-EEa"/>
                         <viewControllerLayoutGuide type="bottom" id="CbC-hm-RpN"/>
@@ -58,13 +58,22 @@
                     <view key="view" contentMode="scaleToFill" id="7UR-8s-sWM">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oDt-2z-e5m">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <items>
+                                    <navigationItem id="Cip-Nt-ubd"/>
+                                </items>
+                            </navigationBar>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Offer" id="iyE-2w-FuU"/>
+                    <navigationItem key="navigationItem" id="Bdh-HE-I97"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="abB-SU-V0Z" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="154" y="-409"/>
+            <point key="canvasLocation" x="1092" y="-409.7451274362819"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="jU8-QZ-bAD">
@@ -76,7 +85,7 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </tabBar>
                     <connections>
-                        <segue destination="28Z-NT-7xW" kind="relationship" relationship="viewControllers" id="WfJ-Kf-i4p"/>
+                        <segue destination="axe-LZ-g02" kind="relationship" relationship="viewControllers" id="WfJ-Kf-i4p"/>
                         <segue destination="fSY-cP-y59" kind="relationship" relationship="viewControllers" id="3Jc-1p-aCY"/>
                         <segue destination="ZTv-Uy-Gbc" kind="relationship" relationship="viewControllers" id="HjC-tv-HDm"/>
                     </connections>
@@ -84,6 +93,25 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Liy-kH-W67" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-798" y="-80"/>
+        </scene>
+        <!--Offers-->
+        <scene sceneID="gs7-Ob-SIY">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="edT-Oj-mEa" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="axe-LZ-g02" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Offers" id="iyE-2w-FuU"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="2QB-Rq-JYn">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="28Z-NT-7xW" kind="relationship" relationship="rootViewController" id="ihq-9q-JFh"/>
+                    </connections>
+                </navigationController>
+            </objects>
+            <point key="canvasLocation" x="152.80000000000001" y="-409.7451274362819"/>
         </scene>
     </scenes>
 </document>

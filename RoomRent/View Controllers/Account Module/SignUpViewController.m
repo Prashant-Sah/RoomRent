@@ -8,7 +8,7 @@
 
 #import "SignUpViewController.h"
 //#import "CustomButton.h"
-
+NSString *msg;
 @interface SignUpViewController ()
 
 @property (weak, nonatomic) IBOutlet UIButton *profileImageButton;
@@ -33,6 +33,13 @@
     _emailAddTextField.tag = EMAIL_ADDRESS_TEXTFIELD;
     _passwordTextField.tag = PASSWORD_TEXTFIELD;
     
+    
+    _nameTextField.text = @"Prashant-Sah";
+    _mobileTextField.text =@"9842879727";
+    _userNameTextField.text =@"Prashat";
+    _emailAddTextField.text = @"068bex@gmail.com";
+    _passwordTextField.text = @"12345";
+    
     //navigation Bar clear
     UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithTitle:@"Cancel" style:UIBarButtonItemStylePlain target:self action:@selector(onCancel)];
     self.navigationItem.leftBarButtonItem = cancelButton;
@@ -43,7 +50,54 @@
 }
 
 - (IBAction)create:(UIButton *)sender {
-    [self dismissViewControllerAnimated:true  completion:nil];
+    
+    NSString *name = self.nameTextField.text;
+    NSString *mobile = self.mobileTextField.text;
+    NSString *username = self.userNameTextField.text;
+    NSString *emailAddress = self.emailAddTextField.text;
+    NSString *password = self.passwordTextField.text;
+    
+    NSDictionary *params = @{@"email": emailAddress,
+                             @"username": username,
+                             @"name": name,
+                             @"password" : password,
+                             @"phone" : mobile,
+                             @"profileImage" : @"sdfdxgdf"
+                             };
+    
+    [[APICaller sharedInstance] callApi:@"register" parameters:params headerFlag: false viewController:self completion:^(NSDictionary *responseObjectDictionary) {
+        
+        NSLog(@"%@", responseObjectDictionary);
+        
+        NSString *code = [responseObjectDictionary valueForKey:@"code"];
+        
+        if ([code isEqualToString:USER_REGISTERED ]){
+            
+            [self dismissViewControllerAnimated:true  completion:nil];
+            
+        }
+        else{
+            
+            //NSString *msg = @"";
+            NSString *errorMessage = [responseObjectDictionary valueForKey:@"message"];
+            
+            NSDictionary *validationErrors = [responseObjectDictionary valueForKey:@"errors"];
+            NSArray *errArrKeys = [validationErrors allKeys];
+            NSLog(@"%@", errArrKeys);
+            for (NSString *key in errArrKeys){
+                
+                for (NSString *msg in [validationErrors valueForKey:key]){
+                    
+                    errorMessage = [errorMessage stringByAppendingString:@"\n"];
+                    errorMessage = [errorMessage stringByAppendingString:msg];
+
+                }
+                
+            }
+            [[Alerter sharedInstance] createAlert:@"Error" message:errorMessage viewController:self completion:^{
+            }];
+        }
+    }];
 }
 
 -(void) onCancel{
@@ -68,7 +122,7 @@
 {
     [self.profileImageButton setImage:image forState:UIControlStateNormal];
     [self dismissViewControllerAnimated:true completion:nil];
+    
 }
-
 
 @end
