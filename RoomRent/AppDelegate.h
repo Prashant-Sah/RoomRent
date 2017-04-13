@@ -7,6 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <SWRevealViewController.h>
+#import "Navigator.h"
+#import "OffersViewController.h"
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 

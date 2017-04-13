@@ -9,6 +9,7 @@
 #import "User.h"
 
 @implementation User
+static User* user = nil;
 
 -(void)initUser:(NSString*) fullname username:(NSString *)username email:(NSString *)email mobile:(NSString *)mobile {
     
@@ -17,6 +18,37 @@
     self.email = email;
     self.mobile = mobile;
     
+}
+-(User *)getUser{
+    return user;
+}
+
+- (void)initUserFromJson:(NSDictionary *)userDict{
+    
+    user.fullname = [userDict valueForKey:@"name"];
+    user.username = [userDict valueForKey:@"username"];
+    user.email = [userDict valueForKey:@"email"];
+    user.username = [userDict valueForKey:@"phone"];
+    
+}
+
+- (void)encodeWithCoder:(NSCoder *)aCoder{
+    
+    [aCoder encodeObject:_fullname forKey:@"fullname"];
+    [aCoder encodeObject:_username forKey:@"username"];
+    [aCoder encodeObject:_email forKey:@"email"];
+    [aCoder encodeObject:_mobile forKey:@"mobile"];
+}
+
+- (instancetype)initWithCoder:(NSCoder *)aDecoder{
+    if(self = [super init]){
+        
+        self.fullname = [aDecoder decodeObjectForKey:@"fullname"];
+        self.username = [aDecoder decodeObjectForKey:@"username"];
+        self.email = [aDecoder decodeObjectForKey:@"email"];
+        self.mobile = [aDecoder decodeObjectForKey:@"mobile"];
+    }
+    return self;
 }
 
 @end

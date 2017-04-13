@@ -22,6 +22,7 @@
 		8F93E3B21E8E267E008C02D4 /* SignInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F93E3B11E8E267E008C02D4 /* SignInViewController.m */; };
 		8F93E3B51E8E272C008C02D4 /* ForgotPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F93E3B41E8E272C008C02D4 /* ForgotPasswordViewController.m */; };
 		8F93E3B81E8E4F3E008C02D4 /* SignUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F93E3B71E8E4F3E008C02D4 /* SignUpViewController.m */; };
+		8FD54F581E9F741700565EC4 /* SideBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FD54F571E9F741700565EC4 /* SideBarViewController.m */; };
 		8FF2CE041E9DD3260059E3F5 /* OffersViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FF2CE031E9DD3260059E3F5 /* OffersViewController.m */; };
 		8FF2CE071E9DF0920059E3F5 /* Navigator.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FF2CE061E9DF0920059E3F5 /* Navigator.m */; };
 		8FF2CE0C1E9E018B0059E3F5 /* CustomButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FF2CE091E9E018B0059E3F5 /* CustomButton.m */; };
@@ -59,6 +60,8 @@
 		8F93E3B41E8E272C008C02D4 /* ForgotPasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForgotPasswordViewController.m; sourceTree = "<group>"; };
 		8F93E3B61E8E4F3E008C02D4 /* SignUpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignUpViewController.h; sourceTree = "<group>"; };
 		8F93E3B71E8E4F3E008C02D4 /* SignUpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignUpViewController.m; sourceTree = "<group>"; };
+		8FD54F561E9F741700565EC4 /* SideBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SideBarViewController.h; sourceTree = "<group>"; };
+		8FD54F571E9F741700565EC4 /* SideBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SideBarViewController.m; sourceTree = "<group>"; };
 		8FF2CE021E9DD3260059E3F5 /* OffersViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OffersViewController.h; sourceTree = "<group>"; };
 		8FF2CE031E9DD3260059E3F5 /* OffersViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OffersViewController.m; sourceTree = "<group>"; };
 		8FF2CE051E9DF0920059E3F5 /* Navigator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Navigator.h; sourceTree = "<group>"; };
@@ -100,6 +103,8 @@
 			children = (
 				8FF2CE021E9DD3260059E3F5 /* OffersViewController.h */,
 				8FF2CE031E9DD3260059E3F5 /* OffersViewController.m */,
+				8FD54F561E9F741700565EC4 /* SideBarViewController.h */,
+				8FD54F571E9F741700565EC4 /* SideBarViewController.m */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -156,8 +161,8 @@
 				8F4D2D2A1E8CFBE800347F9A /* AppDelegate.h */,
 				8F4D2D2B1E8CFBE800347F9A /* AppDelegate.m */,
 				8F248DC91E935ACC00786B69 /* Main.storyboard */,
-				8F4D2D351E8CFBE800347F9A /* LaunchScreen.storyboard */,
 				8F4D2D301E8CFBE800347F9A /* Account.storyboard */,
+				8F4D2D351E8CFBE800347F9A /* LaunchScreen.storyboard */,
 				8F4D2D331E8CFBE800347F9A /* Assets.xcassets */,
 				8F4D2D381E8CFBE800347F9A /* Info.plist */,
 				8F4D2D271E8CFBE800347F9A /* Supporting Files */,
@@ -370,6 +375,7 @@
 				8FF2CE0C1E9E018B0059E3F5 /* CustomButton.m in Sources */,
 				8F85F3951E94A44B00812C10 /* Alerter.m in Sources */,
 				8F93E3B21E8E267E008C02D4 /* SignInViewController.m in Sources */,
+				8FD54F581E9F741700565EC4 /* SideBarViewController.m in Sources */,
 				8FF2CE041E9DD3260059E3F5 /* OffersViewController.m in Sources */,
 				8F63C1051E95FC82000790D6 /* Validator.m in Sources */,
 				8F4D2D291E8CFBE800347F9A /* main.m in Sources */,

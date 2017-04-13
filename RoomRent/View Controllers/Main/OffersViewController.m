@@ -9,6 +9,8 @@
 #import "OffersViewController.h"
 
 @interface OffersViewController ()
+@property (weak, nonatomic) IBOutlet UITableView *offersTableView;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *sidebarbutton;
 
 @end
 
@@ -17,8 +19,22 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    _offersTableView.dataSource = self;
+    _offersTableView.delegate = self;
+    
+    SWRevealViewController *revealViewController = self.revealViewController;
+    if ( revealViewController )
+    {
+        [self.sidebarbutton setTarget: self.revealViewController];
+        [self.sidebarbutton setAction: @selector( revealToggle: )];
+        [self.view addGestureRecognizer:self.revealViewController.panGestureRecognizer];
+    }
+    
+    UINib *cellNib = [UINib nibWithNibName:@"OffersTableViewCell" bundle:nil];
+    [self.offersTableView registerNib:cellNib forCellReuseIdentifier:@"OffersTableViewCell"];
+    
     UIBarButtonItem *logoutButton = [[UIBarButtonItem alloc] initWithTitle:@"Logout" style:UIBarButtonItemStylePlain target:self action:@selector(onLogout)];
-    self.navigationItem.leftBarButtonItem = logoutButton;
+    self.navigationItem.rightBarButtonItem = logoutButton;
     logoutButton.tintColor = [UIColor blueColor];
     [self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
     self.navigationController.navigationBar.translucent = YES;
@@ -33,9 +49,24 @@
         if([code isEqualToString:USER_LOGGED_OUT]){
             
             [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"userApiToken"];
-            [[Navigator sharedInstance] makeRootViewController:@"Account" viewController:@"SignInViewController" tabBarController:nil];
+            [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"userDataKey"];
+            [[Navigator sharedInstance] makeRootViewControllerWithStoryBoard:@"Account" viewController:@"SignInViewController" tabBarController:nil];
         }
     }];
 }
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+    return 1;
+}
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    return 3;
+}
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    OffersTableViewCell *cell  = (OffersTableViewCell *)  [tableView dequeueReusableCellWithIdentifier:@"OffersTableViewCell"];
+    cell.backgroundColor = [UIColor blueColor];
+    return cell;
+    
+}
+
 
 @end

@@ -25,7 +25,7 @@ static NSString *API_TOKEN = @"OD44GCYFpHYHcwYFTG1QsQBGPOLcHjk8OMOMPkd3Ew3RTaLX0
 
 static NSString *USER_API_TOKEN;
 static NSString *DEVICE_TYPE = @"1";
-static NSString *DEVICE_TOKEN = @"";
+static NSString *DEVICE_TOKEN = @"kdsfjd";
 
 static NSString *LOGIN_SUCCESS = @"0011";
 

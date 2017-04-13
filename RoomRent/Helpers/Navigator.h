@@ -9,11 +9,19 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 #import <Foundation/Foundation.h>
+#import <SWRevealViewController.h>
 
 @interface Navigator : NSObject
 
 +(Navigator*) sharedInstance;
 
--(void)makeRootViewController:(NSString *)storyBoard viewController : (NSString *)VC tabBarController:(NSString *)tabBC;
+-(Navigator*)initNavigator;
+
+-(void)makeRootViewControllerWithStoryBoard:(NSString *)storyBoard viewController : (NSString *)VC tabBarController:(NSString *)tabBC;
+
 -(void)presentWithNavigationController:(UIViewController*) presentVC  viewController:(NSString *)VC;
+
+-(void) setRevealViewControllerWithFrontTabViewController: (NSString *) tabVC sideViewController:(NSString *) sideVC storyBoard :(NSString *) storyboard;
+
+
 @end

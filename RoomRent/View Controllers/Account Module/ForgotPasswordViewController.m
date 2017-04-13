@@ -26,7 +26,6 @@
     self.navigationController.navigationBar.translucent = YES;
 }
 
-
 -(void) onCancel{
     [self dismissViewControllerAnimated:NO completion:nil];
 }

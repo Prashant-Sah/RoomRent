@@ -9,22 +9,26 @@
 #import "Navigator.h"
 
 @implementation Navigator
+
+UIWindow *window = nil;
+
 static Navigator *instance = nil;
 
 +(Navigator *)sharedInstance{
     if(instance == nil){
-        instance = [[Navigator alloc] init];
+        instance = [[Navigator alloc] initNavigator];
         return instance;
     }
     return  instance;
 }
 
--(void)makeRootViewController:(NSString *)storyBoard viewController:(NSString *)VC tabBarController:(NSString *)tabBC {
-    
-    //AppDelegate* sharedDelegate = [AppDelegate appDelegate];
-    //AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
-    
-    UIWindow *window = [[[UIApplication sharedApplication] delegate] window];
+-(Navigator*)initNavigator {
+    window = [[[UIApplication sharedApplication] delegate] window];
+    return self;
+}
+
+- (void)makeRootViewControllerWithStoryBoard:(NSString *)storyBoard viewController:(NSString *)VC tabBarController:(NSString *)tabBC{
+//    UIWindow *window = [[[UIApplication sharedApplication] delegate] window];
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:storyBoard bundle:nil];
     
     if(VC == nil){
@@ -39,6 +43,20 @@ static Navigator *instance = nil;
         [window makeKeyAndVisible];
     }
 }
+
+- (void)setRevealViewControllerWithFrontTabViewController:(NSString *)tabVC sideViewController:(NSString *)sideVC storyBoard:(NSString *)storyboard{
+    
+    //UIWindow *window = [[[UIApplication sharedApplication] delegate] window];
+    
+    UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:storyboard bundle:nil];
+    UITabBarController *tabViewController = [storyBoard instantiateViewControllerWithIdentifier:tabVC];
+    UIViewController *sideBarVC = [storyBoard instantiateViewControllerWithIdentifier:sideVC];
+    SWRevealViewController *revealViewController = [[SWRevealViewController alloc] initWithRearViewController:sideBarVC frontViewController:tabViewController];
+    window.rootViewController = revealViewController;
+    [window makeKeyAndVisible];
+    
+}
+
 
 -(void)presentWithNavigationController:(UIViewController*) presentVC  viewController:(NSString *)VC {
     

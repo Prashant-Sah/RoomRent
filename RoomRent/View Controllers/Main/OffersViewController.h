@@ -9,7 +9,10 @@
 #import <UIKit/UIKit.h>
 #import "APICaller.h"
 #import "Navigator.h"
+#import <SWRevealViewController.h>
+#import "OffersTableViewCell.h"
 
-@interface OffersViewController : UIViewController
+
+@interface OffersViewController : UIViewController <UITableViewDataSource , UITableViewDelegate>
 
 @end
