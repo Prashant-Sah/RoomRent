@@ -19,7 +19,7 @@ static APICaller* instance = nil;
     return instance;
 }
 
--(void)callApi:(NSString *)appendString parameters:(NSDictionary *)params headerFlag:(BOOL) headerFlag viewController:(UIViewController*)VC completion:(void (^)(NSDictionary *responseObjectDictionary))completionBlock {
+-(void)callApi:(NSString *)appendString headerFlag:(BOOL)headerFlag parameters:(NSDictionary *)params imageData:(NSData *)imageData fileName:(NSString *)fileName viewControlller:(UIViewController *)VC completion:(void (^)(NSDictionary *))completionBlock{
     
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
@@ -29,19 +29,31 @@ static APICaller* instance = nil;
         NSLog(@"%@",userApiToken);
         [manager.requestSerializer setValue:[@"Bearer " stringByAppendingString:userApiToken] forHTTPHeaderField:@"Authorization"];
     }
-    [manager POST: [PUSP_BASE_URL stringByAppendingString:appendString] parameters:params progress:nil success:^
-     (NSURLSessionTask *task, id responseObject) {
-         
-         NSDictionary *responseObjectDictionary = (NSDictionary*) responseObject;
-         completionBlock(responseObjectDictionary);
-         
-     } failure:^(NSURLSessionTask *operation, NSError *error) {
-         
-         [[Alerter sharedInstance] createAlert:@"Error" message:@"Error in API Call" viewController:VC completion:^{
-         }];
-     }];
     
+    if(imageData == nil){
+        [manager POST:[PUSP_BASE_URL stringByAppendingString:appendString] parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+            
+            NSDictionary *responseObjectDictionary = (NSDictionary*) responseObject;
+            completionBlock(responseObjectDictionary);
+        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+            
+            [[Alerter sharedInstance] createAlert:@"Error" message:@"Error in API Call" viewController:VC completion:^{
+            }];
+        }];
+    }
+    else{
+        
+        [manager POST:[PUSP_BASE_URL stringByAppendingString:appendString] parameters:params constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
+            [formData appendPartWithFileData:imageData name:@"profile_image" fileName:fileName mimeType:@"image/jpeg"];
+            
+        } progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+            NSDictionary *responseObjectDictionary = (NSDictionary*) responseObject;
+            completionBlock(responseObjectDictionary);
+            
+        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+            [[Alerter sharedInstance] createAlert:@"Error" message:@"Error in API Call" viewController:VC completion:^{ }];
+        }];
+    }
 }
-
 
 @end

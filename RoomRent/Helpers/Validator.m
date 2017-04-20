@@ -77,6 +77,5 @@ static Validator * instance = nil;
 
 - (void)tapOnError:(UITextField *)textfield{
     
-    UILabel *label = [[UILabel alloc] initWithFrame: CGRectMake(0, 0, 200, 20)];
 }
 @end

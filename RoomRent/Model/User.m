@@ -11,13 +11,13 @@
 @implementation User
 static User* user = nil;
 
--(void)initUser:(NSString*) fullname username:(NSString *)username email:(NSString *)email mobile:(NSString *)mobile {
+-(void)initUser:(NSString*) fullname username:(NSString *)username email:(NSString *)email mobile:(NSString *)mobile profileImageURL:(NSURL *) imageURL  {
     
     self.fullname = fullname;
     self.username = username;
     self.email = email;
     self.mobile = mobile;
-    
+    self.profileImageURL = imageURL;
 }
 -(User *)getUser{
     return user;
@@ -28,7 +28,8 @@ static User* user = nil;
     user.fullname = [userDict valueForKey:@"name"];
     user.username = [userDict valueForKey:@"username"];
     user.email = [userDict valueForKey:@"email"];
-    user.username = [userDict valueForKey:@"phone"];
+    user.mobile = [userDict valueForKey:@"phone"];
+    user.profileImageURL = [userDict valueForKey:@"profile_image"];
     
 }
 
@@ -38,6 +39,7 @@ static User* user = nil;
     [aCoder encodeObject:_username forKey:@"username"];
     [aCoder encodeObject:_email forKey:@"email"];
     [aCoder encodeObject:_mobile forKey:@"mobile"];
+    [aCoder encodeObject:_profileImageURL forKey:@"profileImageURL"];
 }
 
 - (instancetype)initWithCoder:(NSCoder *)aDecoder{
@@ -47,6 +49,7 @@ static User* user = nil;
         self.username = [aDecoder decodeObjectForKey:@"username"];
         self.email = [aDecoder decodeObjectForKey:@"email"];
         self.mobile = [aDecoder decodeObjectForKey:@"mobile"];
+        self.profileImageURL = [aDecoder decodeObjectForKey:@"profileImageURL"];
     }
     return self;
 }

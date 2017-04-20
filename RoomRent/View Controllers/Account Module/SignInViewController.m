@@ -46,7 +46,7 @@
                              @"device_type": DEVICE_TYPE,
                              @"device_token": DEVICE_TOKEN};
     
-    [[APICaller sharedInstance] callApi:@"login" parameters:params headerFlag : false viewController:self completion:^(NSDictionary *responseObjectDictionary) {
+    [[APICaller sharedInstance] callApi:@"login" headerFlag:false parameters:params imageData:nil fileName:nil viewControlller:self completion:^(NSDictionary *responseObjectDictionary) {
         
         NSLog(@"%@",responseObjectDictionary);
         NSString *code = [responseObjectDictionary valueForKey:@"code"];

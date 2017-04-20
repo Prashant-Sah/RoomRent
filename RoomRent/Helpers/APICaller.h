@@ -15,8 +15,8 @@
 
 +(APICaller *) sharedInstance;
 
--(void)callApi:(NSString *)appendString parameters:(NSDictionary *)params headerFlag:(BOOL) headerFlag viewController:(UIViewController*)VC completion:(void (^)(NSDictionary *responseObjectDictionary))completionBlock  ;
-
 //-(APICaller *) initAPICaller;
+
+-(void)callApi :  (NSString *) appendString headerFlag : (BOOL) headerFlag parameters:(NSDictionary *)params imageData : (NSData *) imageData fileName : (NSString *) fileName viewControlller:(UIViewController *) VC completion :(void (^) (NSDictionary * responseObjectDictionary)) completionBlock ;
 
 @end

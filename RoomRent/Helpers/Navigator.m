@@ -38,8 +38,8 @@ static Navigator *instance = nil;
         [window makeKeyAndVisible];
     }else{
         
-        UIViewController *nVC = [storyboard instantiateViewControllerWithIdentifier:VC];
-        window.rootViewController = nVC;
+        UIViewController *newVC = [storyboard instantiateViewControllerWithIdentifier:VC];
+        window.rootViewController = newVC;
         [window makeKeyAndVisible];
     }
 }
@@ -52,6 +52,7 @@ static Navigator *instance = nil;
     UITabBarController *tabViewController = [storyBoard instantiateViewControllerWithIdentifier:tabVC];
     UIViewController *sideBarVC = [storyBoard instantiateViewControllerWithIdentifier:sideVC];
     SWRevealViewController *revealViewController = [[SWRevealViewController alloc] initWithRearViewController:sideBarVC frontViewController:tabViewController];
+    
     window.rootViewController = revealViewController;
     [window makeKeyAndVisible];
     

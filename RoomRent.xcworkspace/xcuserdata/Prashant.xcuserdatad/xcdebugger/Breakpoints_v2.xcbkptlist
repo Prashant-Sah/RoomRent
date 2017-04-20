@@ -9,13 +9,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "RoomRent/Helpers/Validator.m"
-            timestampString = "513508656.053113"
+            filePath = "RoomRent/View Controllers/Main/MyTabBarController.m"
+            timestampString = "514093573.8137"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "80"
-            endingLineNumber = "80"
-            landmarkName = "-tapOnError:"
+            startingLineNumber = "29"
+            endingLineNumber = "29"
+            landmarkName = "-revealController:willMoveToPosition:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -25,13 +25,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "RoomRent/Helpers/Validator.m"
-            timestampString = "513508011.223343"
+            filePath = "RoomRent/View Controllers/Main/MyTabBarController.m"
+            timestampString = "514093574.469229"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "80"
-            endingLineNumber = "80"
-            landmarkName = "-tapOnError:"
+            startingLineNumber = "31"
+            endingLineNumber = "31"
+            landmarkName = "-revealController:willMoveToPosition:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -41,13 +41,29 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "RoomRent/Model/User.m"
-            timestampString = "513772069.851417"
+            filePath = "RoomRent/View Controllers/Main/UserLocationViewController.m"
+            timestampString = "514361099.797942"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "16"
-            endingLineNumber = "16"
-            landmarkName = "-initUser:username:email:mobile:"
+            startingLineNumber = "30"
+            endingLineNumber = "30"
+            landmarkName = "-locationManager:didUpdateToLocation:fromLocation:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "RoomRent/View Controllers/Main/UserLocationViewController.m"
+            timestampString = "514361104.765801"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "26"
+            endingLineNumber = "26"
+            landmarkName = "-viewDidLoad"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

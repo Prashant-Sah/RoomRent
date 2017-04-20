@@ -8,6 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		18DD39C8802283CF8C721A8A /* libPods-RoomRent.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8950A843D8D5D7990219AC35 /* libPods-RoomRent.a */; };
+		8F0CBB2E1EA4B8C50069F1ED /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F0CBB2D1EA4B8C50069F1ED /* ProfileViewController.m */; };
+		8F0CBB3A1EA4D21A0069F1ED /* CustomCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F0CBB381EA4D21A0069F1ED /* CustomCollectionViewCell.m */; };
+		8F0CBB3B1EA4D21A0069F1ED /* CustomCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8F0CBB391EA4D21A0069F1ED /* CustomCollectionViewCell.xib */; };
+		8F0CBB471EA4D3620069F1ED /* CustomTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F0CBB451EA4D3620069F1ED /* CustomTableViewCell.m */; };
+		8F0CBB481EA4D3620069F1ED /* CustomTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8F0CBB461EA4D3620069F1ED /* CustomTableViewCell.xib */; };
+		8F0CBB4B1EA4DEFB0069F1ED /* AddPostViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F0CBB4A1EA4DEFB0069F1ED /* AddPostViewController.m */; };
+		8F1EA3A81EA7307E00E8C34E /* ImagePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F1EA3A71EA7307E00E8C34E /* ImagePicker.m */; };
 		8F248DCA1E935ACD00786B69 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8F248DC91E935ACC00786B69 /* Main.storyboard */; };
 		8F248DD51E9393E000786B69 /* KeyboardAvoidingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F248DD41E9393DF00786B69 /* KeyboardAvoidingViewController.m */; };
 		8F248DDF1E93AF2200786B69 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F248DDE1E93AF2200786B69 /* User.m */; };
@@ -23,6 +30,11 @@
 		8F93E3B51E8E272C008C02D4 /* ForgotPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F93E3B41E8E272C008C02D4 /* ForgotPasswordViewController.m */; };
 		8F93E3B81E8E4F3E008C02D4 /* SignUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F93E3B71E8E4F3E008C02D4 /* SignUpViewController.m */; };
 		8FD54F581E9F741700565EC4 /* SideBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FD54F571E9F741700565EC4 /* SideBarViewController.m */; };
+		8FDD48E91EA8800F003DDEE9 /* Post.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FDD48E81EA8800F003DDEE9 /* Post.m */; };
+		8FDD48EC1EA880C1003DDEE9 /* UserLocationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FDD48EB1EA880C1003DDEE9 /* UserLocationViewController.m */; };
+		8FDD48EE1EA88467003DDEE9 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8FDD48ED1EA88467003DDEE9 /* CoreLocation.framework */; };
+		8FDD48F01EA88474003DDEE9 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8FDD48EF1EA88474003DDEE9 /* MapKit.framework */; };
+		8FDD71521EA47CAD006C0020 /* CustomRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FDD71511EA47CAD006C0020 /* CustomRevealViewController.m */; };
 		8FF2CE041E9DD3260059E3F5 /* OffersViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FF2CE031E9DD3260059E3F5 /* OffersViewController.m */; };
 		8FF2CE071E9DF0920059E3F5 /* Navigator.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FF2CE061E9DF0920059E3F5 /* Navigator.m */; };
 		8FF2CE0C1E9E018B0059E3F5 /* CustomButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FF2CE091E9E018B0059E3F5 /* CustomButton.m */; };
@@ -34,6 +46,18 @@
 /* Begin PBXFileReference section */
 		7B014657A9B12EFA19F2E978 /* Pods-RoomRent.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RoomRent.debug.xcconfig"; path = "Pods/Target Support Files/Pods-RoomRent/Pods-RoomRent.debug.xcconfig"; sourceTree = "<group>"; };
 		8950A843D8D5D7990219AC35 /* libPods-RoomRent.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-RoomRent.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8F0CBB2C1EA4B8C50069F1ED /* ProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileViewController.h; sourceTree = "<group>"; };
+		8F0CBB2D1EA4B8C50069F1ED /* ProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileViewController.m; sourceTree = "<group>"; };
+		8F0CBB371EA4D21A0069F1ED /* CustomCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomCollectionViewCell.h; sourceTree = "<group>"; };
+		8F0CBB381EA4D21A0069F1ED /* CustomCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomCollectionViewCell.m; sourceTree = "<group>"; };
+		8F0CBB391EA4D21A0069F1ED /* CustomCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomCollectionViewCell.xib; sourceTree = "<group>"; };
+		8F0CBB441EA4D3620069F1ED /* CustomTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomTableViewCell.h; sourceTree = "<group>"; };
+		8F0CBB451EA4D3620069F1ED /* CustomTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomTableViewCell.m; sourceTree = "<group>"; };
+		8F0CBB461EA4D3620069F1ED /* CustomTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomTableViewCell.xib; sourceTree = "<group>"; };
+		8F0CBB491EA4DEFB0069F1ED /* AddPostViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddPostViewController.h; sourceTree = "<group>"; };
+		8F0CBB4A1EA4DEFB0069F1ED /* AddPostViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddPostViewController.m; sourceTree = "<group>"; };
+		8F1EA3A61EA7307E00E8C34E /* ImagePicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImagePicker.h; sourceTree = "<group>"; };
+		8F1EA3A71EA7307E00E8C34E /* ImagePicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImagePicker.m; sourceTree = "<group>"; };
 		8F248DC91E935ACC00786B69 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		8F248DD31E9393DF00786B69 /* KeyboardAvoidingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeyboardAvoidingViewController.h; sourceTree = "<group>"; };
 		8F248DD41E9393DF00786B69 /* KeyboardAvoidingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeyboardAvoidingViewController.m; sourceTree = "<group>"; };
@@ -60,8 +84,17 @@
 		8F93E3B41E8E272C008C02D4 /* ForgotPasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForgotPasswordViewController.m; sourceTree = "<group>"; };
 		8F93E3B61E8E4F3E008C02D4 /* SignUpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignUpViewController.h; sourceTree = "<group>"; };
 		8F93E3B71E8E4F3E008C02D4 /* SignUpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignUpViewController.m; sourceTree = "<group>"; };
+		8FAA4C7C1EA5C51200B55334 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		8FD54F561E9F741700565EC4 /* SideBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SideBarViewController.h; sourceTree = "<group>"; };
 		8FD54F571E9F741700565EC4 /* SideBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SideBarViewController.m; sourceTree = "<group>"; };
+		8FDD48E71EA8800F003DDEE9 /* Post.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Post.h; sourceTree = "<group>"; };
+		8FDD48E81EA8800F003DDEE9 /* Post.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Post.m; sourceTree = "<group>"; };
+		8FDD48EA1EA880C1003DDEE9 /* UserLocationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserLocationViewController.h; sourceTree = "<group>"; };
+		8FDD48EB1EA880C1003DDEE9 /* UserLocationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserLocationViewController.m; sourceTree = "<group>"; };
+		8FDD48ED1EA88467003DDEE9 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		8FDD48EF1EA88474003DDEE9 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		8FDD71501EA47CAD006C0020 /* CustomRevealViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomRevealViewController.h; sourceTree = "<group>"; };
+		8FDD71511EA47CAD006C0020 /* CustomRevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomRevealViewController.m; sourceTree = "<group>"; };
 		8FF2CE021E9DD3260059E3F5 /* OffersViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OffersViewController.h; sourceTree = "<group>"; };
 		8FF2CE031E9DD3260059E3F5 /* OffersViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OffersViewController.m; sourceTree = "<group>"; };
 		8FF2CE051E9DF0920059E3F5 /* Navigator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Navigator.h; sourceTree = "<group>"; };
@@ -81,6 +114,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8FDD48F01EA88474003DDEE9 /* MapKit.framework in Frameworks */,
+				8FDD48EE1EA88467003DDEE9 /* CoreLocation.framework in Frameworks */,
 				18DD39C8802283CF8C721A8A /* libPods-RoomRent.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -94,6 +129,12 @@
 				8FF2CE0E1E9E024D0059E3F5 /* OffersTableViewCell.h */,
 				8FF2CE0F1E9E024D0059E3F5 /* OffersTableViewCell.m */,
 				8FF2CE101E9E024D0059E3F5 /* OffersTableViewCell.xib */,
+				8F0CBB371EA4D21A0069F1ED /* CustomCollectionViewCell.h */,
+				8F0CBB381EA4D21A0069F1ED /* CustomCollectionViewCell.m */,
+				8F0CBB391EA4D21A0069F1ED /* CustomCollectionViewCell.xib */,
+				8F0CBB441EA4D3620069F1ED /* CustomTableViewCell.h */,
+				8F0CBB451EA4D3620069F1ED /* CustomTableViewCell.m */,
+				8F0CBB461EA4D3620069F1ED /* CustomTableViewCell.xib */,
 			);
 			path = "Custom Views";
 			sourceTree = "<group>";
@@ -105,6 +146,10 @@
 				8FF2CE031E9DD3260059E3F5 /* OffersViewController.m */,
 				8FD54F561E9F741700565EC4 /* SideBarViewController.h */,
 				8FD54F571E9F741700565EC4 /* SideBarViewController.m */,
+				8F0CBB491EA4DEFB0069F1ED /* AddPostViewController.h */,
+				8F0CBB4A1EA4DEFB0069F1ED /* AddPostViewController.m */,
+				8FDD48EA1EA880C1003DDEE9 /* UserLocationViewController.h */,
+				8FDD48EB1EA880C1003DDEE9 /* UserLocationViewController.m */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -113,11 +158,13 @@
 			isa = PBXGroup;
 			children = (
 				8F248DD31E9393DF00786B69 /* KeyboardAvoidingViewController.h */,
+				8F248DD41E9393DF00786B69 /* KeyboardAvoidingViewController.m */,
 				8FF2CE081E9E018B0059E3F5 /* CustomButton.h */,
 				8FF2CE091E9E018B0059E3F5 /* CustomButton.m */,
 				8FF2CE0A1E9E018B0059E3F5 /* CustomTextField.h */,
 				8FF2CE0B1E9E018B0059E3F5 /* CustomTextField.m */,
-				8F248DD41E9393DF00786B69 /* KeyboardAvoidingViewController.m */,
+				8FDD71501EA47CAD006C0020 /* CustomRevealViewController.h */,
+				8FDD71511EA47CAD006C0020 /* CustomRevealViewController.m */,
 			);
 			path = "Custom Class";
 			sourceTree = "<group>";
@@ -127,6 +174,8 @@
 			children = (
 				8F248DDD1E93AF2200786B69 /* User.h */,
 				8F248DDE1E93AF2200786B69 /* User.m */,
+				8FDD48E71EA8800F003DDEE9 /* Post.h */,
+				8FDD48E81EA8800F003DDEE9 /* Post.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -196,6 +245,8 @@
 				8F93E3B41E8E272C008C02D4 /* ForgotPasswordViewController.m */,
 				8F93E3B61E8E4F3E008C02D4 /* SignUpViewController.h */,
 				8F93E3B71E8E4F3E008C02D4 /* SignUpViewController.m */,
+				8F0CBB2C1EA4B8C50069F1ED /* ProfileViewController.h */,
+				8F0CBB2D1EA4B8C50069F1ED /* ProfileViewController.m */,
 			);
 			path = "Account Module";
 			sourceTree = "<group>";
@@ -219,6 +270,8 @@
 				8F63C1071E962D90000790D6 /* APICaller.m */,
 				8FF2CE051E9DF0920059E3F5 /* Navigator.h */,
 				8FF2CE061E9DF0920059E3F5 /* Navigator.m */,
+				8F1EA3A61EA7307E00E8C34E /* ImagePicker.h */,
+				8F1EA3A71EA7307E00E8C34E /* ImagePicker.m */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -235,6 +288,9 @@
 		FF837D5CF97CAE7E54D15733 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				8FDD48EF1EA88474003DDEE9 /* MapKit.framework */,
+				8FDD48ED1EA88467003DDEE9 /* CoreLocation.framework */,
+				8FAA4C7C1EA5C51200B55334 /* AssetsLibrary.framework */,
 				8950A843D8D5D7990219AC35 /* libPods-RoomRent.a */,
 			);
 			name = Frameworks;
@@ -302,10 +358,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				8FF2CE121E9E024D0059E3F5 /* OffersTableViewCell.xib in Resources */,
+				8F0CBB481EA4D3620069F1ED /* CustomTableViewCell.xib in Resources */,
 				8F4D2D371E8CFBE800347F9A /* LaunchScreen.storyboard in Resources */,
 				8F4D2D341E8CFBE800347F9A /* Assets.xcassets in Resources */,
 				8F4D2D321E8CFBE800347F9A /* Account.storyboard in Resources */,
 				8F248DCA1E935ACD00786B69 /* Main.storyboard in Resources */,
+				8F0CBB3B1EA4D21A0069F1ED /* CustomCollectionViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -370,16 +428,24 @@
 				8F93E3B51E8E272C008C02D4 /* ForgotPasswordViewController.m in Sources */,
 				8F248DDF1E93AF2200786B69 /* User.m in Sources */,
 				8F93E3B81E8E4F3E008C02D4 /* SignUpViewController.m in Sources */,
+				8FDD48EC1EA880C1003DDEE9 /* UserLocationViewController.m in Sources */,
 				8FF2CE111E9E024D0059E3F5 /* OffersTableViewCell.m in Sources */,
+				8F1EA3A81EA7307E00E8C34E /* ImagePicker.m in Sources */,
 				8F4D2D2C1E8CFBE800347F9A /* AppDelegate.m in Sources */,
 				8FF2CE0C1E9E018B0059E3F5 /* CustomButton.m in Sources */,
 				8F85F3951E94A44B00812C10 /* Alerter.m in Sources */,
+				8F0CBB2E1EA4B8C50069F1ED /* ProfileViewController.m in Sources */,
 				8F93E3B21E8E267E008C02D4 /* SignInViewController.m in Sources */,
+				8FDD71521EA47CAD006C0020 /* CustomRevealViewController.m in Sources */,
 				8FD54F581E9F741700565EC4 /* SideBarViewController.m in Sources */,
+				8FDD48E91EA8800F003DDEE9 /* Post.m in Sources */,
+				8F0CBB4B1EA4DEFB0069F1ED /* AddPostViewController.m in Sources */,
 				8FF2CE041E9DD3260059E3F5 /* OffersViewController.m in Sources */,
 				8F63C1051E95FC82000790D6 /* Validator.m in Sources */,
 				8F4D2D291E8CFBE800347F9A /* main.m in Sources */,
 				8F63C1081E962D90000790D6 /* APICaller.m in Sources */,
+				8F0CBB471EA4D3620069F1ED /* CustomTableViewCell.m in Sources */,
+				8F0CBB3A1EA4D21A0069F1ED /* CustomCollectionViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

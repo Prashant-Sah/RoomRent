@@ -11,7 +11,7 @@
 #import <Foundation/Foundation.h>
 #import <SWRevealViewController.h>
 
-@interface Navigator : NSObject
+@interface Navigator : NSObject <SWRevealViewControllerDelegate>
 
 +(Navigator*) sharedInstance;
 

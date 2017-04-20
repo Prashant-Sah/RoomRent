@@ -7,8 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "User.h"
 #import <SWRevealViewController.h>
+#import "User.h"
+#import "APICaller.h"
+#import "Navigator.h"
 
 @interface SideBarViewController : UIViewController <SWRevealViewControllerDelegate>
 

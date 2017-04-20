@@ -15,7 +15,7 @@
 @property NSString *password;
 @property NSString *email;
 @property NSString *mobile;
-
+@property NSURL *profileImageURL;
 
 -(void) initUserFromJson : (NSDictionary *) userDict;
 

@@ -8,7 +8,7 @@
 
 #import "SignUpViewController.h"
 //#import "CustomButton.h"
-NSString *msg;
+
 @interface SignUpViewController ()
 
 @property (weak, nonatomic) IBOutlet UIButton *profileImageButton;
@@ -19,13 +19,15 @@ NSString *msg;
 @property (weak, nonatomic) IBOutlet UITextField *passwordTextField;
 @property (weak, nonatomic) IBOutlet UIButton *createButton;
 
+@property UIImage *profileImage;
+@property NSData *imageData;
 @end
 
 @implementation SignUpViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
+    
     //Assigning tags to textfields
     _nameTextField.tag = NAME_TEXTFIELD;
     _mobileTextField.tag = MOBILE_TEXTFIELD;
@@ -34,11 +36,11 @@ NSString *msg;
     _passwordTextField.tag = PASSWORD_TEXTFIELD;
     
     
-    _nameTextField.text = @"Prashant-Sah";
-    _mobileTextField.text =@"9842879727";
-    _userNameTextField.text =@"Prashat";
-    _emailAddTextField.text = @"068bex@gmail.com";
-    _passwordTextField.text = @"12345";
+    _nameTextField.text = @"Pupa Raaz";
+    _mobileTextField.text =@"9876543210";
+    _userNameTextField.text =@"Puspi";
+    _emailAddTextField.text = @"069bct429@gmail.com";
+    _passwordTextField.text = @"Puspa123#";
     
     //navigation Bar clear
     UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithTitle:@"Cancel" style:UIBarButtonItemStylePlain target:self action:@selector(onCancel)];
@@ -56,16 +58,20 @@ NSString *msg;
     NSString *username = self.userNameTextField.text;
     NSString *emailAddress = self.emailAddTextField.text;
     NSString *password = self.passwordTextField.text;
+    //UIImage *profileImage = self.profileImageButton.imageView.image;
     
     NSDictionary *params = @{@"email": emailAddress,
                              @"username": username,
                              @"name": name,
                              @"password" : password,
                              @"phone" : mobile,
-                             @"profileImage" : @"sdfdxgdf"
                              };
-    
-    [[APICaller sharedInstance] callApi:@"register" parameters:params headerFlag: false viewController:self completion:^(NSDictionary *responseObjectDictionary) {
+    if(_profileImage != nil){
+        self.imageData = UIImageJPEGRepresentation(self.profileImage, 0.5);
+    }else{
+        self.imageData = nil;
+    }
+    [[APICaller sharedInstance] callApi:@"register" headerFlag:false parameters:params imageData:_imageData fileName:@"puspi.jpeg" viewControlller:self completion:^(NSDictionary *responseObjectDictionary) {
         
         NSLog(@"%@", responseObjectDictionary);
         
@@ -78,7 +84,6 @@ NSString *msg;
         }
         else{
             
-            //NSString *msg = @"";
             NSString *errorMessage = [responseObjectDictionary valueForKey:@"message"];
             
             NSDictionary *validationErrors = [responseObjectDictionary valueForKey:@"errors"];
@@ -90,7 +95,7 @@ NSString *msg;
                     
                     errorMessage = [errorMessage stringByAppendingString:@"\n"];
                     errorMessage = [errorMessage stringByAppendingString:msg];
-
+                    
                 }
                 
             }
@@ -100,6 +105,7 @@ NSString *msg;
     }];
 }
 
+
 -(void) onCancel{
     [self dismissViewControllerAnimated:NO completion:nil];
 }
@@ -107,22 +113,31 @@ NSString *msg;
 #pragma-mark - add profile photo
 - (IBAction)addPhoto:(id)sender {
     
-    UIImagePickerController *pickerController = [[UIImagePickerController alloc]
-                                                 init];
-    pickerController.delegate = self ;
-    //__weak SignUpViewController *weakself;
-    //pickerController.delegate = weakself;
-    pickerController.allowsEditing = true;
-    [self presentViewController:pickerController animated:YES completion:nil];
-}
+        UIImagePickerController *pickerController = [[UIImagePickerController alloc]
+                                                     init];
+        pickerController.delegate = self ;
+        //__weak SignUpViewController *weakself;
+        //pickerController.delegate = weakself;
+        pickerController.allowsEditing = true;
+        [self presentViewController:pickerController animated:YES completion:nil];
+    }
 
-- (void) imagePickerController:(UIImagePickerController *)picker
-         didFinishPickingImage:(UIImage *)image
-                   editingInfo:(NSDictionary *)editingInfo
-{
-    [self.profileImageButton setImage:image forState:UIControlStateNormal];
-    [self dismissViewControllerAnimated:true completion:nil];
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info{
     
+    UIImage *editedImage = [info objectForKey:UIImagePickerControllerEditedImage];
+    //UIImage *croppedImage = [info objectForKey:UIImagePickerControllerCropRect];
+    //UIImage *originalImage = [info objectForKey:UIImagePickerControllerOriginalImage];
+    
+    if(editedImage!= nil){
+        self.profileImage = editedImage;
+        [self.profileImageButton setImage:editedImage forState:UIControlStateNormal];
+    }else{
+        self.profileImage = nil;
+        [self.profileImageButton setImage:nil forState:UIControlStateNormal];
+    }
+    
+    [self dismissViewControllerAnimated:true completion:nil];
 }
+    
 
 @end
