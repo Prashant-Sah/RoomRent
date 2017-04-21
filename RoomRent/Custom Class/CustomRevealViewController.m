@@ -33,29 +33,12 @@
 
 - (void)revealController:(SWRevealViewController *)revealController willMoveToPosition:(FrontViewPosition)position{
     
-    static NSInteger tagLockView = 4207868622;
-    if (revealController.frontViewPosition == FrontViewPositionRight) {
-        
-        UIView *lock = [revealController.frontViewController.view viewWithTag:tagLockView];
-        [lock addGestureRecognizer:revealController.frontViewController.revealViewController.panGestureRecognizer];
-        [lock addGestureRecognizer:revealController.frontViewController.revealViewController.tapGestureRecognizer];
-        [UIView animateWithDuration:0.25 animations:^{
-            lock.alpha = 0;
-        } completion:^(BOOL finished) {
-            [lock removeFromSuperview];
-        }];
-    } else if (revealController.frontViewPosition == FrontViewPositionLeft) {
-        
-        UIView *lock = [[UIView alloc] initWithFrame:revealController.frontViewController.view.bounds];
-        lock.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-        lock.tag = tagLockView;
-        [lock addGestureRecognizer:revealController.frontViewController.revealViewController.tapGestureRecognizer];
-        [lock addGestureRecognizer:revealController.frontViewController.revealViewController.panGestureRecognizer];
-        [revealController.frontViewController.view addSubview:lock];
-        [UIView animateWithDuration:0.75 animations:^{}];
+    if(position == FrontViewPositionLeft){
+        [revealController.frontViewController.view setUserInteractionEnabled:true];
+    }else{
+        [revealController.frontViewController.view setUserInteractionEnabled:false];
+        [revealController.frontViewController.revealViewController tapGestureRecognizer];
     }
-    
-
 }
 
 @end

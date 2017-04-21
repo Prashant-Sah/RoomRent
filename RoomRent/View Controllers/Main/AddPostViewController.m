@@ -13,15 +13,23 @@
 @property (weak, nonatomic) IBOutlet UICollectionView *photosCollectionView;
 @property  NSIndexPath *selectedIndexPath;
 @property NSInteger lastRowIndex;
+
+@property (weak, nonatomic) IBOutlet UITextField *titleTextField;
+@property (weak, nonatomic) IBOutlet UITextView *descriptionTextField;
+@property (weak, nonatomic) IBOutlet UITextField *roomsTextField;
+@property (weak, nonatomic) IBOutlet UITextField *priceTextField;
+@property (weak, nonatomic) IBOutlet UITextField *addressTextField;
+
 @end
 
-
 @implementation AddPostViewController
+
 
 NSMutableArray *photoMutableArray = nil;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     
     _photosCollectionView.delegate = self;
     _photosCollectionView.dataSource = self;
@@ -37,43 +45,55 @@ NSMutableArray *photoMutableArray = nil;
     layout.minimumLineSpacing = 5.0f;
     layout.minimumInteritemSpacing = 5.0f;
     
+    
+    //Cancel Button with background clear
     UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithTitle:@"Cancel" style:UIBarButtonItemStylePlain target:self action:@selector(onCancel)];
     self.navigationItem.leftBarButtonItem = cancelButton;
     cancelButton.tintColor = [UIColor whiteColor];
     [self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
     self.navigationController.navigationBar.translucent = YES;
     
+    //LongPressGesture for deleting photo
     UILongPressGestureRecognizer *lpgr = [[UILongPressGestureRecognizer alloc]
-       initWithTarget:self action:@selector(handleLongPress:)];
+                                          initWithTarget:self action:@selector(handleLongPress:)];
     lpgr.delegate = self;
     lpgr.delaysTouchesBegan = YES;
     [self.photosCollectionView addGestureRecognizer:lpgr];
 }
 
+
+
+
+//MARK - Button Handlers
 -(void) onCancel{
     [self dismissViewControllerAnimated:true completion:nil];
 }
--(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    if(photoMutableArray.count == 6){
-        [photoMutableArray removeLastObject];
+
+- (IBAction)gpsIconPressed:(UIButton *)sender {
+    
+    UserLocationViewController *userLocationViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"UserLocationViewController"];
+    userLocationViewController.userLocationdelegate = self;
+    [self presentViewController: userLocationViewController animated:true completion:nil];
+}
+
+- (IBAction)postButtonPressed:(UIButton *)sender {
+    NSArray *required = @[
+                          self.titleTextField,
+                          self.descriptionTextField,
+                          self.roomsTextField,
+                          self.priceTextField,
+                          self.addressTextField
+                          ];
+
+    if([[required valueForKeyPath:@"text.@min.length"] intValue] == 0){
+        [[Alerter sharedInstance] createAlert:@"Error" message:@"One or more input fields are empty" viewController:self completion:^{}
+         ];
     }
-    return photoMutableArray.count;
 }
 
--(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    
-    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"photoCell" forIndexPath:indexPath];
-    cell.layer.cornerRadius = 5;
-    CGRect imageRect = CGRectMake(0, 0 , 100, 100);
-    UIImageView *photosImageView = [[UIImageView alloc] initWithFrame:imageRect];
-    photosImageView.layer.cornerRadius = 5;
-    [cell.contentView addSubview:[photosImageView initWithImage:photoMutableArray[indexPath.row]]];
-    NSLog(@"%@", photoMutableArray);
-    
-    return cell;
-    
-}
 
+
+//Collection View DataSource and Delegate Functions
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
     
     _selectedIndexPath = indexPath;
@@ -90,6 +110,26 @@ NSMutableArray *photoMutableArray = nil;
     
 }
 
+-(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
+    if(photoMutableArray.count == 6){
+        [photoMutableArray removeLastObject];
+    }
+    return photoMutableArray.count;
+}
+
+-(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+    
+    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"photoCell" forIndexPath:indexPath];
+    CGRect imageRect = CGRectMake(0, 0 , 100, 100);
+    UIImageView *photosImageView = [[UIImageView alloc] initWithFrame:imageRect];
+    [cell.contentView addSubview:[photosImageView initWithImage:photoMutableArray[indexPath.row]]];
+    NSLog(@"%@", photoMutableArray);
+    
+    return cell;
+    
+}
+
+//MARK - Image Handling and Setting to Cell
 - (void)setImageForCellwithImage:(UIImage *)selectedImage{
     
     CGSize destinationSize = CGSizeMake(100, 100);
@@ -106,7 +146,7 @@ NSMutableArray *photoMutableArray = nil;
         [photoMutableArray replaceObjectAtIndex:_selectedIndexPath.row withObject:selectedResizedImage];
         [_photosCollectionView reloadItemsAtIndexPaths:selectedIndexPathArray];
     }
- 
+    
     [_photosCollectionView reloadData];
 }
 
@@ -117,15 +157,8 @@ NSMutableArray *photoMutableArray = nil;
     [self setImageForCellwithImage:editedImage];
     
 }
-- (IBAction)gpsIconPressed:(UIButton *)sender {
-    
-    UIViewController *userLocationViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"UserLocationViewController"];
-    
-    [self presentViewController: userLocationViewController animated:true completion:nil];
-}
 
-
-
+//MARK - Long Press Gesture
 -(void)handleLongPress:(UILongPressGestureRecognizer *)gestureRecognizer
 {
     if (gestureRecognizer.state != UIGestureRecognizerStateEnded) {
@@ -158,8 +191,39 @@ NSMutableArray *photoMutableArray = nil;
         [aLertController addAction:no];
         
         [self presentViewController:aLertController animated:true completion:nil];
-
+        
     }
 }
+
+
+//MARK - UserLocationDelegate Functions
+- (void)didSelectLocation:(CLLocationCoordinate2D)annotationCoordinate{
+    
+    CLGeocoder *geocoder = [[CLGeocoder alloc]init];
+    CLLocation *annotationLocation =  [[CLLocation alloc] initWithLatitude:annotationCoordinate.latitude longitude:annotationCoordinate.longitude];
+    
+    [geocoder reverseGeocodeLocation:annotationLocation completionHandler:^(NSArray<CLPlacemark *> * _Nullable placemarks, NSError * _Nullable error) {
+        
+        if(error){
+            NSLog(@"%@",error);
+        }
+        
+        CLPlacemark *placemark = [placemarks objectAtIndex:0];
+        NSLog(@"placemark.ISOcountryCode %@",placemark.ISOcountryCode);
+        NSLog(@"placemark.country %@",placemark.country);
+        NSLog(@"placemark.locality %@",placemark.locality );
+        NSLog(@"placemark.postalCode %@",placemark.postalCode);
+        NSLog(@"placemark.administrativeArea %@",placemark.administrativeArea);
+        NSLog(@"placemark.locality %@",placemark.locality);
+        NSLog(@"placemark.subLocality %@",placemark.subLocality);
+        NSLog(@"placemark.subThoroughfare %@",placemark.subThoroughfare);
+        
+        self.addressTextField.text = [[placemark.subLocality stringByAppendingString: placemark.locality ] stringByAppendingString:placemark.country];
+    }];
+    
+}
+
+
+
 
 @end

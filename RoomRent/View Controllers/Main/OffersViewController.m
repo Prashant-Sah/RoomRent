@@ -24,6 +24,8 @@
     
     UINib *cellNib = [UINib nibWithNibName:@"OffersTableViewCell" bundle:nil];
     [self.offersTableView registerNib:cellNib forCellReuseIdentifier:@"OffersTableViewCell"];
+    
+    [self.revealViewController panGestureRecognizer];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{

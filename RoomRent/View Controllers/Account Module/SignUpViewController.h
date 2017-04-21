@@ -7,11 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <AssetsLibrary/AssetsLibrary.h>
 #import "KeyboardAvoidingViewController.h"
 #import "Constants.h"
 #import "APICaller.h"
 #import "User.h"
 #import "ImagePicker.h"
+#import <Photos/Photos.h>
 
 @interface SignUpViewController : KeyboardAvoidingViewController <UIImagePickerControllerDelegate>
 

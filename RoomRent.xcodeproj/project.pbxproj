@@ -95,6 +95,7 @@
 		8FDD48EF1EA88474003DDEE9 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		8FDD71501EA47CAD006C0020 /* CustomRevealViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomRevealViewController.h; sourceTree = "<group>"; };
 		8FDD71511EA47CAD006C0020 /* CustomRevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomRevealViewController.m; sourceTree = "<group>"; };
+		8FE2E79F1EA9BE89008ED312 /* Location.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Location.gpx; sourceTree = "<group>"; };
 		8FF2CE021E9DD3260059E3F5 /* OffersViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OffersViewController.h; sourceTree = "<group>"; };
 		8FF2CE031E9DD3260059E3F5 /* OffersViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OffersViewController.m; sourceTree = "<group>"; };
 		8FF2CE051E9DF0920059E3F5 /* Navigator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Navigator.h; sourceTree = "<group>"; };
@@ -176,6 +177,7 @@
 				8F248DDE1E93AF2200786B69 /* User.m */,
 				8FDD48E71EA8800F003DDEE9 /* Post.h */,
 				8FDD48E81EA8800F003DDEE9 /* Post.m */,
+				8FE2E79F1EA9BE89008ED312 /* Location.gpx */,
 			);
 			path = Model;
 			sourceTree = "<group>";

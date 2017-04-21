@@ -27,8 +27,8 @@
     _emailAddTextField.keyboardType = UIKeyboardTypeEmailAddress;
     _emailAddTextField.tag = EMAIL_ADDRESS_TEXTFIELD;
     _passwordTextField.tag = PASSWORD_TEXTFIELD;
-    self.emailAddTextField.text = @"Prashat";
-    self.passwordTextField.text = @"Pras1234";
+    self.emailAddTextField.text = @"Puspa";
+    self.passwordTextField.text = @"Puspa123#";
     
     [self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
     self.navigationController.navigationBar.shadowImage = [UIImage new];
@@ -46,7 +46,7 @@
                              @"device_type": DEVICE_TYPE,
                              @"device_token": DEVICE_TOKEN};
     
-    [[APICaller sharedInstance] callApi:@"login" headerFlag:false parameters:params imageData:nil fileName:nil viewControlller:self completion:^(NSDictionary *responseObjectDictionary) {
+    [[APICaller sharedInstance] callApi:@"login" headerFlag:false parameters:params imageData:nil fileName:nil viewController:self completion:^(NSDictionary *responseObjectDictionary) {
         
         NSLog(@"%@",responseObjectDictionary);
         NSString *code = [responseObjectDictionary valueForKey:@"code"];

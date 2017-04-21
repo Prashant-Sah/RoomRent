@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "APICaller.h"
+#import "UserLocationViewController.h"
 
-@interface AddPostViewController : UIViewController <UICollectionViewDelegate, UICollectionViewDataSource , UIImagePickerControllerDelegate, UIGestureRecognizerDelegate>
+@interface AddPostViewController : UIViewController <UICollectionViewDelegate, UICollectionViewDataSource , UIImagePickerControllerDelegate, UIGestureRecognizerDelegate, UserLocationDelegate>
 
 - (void) setImageForCellwithImage : (UIImage *) selectedImage;
 

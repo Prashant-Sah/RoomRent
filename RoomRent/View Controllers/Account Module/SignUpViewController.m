@@ -21,6 +21,7 @@
 
 @property UIImage *profileImage;
 @property NSData *imageData;
+@property NSString *imageName;
 @end
 
 @implementation SignUpViewController
@@ -58,7 +59,6 @@
     NSString *username = self.userNameTextField.text;
     NSString *emailAddress = self.emailAddTextField.text;
     NSString *password = self.passwordTextField.text;
-    //UIImage *profileImage = self.profileImageButton.imageView.image;
     
     NSDictionary *params = @{@"email": emailAddress,
                              @"username": username,
@@ -71,7 +71,7 @@
     }else{
         self.imageData = nil;
     }
-    [[APICaller sharedInstance] callApi:@"register" headerFlag:false parameters:params imageData:_imageData fileName:@"puspi.jpeg" viewControlller:self completion:^(NSDictionary *responseObjectDictionary) {
+    [[APICaller sharedInstance] callApi:@"register" headerFlag:false parameters:params imageData:_imageData fileName:_imageName viewController:self completion:^(NSDictionary *responseObjectDictionary) {
         
         NSLog(@"%@", responseObjectDictionary);
         
@@ -125,8 +125,11 @@
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info{
     
     UIImage *editedImage = [info objectForKey:UIImagePickerControllerEditedImage];
-    //UIImage *croppedImage = [info objectForKey:UIImagePickerControllerCropRect];
-    //UIImage *originalImage = [info objectForKey:UIImagePickerControllerOriginalImage];
+    NSURL *imageFileURL = [info objectForKey:UIImagePickerControllerReferenceURL];
+    _imageName = [imageFileURL lastPathComponent];
+
+    PHFetchResult *result = [PHAsset fetchAssetsWithALAssetURLs:@[imageFileURL] options:nil];
+    _imageName = [[result firstObject] filename];
     
     if(editedImage!= nil){
         self.profileImage = editedImage;
