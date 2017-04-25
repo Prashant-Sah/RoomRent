@@ -36,6 +36,8 @@
     [self resignFirstResponder];
     return true;
 }
+
+// gets rectangle of textfield and passes it to keyboardavoidingviewcontroller
 - (BOOL)textFieldShouldBeginEditing:(CustomTextField *)textField{
     
     CGRect textfieldrect = [self.superview convertRect:textField.frame toView:[[[UIApplication sharedApplication] delegate ] window ]];

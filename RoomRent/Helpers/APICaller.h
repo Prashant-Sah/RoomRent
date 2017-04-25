@@ -21,4 +21,7 @@
 
 -(void) callApiForReceivingImage : (NSString *) appendString viewController :(UIViewController *) VC completion : (void (^) (id responseObjectFromApi)) completionBlock;
 
+-(void)callApiforPost:(NSString *)appendString headerFlag:(BOOL)headerFlag parameters:(NSDictionary *)params imageDataArray:(NSArray *)imageDataArray fileNameArray:(NSArray *)fileNameArray viewController:(UIViewController *)VC completion:(void (^)(NSDictionary *responseObjectDictionary))completionBlock;
+
+
 @end

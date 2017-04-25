@@ -14,10 +14,12 @@ enum {
     MOBILE_TEXTFIELD = 2,
     USERNAME_TEXTFIELD = 3,
     EMAIL_ADDRESS_TEXTFIELD = 4,
-    PASSWORD_TEXTFIELD = 5
+    PASSWORD_TEXTFIELD = 5,
+    ROOMS_TEXTFIELD = 6,
+    PRICE_TEXTFIELD = 7
 };
 
-static NSString *PUSP_BASE_URL = @"http://192.168.0.143:81/api/v1/";
+static NSString *PUSP_BASE_URL = @"http://192.168.0.143:82/api/v1/";
 static NSString *PUSP_FILE_URL = @"http://192.168.0.143:81/api/v1/getfile/";
 static NSString *BASE_URL = @"http://192.168.0.157:81/api/";
 //static NSString *API_TOKEN = @"OD44GCYFpHYHcwYFTG1QsQBGPOLcHjk8OMOMPkd3Ew3RTaLX0ox2ES3UASxE";
@@ -32,3 +34,8 @@ static NSString *LOGIN_SUCCESS = @"0011";
 
 static NSString *USER_REGISTERED = @"0013";
 static NSString *USER_LOGGED_OUT = @"0020";
+
+static NSString *OFFER_POSTED_SUCCESSFULLY = @"0073";
+
+static NSString *OFFER = @"1";
+static NSString *REQUEST = @"2";

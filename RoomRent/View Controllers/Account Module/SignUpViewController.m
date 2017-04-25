@@ -66,12 +66,13 @@
                              @"password" : password,
                              @"phone" : mobile,
                              };
+    
     if(_profileImage != nil){
         self.imageData = UIImageJPEGRepresentation(self.profileImage, 0.5);
     }else{
         self.imageData = nil;
     }
-    [[APICaller sharedInstance] callApi:@"register" headerFlag:false parameters:params imageData:_imageData fileName:_imageName viewController:self completion:^(NSDictionary *responseObjectDictionary) {
+    [[APICaller sharedInstance] callApi:@"register" headerFlag:false parameters:params imageData: [[NSArray alloc] initWithObjects:self.imageData, nil] fileName: [[NSArray alloc] initWithObjects:self.imageName, nil]  viewController:self completion:^(NSDictionary *responseObjectDictionary) {
         
         NSLog(@"%@", responseObjectDictionary);
         

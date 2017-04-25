@@ -27,17 +27,21 @@
     NSString *username = [userDict valueForKey:@"username"];
     self.userNameLabel.text = username;
     
-    [[APICaller sharedInstance] callApiForReceivingImage:[@"getfile/" stringByAppendingString:[userDict valueForKey:@"profile_image"]] viewController:self completion:^(id responseObjectFromApi) {
-        if(responseObjectFromApi != nil){
-            
-            CGSize destinationSize = CGSizeMake(100, 100);
-            UIGraphicsBeginImageContext(destinationSize);
-            [responseObjectFromApi drawInRect:CGRectMake(0,0,destinationSize.width,destinationSize.height)];
-            UIImage *resizedProfileImage = UIGraphicsGetImageFromCurrentImageContext();
-            
-            [_profileImageButton setImage:resizedProfileImage forState:UIControlStateNormal];
-        }
-    }];
+
+    if(![[userDict valueForKey:@"profile_image"]  isEqual:@"<null>" ]){
+    }else{
+        [[APICaller sharedInstance] callApiForReceivingImage:[@"getfile/" stringByAppendingString:[userDict valueForKey:@"profile_image"]? : @""] viewController:self completion:^(id responseObjectFromApi) {
+            if(responseObjectFromApi != nil){
+                
+                CGSize destinationSize = CGSizeMake(100, 100);
+                UIGraphicsBeginImageContext(destinationSize);
+                [responseObjectFromApi drawInRect:CGRectMake(0,0,destinationSize.width,destinationSize.height)];
+                UIImage *resizedProfileImage = UIGraphicsGetImageFromCurrentImageContext();
+                
+                [_profileImageButton setImage:resizedProfileImage forState:UIControlStateNormal];
+            }
+        }];
+    }
 
 //    NSURL *profileImageFullURL = [NSURL fileURLWithPath:[PUSP_FILE_URL stringByAppendingString:[userDict valueForKey:@"profile_image"]?: @""]];
 //    NSData *profileImageData = [[NSData alloc] initWithContentsOfURL:profileImageFullURL];

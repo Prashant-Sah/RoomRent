@@ -9,38 +9,45 @@
 #import "AddPostViewController.h"
 
 @interface AddPostViewController ()
-
 @property (weak, nonatomic) IBOutlet UICollectionView *photosCollectionView;
-@property  NSIndexPath *selectedIndexPath;
-@property NSInteger lastRowIndex;
-
+@property (weak, nonatomic) IBOutlet UIView *contentView;
 @property (weak, nonatomic) IBOutlet UITextField *titleTextField;
 @property (weak, nonatomic) IBOutlet UITextView *descriptionTextField;
 @property (weak, nonatomic) IBOutlet UITextField *roomsTextField;
 @property (weak, nonatomic) IBOutlet UITextField *priceTextField;
-@property (weak, nonatomic) IBOutlet UITextField *addressTextField;
+@property (weak, nonatomic) IBOutlet UILabel *addressLabel;
+
+@property  NSIndexPath *selectedIndexPath;
+@property NSInteger lastRowIndex;
 
 @end
 
 @implementation AddPostViewController
 
-
+CLLocationCoordinate2D userAnnotationCoordinate;
 NSMutableArray *photoMutableArray = nil;
+NSMutableArray *photoDataArray = nil;
+NSMutableArray *photoNameArray = nil;
+NSString *imageName;
+NSData *imageData;
+
+int selectedItemIndex;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    
+
     _photosCollectionView.delegate = self;
     _photosCollectionView.dataSource = self;
     
     photoMutableArray  = [[NSMutableArray alloc] initWithObjects:[UIImage imageNamed:@"addPhotosIcon.png"], nil];
+    photoNameArray = [[NSMutableArray alloc] init];
+    photoDataArray = [[NSMutableArray alloc] init];
     
     _photosCollectionView.layer.borderWidth = 5.0f;
     _photosCollectionView.layer.borderColor = [UIColor grayColor].CGColor;
     _photosCollectionView.layer.cornerRadius = 5.0f;
     
-    UICollectionViewFlowLayout *layout = self.photosCollectionView.collectionViewLayout;
+    UICollectionViewFlowLayout *layout = [UICollectionViewFlowLayout new];
     [layout setScrollDirection: UICollectionViewScrollDirectionHorizontal];
     layout.minimumLineSpacing = 5.0f;
     layout.minimumInteritemSpacing = 5.0f;
@@ -59,10 +66,17 @@ NSMutableArray *photoMutableArray = nil;
     lpgr.delegate = self;
     lpgr.delaysTouchesBegan = YES;
     [self.photosCollectionView addGestureRecognizer:lpgr];
+    
+    _roomsTextField.tag = ROOMS_TEXTFIELD;
+    _priceTextField.tag = PRICE_TEXTFIELD;
+    
+    //[_contentView addGestureRecognizer:[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(onTap)]];
+    
+    _titleTextField.text =@"room at narayantar";
+    _descriptionTextField.text = @"free of cost for one special person";
+    _roomsTextField.text =@"1";
+    _priceTextField.text = @"Rs.1000";
 }
-
-
-
 
 //MARK - Button Handlers
 -(void) onCancel{
@@ -82,21 +96,48 @@ NSMutableArray *photoMutableArray = nil;
                           self.descriptionTextField,
                           self.roomsTextField,
                           self.priceTextField,
-                          self.addressTextField
+                          self.addressLabel
                           ];
 
     if([[required valueForKeyPath:@"text.@min.length"] intValue] == 0){
         [[Alerter sharedInstance] createAlert:@"Error" message:@"One or more input fields are empty" viewController:self completion:^{}
          ];
+    }else{
+        
+        NSString *lat = [NSString stringWithFormat:@"%.8f",userAnnotationCoordinate.latitude];
+        NSString *lon =[NSString stringWithFormat:@"%.8f", userAnnotationCoordinate.longitude];
+        NSDictionary *params = @{
+                                 @"post_type" : OFFER,
+                                 @"title" : _titleTextField.text,
+                                 @"description" : _descriptionTextField.text,
+                                 @"no_of_rooms" : self.roomsTextField.text,
+                                 @"price" : [self.priceTextField.text substringFromIndex:3],
+                                 @"address" : self.addressLabel.text,
+                                 @"latitude" :  lat,
+                                 @"longitude" : lon
+                                 };
+        
+        [[APICaller sharedInstance] callApiforPost:@"post/create" headerFlag:true parameters:params imageDataArray:photoDataArray fileNameArray:photoNameArray viewController:self completion:^(NSDictionary *responseObjectDictionary)  {
+            
+            NSString *code = [responseObjectDictionary valueForKey:@"code"];
+            if(code == OFFER_POSTED_SUCCESSFULLY){
+                [[Alerter sharedInstance] createAlert:@"Success" message:@"Offer Posted Successfully" viewController:self completion:^{}];
+            }
+            
+            NSLog(@"%@", responseObjectDictionary);
+            
+            
+        }];
     }
+
+
 }
-
-
-
 //Collection View DataSource and Delegate Functions
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
     
     _selectedIndexPath = indexPath;
+    
+    selectedItemIndex = indexPath.row;
     
     UIImagePickerController *pickerController = [[UIImagePickerController alloc]
                                                  init];
@@ -123,7 +164,6 @@ NSMutableArray *photoMutableArray = nil;
     CGRect imageRect = CGRectMake(0, 0 , 100, 100);
     UIImageView *photosImageView = [[UIImageView alloc] initWithFrame:imageRect];
     [cell.contentView addSubview:[photosImageView initWithImage:photoMutableArray[indexPath.row]]];
-    NSLog(@"%@", photoMutableArray);
     
     return cell;
     
@@ -132,6 +172,7 @@ NSMutableArray *photoMutableArray = nil;
 //MARK - Image Handling and Setting to Cell
 - (void)setImageForCellwithImage:(UIImage *)selectedImage{
     
+    //resizing image to 100*100
     CGSize destinationSize = CGSizeMake(100, 100);
     UIGraphicsBeginImageContext(destinationSize);
     [selectedImage drawInRect:CGRectMake(0,0,destinationSize.width,destinationSize.height)];
@@ -139,12 +180,18 @@ NSMutableArray *photoMutableArray = nil;
     
     NSArray *selectedIndexPathArray = [[NSArray alloc] initWithObjects:_selectedIndexPath, nil];
     
+    int x = selectedItemIndex;
+    
     if(_selectedIndexPath.row == _lastRowIndex){
         [photoMutableArray insertObject:selectedResizedImage atIndex:0];
+        [photoDataArray insertObject:imageData atIndex:0];
+        [photoNameArray insertObject:imageName atIndex:0];
         
     }else{
-        [photoMutableArray replaceObjectAtIndex:_selectedIndexPath.row withObject:selectedResizedImage];
-        [_photosCollectionView reloadItemsAtIndexPaths:selectedIndexPathArray];
+        [photoMutableArray replaceObjectAtIndex:selectedItemIndex withObject:selectedResizedImage];
+        [photoDataArray replaceObjectAtIndex:_selectedIndexPath.row withObject:imageData];
+        [photoNameArray replaceObjectAtIndex:_selectedIndexPath.row withObject:imageName];
+        //[_photosCollectionView reloadItemsAtIndexPaths:selectedIndexPathArray];
     }
     
     [_photosCollectionView reloadData];
@@ -153,8 +200,14 @@ NSMutableArray *photoMutableArray = nil;
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info{
     
     UIImage *editedImage = [info objectForKey:UIImagePickerControllerEditedImage];
-    [self dismissViewControllerAnimated:true completion:nil];
+    imageData = UIImageJPEGRepresentation(editedImage, 0.5);
+    
+    NSURL *imageFileURL = [info objectForKey:UIImagePickerControllerReferenceURL];
+    PHFetchResult *result = [PHAsset fetchAssetsWithALAssetURLs:@[imageFileURL] options:nil];
+    imageName = [[result firstObject] filename];
     [self setImageForCellwithImage:editedImage];
+    
+    [self dismissViewControllerAnimated:true completion:nil];
     
 }
 
@@ -176,7 +229,7 @@ NSMutableArray *photoMutableArray = nil;
         
         UIAlertAction *yes = [UIAlertAction actionWithTitle:@"Yes" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
             
-            [photoMutableArray removeObjectAtIndex:_selectedIndexPath.row];
+            [photoMutableArray removeObjectAtIndex:selectedItemIndex];
             NSLog(@"%@",photoMutableArray);
             [self.photosCollectionView reloadData];
             
@@ -195,18 +248,18 @@ NSMutableArray *photoMutableArray = nil;
     }
 }
 
+-(void) onTap{
+    [self.view endEditing:true];
+}
 
 //MARK - UserLocationDelegate Functions
 - (void)didSelectLocation:(CLLocationCoordinate2D)annotationCoordinate{
     
+    userAnnotationCoordinate = annotationCoordinate;
     CLGeocoder *geocoder = [[CLGeocoder alloc]init];
     CLLocation *annotationLocation =  [[CLLocation alloc] initWithLatitude:annotationCoordinate.latitude longitude:annotationCoordinate.longitude];
     
     [geocoder reverseGeocodeLocation:annotationLocation completionHandler:^(NSArray<CLPlacemark *> * _Nullable placemarks, NSError * _Nullable error) {
-        
-        if(error){
-            NSLog(@"%@",error);
-        }
         
         CLPlacemark *placemark = [placemarks objectAtIndex:0];
         NSLog(@"placemark.ISOcountryCode %@",placemark.ISOcountryCode);
@@ -218,12 +271,46 @@ NSMutableArray *photoMutableArray = nil;
         NSLog(@"placemark.subLocality %@",placemark.subLocality);
         NSLog(@"placemark.subThoroughfare %@",placemark.subThoroughfare);
         
-        self.addressTextField.text = [[placemark.subLocality stringByAppendingString: placemark.locality ] stringByAppendingString:placemark.country];
+        _addressLabel.hidden = false;
+        self.addressLabel.text = placemark.country;
     }];
     
 }
 
 
+//TEXT Field delegate functions
+-(BOOL) textFieldShouldReturn:(UITextField *)textField{
+    
+    [self resignFirstResponder];
+    return true;
+}
 
+// gets rectangle of textfield and passes it to keyboardavoidingviewcontroller
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField{
+
+    CGRect textfieldrect = [self.view convertRect:textField.frame toView:[[[UIApplication sharedApplication] delegate ] window ]];
+    [KeyboardAvoidingViewController setActiveTextFieldPosition:textfieldrect.origin];
+    
+    return true;
+}
+
+-(BOOL) textFieldShouldEndEditing:(UITextField *)textField{
+    if(textField.tag ){
+        [[Validator sharedInstance] startValidation:textField];
+    }
+    return true;
+}
+
+- (void)textFieldDidBeginEditing:(UITextField *)textField{
+    if(textField.tag == PRICE_TEXTFIELD){
+        _priceTextField.text = @"Rs.";
+    }
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField{
+    if(textField.tag == PRICE_TEXTFIELD && [_priceTextField.text isEqualToString:@"Rs."] ){
+        _priceTextField.text = @"";
+    }
+}
 
 @end

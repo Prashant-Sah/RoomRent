@@ -44,8 +44,8 @@ CLLocationManager *locationManager;
     _currentLocation = newLocation;
     if (_currentLocation != nil) {
         [locationManager stopUpdatingLocation];
-        NSLog(@"%.8f",_currentLocation.coordinate.latitude);
-        NSLog(@"%.8f",_currentLocation.coordinate.longitude);
+        //NSLog(@"%.8f",_currentLocation.coordinate.latitude);
+        //NSLog(@"%.8f",_currentLocation.coordinate.longitude);
         
         MKCoordinateRegion region;
         region.center = _currentLocation.coordinate;
@@ -75,24 +75,6 @@ CLLocationManager *locationManager;
     
     myAnnotation.coordinate = mapCoordinate;
     [self.mapView addAnnotation:myAnnotation];
-    CLLocation *annotationLocation = [[CLLocation alloc] initWithLatitude:mapCoordinate.latitude longitude:mapCoordinate.longitude];
-    CLGeocoder *geocoder = [[CLGeocoder alloc]init];
-    [geocoder reverseGeocodeLocation:annotationLocation completionHandler:^(NSArray<CLPlacemark *> * _Nullable placemarks, NSError * _Nullable error) {
-        
-        if(error){
-            NSLog(@"%@",error);
-        }
-        
-        CLPlacemark *placemark = [placemarks objectAtIndex:0];
-        NSLog(@"placemark.ISOcountryCode %@",placemark.ISOcountryCode);
-        NSLog(@"placemark.country %@",placemark.country);
-        NSLog(@"placemark.locality %@",placemark.locality );
-        NSLog(@"placemark.postalCode %@",placemark.postalCode);
-        NSLog(@"placemark.administrativeArea %@",placemark.administrativeArea);
-        NSLog(@"placemark.locality %@",placemark.locality);
-        NSLog(@"placemark.subLocality %@",placemark.subLocality);
-        NSLog(@"placemark.subThoroughfare %@",placemark.subThoroughfare);
-    }];
 }
 
 

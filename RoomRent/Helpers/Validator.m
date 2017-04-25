@@ -52,12 +52,22 @@ static Validator * instance = nil;
             regEx = @"^.{4,50}$";
             break;
             
+        case ROOMS_TEXTFIELD:
+            regEx = @"\\d{1,2}";
+            break;
+            
+        case PRICE_TEXTFIELD: // needs to be highly modified
+            //regEx = @"\\Rs.(([0-9]{1,3}),?.?\\d{0,2})(([0-9]{1,3})?,?.?\\d{0,2})";
+            regEx = @"Rs.(\\d{1,5}([.]\\d{1,3})?|[.]\\d{1,3})";
+            break;
+            
         default:
+            regEx = @".*?";
             break;
     }
     
     y = [self validateText:textfield.text regularExpression:regEx];
-    textfield.textColor = y ?  [UIColor whiteColor] : [UIColor redColor] ;
+    textfield.textColor = y ?  [UIColor blackColor] : [UIColor redColor] ;
     if (!y) {
         [self addErrorButton:textfield];
     }

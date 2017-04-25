@@ -7,10 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <Photos/Photos.h>
 #import "APICaller.h"
+#import "KeyboardAvoidingViewController.h"
 #import "UserLocationViewController.h"
+#import "Validator.h"
 
-@interface AddPostViewController : UIViewController <UICollectionViewDelegate, UICollectionViewDataSource , UIImagePickerControllerDelegate, UIGestureRecognizerDelegate, UserLocationDelegate>
+
+@interface AddPostViewController : KeyboardAvoidingViewController <UICollectionViewDelegate, UICollectionViewDataSource , UIImagePickerControllerDelegate, UIGestureRecognizerDelegate, UserLocationDelegate, UITextFieldDelegate>
 
 - (void) setImageForCellwithImage : (UIImage *) selectedImage;
 

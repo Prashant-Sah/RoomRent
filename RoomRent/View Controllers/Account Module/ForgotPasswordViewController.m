@@ -38,7 +38,7 @@
                              @"email" : _emailAddressTextField.text
                              };
     [[APICaller sharedInstance] callApi:@"forgetpassword" headerFlag:false parameters:params imageData:nil fileName:nil viewController:self completion:^(NSDictionary *responseObjectDictionary) {
-    
+
         NSString *code = [responseObjectDictionary valueForKey:@"code"];
         
         if ([code isEqualToString:USER_REGISTERED ]){
