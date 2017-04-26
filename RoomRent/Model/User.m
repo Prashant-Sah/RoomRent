@@ -11,14 +11,6 @@
 @implementation User
 static User* user = nil;
 
--(void)initUser:(NSString*) fullname username:(NSString *)username email:(NSString *)email mobile:(NSString *)mobile profileImageURL:(NSURL *) imageURL  {
-    
-    self.fullname = fullname;
-    self.username = username;
-    self.email = email;
-    self.mobile = mobile;
-    self.profileImageURL = imageURL;
-}
 -(User *)getUser{
     return user;
 }

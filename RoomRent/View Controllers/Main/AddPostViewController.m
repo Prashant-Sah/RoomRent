@@ -119,20 +119,23 @@ int selectedItemIndex;
         
         [[APICaller sharedInstance] callApiforPost:@"post/create" headerFlag:true parameters:params imageDataArray:photoDataArray fileNameArray:photoNameArray viewController:self completion:^(NSDictionary *responseObjectDictionary)  {
             
-            NSString *code = [responseObjectDictionary valueForKey:@"code"];
-            if(code == OFFER_POSTED_SUCCESSFULLY){
-                [[Alerter sharedInstance] createAlert:@"Success" message:@"Offer Posted Successfully" viewController:self completion:^{}];
-            }
             
             NSLog(@"%@", responseObjectDictionary);
             
-            
+            NSString *code = [responseObjectDictionary valueForKey:@"code"];
+            if([code isEqualToString:OFFER_POSTED_SUCCESSFULLY]){
+                
+                [[Alerter sharedInstance] createAlert:@"Success" message:@"Offer Posted Successfully" viewController:self completion:^{}];
+                
+                NSDictionary *postDict = [responseObjectDictionary valueForKey:@"post"];
+                [[Post alloc] initPostFromJson:postDict];
+
+            }
         }];
     }
 
-
 }
-//Collection View DataSource and Delegate Functions
+//Collection View DataSource and Delegate Funct ions
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
     
     _selectedIndexPath = indexPath;
@@ -178,9 +181,7 @@ int selectedItemIndex;
     [selectedImage drawInRect:CGRectMake(0,0,destinationSize.width,destinationSize.height)];
     UIImage *selectedResizedImage = UIGraphicsGetImageFromCurrentImageContext();
     
-    NSArray *selectedIndexPathArray = [[NSArray alloc] initWithObjects:_selectedIndexPath, nil];
-    
-    int x = selectedItemIndex;
+    //NSArray *selectedIndexPathArray = [[NSArray alloc] initWithObjects:_selectedIndexPath, nil];
     
     if(_selectedIndexPath.row == _lastRowIndex){
         [photoMutableArray insertObject:selectedResizedImage atIndex:0];
@@ -188,7 +189,7 @@ int selectedItemIndex;
         [photoNameArray insertObject:imageName atIndex:0];
         
     }else{
-        [photoMutableArray replaceObjectAtIndex:selectedItemIndex withObject:selectedResizedImage];
+        [photoMutableArray replaceObjectAtIndex:_selectedIndexPath.row withObject:selectedResizedImage];
         [photoDataArray replaceObjectAtIndex:_selectedIndexPath.row withObject:imageData];
         [photoNameArray replaceObjectAtIndex:_selectedIndexPath.row withObject:imageName];
         //[_photosCollectionView reloadItemsAtIndexPaths:selectedIndexPathArray];
@@ -223,7 +224,6 @@ int selectedItemIndex;
     if (indexPath == nil){
         NSLog(@"couldn't find index path");
     } else {
-        UICollectionViewCell* cell = [self.photosCollectionView cellForItemAtIndexPath:indexPath];
         
         UIAlertController *aLertController = [UIAlertController alertControllerWithTitle:(@"Alert") message:@"Do you want to delete this image" preferredStyle:UIAlertControllerStyleAlert];
         

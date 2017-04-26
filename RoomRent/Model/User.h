@@ -19,6 +19,6 @@
 
 -(void) initUserFromJson : (NSDictionary *) userDict;
 
--(void)initUser:(NSString*) fullname username:(NSString *)username email:(NSString *)email mobile:(NSString *)mobile;
+
 -(User*) getUser;
 @end

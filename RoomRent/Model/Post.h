@@ -10,4 +10,17 @@
 
 @interface Post : NSObject
 
+@property int postid;
+@property NSString *title;
+@property NSString *offerDescription;
+@property NSInteger numberOfRooms;
+@property double price;
+//@property NSString *location;
+@property NSString *lat;
+@property NSString *lon;
+@property NSMutableArray *imagesArray;
+
+- (Post*) initPostFromJson : (NSDictionary *) postDict;
+
 @end
+

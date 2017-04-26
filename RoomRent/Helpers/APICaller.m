@@ -12,6 +12,8 @@
 AFHTTPSessionManager *manager = nil;
 
 static APICaller* instance = nil;
+NSData *imagedata;
+NSString *filename;
 
 + (APICaller *)sharedInstance{
     if(instance == nil){
@@ -26,8 +28,18 @@ static APICaller* instance = nil;
     return self;
 }
 
-NSData *imagedata;
-NSString *filename;
+-(void) callCommonAlertWithError:(NSError *) error viewController:(UIViewController *) VC{
+    
+    if(error.code == NSURLErrorTimedOut){
+        [[Alerter sharedInstance] createAlert:@"Error" message:@"The server took too long to respond." viewController:VC completion:^{}];
+    }else if (error.code == NSURLErrorCannotConnectToHost || error.code == NSURLErrorNotConnectedToInternet){
+        [[Alerter sharedInstance] createAlert:@"Error" message:@"No connection to internet" viewController:VC completion:^{}];
+    }
+    else{
+        [[Alerter sharedInstance] createAlert:@"Error" message:@"Error in API Call" viewController:VC completion:^{}];
+    }
+}
+
 
 -(void)callApi:(NSString *)appendString headerFlag:(BOOL)headerFlag parameters:(NSDictionary *)params imageData:(NSData *)imageData fileName:(NSString *)fileName viewController:(UIViewController *)VC completion:(void (^)(NSDictionary *))completionBlock{
     
@@ -46,8 +58,7 @@ NSString *filename;
             completionBlock(responseObjectDictionary);
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
             
-            [[Alerter sharedInstance] createAlert:@"Error" message:@"Error in API Call" viewController:VC completion:^{
-            }];
+            [self callCommonAlertWithError:error viewController:VC];
         }];
     }
     else{
@@ -60,7 +71,7 @@ NSString *filename;
             completionBlock(responseObjectDictionary);
             
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-            [[Alerter sharedInstance] createAlert:@"Error" message:@"Error in API Call" viewController:VC completion:^{ }];
+            [self callCommonAlertWithError:error viewController:VC];
         }];
     }
 }
@@ -72,10 +83,13 @@ NSString *filename;
     [manager.requestSerializer setValue:[@"Bearer " stringByAppendingString:userApiToken] forHTTPHeaderField:@"Authorization"];
     
     [manager GET:[PUSP_BASE_URL stringByAppendingString:appendString] parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        
         NSLog(@"%@",responseObject);
         completionBlock(responseObject);
+        
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        [[Alerter sharedInstance] createAlert:@"Error" message:@"Error in API Call" viewController:VC completion:^{ }];
+        
+        [self callCommonAlertWithError:error viewController:VC];
     }];
 }
 
@@ -100,8 +114,7 @@ NSString *filename;
             
             NSLog(@"%@", error);
             
-            [[Alerter sharedInstance] createAlert:@"Error" message:@"Error in API Call" viewController:VC completion:^{
-            }];
+            [self callCommonAlertWithError:error viewController:VC];
             
         }];
     } else {
@@ -122,14 +135,7 @@ NSString *filename;
             
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
             
-            if(error.code == NSURLErrorTimedOut){
-                [[Alerter sharedInstance] createAlert:@"Error" message:@"The server took too long to respond." viewController:VC completion:^{}];
-            }else if (error.code == NSURLErrorCannotConnectToHost || error.code == NSURLErrorNotConnectedToInternet){
-                [[Alerter sharedInstance] createAlert:@"Error" message:@"No connection to internet" viewController:VC completion:^{}];
-            }
-            else{
-                [[Alerter sharedInstance] createAlert:@"Error" message:@"Error in API Call" viewController:VC completion:^{}];
-            }
+            [self callCommonAlertWithError:error viewController:VC];
         }];
         
     }

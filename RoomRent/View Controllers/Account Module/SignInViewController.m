@@ -57,7 +57,6 @@
             NSData *userData = [NSKeyedArchiver archivedDataWithRootObject:[responseObjectDictionary valueForKey:@"user" ]];
             [[NSUserDefaults standardUserDefaults] setObject:userData forKey:@"userDataKey"];
             
-            //[[User alloc] initUser:[responseObjectDictionary valueForKey:@"name"] username:[responseObjectDictionary valueForKey:@"username"] email:[responseObjectDictionary valueForKey:@"email"] mobile:[responseObjectDictionary valueForKey:@"mobile"]];
             NSDictionary *userDict = [responseObjectDictionary valueForKey:@"user"];
             [[User alloc] initUserFromJson:userDict];
             [self gotoMain];

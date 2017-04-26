@@ -10,4 +10,10 @@
 
 @interface OffersTableViewCell : UITableViewCell
 
+@property (weak, nonatomic) IBOutlet UICollectionView *roomPhotosCollectionView;
+@property (weak, nonatomic) IBOutlet UILabel *titleLabel;
+@property (weak, nonatomic) IBOutlet UILabel *descriptionLabel;
+@property (weak, nonatomic) IBOutlet UILabel *priceLabel;
+@property (weak, nonatomic) IBOutlet UILabel *numberOfRoomsLabel;
+
 @end

@@ -11,6 +11,7 @@
 #import "Navigator.h"
 #import "OffersTableViewCell.h"
 #import "CustomRevealViewController.h"
+#import "Post.h"
 
 @interface OffersViewController : CustomRevealViewController <UITableViewDataSource , UITableViewDelegate>
 

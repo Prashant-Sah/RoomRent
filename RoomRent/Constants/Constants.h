@@ -35,7 +35,10 @@ static NSString *LOGIN_SUCCESS = @"0011";
 static NSString *USER_REGISTERED = @"0013";
 static NSString *USER_LOGGED_OUT = @"0020";
 
-static NSString *OFFER_POSTED_SUCCESSFULLY = @"0073";
-
 static NSString *OFFER = @"1";
 static NSString *REQUEST = @"2";
+
+static NSString *NO_POSTS_FOUND = @"0071";
+static NSString *POSTS_FOUND = @"0072";
+static NSString *OFFER_POSTED_SUCCESSFULLY = @"0073";
+
