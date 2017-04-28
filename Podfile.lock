@@ -14,16 +14,21 @@ PODS:
   - AFNetworking/Serialization (3.1.0)
   - AFNetworking/UIKit (3.1.0):
     - AFNetworking/NSURLSession
+  - FMDB (2.6.2):
+    - FMDB/standard (= 2.6.2)
+  - FMDB/standard (2.6.2)
   - SWRevealViewController (2.3.0)
 
 DEPENDENCIES:
   - AFNetworking
+  - FMDB
   - SWRevealViewController
 
 SPEC CHECKSUMS:
   AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
+  FMDB: 854a0341b4726e53276f2a8996f06f1b80f9259a
   SWRevealViewController: 6d3fd97f70112fd7cef9de14df4260eacce4c63a
 
-PODFILE CHECKSUM: 81455827aec8e11db22fb3b9cab5715c22df475c
+PODFILE CHECKSUM: 432322a5cd0dd7d7c0c2b234d7553b71c7377a66
 
 COCOAPODS: 1.2.0

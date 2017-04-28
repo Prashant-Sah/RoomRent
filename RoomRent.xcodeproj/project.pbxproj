@@ -8,11 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		18DD39C8802283CF8C721A8A /* libPods-RoomRent.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8950A843D8D5D7990219AC35 /* libPods-RoomRent.a */; };
+		8F04E48F1EB1AE90001E1972 /* SinglePostViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F04E48D1EB1AE8F001E1972 /* SinglePostViewController.m */; };
+		8F04E4971EB1BA4E001E1972 /* LocalDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F04E4961EB1BA4E001E1972 /* LocalDatabase.m */; };
 		8F0CBB2E1EA4B8C50069F1ED /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F0CBB2D1EA4B8C50069F1ED /* ProfileViewController.m */; };
-		8F0CBB3A1EA4D21A0069F1ED /* CustomCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F0CBB381EA4D21A0069F1ED /* CustomCollectionViewCell.m */; };
-		8F0CBB3B1EA4D21A0069F1ED /* CustomCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8F0CBB391EA4D21A0069F1ED /* CustomCollectionViewCell.xib */; };
-		8F0CBB471EA4D3620069F1ED /* CustomTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F0CBB451EA4D3620069F1ED /* CustomTableViewCell.m */; };
-		8F0CBB481EA4D3620069F1ED /* CustomTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8F0CBB461EA4D3620069F1ED /* CustomTableViewCell.xib */; };
 		8F0CBB4B1EA4DEFB0069F1ED /* AddPostViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F0CBB4A1EA4DEFB0069F1ED /* AddPostViewController.m */; };
 		8F1EA3A81EA7307E00E8C34E /* ImagePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F1EA3A71EA7307E00E8C34E /* ImagePicker.m */; };
 		8F248DCA1E935ACD00786B69 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8F248DC91E935ACC00786B69 /* Main.storyboard */; };
@@ -46,14 +44,12 @@
 /* Begin PBXFileReference section */
 		7B014657A9B12EFA19F2E978 /* Pods-RoomRent.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RoomRent.debug.xcconfig"; path = "Pods/Target Support Files/Pods-RoomRent/Pods-RoomRent.debug.xcconfig"; sourceTree = "<group>"; };
 		8950A843D8D5D7990219AC35 /* libPods-RoomRent.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-RoomRent.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8F04E48C1EB1AE8F001E1972 /* SinglePostViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SinglePostViewController.h; sourceTree = "<group>"; };
+		8F04E48D1EB1AE8F001E1972 /* SinglePostViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SinglePostViewController.m; sourceTree = "<group>"; };
+		8F04E4951EB1BA48001E1972 /* LocalDatabase.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LocalDatabase.h; sourceTree = "<group>"; };
+		8F04E4961EB1BA4E001E1972 /* LocalDatabase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocalDatabase.m; sourceTree = "<group>"; };
 		8F0CBB2C1EA4B8C50069F1ED /* ProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileViewController.h; sourceTree = "<group>"; };
 		8F0CBB2D1EA4B8C50069F1ED /* ProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileViewController.m; sourceTree = "<group>"; };
-		8F0CBB371EA4D21A0069F1ED /* CustomCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomCollectionViewCell.h; sourceTree = "<group>"; };
-		8F0CBB381EA4D21A0069F1ED /* CustomCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomCollectionViewCell.m; sourceTree = "<group>"; };
-		8F0CBB391EA4D21A0069F1ED /* CustomCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomCollectionViewCell.xib; sourceTree = "<group>"; };
-		8F0CBB441EA4D3620069F1ED /* CustomTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomTableViewCell.h; sourceTree = "<group>"; };
-		8F0CBB451EA4D3620069F1ED /* CustomTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomTableViewCell.m; sourceTree = "<group>"; };
-		8F0CBB461EA4D3620069F1ED /* CustomTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomTableViewCell.xib; sourceTree = "<group>"; };
 		8F0CBB491EA4DEFB0069F1ED /* AddPostViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddPostViewController.h; sourceTree = "<group>"; };
 		8F0CBB4A1EA4DEFB0069F1ED /* AddPostViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddPostViewController.m; sourceTree = "<group>"; };
 		8F1EA3A61EA7307E00E8C34E /* ImagePicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImagePicker.h; sourceTree = "<group>"; };
@@ -124,18 +120,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8F04E4941EB1B9E5001E1972 /* Database */ = {
+			isa = PBXGroup;
+			children = (
+				8F04E4951EB1BA48001E1972 /* LocalDatabase.h */,
+				8F04E4961EB1BA4E001E1972 /* LocalDatabase.m */,
+			);
+			path = Database;
+			sourceTree = "<group>";
+		};
 		8F248DC21E9345D000786B69 /* Custom Views */ = {
 			isa = PBXGroup;
 			children = (
 				8FF2CE0E1E9E024D0059E3F5 /* OffersTableViewCell.h */,
 				8FF2CE0F1E9E024D0059E3F5 /* OffersTableViewCell.m */,
 				8FF2CE101E9E024D0059E3F5 /* OffersTableViewCell.xib */,
-				8F0CBB371EA4D21A0069F1ED /* CustomCollectionViewCell.h */,
-				8F0CBB381EA4D21A0069F1ED /* CustomCollectionViewCell.m */,
-				8F0CBB391EA4D21A0069F1ED /* CustomCollectionViewCell.xib */,
-				8F0CBB441EA4D3620069F1ED /* CustomTableViewCell.h */,
-				8F0CBB451EA4D3620069F1ED /* CustomTableViewCell.m */,
-				8F0CBB461EA4D3620069F1ED /* CustomTableViewCell.xib */,
 			);
 			path = "Custom Views";
 			sourceTree = "<group>";
@@ -151,6 +150,8 @@
 				8F0CBB4A1EA4DEFB0069F1ED /* AddPostViewController.m */,
 				8FDD48EA1EA880C1003DDEE9 /* UserLocationViewController.h */,
 				8FDD48EB1EA880C1003DDEE9 /* UserLocationViewController.m */,
+				8F04E48C1EB1AE8F001E1972 /* SinglePostViewController.h */,
+				8F04E48D1EB1AE8F001E1972 /* SinglePostViewController.m */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -203,6 +204,7 @@
 		8F4D2D261E8CFBE800347F9A /* RoomRent */ = {
 			isa = PBXGroup;
 			children = (
+				8F04E4941EB1B9E5001E1972 /* Database */,
 				8F93E3AF1E8E260E008C02D4 /* Helpers */,
 				8F93E3AE1E8E2609008C02D4 /* Constants */,
 				8F248DD61E93AB1C00786B69 /* Model */,
@@ -360,12 +362,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				8FF2CE121E9E024D0059E3F5 /* OffersTableViewCell.xib in Resources */,
-				8F0CBB481EA4D3620069F1ED /* CustomTableViewCell.xib in Resources */,
 				8F4D2D371E8CFBE800347F9A /* LaunchScreen.storyboard in Resources */,
 				8F4D2D341E8CFBE800347F9A /* Assets.xcassets in Resources */,
 				8F4D2D321E8CFBE800347F9A /* Account.storyboard in Resources */,
 				8F248DCA1E935ACD00786B69 /* Main.storyboard in Resources */,
-				8F0CBB3B1EA4D21A0069F1ED /* CustomCollectionViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -428,6 +428,7 @@
 				8FF2CE071E9DF0920059E3F5 /* Navigator.m in Sources */,
 				8F248DD51E9393E000786B69 /* KeyboardAvoidingViewController.m in Sources */,
 				8F93E3B51E8E272C008C02D4 /* ForgotPasswordViewController.m in Sources */,
+				8F04E48F1EB1AE90001E1972 /* SinglePostViewController.m in Sources */,
 				8F248DDF1E93AF2200786B69 /* User.m in Sources */,
 				8F93E3B81E8E4F3E008C02D4 /* SignUpViewController.m in Sources */,
 				8FDD48EC1EA880C1003DDEE9 /* UserLocationViewController.m in Sources */,
@@ -435,6 +436,7 @@
 				8F1EA3A81EA7307E00E8C34E /* ImagePicker.m in Sources */,
 				8F4D2D2C1E8CFBE800347F9A /* AppDelegate.m in Sources */,
 				8FF2CE0C1E9E018B0059E3F5 /* CustomButton.m in Sources */,
+				8F04E4971EB1BA4E001E1972 /* LocalDatabase.m in Sources */,
 				8F85F3951E94A44B00812C10 /* Alerter.m in Sources */,
 				8F0CBB2E1EA4B8C50069F1ED /* ProfileViewController.m in Sources */,
 				8F93E3B21E8E267E008C02D4 /* SignInViewController.m in Sources */,
@@ -446,8 +448,6 @@
 				8F63C1051E95FC82000790D6 /* Validator.m in Sources */,
 				8F4D2D291E8CFBE800347F9A /* main.m in Sources */,
 				8F63C1081E962D90000790D6 /* APICaller.m in Sources */,
-				8F0CBB471EA4D3620069F1ED /* CustomTableViewCell.m in Sources */,
-				8F0CBB3A1EA4D21A0069F1ED /* CustomCollectionViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

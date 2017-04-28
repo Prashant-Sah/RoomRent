@@ -8,12 +8,28 @@
 
 #import <UIKit/UIKit.h>
 
+
+@interface RoomPhotosCollectionView : UICollectionView
+
+@property (nonatomic, strong) NSIndexPath *indexPath;
+
+@end
+
+static NSString *collectionViewCellIdentifier = @"PhotosCell";
+
 @interface OffersTableViewCell : UITableViewCell
 
-@property (weak, nonatomic) IBOutlet UICollectionView *roomPhotosCollectionView;
+@property (strong, nonatomic) IBOutlet RoomPhotosCollectionView *roomPhotosCollectionView;
+
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 @property (weak, nonatomic) IBOutlet UILabel *descriptionLabel;
 @property (weak, nonatomic) IBOutlet UILabel *priceLabel;
 @property (weak, nonatomic) IBOutlet UILabel *numberOfRoomsLabel;
+
+@property (nonatomic, strong) NSIndexPath *indexPath;
+
+@property int row;
+
+- (void)setCollectionViewDataSourceDelegate:(id<UICollectionViewDataSource, UICollectionViewDelegate>)dataSourceDelegate forRow:(int)row;
 
 @end

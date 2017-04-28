@@ -13,6 +13,7 @@
 #import "UserLocationViewController.h"
 #import "Validator.h"
 #import "Post.h"
+#import "LocalDatabase.h"
 
 @interface AddPostViewController : KeyboardAvoidingViewController <UICollectionViewDelegate, UICollectionViewDataSource , UIImagePickerControllerDelegate, UIGestureRecognizerDelegate, UserLocationDelegate, UITextFieldDelegate>
 

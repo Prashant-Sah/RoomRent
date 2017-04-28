@@ -12,7 +12,10 @@
 #import "OffersTableViewCell.h"
 #import "CustomRevealViewController.h"
 #import "Post.h"
+#import "OffersTableViewCell.h"
+#import "SinglePostViewController.h"
 
-@interface OffersViewController : CustomRevealViewController <UITableViewDataSource , UITableViewDelegate>
+@interface OffersViewController : CustomRevealViewController <UITableViewDataSource , UITableViewDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout>
 
+@property int postId;
 @end

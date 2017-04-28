@@ -1,4 +1,4 @@
-//
+        //
 //  APICaller.m
 //  RoomRent
 //
@@ -31,7 +31,7 @@ NSString *filename;
 -(void) callCommonAlertWithError:(NSError *) error viewController:(UIViewController *) VC{
     
     if(error.code == NSURLErrorTimedOut){
-        [[Alerter sharedInstance] createAlert:@"Error" message:@"The server took too long to respond." viewController:VC completion:^{}];
+        [[Alerter sharedInstance] createAlert:@"Error" message:@"The server took too long to respond or is offline." viewController:VC completion:^{}];
     }else if (error.code == NSURLErrorCannotConnectToHost || error.code == NSURLErrorNotConnectedToInternet){
         [[Alerter sharedInstance] createAlert:@"Error" message:@"No connection to internet" viewController:VC completion:^{}];
     }
@@ -84,7 +84,6 @@ NSString *filename;
     
     [manager GET:[PUSP_BASE_URL stringByAppendingString:appendString] parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
-        NSLog(@"%@",responseObject);
         completionBlock(responseObject);
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {

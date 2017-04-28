@@ -7,6 +7,7 @@
 //
 
 #import "OffersViewController.h"
+#import "OffersTableViewCell.h"
 
 @interface OffersViewController ()
 @property (weak, nonatomic) IBOutlet UITableView *offersTableView;
@@ -16,7 +17,9 @@
 @implementation OffersViewController
 
 NSMutableArray *postArray = nil;
+NSArray *imagesForASinglePost = nil;
 UIRefreshControl *refresher;
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -36,6 +39,7 @@ UIRefreshControl *refresher;
     [refresher addTarget:self action:@selector(refreshTable) forControlEvents:UIControlEventValueChanged];
 }
 
+
 -(void) refreshTable{
     [self loadPosts];
     [refresher endRefreshing];
@@ -49,7 +53,8 @@ UIRefreshControl *refresher;
     postArray = [[NSMutableArray alloc] init];
     
     NSDictionary *params = @{
-                             @"post_type" : OFFER
+                             @"post_type" : OFFER,
+                             @"offset" : @0
                              };
     
     [[APICaller sharedInstance] callApi:@"post/all" headerFlag:true parameters:params imageData:nil fileName:nil viewController:self completion:^(NSDictionary *responseObjectDictionary) {
@@ -62,7 +67,6 @@ UIRefreshControl *refresher;
             NSDictionary *postData = [responseObjectDictionary valueForKey:@"data"];
             for (NSDictionary *singlePost in postData) {
                 
-                
                 Post *post = [[Post alloc] initPostFromJson:singlePost];
                 [postArray addObject:post];
                 
@@ -70,28 +74,78 @@ UIRefreshControl *refresher;
             [self.offersTableView reloadData];
         }
     }];
+    
+}
 
+//MARK- CollectionView DataSource and Delegate Functions
+- (NSInteger)numberOfSectionsInCollectionView:(RoomPhotosCollectionView *)collectionView{
+    return 1;
+}
+
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
+    return imagesForASinglePost.count;
+}
+
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
+    
+    UICollectionViewCell *singlePhotoCell = [collectionView dequeueReusableCellWithReuseIdentifier:collectionViewCellIdentifier forIndexPath:indexPath];
+    
+    for (NSString *singleImageURL in imagesForASinglePost) {
+        
+        [[APICaller sharedInstance] callApiForReceivingImage:[@"getfile/" stringByAppendingString:singleImageURL] viewController:self completion:^(id responseObjectFromApi) {
+            
+            CGSize destinationSize = CGSizeMake(100, 100);
+            UIGraphicsBeginImageContext(destinationSize);
+            [responseObjectFromApi drawInRect:CGRectMake(0,0,destinationSize.width,destinationSize.height)];
+            UIImage *resizedImage = UIGraphicsGetImageFromCurrentImageContext();
+            
+            CGRect imageRect = CGRectMake(0, 0 , 100, 100);
+            UIImageView *photosImageView = [[UIImageView alloc] initWithFrame:imageRect];
+            
+            [singlePhotoCell.contentView addSubview:[photosImageView initWithImage:resizedImage]];
+
+        }];
+    }
+    return singlePhotoCell;
 }
 
 
+
+//MARK- TableView DataSource and Delegate Functions
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     return 1;
 }
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return postArray.count;
 }
+
+- (void)tableView:(UITableView *)tableView willDisplayCell:(OffersTableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    [cell setCollectionViewDataSourceDelegate:self forRow:(int)indexPath.row];
+    
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
     OffersTableViewCell *cell  = (OffersTableViewCell *)  [tableView dequeueReusableCellWithIdentifier:@"OffersTableViewCell"];
-    
+    [[cell roomPhotosCollectionView] registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:collectionViewCellIdentifier];
     cell.titleLabel.text = [postArray[indexPath.row] title];
     cell.descriptionLabel.text = [postArray[indexPath.row] offerDescription];
     cell.priceLabel.text = [@"@Rs." stringByAppendingString:[NSString stringWithFormat:@"%d",(int) [postArray[indexPath.row] price]]] ;
     cell.numberOfRoomsLabel.text = [[NSString stringWithFormat:@"%ld",(long)[postArray[indexPath.row] numberOfRooms]]  stringByAppendingString:@" Rooms"];
     
+    imagesForASinglePost = [postArray[indexPath.row] imagesArray];
+    
     return cell;
     
 }
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    UIViewController *singlePostVC = [self.storyboard instantiateViewControllerWithIdentifier:@"SinglePostViewController"];
+    [self.navigationController pushViewController:singlePostVC animated:true];
+}
+
 - (IBAction)addPostButtonPressed:(UIBarButtonItem *)sender {
     
     UIAlertController *aLertController = [UIAlertController alertControllerWithTitle:(@"Alert") message:@"Select the type of Post" preferredStyle:UIAlertControllerStyleAlert];

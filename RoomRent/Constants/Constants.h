@@ -19,7 +19,7 @@ enum {
     PRICE_TEXTFIELD = 7
 };
 
-static NSString *PUSP_BASE_URL = @"http://192.168.0.143:82/api/v1/";
+static NSString *PUSP_BASE_URL = @"http://192.168.0.143:81/api/v1/";
 static NSString *PUSP_FILE_URL = @"http://192.168.0.143:81/api/v1/getfile/";
 static NSString *BASE_URL = @"http://192.168.0.157:81/api/";
 //static NSString *API_TOKEN = @"OD44GCYFpHYHcwYFTG1QsQBGPOLcHjk8OMOMPkd3Ew3RTaLX0ox2ES3UASxE";

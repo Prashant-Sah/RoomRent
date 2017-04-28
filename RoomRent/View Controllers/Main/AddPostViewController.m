@@ -119,17 +119,16 @@ int selectedItemIndex;
         
         [[APICaller sharedInstance] callApiforPost:@"post/create" headerFlag:true parameters:params imageDataArray:photoDataArray fileNameArray:photoNameArray viewController:self completion:^(NSDictionary *responseObjectDictionary)  {
             
-            
             NSLog(@"%@", responseObjectDictionary);
             
             NSString *code = [responseObjectDictionary valueForKey:@"code"];
             if([code isEqualToString:OFFER_POSTED_SUCCESSFULLY]){
                 
-                [[Alerter sharedInstance] createAlert:@"Success" message:@"Offer Posted Successfully" viewController:self completion:^{}];
+                //[[Alerter sharedInstance] createAlert:@"Success" message:@"Offer Posted Successfully" viewController:self completion:^{}];
                 
                 NSDictionary *postDict = [responseObjectDictionary valueForKey:@"post"];
-                [[Post alloc] initPostFromJson:postDict];
-
+                [[LocalDatabase alloc] pushPostToDatabase:postDict viewController:self];
+               
             }
         }];
     }

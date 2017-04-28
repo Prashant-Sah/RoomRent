@@ -28,7 +28,7 @@
     self.userNameLabel.text = username;
     
 
-    if(![[userDict valueForKey:@"profile_image"]  isEqual:@"<null>" ]){
+    if([[userDict valueForKey:@"profile_image"]  isEqualToString:@"<null>" ]){
     }else{
         [[APICaller sharedInstance] callApiForReceivingImage:[@"getfile/" stringByAppendingString:[userDict valueForKey:@"profile_image"]? : @""] viewController:self completion:^(id responseObjectFromApi) {
             if(responseObjectFromApi != nil){
