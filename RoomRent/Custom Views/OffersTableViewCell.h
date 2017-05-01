@@ -21,10 +21,12 @@ static NSString *collectionViewCellIdentifier = @"PhotosCell";
 
 @property (strong, nonatomic) IBOutlet RoomPhotosCollectionView *roomPhotosCollectionView;
 
+@property int postId;
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 @property (weak, nonatomic) IBOutlet UILabel *descriptionLabel;
 @property (weak, nonatomic) IBOutlet UILabel *priceLabel;
 @property (weak, nonatomic) IBOutlet UILabel *numberOfRoomsLabel;
+@property (weak, nonatomic) IBOutlet UILabel *userLabel;
 
 @property (nonatomic, strong) NSIndexPath *indexPath;
 

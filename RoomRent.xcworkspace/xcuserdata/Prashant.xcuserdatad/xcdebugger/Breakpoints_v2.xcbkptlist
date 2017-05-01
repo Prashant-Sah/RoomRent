@@ -202,7 +202,7 @@
                   moduleName = "RoomRent"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/prashnant/Projects/RoomRent/RoomRent/Database/LocalDatabase.m"
-                  timestampString = "515067891.93315"
+                  timestampString = "515332882.178841"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "71"
@@ -217,7 +217,7 @@
                   moduleName = "RoomRent"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/prashnant/Projects/RoomRent/RoomRent/Database/LocalDatabase.m"
-                  timestampString = "515067891.934783"
+                  timestampString = "515332882.182106"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "71"
@@ -289,46 +289,62 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "RoomRent/Helpers/APICaller.m"
-            timestampString = "515064989.864494"
+            filePath = "RoomRent/View Controllers/Account Module/Main/DashBoard/DashBoardViewController.m"
+            timestampString = "515332733.057843"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "39"
-            endingLineNumber = "39"
-            landmarkName = "-callCommonAlertWithError:viewController:"
+            startingLineNumber = "18"
+            endingLineNumber = "18"
+            landmarkName = "-viewDidLoad"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "-[APICaller callCommonAlertWithError:viewController:]"
-                  moduleName = "RoomRent"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/prashnant/Projects/RoomRent/RoomRent/Helpers/APICaller.m"
-                  timestampString = "515067891.94898"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "39"
-                  endingLineNumber = "39"
-                  offsetFromSymbolStart = "414">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "__53-[APICaller callCommonAlertWithError:viewController:]_block_invoke_3"
-                  moduleName = "RoomRent"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/prashnant/Projects/RoomRent/RoomRent/Helpers/APICaller.m"
-                  timestampString = "515067891.950701"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "39"
-                  endingLineNumber = "39"
-                  offsetFromSymbolStart = "12">
-               </Location>
-            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "RoomRent/View Controllers/Account Module/Main/Offers/OffersViewController.m"
+            timestampString = "515332748.18616"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "23"
+            endingLineNumber = "23"
+            landmarkName = "-viewDidLoad"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "RoomRent/Custom Class/CustomRevealViewController.m"
+            timestampString = "515332760.562659"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "21"
+            endingLineNumber = "21"
+            landmarkName = "-viewDidLoad"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "RoomRent/View Controllers/Account Module/Main/Ask/AskViewController.m"
+            timestampString = "515332784.699269"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "18"
+            endingLineNumber = "18"
+            landmarkName = "-viewDidLoad"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

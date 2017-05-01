@@ -27,7 +27,8 @@ static NSMutableArray *postArray = nil;
     self.lat = [postDict valueForKey:@"latitude"];
     self.lon = [postDict valueForKey:@"longitude"];
     self.imagesArray = [postDict valueForKey:@"images"];
-    
+    NSDictionary *userDict = [postDict valueForKey:@"user"];
+    self.user = [userDict valueForKey:@"username"];
 //    NSArray *imageURLArray = [postDict valueForKey:@"images"];
 //    for (NSString *imageURL in imageURLArray) {
 //        [post.imagesArray addObject:imageURL ];

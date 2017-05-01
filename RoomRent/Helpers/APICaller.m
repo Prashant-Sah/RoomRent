@@ -128,9 +128,9 @@ NSString *filename;
             }
         }
         progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-            NSDictionary *responseObjectDictionary = (NSDictionary*) responseObject;
+            //NSDictionary *responseObjectDictionary = (NSDictionary*) responseObject;
             
-            completionBlock(responseObjectDictionary);
+            completionBlock(responseObject);
             
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
             
@@ -138,6 +138,28 @@ NSString *filename;
         }];
         
     }
+    
+}
+
+- (void)callApiToGetSinglePost:(NSString *)appendString headerFlag:(BOOL)headerFlag viewController:(UIViewController *)VC completion:(void (^)(NSDictionary *))completionBlock{
+    
+    manager.requestSerializer = [AFHTTPRequestSerializer serializer];
+    manager.responseSerializer = [AFJSONResponseSerializer serializer];
+    
+    if(headerFlag){
+        NSString *userApiToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"userApiToken"];
+        NSLog(@"%@",userApiToken);
+        [manager.requestSerializer setValue:[@"Bearer " stringByAppendingString:userApiToken] forHTTPHeaderField:@"Authorization"];
+    }
+    
+    [manager GET:[PUSP_BASE_URL stringByAppendingString:appendString] parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        
+        NSDictionary *postObjectDictionary = [responseObject valueForKey:@"post"];
+        completionBlock(postObjectDictionary);
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        
+        [self callCommonAlertWithError:error viewController:VC];
+    }] ;
 }
 
 @end

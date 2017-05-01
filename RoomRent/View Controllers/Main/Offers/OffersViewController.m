@@ -7,7 +7,6 @@
 //
 
 #import "OffersViewController.h"
-#import "OffersTableViewCell.h"
 
 @interface OffersViewController ()
 @property (weak, nonatomic) IBOutlet UITableView *offersTableView;
@@ -23,6 +22,7 @@ UIRefreshControl *refresher;
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    [self loadPosts];
     _offersTableView.dataSource = self;
     _offersTableView.delegate = self;
     self.offersTableView.rowHeight = UITableViewAutomaticDimension;
@@ -46,7 +46,7 @@ UIRefreshControl *refresher;
 }
 -(void)viewWillAppear:(BOOL)animated{
     
-    [self loadPosts];
+    //[self loadPosts];
 }
 
 -(void)loadPosts{
@@ -130,11 +130,12 @@ UIRefreshControl *refresher;
     
     OffersTableViewCell *cell  = (OffersTableViewCell *)  [tableView dequeueReusableCellWithIdentifier:@"OffersTableViewCell"];
     [[cell roomPhotosCollectionView] registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:collectionViewCellIdentifier];
+    cell.roomPhotosCollectionView.contentSize = CGSizeMake(self.view.frame.size.width, 100) ;
     cell.titleLabel.text = [postArray[indexPath.row] title];
     cell.descriptionLabel.text = [postArray[indexPath.row] offerDescription];
     cell.priceLabel.text = [@"@Rs." stringByAppendingString:[NSString stringWithFormat:@"%d",(int) [postArray[indexPath.row] price]]] ;
     cell.numberOfRoomsLabel.text = [[NSString stringWithFormat:@"%ld",(long)[postArray[indexPath.row] numberOfRooms]]  stringByAppendingString:@" Rooms"];
-    
+    cell.userLabel.text = [postArray[indexPath.row] user];
     imagesForASinglePost = [postArray[indexPath.row] imagesArray];
     
     return cell;
@@ -142,7 +143,10 @@ UIRefreshControl *refresher;
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    UIViewController *singlePostVC = [self.storyboard instantiateViewControllerWithIdentifier:@"SinglePostViewController"];
+    
+    SinglePostViewController *singlePostVC = [self.storyboard instantiateViewControllerWithIdentifier:@"SinglePostViewController"];
+    singlePostVC.postId = [postArray[indexPath.row] postid];
+    NSLog(@"%d", [postArray[indexPath.row] postid]);
     [self.navigationController pushViewController:singlePostVC animated:true];
 }
 
@@ -170,7 +174,5 @@ UIRefreshControl *refresher;
     
     [self presentViewController:aLertController animated:true completion:nil];
 }
-
-
 
 @end

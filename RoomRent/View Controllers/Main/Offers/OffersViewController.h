@@ -17,5 +17,4 @@
 
 @interface OffersViewController : CustomRevealViewController <UITableViewDataSource , UITableViewDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout>
 
-@property int postId;
 @end

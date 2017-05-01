@@ -18,6 +18,7 @@
 //@property NSString *location;
 @property NSString *lat;
 @property NSString *lon;
+@property NSString *user;
 @property NSMutableArray *imagesArray;
 
 - (Post*) initPostFromJson : (NSDictionary *) postDict;

@@ -42,13 +42,13 @@ CLLocationManager *locationManager;
 {
     NSLog(@"didUpdateToLocation: %@", newLocation);
     _currentLocation = newLocation;
-    if (_currentLocation != nil) {
+    if (self.currentLocation != nil) {
         [locationManager stopUpdatingLocation];
         //NSLog(@"%.8f",_currentLocation.coordinate.latitude);
         //NSLog(@"%.8f",_currentLocation.coordinate.longitude);
         
         MKCoordinateRegion region;
-        region.center = _currentLocation.coordinate;
+        region.center = self.currentLocation.coordinate;
         region.span = MKCoordinateSpanMake(0.05, 0.05);
         
         region = [_mapView regionThatFits:region];

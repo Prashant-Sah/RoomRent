@@ -15,26 +15,18 @@
 @implementation OffersTableViewCell
 
 -(void)drawRect:(CGRect)rect {
-    UICollectionViewFlowLayout *layout = [UICollectionViewFlowLayout new];
-    [layout setScrollDirection: UICollectionViewScrollDirectionHorizontal];
-    layout.minimumLineSpacing = 5.0f;
-    layout.minimumInteritemSpacing = 5.0f;
-
+    
 }
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
-   
+    
     if (!(self = [super initWithStyle:style reuseIdentifier:reuseIdentifier])) return nil;
     
     UICollectionViewFlowLayout *layout = (UICollectionViewFlowLayout *) self.roomPhotosCollectionView.collectionViewLayout;
-    layout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
-    layout.minimumLineSpacing = 5.0f;
-    layout.minimumInteritemSpacing = 5.0f;
-    layout.itemSize = CGSizeMake(100, 100);
-    //layout.sectionInset = UIEdgeInsetsMake(5, 5, 5, 5);
-    
+    layout.minimumInteritemSpacing = 5.0;
+    layout.minimumLineSpacing = 5.0;
+    self.roomPhotosCollectionView.showsHorizontalScrollIndicator = false;
     self.roomPhotosCollectionView.userInteractionEnabled = false;
-    self.roomPhotosCollectionView = [[RoomPhotosCollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:layout];
     
     [self.roomPhotosCollectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:collectionViewCellIdentifier];
     
