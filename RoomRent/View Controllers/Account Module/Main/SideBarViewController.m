@@ -27,27 +27,23 @@
     NSString *username = [userDict valueForKey:@"username"];
     self.userNameLabel.text = username;
     
-
-    if([[userDict valueForKey:@"profile_image"]  isEqualToString:@"<null>" ]){
-    }else{
-        [[APICaller sharedInstance] callApiForReceivingImage:[@"getfile/" stringByAppendingString:[userDict valueForKey:@"profile_image"]? : @""] viewController:self completion:^(id responseObjectFromApi) {
-            if(responseObjectFromApi != nil){
-                
-                CGSize destinationSize = CGSizeMake(100, 100);
-                UIGraphicsBeginImageContext(destinationSize);
-                [responseObjectFromApi drawInRect:CGRectMake(0,0,destinationSize.width,destinationSize.height)];
-                UIImage *resizedProfileImage = UIGraphicsGetImageFromCurrentImageContext();
-                
-                [_profileImageButton setImage:resizedProfileImage forState:UIControlStateNormal];
-            }
-        }];
+    if (![[userDict valueForKey:@"profile_image"] isEqual:[NSNull null]]) {
+        
+        NSString *userApiToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"userApiToken"];
+        
+        SDWebImageDownloader *manager = [SDWebImageManager sharedManager].imageDownloader;
+        [manager setValue:[@"Bearer " stringByAppendingString:userApiToken] forHTTPHeaderField:@"Authorization"];
+        
+        NSURL *url = [NSURL URLWithString:[[PUSP_BASE_URL stringByAppendingString:@"getfile/"] stringByAppendingString:[userDict valueForKey:@"profile_image"]]];
+        
+        [self.profileImageButton sd_setImageWithURL:url forState:UIControlStateNormal];
+        [self.profileImageButton setContentMode:UIViewContentModeScaleAspectFit];
+        
+        self.profileImageButton.layer.borderColor = [UIColor whiteColor].CGColor;
+        self.profileImageButton.layer.borderWidth = 2.0f;
+        
     }
-
-//    NSURL *profileImageFullURL = [NSURL fileURLWithPath:[PUSP_FILE_URL stringByAppendingString:[userDict valueForKey:@"profile_image"]?: @""]];
-//    NSData *profileImageData = [[NSData alloc] initWithContentsOfURL:profileImageFullURL];
-//    if(profileImageData != nil){
-//    [_profileImageButton setImage:[UIImage imageWithData:profileImageData] forState:normal];
-//    }
+    
 }
 - (IBAction)profileBtnPressed:(UIButton *)sender {
     [[Navigator sharedInstance] makeRootViewControllerWithStoryBoard:@"Account" viewController:@"ProfileViewController" tabBarController:nil];
@@ -65,9 +61,10 @@
             [[Navigator sharedInstance] makeRootViewControllerWithStoryBoard:@"Account" viewController:@"SignInViewController" tabBarController:nil];
         }
     }];
-
+    
 }
 - (IBAction)clear:(UIButton *)sender {
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"userApiToken"];
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"userDataKey"];
     [[Navigator sharedInstance] makeRootViewControllerWithStoryBoard:@"Account" viewController:@"SignInViewController" tabBarController:nil];
 }

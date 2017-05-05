@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <AFNetworking.h>
+#import <SDWebImage/UIImageView+WebCache.h>
 #import"Constants.h"
 #import "Alerter.h"
 
@@ -21,9 +22,14 @@
 
 -(void) callApiForReceivingImage : (NSString *) appendString viewController :(UIViewController *) VC completion : (void (^) (id responseObjectFromApi)) completionBlock;
 
--(void)callApiforPost:(NSString *)appendString headerFlag:(BOOL)headerFlag parameters:(NSDictionary *)params imageDataArray:(NSArray *)imageDataArray fileNameArray:(NSArray *)fileNameArray viewController:(UIViewController *)VC completion:(void (^)(NSDictionary *responseObjectDictionary))completionBlock;
+-(void)callApiToCreatePost:(NSString *)appendString parameters:(NSDictionary *)params imageDataArray:(NSArray *)imageDataArray fileNameArray:(NSArray *)fileNameArray viewController:(UIViewController *)VC completion:(void (^)(NSDictionary *responseObjectDictionary))completionBlock;
 
--(void) callApiToGetSinglePost :(NSString *) appendString headerFlag :(BOOL) headerFlag viewController :(UIViewController *) VC completion :(void (^) (NSDictionary * responseObjectDictionary)) completionBlock ;
+-(void) callAPiToGetAllPosts : (NSString *) appendString parameters :(NSDictionary *) params viewController :(UIViewController *) VC completion:(void (^)(NSDictionary *responseObjectDictionary))completionBlock;
+
+-(void) callApiToGetSinglePost :(NSString *) appendString viewController :(UIViewController *) VC completion :(void (^) (NSDictionary * responseObjectDictionary)) completionBlock ;
+
+-(void) getImageForURL : (NSString *) appendString requiredImageSize : (CGSize) destinationSize viewController :(UIViewController *) VC completion:(void (^)(UIImage *resizedImage))completionBlock;
+
 
 -(void) callCommonAlertWithError:(NSError *) error viewController:(UIViewController *) VC;
 

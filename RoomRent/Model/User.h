@@ -10,6 +10,7 @@
 
 @interface User : NSObject <NSCoding>
 
+@property NSNumber *userId;
 @property NSString *fullname;
 @property NSString *username;
 @property NSString *password;
@@ -17,8 +18,6 @@
 @property NSString *mobile;
 @property NSURL *profileImageURL;
 
--(void) initUserFromJson : (NSDictionary *) userDict;
+-(User*) initUserFromJson : (NSDictionary *) userDict;
 
-
--(User*) getUser;
 @end

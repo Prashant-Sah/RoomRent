@@ -7,19 +7,21 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "User.h"
 
 @interface Post : NSObject
 
 @property int postid;
 @property NSString *title;
 @property NSString *offerDescription;
-@property NSInteger numberOfRooms;
+@property int numberOfRooms;
 @property double price;
-//@property NSString *location;
-@property NSString *lat;
-@property NSString *lon;
-@property NSString *user;
+@property NSString *location;
+@property double latitude;
+@property double longitude;
 @property NSMutableArray *imagesArray;
+
+@property User *postUser;
 
 - (Post*) initPostFromJson : (NSDictionary *) postDict;
 

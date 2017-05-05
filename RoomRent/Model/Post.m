@@ -8,9 +8,6 @@
 
 #import "Post.h"
 
-static Post* post = nil;
-static NSMutableArray *postArray = nil;
-
 @implementation Post
 
 
@@ -24,15 +21,13 @@ static NSMutableArray *postArray = nil;
     self.offerDescription = [postDict valueForKey:@"description"];
     self.numberOfRooms = [[postDict valueForKey:@"no_of_rooms"] intValue];
     self.price = [[postDict valueForKey:@"price"] doubleValue];
-    self.lat = [postDict valueForKey:@"latitude"];
-    self.lon = [postDict valueForKey:@"longitude"];
+    self.latitude = [[postDict valueForKey:@"latitude"] doubleValue];
+    self.longitude = [[postDict valueForKey:@"longitude"] doubleValue];
+    self.location = [postDict valueForKey:@"address"];
     self.imagesArray = [postDict valueForKey:@"images"];
-    NSDictionary *userDict = [postDict valueForKey:@"user"];
-    self.user = [userDict valueForKey:@"username"];
-//    NSArray *imageURLArray = [postDict valueForKey:@"images"];
-//    for (NSString *imageURL in imageURLArray) {
-//        [post.imagesArray addObject:imageURL ];
-//    }
+    
+    self.postUser = [[User alloc] initUserFromJson:[postDict valueForKey:@"user"]];
+    
     
     return self;
 }

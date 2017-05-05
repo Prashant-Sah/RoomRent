@@ -23,7 +23,7 @@
 
 CLLocationDegrees latitude = 0;
 CLLocationDegrees longitude = 0;
-NSArray *imagesArray;
+NSArray *imagesArray = nil;
 
 @implementation SinglePostViewController
 
@@ -40,31 +40,33 @@ NSArray *imagesArray;
     layout.minimumInteritemSpacing = 0.0;
     self.roomPhotosCollectionView.showsHorizontalScrollIndicator = false;
     self.roomPhotosCollectionView.pagingEnabled = true;
+    
 }
 -(void)viewWillAppear:(BOOL)animated{
     
-    [[APICaller sharedInstance] callApiToGetSinglePost:[@"post/" stringByAppendingString: [NSString stringWithFormat:@"%d", self.postId]] headerFlag:true viewController:self completion:^(NSDictionary *responseObjectDictionary) {
+    [[APICaller sharedInstance] callApiToGetSinglePost:[@"post/" stringByAppendingString: [NSString stringWithFormat:@"%d", self.postId]] viewController:self completion:^(NSDictionary *responseObjectDictionary) {
         
         NSLog(@"%@", responseObjectDictionary);
-        self.titleLabel.text = [responseObjectDictionary valueForKey:@"title"];
-        self.descriptionLabel.text = [responseObjectDictionary valueForKey:@"description"];
-        self.numberOfRoomsLabel.text = [NSString stringWithFormat:@"%@",[responseObjectDictionary valueForKey:@"no_of_rooms"] ] ;
-        self.priceLabel.text = [NSString stringWithFormat:@"%@", [responseObjectDictionary valueForKey:@"price"]];
-        self.locationLabel.text
-        = [responseObjectDictionary valueForKey:@"address"];
+        Post *singlePost = [[Post alloc] initPostFromJson:responseObjectDictionary];
+        imagesArray = singlePost.imagesArray;
+        [self.roomPhotosCollectionView reloadData];
+        self.titleLabel.text = singlePost.title;
+        self.descriptionLabel.text = singlePost.offerDescription;
+        self.numberOfRoomsLabel.text = [NSString stringWithFormat:@"%d", singlePost.numberOfRooms];
+        self.priceLabel.text = [NSString stringWithFormat:@"%d", (int) singlePost.price];
+        self.locationLabel.text = singlePost.location ;
         
-        imagesArray = [responseObjectDictionary valueForKey:@"images"];
-        static dispatch_once_t onceToken;
-        dispatch_once(&onceToken, ^{
-            [self.roomPhotosCollectionView reloadData];
-        });
-        
+        self.userLabel.text = singlePost.postUser.username;
         
         NSDictionary *userDict = [responseObjectDictionary valueForKey:@"user"];
         self.userLabel.text = [userDict valueForKey:@"username"];
         
-        latitude = [[responseObjectDictionary valueForKey:@"latitude"] doubleValue] ;
-        longitude = [[responseObjectDictionary valueForKey:@"longitude"] doubleValue];
+        static dispatch_once_t onceToken;
+        dispatch_once(&onceToken, ^{
+            [self.roomPhotosCollectionView reloadData];
+        });
+        latitude = singlePost.latitude;
+        longitude = singlePost.longitude;
         
         MKCoordinateRegion region;
         CLLocationCoordinate2D roomLocation = CLLocationCoordinate2DMake(latitude , longitude);
@@ -78,7 +80,7 @@ NSArray *imagesArray;
         [self.singlePostMapView addAnnotation: annotationPoint];
         
     }];
-
+    
 }
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView{
@@ -89,27 +91,21 @@ NSArray *imagesArray;
 }
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
     
-    int i =0;
     UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"roomPhotosCell" forIndexPath:indexPath];
+    CGRect imageRect = CGRectMake(0, 0 , self.view.frame.size.width, 200);
+    UIImageView *photosImageView = [[UIImageView alloc] initWithFrame:imageRect];
     
-    for (NSString *singleImageURL in imagesArray) {
+    if(imagesArray.count>0){
         
-        NSLog(@"%d",i);
-        i=i+1;
-        [[APICaller sharedInstance] callApiForReceivingImage:[@"getfile/" stringByAppendingString:singleImageURL] viewController:self completion:^(id responseObjectFromApi) {
-            
-            CGSize destinationSize = CGSizeMake(self.view.frame.size.width , 200);
-            UIGraphicsBeginImageContext(destinationSize);
-            [responseObjectFromApi drawInRect:CGRectMake(0,0,destinationSize.width,destinationSize.height)];
-            UIImage *resizedImage = UIGraphicsGetImageFromCurrentImageContext();
-            
-            CGRect imageRect = CGRectMake(0, 0 , self.view.frame.size.width, 200);
-            UIImageView *photosImageView = [[UIImageView alloc] initWithFrame:imageRect];
-            
-            [cell.contentView addSubview:[photosImageView initWithImage:resizedImage]];
-            
-        }];
+        NSString *userApiToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"userApiToken"];
+        SDWebImageDownloader *manager = [SDWebImageManager sharedManager].imageDownloader;
+        [manager setValue:[@"Bearer " stringByAppendingString:userApiToken] forHTTPHeaderField:@"Authorization"];
+        NSURL *url = [NSURL URLWithString:[[PUSP_BASE_URL stringByAppendingString:@"getfile/"] stringByAppendingString:imagesArray[indexPath.row] ]];
+        [photosImageView sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"noPhotos.jpeg"] options:SDWebImageScaleDownLargeImages];
+    }else{
+        [photosImageView setImage:[UIImage imageNamed:@"noPhotos"]];
     }
+    [cell.contentView addSubview:photosImageView ];
     return cell;
 }
 

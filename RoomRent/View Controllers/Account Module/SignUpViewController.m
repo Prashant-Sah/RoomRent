@@ -37,7 +37,7 @@
     _passwordTextField.tag = PASSWORD_TEXTFIELD;
     
     
-    _nameTextField.text = @"Pupa Raaz";
+    _nameTextField.text = @"Puspa Raaz";
     _mobileTextField.text =@"9876543210";
     _userNameTextField.text =@"Puspi";
     _emailAddTextField.text = @"069bct429@gmail.com";

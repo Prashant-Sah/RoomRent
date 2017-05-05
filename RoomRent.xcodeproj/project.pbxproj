@@ -14,6 +14,7 @@
 		8F248DCA1E935ACD00786B69 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8F248DC91E935ACC00786B69 /* Main.storyboard */; };
 		8F248DD51E9393E000786B69 /* KeyboardAvoidingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F248DD41E9393DF00786B69 /* KeyboardAvoidingViewController.m */; };
 		8F248DDF1E93AF2200786B69 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F248DDE1E93AF2200786B69 /* User.m */; };
+		8F2F66A01EBB322C007FF6EE /* MasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F2F669F1EBB322C007FF6EE /* MasterViewController.m */; };
 		8F4D2D291E8CFBE800347F9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F4D2D281E8CFBE800347F9A /* main.m */; };
 		8F4D2D2C1E8CFBE800347F9A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F4D2D2B1E8CFBE800347F9A /* AppDelegate.m */; };
 		8F4D2D321E8CFBE800347F9A /* Account.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8F4D2D301E8CFBE800347F9A /* Account.storyboard */; };
@@ -57,6 +58,8 @@
 		8F248DD41E9393DF00786B69 /* KeyboardAvoidingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeyboardAvoidingViewController.m; sourceTree = "<group>"; };
 		8F248DDD1E93AF2200786B69 /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
 		8F248DDE1E93AF2200786B69 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
+		8F2F669E1EBB322C007FF6EE /* MasterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MasterViewController.h; sourceTree = "<group>"; };
+		8F2F669F1EBB322C007FF6EE /* MasterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MasterViewController.m; sourceTree = "<group>"; };
 		8F4D2D241E8CFBE800347F9A /* RoomRent.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RoomRent.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8F4D2D281E8CFBE800347F9A /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		8F4D2D2A1E8CFBE800347F9A /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -156,6 +159,8 @@
 				8FF2CE0B1E9E018B0059E3F5 /* CustomTextField.m */,
 				8FDD71501EA47CAD006C0020 /* CustomRevealViewController.h */,
 				8FDD71511EA47CAD006C0020 /* CustomRevealViewController.m */,
+				8F2F669E1EBB322C007FF6EE /* MasterViewController.h */,
+				8F2F669F1EBB322C007FF6EE /* MasterViewController.m */,
 			);
 			path = "Custom Class";
 			sourceTree = "<group>";
@@ -484,6 +489,7 @@
 				8F4D2D291E8CFBE800347F9A /* main.m in Sources */,
 				8F63C1081E962D90000790D6 /* APICaller.m in Sources */,
 				8F628AEC1EB757A700B320A7 /* DashBoardViewController.m in Sources */,
+				8F2F66A01EBB322C007FF6EE /* MasterViewController.m in Sources */,
 				8F628AE51EB756D700B320A7 /* AddPostViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

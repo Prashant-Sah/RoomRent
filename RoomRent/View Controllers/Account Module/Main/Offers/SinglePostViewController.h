@@ -10,6 +10,7 @@
 #import <MapKit/MapKit.h>
 #import <CoreLocation/CoreLocation.h>
 #import "APICaller.h"
+#import "Post.h"
 
 @interface SinglePostViewController : UIViewController <UICollectionViewDataSource,UICollectionViewDelegate >
 

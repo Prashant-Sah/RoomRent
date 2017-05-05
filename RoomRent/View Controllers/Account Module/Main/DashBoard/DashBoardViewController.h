@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "CustomRevealViewController.h"
+//#import "CustomRevealViewController.h"
+#import "MasterViewController.h"
 
-@interface DashBoardViewController : CustomRevealViewController
+@interface DashBoardViewController : MasterViewController
 
 @end

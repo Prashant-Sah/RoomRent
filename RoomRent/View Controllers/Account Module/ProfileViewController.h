@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "Navigator.h"
 
+#import "APICaller.h"
+
 @interface ProfileViewController : UIViewController
 
 @end

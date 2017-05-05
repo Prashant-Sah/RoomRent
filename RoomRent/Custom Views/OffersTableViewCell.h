@@ -15,9 +15,9 @@
 
 @end
 
-static NSString *collectionViewCellIdentifier = @"PhotosCell";
 
-@interface OffersTableViewCell : UITableViewCell
+
+@interface OffersTableViewCell : UITableViewCell <UICollectionViewDelegate ,UICollectionViewDataSource>
 
 @property (strong, nonatomic) IBOutlet RoomPhotosCollectionView *roomPhotosCollectionView;
 
@@ -27,8 +27,6 @@ static NSString *collectionViewCellIdentifier = @"PhotosCell";
 @property (weak, nonatomic) IBOutlet UILabel *priceLabel;
 @property (weak, nonatomic) IBOutlet UILabel *numberOfRoomsLabel;
 @property (weak, nonatomic) IBOutlet UILabel *userLabel;
-
-@property (nonatomic, strong) NSIndexPath *indexPath;
 
 @property int row;
 

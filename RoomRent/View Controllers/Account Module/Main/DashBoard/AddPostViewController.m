@@ -35,7 +35,7 @@ int selectedItemIndex;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
+    
     _photosCollectionView.delegate = self;
     _photosCollectionView.dataSource = self;
     
@@ -47,10 +47,10 @@ int selectedItemIndex;
     _photosCollectionView.layer.borderColor = [UIColor grayColor].CGColor;
     _photosCollectionView.layer.cornerRadius = 5.0f;
     
-    UICollectionViewFlowLayout *layout = [UICollectionViewFlowLayout new];
+    UICollectionViewFlowLayout *layout = (UICollectionViewFlowLayout *) self.photosCollectionView.collectionViewLayout;
     [layout setScrollDirection: UICollectionViewScrollDirectionHorizontal];
-    layout.minimumLineSpacing = 5.0f;
-    layout.minimumInteritemSpacing = 5.0f;
+    layout.minimumLineSpacing = 0.0f;
+    layout.minimumInteritemSpacing = 0.0f;
     
     
     //Cancel Button with background clear
@@ -98,12 +98,14 @@ int selectedItemIndex;
                           self.priceTextField,
                           self.addressLabel
                           ];
-
+    
     if([[required valueForKeyPath:@"text.@min.length"] intValue] == 0){
         [[Alerter sharedInstance] createAlert:@"Error" message:@"One or more input fields are empty" viewController:self completion:^{}
          ];
     }else{
         
+        //double lat = userAnnotationCoordinate.latitude;
+        //double lon = userAnnotationCoordinate.longitude;
         NSString *lat = [NSString stringWithFormat:@"%.8f",userAnnotationCoordinate.latitude];
         NSString *lon =[NSString stringWithFormat:@"%.8f", userAnnotationCoordinate.longitude];
         NSDictionary *params = @{
@@ -117,7 +119,7 @@ int selectedItemIndex;
                                  @"longitude" : lon
                                  };
         
-        [[APICaller sharedInstance] callApiforPost:@"post/create" headerFlag:true parameters:params imageDataArray:photoDataArray fileNameArray:photoNameArray viewController:self completion:^(NSDictionary *responseObjectDictionary)  {
+        [[APICaller sharedInstance] callApiToCreatePost:@"post/create" parameters:params imageDataArray:photoDataArray fileNameArray:photoNameArray viewController:self completion:^(NSDictionary *responseObjectDictionary)  {
             
             NSLog(@"%@", responseObjectDictionary);
             
@@ -128,11 +130,12 @@ int selectedItemIndex;
                 
                 NSDictionary *postDict = [responseObjectDictionary valueForKey:@"post"];
                 [[LocalDatabase alloc] pushPostToDatabase:postDict viewController:self];
-               
+                
+                [self dismissViewControllerAnimated:true completion:nil];
             }
         }];
     }
-
+    
 }
 //Collection View DataSource and Delegate Funct ions
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
@@ -279,14 +282,12 @@ int selectedItemIndex;
 
 //TEXT Field delegate functions
 -(BOOL) textFieldShouldReturn:(UITextField *)textField{
-    
     [self resignFirstResponder];
     return true;
 }
 
 // gets rectangle of textfield and passes it to keyboardavoidingviewcontroller
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField{
-
     CGRect textfieldrect = [self.view convertRect:textField.frame toView:[[[UIApplication sharedApplication] delegate ] window ]];
     [KeyboardAvoidingViewController setActiveTextFieldPosition:textfieldrect.origin];
     
@@ -299,7 +300,14 @@ int selectedItemIndex;
     }
     return true;
 }
-
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
+    if (textField.tag == PRICE_TEXTFIELD){
+        if(range.location <3){
+            return false;
+        }
+    }
+    return true;
+}
 - (void)textFieldDidBeginEditing:(UITextField *)textField{
     if(textField.tag == PRICE_TEXTFIELD){
         _priceTextField.text = @"Rs.";

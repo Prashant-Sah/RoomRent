@@ -17,18 +17,23 @@ PODS:
   - FMDB (2.6.2):
     - FMDB/standard (= 2.6.2)
   - FMDB/standard (2.6.2)
+  - SDWebImage (4.0.0):
+    - SDWebImage/Core (= 4.0.0)
+  - SDWebImage/Core (4.0.0)
   - SWRevealViewController (2.3.0)
 
 DEPENDENCIES:
   - AFNetworking
   - FMDB
+  - SDWebImage
   - SWRevealViewController
 
 SPEC CHECKSUMS:
   AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
   FMDB: 854a0341b4726e53276f2a8996f06f1b80f9259a
+  SDWebImage: 76a6348bdc74eb5a55dd08a091ef298e56b55e41
   SWRevealViewController: 6d3fd97f70112fd7cef9de14df4260eacce4c63a
 
-PODFILE CHECKSUM: 432322a5cd0dd7d7c0c2b234d7553b71c7377a66
+PODFILE CHECKSUM: a6cb12a6554d7f94eb7c393a9b09a9f53af4eb9c
 
 COCOAPODS: 1.2.0

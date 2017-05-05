@@ -38,11 +38,26 @@
     NSData *userDataDict = [[NSUserDefaults standardUserDefaults] objectForKey:@"userDataKey"];
     NSDictionary *userDict = [NSKeyedUnarchiver unarchiveObjectWithData:userDataDict];
     
-    _fullnameLabel.text = [userDict valueForKey:@"name"];
-     _mobileLabel.text = [userDict valueForKey:@"mobile"];
-    _usernameLabel.text = [userDict valueForKey:@"username"];
-    _emailLabel.text = [userDict valueForKey:@"email"];
-   
+    self.fullnameLabel.text = [userDict valueForKey:@"name"];
+    self.mobileLabel.text = [userDict valueForKey:@"phone"];
+    self.usernameLabel.text = [userDict valueForKey:@"username"];
+    self.emailLabel.text = [userDict valueForKey:@"email"];
+    
+    if([[userDict valueForKey:@"profile_image"]  isEqualToString:@"<null>" ]){
+    }else{
+        [[APICaller sharedInstance] callApiForReceivingImage:[@"getfile/" stringByAppendingString:[userDict valueForKey:@"profile_image"]?  : @""] viewController:self completion:^(id responseObjectFromApi) {
+            if(responseObjectFromApi != nil){
+                
+                CGSize destinationSize = CGSizeMake(100, 100);
+                UIGraphicsBeginImageContext(destinationSize);
+                [responseObjectFromApi drawInRect:CGRectMake(0,0,destinationSize.width,destinationSize.height)];
+                UIImage *resizedProfileImage = UIGraphicsGetImageFromCurrentImageContext();
+                
+                [self.profileImageButton setImage:resizedProfileImage forState:UIControlStateNormal];
+            }
+        }];
+    }
+    
 }
 - (IBAction)editButtonPressed:(UIButton *)sender {
     _updateProfileBtn.hidden = false;

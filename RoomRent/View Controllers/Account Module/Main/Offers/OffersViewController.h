@@ -14,7 +14,8 @@
 #import "Post.h"
 #import "OffersTableViewCell.h"
 #import "SinglePostViewController.h"
+#import "MasterViewController.h"
 
-@interface OffersViewController : CustomRevealViewController <UITableViewDataSource , UITableViewDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout>
+@interface OffersViewController : CustomRevealViewController <UITableViewDataSource , UITableViewDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UIScrollViewDelegate>
 
 @end

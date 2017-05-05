@@ -68,7 +68,7 @@ static LocalDatabase *instance = nil;
     }else{
         message = @"Data additon failed";
     }
-    [[Alerter sharedInstance] createAlert:@"Message" message:message viewController:VC  completion:^{ }];
+    //[[Alerter sharedInstance] createAlert:@"Message" message:message viewController:VC  completion:^{ }];
 }
 
 -(void)executeQueryOrUpdate:(NSString *)statement queryUpdateFlag:(BOOL)queryUpdateFlag{

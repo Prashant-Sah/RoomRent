@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import <SWRevealViewController.h>
+#import <SDWebImage/UIImageView+WebCache.h>
+#import <SDWebImage/UIButton+WebCache.h>
 #import "User.h"
 #import "APICaller.h"
 #import "Navigator.h"

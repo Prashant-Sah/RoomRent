@@ -1,4 +1,4 @@
-        //
+//
 //  APICaller.m
 //  RoomRent
 //
@@ -10,7 +10,7 @@
 @implementation APICaller
 
 AFHTTPSessionManager *manager = nil;
-
+NSString *userApiToken = nil;
 static APICaller* instance = nil;
 NSData *imagedata;
 NSString *filename;
@@ -46,8 +46,7 @@ NSString *filename;
     manager.responseSerializer = [AFJSONResponseSerializer serializer];
     
     if(headerFlag){
-        NSString *userApiToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"userApiToken"];
-        NSLog(@"%@",userApiToken);
+        userApiToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"userApiToken"];
         [manager.requestSerializer setValue:[@"Bearer " stringByAppendingString:userApiToken] forHTTPHeaderField:@"Authorization"];
     }
     
@@ -76,10 +75,27 @@ NSString *filename;
     }
 }
 
+-(void) callAPiToGetAllPosts : (NSString *) appendString parameters :(NSDictionary *) params viewController :(UIViewController *)  VC completion:(void (^)(NSDictionary *))completionBlock{
+    
+    manager.responseSerializer = [AFJSONResponseSerializer serializer];
+    userApiToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"userApiToken"];
+    
+    [manager.requestSerializer setValue:[@"Bearer " stringByAppendingString:userApiToken] forHTTPHeaderField:@"Authorization"];
+    
+    [manager GET:[PUSP_BASE_URL stringByAppendingString:appendString] parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        completionBlock(responseObject);
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        [self callCommonAlertWithError:error viewController:VC];
+    }];
+    
+}
+
+
+
 - (void)callApiForReceivingImage:(NSString *)appendString viewController:(UIViewController *)VC completion:(void (^)(id))completionBlock{
     
-    NSString *userApiToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"userApiToken"];
     manager.responseSerializer = [AFImageResponseSerializer serializer];
+    userApiToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"userApiToken"];
     [manager.requestSerializer setValue:[@"Bearer " stringByAppendingString:userApiToken] forHTTPHeaderField:@"Authorization"];
     
     [manager GET:[PUSP_BASE_URL stringByAppendingString:appendString] parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
@@ -92,16 +108,33 @@ NSString *filename;
     }];
 }
 
--(void) callApiforPost:(NSString *)appendString headerFlag:(BOOL)headerFlag parameters:(NSDictionary *)params imageDataArray:(NSArray *)imageDataArray fileNameArray:(NSArray *)fileNameArray viewController:(UIViewController *)VC completion:(void (^)(NSDictionary *))completionBlock{
+-(void) getImageForURL : (NSString *) appendString requiredImageSize : (CGSize) destinationSize viewController :(UIViewController *) VC completion:(void (^)(UIImage *Image))completionBlock{
+    
+    SDWebImageDownloader *manager = [SDWebImageManager sharedManager].imageDownloader;
+    
+    userApiToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"userApiToken"];
+    [manager setValue:[@"Bearer " stringByAppendingString:userApiToken] forHTTPHeaderField:@"Authorization"];
+    
+    NSURL *imageURL = [NSURL URLWithString:[PUSP_BASE_URL stringByAppendingString:[@"getfile/"  stringByAppendingString:appendString]]];
+    
+    [manager downloadImageWithURL:imageURL options:SDWebImageDownloaderScaleDownLargeImages progress:nil completed:^(UIImage * _Nullable image, NSData * _Nullable data, NSError * _Nullable error, BOOL finished) {
+        UIGraphicsBeginImageContext(destinationSize);
+        [image drawInRect:CGRectMake(0,0,destinationSize.width,destinationSize.height)];
+        UIImage *resizedImage = UIGraphicsGetImageFromCurrentImageContext();
+        completionBlock(resizedImage);
+    }];
+    
+}
+
+// Post the Posts
+-(void) callApiToCreatePost:(NSString *)appendString parameters:(NSDictionary *)params imageDataArray:(NSArray *)imageDataArray fileNameArray:(NSArray *)fileNameArray viewController:(UIViewController *)VC completion:(void (^)(NSDictionary *))completionBlock{
     
     manager.requestSerializer = [AFHTTPRequestSerializer serializer];
     manager.responseSerializer = [AFJSONResponseSerializer serializer];
     
-    if(headerFlag){
-        NSString *userApiToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"userApiToken"];
-        NSLog(@"%@",userApiToken);
-        [manager.requestSerializer setValue:[@"Bearer " stringByAppendingString:userApiToken] forHTTPHeaderField:@"Authorization"];
-    }
+    userApiToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"userApiToken"];
+    [manager.requestSerializer setValue:[@"Bearer " stringByAppendingString:userApiToken] forHTTPHeaderField:@"Authorization"];
+    
     
     if(imageDataArray.count <= 0){
         [manager POST:[PUSP_BASE_URL stringByAppendingString:appendString] parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
@@ -110,8 +143,6 @@ NSString *filename;
             completionBlock(responseObjectDictionary);
             
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-            
-            NSLog(@"%@", error);
             
             [self callCommonAlertWithError:error viewController:VC];
             
@@ -127,30 +158,28 @@ NSString *filename;
                 [formData appendPartWithFileData:imagedata name:@"images[]" fileName:filename mimeType:@"image/jpeg"];
             }
         }
-        progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-            //NSDictionary *responseObjectDictionary = (NSDictionary*) responseObject;
-            
-            completionBlock(responseObject);
-            
-        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-            
-            [self callCommonAlertWithError:error viewController:VC];
-        }];
+             progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+                 //NSDictionary *responseObjectDictionary = (NSDictionary*) responseObject;
+                 
+                 completionBlock(responseObject);
+                 
+             } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+                 
+                 [self callCommonAlertWithError:error viewController:VC];
+             }];
         
     }
     
 }
 
-- (void)callApiToGetSinglePost:(NSString *)appendString headerFlag:(BOOL)headerFlag viewController:(UIViewController *)VC completion:(void (^)(NSDictionary *))completionBlock{
+- (void)callApiToGetSinglePost:(NSString *)appendString  viewController:(UIViewController *)VC completion:(void (^)(NSDictionary *))completionBlock{
     
     manager.requestSerializer = [AFHTTPRequestSerializer serializer];
     manager.responseSerializer = [AFJSONResponseSerializer serializer];
     
-    if(headerFlag){
-        NSString *userApiToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"userApiToken"];
-        NSLog(@"%@",userApiToken);
-        [manager.requestSerializer setValue:[@"Bearer " stringByAppendingString:userApiToken] forHTTPHeaderField:@"Authorization"];
-    }
+    userApiToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"userApiToken"];
+    [manager.requestSerializer setValue:[@"Bearer " stringByAppendingString:userApiToken] forHTTPHeaderField:@"Authorization"];
+    
     
     [manager GET:[PUSP_BASE_URL stringByAppendingString:appendString] parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         

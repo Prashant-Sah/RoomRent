@@ -9,34 +9,34 @@
 #import "User.h"
 
 @implementation User
-static User* user = nil;
 
--(User *)getUser{
-    return user;
-}
+- (User*)initUserFromJson:(NSDictionary *)userDict{
+    
+    self.userId = [userDict valueForKey:@"id"];
+    self.fullname = [userDict valueForKey:@"name"];
+    self.username = [userDict valueForKey:@"username"];
+    self.email = [userDict valueForKey:@"email"];
+    self.mobile = [userDict valueForKey:@"phone"];
+    self.profileImageURL = [userDict valueForKey:@"profile_image"];
 
-- (void)initUserFromJson:(NSDictionary *)userDict{
     
-    user.fullname = [userDict valueForKey:@"name"];
-    user.username = [userDict valueForKey:@"username"];
-    user.email = [userDict valueForKey:@"email"];
-    user.mobile = [userDict valueForKey:@"phone"];
-    user.profileImageURL = [userDict valueForKey:@"profile_image"];
-    
+    return self;
 }
 
 - (void)encodeWithCoder:(NSCoder *)aCoder{
     
-    [aCoder encodeObject:_fullname forKey:@"fullname"];
-    [aCoder encodeObject:_username forKey:@"username"];
-    [aCoder encodeObject:_email forKey:@"email"];
-    [aCoder encodeObject:_mobile forKey:@"mobile"];
-    [aCoder encodeObject:_profileImageURL forKey:@"profileImageURL"];
+    [aCoder encodeObject:self.userId forKey:@"userId"];
+    [aCoder encodeObject:self.fullname forKey:@"fullname"];
+    [aCoder encodeObject:self.username forKey:@"username"];
+    [aCoder encodeObject:self.email forKey:@"email"];
+    [aCoder encodeObject:self.mobile forKey:@"mobile"];
+    [aCoder encodeObject:self.profileImageURL forKey:@"profileImageURL"];
 }
 
 - (instancetype)initWithCoder:(NSCoder *)aDecoder{
     if(self = [super init]){
-        
+    
+        self.userId = [aDecoder decodeObjectForKey:@"userId"];
         self.fullname = [aDecoder decodeObjectForKey:@"fullname"];
         self.username = [aDecoder decodeObjectForKey:@"username"];
         self.email = [aDecoder decodeObjectForKey:@"email"];

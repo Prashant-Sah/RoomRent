@@ -25,7 +25,7 @@ static NSString *BASE_URL = @"http://192.168.0.157:81/api/";
 
 static NSString *USER_API_TOKEN;
 static NSString *DEVICE_TYPE = @"1";
-static NSString *DEVICE_TOKEN = @"kdsfjd";
+static NSString *DEVICE_TOKEN = @"prashant";
 
 static NSString *LOGIN_SUCCESS = @"0011";
 

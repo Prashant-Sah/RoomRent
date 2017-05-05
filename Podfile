@@ -6,7 +6,8 @@ target 'RoomRent' do
   # use_frameworks!
 	pod ‘AFNetworking’
 	pod 'SWRevealViewController'
-        pod 'FMDB'  
+        pod 'FMDB'
+	pod 'SDWebImage'  
 # Pods for RoomRent
 
 end
