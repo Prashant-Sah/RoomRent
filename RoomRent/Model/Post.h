@@ -19,7 +19,7 @@
 @property NSString *location;
 @property double latitude;
 @property double longitude;
-@property NSMutableArray *imagesArray;
+@property NSArray *imagesArray;
 
 @property User *postUser;
 

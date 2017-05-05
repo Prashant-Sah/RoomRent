@@ -21,13 +21,46 @@
                     <view key="view" contentMode="scaleToFill" id="TwV-Di-b3C">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="n0Z-I2-uRc">
+                                <rect key="frame" x="0.0" y="114" width="414" height="622"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </tableView>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="wGd-08-2gl">
+                                <rect key="frame" x="0.0" y="64" width="414" height="51"/>
+                                <segments>
+                                    <segment title="My Offers"/>
+                                    <segment title="My Requests"/>
+                                </segments>
+                                <connections>
+                                    <action selector="offerOrRequestSelected:" destination="ZTv-Uy-Gbc" eventType="valueChanged" id="daR-Dr-ogg"/>
+                                </connections>
+                            </segmentedControl>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="n0Z-I2-uRc" secondAttribute="trailing" id="4d2-Xp-2pe"/>
+                            <constraint firstItem="wGd-08-2gl" firstAttribute="leading" secondItem="TwV-Di-b3C" secondAttribute="leading" id="SgJ-DM-rW2"/>
+                            <constraint firstAttribute="bottom" secondItem="n0Z-I2-uRc" secondAttribute="bottom" id="T68-h5-ch4"/>
+                            <constraint firstItem="n0Z-I2-uRc" firstAttribute="top" secondItem="AVx-dn-1qA" secondAttribute="bottom" constant="50" id="XCD-eY-0ai"/>
+                            <constraint firstAttribute="trailing" secondItem="wGd-08-2gl" secondAttribute="trailing" id="a0E-HX-cva"/>
+                            <constraint firstItem="n0Z-I2-uRc" firstAttribute="top" secondItem="wGd-08-2gl" secondAttribute="bottom" id="kx9-TY-mIx"/>
+                            <constraint firstItem="n0Z-I2-uRc" firstAttribute="leading" secondItem="TwV-Di-b3C" secondAttribute="leading" id="oPj-qt-r06"/>
+                            <constraint firstItem="wGd-08-2gl" firstAttribute="top" secondItem="AVx-dn-1qA" secondAttribute="bottom" id="ror-Ip-PdF"/>
+                        </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="Bxo-hw-4Mc"/>
+                    <navigationItem key="navigationItem" id="Bxo-hw-4Mc">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="bKW-ls-9Hj"/>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="addPostButton" destination="bKW-ls-9Hj" id="UQO-uG-yXY"/>
+                        <outlet property="offerOrRequestSegmentedControl" destination="wGd-08-2gl" id="c9H-fJ-X2c"/>
+                        <outlet property="offersTableView" destination="n0Z-I2-uRc" id="59O-Zd-MU8"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YbX-mQ-VvD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1092" y="960.2698650674663"/>
+            <point key="canvasLocation" x="1091.304347826087" y="959.51086956521749"/>
         </scene>
         <!--Ask View Controller-->
         <scene sceneID="ief-Lj-xzJ">

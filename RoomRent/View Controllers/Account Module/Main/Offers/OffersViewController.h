@@ -9,13 +9,11 @@
 #import <UIKit/UIKit.h>
 #import "APICaller.h"
 #import "Navigator.h"
-#import "OffersTableViewCell.h"
 #import "CustomRevealViewController.h"
 #import "Post.h"
 #import "OffersTableViewCell.h"
 #import "SinglePostViewController.h"
-#import "MasterViewController.h"
 
-@interface OffersViewController : CustomRevealViewController <UITableViewDataSource , UITableViewDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UIScrollViewDelegate>
+@interface OffersViewController : CustomRevealViewController <UITableViewDataSource , UITableViewDelegate,  UIScrollViewDelegate>
 
 @end

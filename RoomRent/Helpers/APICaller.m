@@ -36,6 +36,7 @@ NSString *filename;
         [[Alerter sharedInstance] createAlert:@"Error" message:@"No connection to internet" viewController:VC completion:^{}];
     }
     else{
+        NSLog(@"%@",error);
         [[Alerter sharedInstance] createAlert:@"Error" message:@"Error in API Call" viewController:VC completion:^{}];
     }
 }
@@ -70,6 +71,7 @@ NSString *filename;
             completionBlock(responseObjectDictionary);
             
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+            NSLog(@"%@",error);
             [self callCommonAlertWithError:error viewController:VC];
         }];
     }

@@ -7,9 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
-//#import "CustomRevealViewController.h"
-#import "MasterViewController.h"
+#import "APICaller.h"
+#import "Navigator.h"
+#import "OffersTableViewCell.h"
+#import "CustomRevealViewController.h"
+#import "Post.h"
+#import "SinglePostViewController.h"
 
-@interface DashBoardViewController : MasterViewController
+
+@interface DashBoardViewController : CustomRevealViewController <UITableViewDataSource , UITableViewDelegate,  UIScrollViewDelegate>
 
 @end

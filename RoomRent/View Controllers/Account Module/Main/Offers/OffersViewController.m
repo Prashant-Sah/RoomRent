@@ -16,10 +16,8 @@
 @implementation OffersViewController
 
 NSMutableArray *postArray = nil;
-NSMutableDictionary *urlImageDict;
 BOOL isLastPage;
 int offsetValue = 0;
-NSIndexPath *postIndex = nil;
 UIRefreshControl *refresher;
 
 - (void)viewDidLoad {
@@ -80,39 +78,6 @@ UIRefreshControl *refresher;
     }];
 }
 
-//MARK: CollectionView DataSource and Delegate Functions
-- (NSInteger)numberOfSectionsInCollectionView:(RoomPhotosCollectionView *)collectionView{
-    return 1;
-}
-
-- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
-    return [[postArray[postIndex.row] imagesArray]count];
-}
-
-- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
-    
-    UICollectionViewCell *singlePhotoCell = [collectionView dequeueReusableCellWithReuseIdentifier:@"PhotosCell" forIndexPath:indexPath];
-    CGRect imageRect = CGRectMake(0, 0 , 100, 100);
-    UIImageView *photosImageView = [[UIImageView alloc] initWithFrame:imageRect];
-    if([[postArray[postIndex.row] imagesArray]count] > 0){
-        
-        NSString *userApiToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"userApiToken"];
-        
-        SDWebImageDownloader *manager = [SDWebImageManager sharedManager].imageDownloader;
-        [manager setValue:[@"Bearer " stringByAppendingString:userApiToken] forHTTPHeaderField:@"Authorization"];
-        
-        NSURL *url = [NSURL URLWithString:[[PUSP_BASE_URL stringByAppendingString:@"getfile/"] stringByAppendingString:[[ postArray[postIndex.row] imagesArray] objectAtIndex:indexPath.row]]];
-        [photosImageView  sd_setImageWithURL: url];
-        
-    }else{
-        [photosImageView setImage:[UIImage imageNamed:@"noPhotos.jpeg"]];
-    }
-    [singlePhotoCell.contentView addSubview:photosImageView];
-    return singlePhotoCell;
-}
-
-
-
 //MARK: TableView DataSource and Delegate Functions
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     return 1;
@@ -122,26 +87,10 @@ UIRefreshControl *refresher;
     return postArray.count;
 }
 
-- (void)tableView:(UITableView *)tableView willDisplayCell:(OffersTableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
-    
-    [cell setCollectionViewDataSourceDelegate:self forRow:(int)indexPath.row];
-    
-}
-
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    postIndex = indexPath;
     OffersTableViewCell *cell  = (OffersTableViewCell *)  [tableView dequeueReusableCellWithIdentifier:@"OffersTableViewCell"];
-    
-    [[cell roomPhotosCollectionView] registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"PhotosCell"];
-    [[cell roomPhotosCollectionView] setFrame:CGRectMake(0, 0, self.view.frame.size.width, 100)];
-    
-    cell.titleLabel.text = [postArray[indexPath.row] title];
-    cell.descriptionLabel.text = [postArray[indexPath.row] offerDescription];
-    cell.priceLabel.text = [@"@Rs." stringByAppendingString:[NSString stringWithFormat:@"%d",(int) [postArray[indexPath.row] price]]] ;
-    cell.numberOfRoomsLabel.text = [[NSString stringWithFormat:@"%ld",(long)[postArray[indexPath.row] numberOfRooms]]  stringByAppendingString:@" Rooms"];
-    cell.userLabel.text = [[postArray[indexPath.row] postUser] username];
-    
+    [cell configureCellWithPost:postArray[indexPath.row]];
     [cell.roomPhotosCollectionView reloadData];
     
     return cell;
@@ -196,7 +145,8 @@ UIRefreshControl *refresher;
                                  @"offset":[NSNumber numberWithInt:offsetValue]
                                  };
         
-        [[APICaller sharedInstance] callApiToCreatePost:@"post/offers" parameters:params imageDataArray:nil fileNameArray:nil viewController:self completion:^(NSDictionary *responseObjectDictionary) {
+        [[APICaller sharedInstance] callAPiToGetAllPosts:@"posts/offers" parameters:params viewController:self completion:^(NSDictionary *responseObjectDictionary) {
+
             
             NSDictionary *postData = [responseObjectDictionary valueForKey:@"data"];
             isLastPage = [[responseObjectDictionary valueForKey:@"is_last_page"] boolValue];

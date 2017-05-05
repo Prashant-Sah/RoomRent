@@ -7,29 +7,20 @@
 //
 
 #import <UIKit/UIKit.h>
-
-
-@interface RoomPhotosCollectionView : UICollectionView
-
-@property (nonatomic, strong) NSIndexPath *indexPath;
-
-@end
-
-
+#import <SDWebImage/UIImageView+WebCache.h>
+#import "Constants.h"
+#import "Post.h"
 
 @interface OffersTableViewCell : UITableViewCell <UICollectionViewDelegate ,UICollectionViewDataSource>
 
-@property (strong, nonatomic) IBOutlet RoomPhotosCollectionView *roomPhotosCollectionView;
-
-@property int postId;
+@property (strong, nonatomic) IBOutlet UICollectionView *roomPhotosCollectionView;
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 @property (weak, nonatomic) IBOutlet UILabel *descriptionLabel;
 @property (weak, nonatomic) IBOutlet UILabel *priceLabel;
 @property (weak, nonatomic) IBOutlet UILabel *numberOfRoomsLabel;
 @property (weak, nonatomic) IBOutlet UILabel *userLabel;
+@property NSArray *collectionViewImagesArray;
 
-@property int row;
-
-- (void)setCollectionViewDataSourceDelegate:(id<UICollectionViewDataSource, UICollectionViewDelegate>)dataSourceDelegate forRow:(int)row;
+-(void)configureCellWithPost :(Post *) post;
 
 @end

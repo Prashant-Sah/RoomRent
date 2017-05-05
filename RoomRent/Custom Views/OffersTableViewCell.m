@@ -8,11 +8,15 @@
 
 #import "OffersTableViewCell.h"
 
-@implementation RoomPhotosCollectionView
-
-@end
-
 @implementation OffersTableViewCell
+
+-(void)awakeFromNib{
+    [super awakeFromNib];
+    
+    self.roomPhotosCollectionView.delegate = self;
+    self.roomPhotosCollectionView.dataSource = self;
+    [[self roomPhotosCollectionView] registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"PhotosCell"];
+}
 
 -(void)drawRect:(CGRect)rect {
     UICollectionViewFlowLayout *layout = (UICollectionViewFlowLayout *) self.roomPhotosCollectionView.collectionViewLayout;
@@ -23,12 +27,36 @@
     self.roomPhotosCollectionView.userInteractionEnabled = true;
 }
 
-- (void)setCollectionViewDataSourceDelegate:(id<UICollectionViewDataSource, UICollectionViewDelegate>)dataSourceDelegate forRow:(int)row
-{
-    self.roomPhotosCollectionView.dataSource = dataSourceDelegate;
-    self.roomPhotosCollectionView.delegate = dataSourceDelegate;
-    self.roomPhotosCollectionView.tag = row;
-    [self.roomPhotosCollectionView reloadData];
+-(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
+    return self.collectionViewImagesArray.count;
 }
 
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
+    
+    UICollectionViewCell *singlePhotoCell = [collectionView dequeueReusableCellWithReuseIdentifier:@"PhotosCell" forIndexPath:indexPath];
+    
+    CGRect imageRect = CGRectMake(0, 0 , 100, 100);
+    UIImageView *photosImageView = [[UIImageView alloc] initWithFrame:imageRect];
+    
+    NSString *userApiToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"userApiToken"];
+    
+    SDWebImageDownloader *manager = [SDWebImageManager sharedManager].imageDownloader;
+    [manager setValue:[@"Bearer " stringByAppendingString:userApiToken] forHTTPHeaderField:@"Authorization"];
+    
+    NSURL *url = [NSURL URLWithString:[[PUSP_BASE_URL stringByAppendingString:@"getfile/"] stringByAppendingString:self.collectionViewImagesArray[indexPath.row]]];
+    [photosImageView  sd_setImageWithURL: url];
+    
+    [singlePhotoCell.contentView addSubview:photosImageView];
+    return singlePhotoCell;
+    
+}
+- (void)configureCellWithPost:(Post *)post{
+    
+    self.collectionViewImagesArray = post.imagesArray;
+    self.titleLabel.text = post.title;
+    self.descriptionLabel.text = post.offerDescription;
+    self.priceLabel.text = [@"@Rs." stringByAppendingString:[NSString stringWithFormat:@"%d",(int) post.price]] ;
+    self.numberOfRoomsLabel.text = [[NSString stringWithFormat:@"%ld",(long)post.numberOfRooms]  stringByAppendingString:@" Rooms"];
+    self.userLabel.text = post.postUser.username;
+}
 @end
