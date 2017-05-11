@@ -565,18 +565,13 @@
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mFb-O2-pVY" customClass="CustomButton">
+                            <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mFb-O2-pVY">
                                 <rect key="frame" x="147" y="164" width="120" height="120"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="120" id="CnL-Sh-Adr"/>
                                     <constraint firstAttribute="width" constant="120" id="UmC-hl-NSC"/>
                                 </constraints>
                                 <state key="normal" image="chooseImageIcon"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                        <integer key="value" value="60"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="toA-Od-ZBY" userLabel="Name Stack View">
                                 <rect key="frame" x="30" y="324" width="354" height="28"/>
@@ -727,7 +722,7 @@
                                 </subviews>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dZz-V7-PXZ">
-                                <rect key="frame" x="20" y="681" width="374" height="55"/>
+                                <rect key="frame" x="20" y="661" width="374" height="55"/>
                                 <color key="backgroundColor" red="0.98431372549999996" green="0.2901960784" blue="0.47450980390000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="55" id="TS8-Dj-nea"/>
@@ -771,7 +766,7 @@
                             <constraint firstItem="dIk-Nm-T9o" firstAttribute="top" secondItem="bLk-ip-X58" secondAttribute="bottom" id="9S3-AN-mBG"/>
                             <constraint firstItem="q1q-Tz-nlF" firstAttribute="trailing" secondItem="GnB-CZ-UUQ" secondAttribute="trailing" id="ALH-Hq-2JV"/>
                             <constraint firstItem="GnB-CZ-UUQ" firstAttribute="trailing" secondItem="Uih-HA-fcg" secondAttribute="trailing" id="GlK-Fb-AEc"/>
-                            <constraint firstItem="dIk-Nm-T9o" firstAttribute="top" secondItem="dZz-V7-PXZ" secondAttribute="bottom" id="HL9-by-Cpi"/>
+                            <constraint firstItem="dIk-Nm-T9o" firstAttribute="top" secondItem="dZz-V7-PXZ" secondAttribute="bottom" constant="20" id="HL9-by-Cpi"/>
                             <constraint firstItem="toA-Od-ZBY" firstAttribute="leading" secondItem="yRL-ge-sAO" secondAttribute="leadingMargin" constant="10" id="MMh-yl-Uo3"/>
                             <constraint firstItem="dC5-gZ-8Cx" firstAttribute="top" secondItem="q1q-Tz-nlF" secondAttribute="bottom" constant="25" id="OE1-E8-051"/>
                             <constraint firstItem="dC5-gZ-8Cx" firstAttribute="leading" secondItem="q1q-Tz-nlF" secondAttribute="leading" id="UVn-81-XAz"/>

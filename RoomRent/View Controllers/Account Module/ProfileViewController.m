@@ -33,7 +33,7 @@
     [super viewDidLoad];
     
     _updateProfileBtn.hidden = true;
-    _cancelBtn.hidden = true;
+    _cancelBtn.hidden = false;
     
     NSData *userDataDict = [[NSUserDefaults standardUserDefaults] objectForKey:@"userDataKey"];
     NSDictionary *userDict = [NSKeyedUnarchiver unarchiveObjectWithData:userDataDict];
@@ -43,20 +43,24 @@
     self.usernameLabel.text = [userDict valueForKey:@"username"];
     self.emailLabel.text = [userDict valueForKey:@"email"];
     
-    if([[userDict valueForKey:@"profile_image"]  isEqualToString:@"<null>" ]){
-    }else{
-        [[APICaller sharedInstance] callApiForReceivingImage:[@"getfile/" stringByAppendingString:[userDict valueForKey:@"profile_image"]?  : @""] viewController:self completion:^(id responseObjectFromApi) {
-            if(responseObjectFromApi != nil){
-                
-                CGSize destinationSize = CGSizeMake(100, 100);
-                UIGraphicsBeginImageContext(destinationSize);
-                [responseObjectFromApi drawInRect:CGRectMake(0,0,destinationSize.width,destinationSize.height)];
-                UIImage *resizedProfileImage = UIGraphicsGetImageFromCurrentImageContext();
-                
-                [self.profileImageButton setImage:resizedProfileImage forState:UIControlStateNormal];
-            }
-        }];
+    if (![[userDict valueForKey:@"profile_image"] isEqual:[NSNull null]]) {
+        
+        NSString *userApiToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"userApiToken"];
+        
+        SDWebImageDownloader *manager = [SDWebImageManager sharedManager].imageDownloader;
+        [manager setValue:[@"Bearer " stringByAppendingString:userApiToken] forHTTPHeaderField:@"Authorization"];
+        
+        NSURL *url = [NSURL URLWithString:[[PUSP_BASE_URL stringByAppendingString:@"getfile/"] stringByAppendingString:[userDict valueForKey:@"profile_image"]]];
+        
+        [self.profileImageButton sd_setImageWithURL:url forState:UIControlStateNormal];
+        [self.profileImageButton setContentMode:UIViewContentModeScaleAspectFit];
+        
+        self.profileImageButton.layer.borderColor = [UIColor whiteColor].CGColor;
+        self.profileImageButton.layer.cornerRadius = self.profileImageButton.frame.size.height/2;
+        self.profileImageButton.layer.borderWidth = 2.0f;
+        self.profileImageButton.clipsToBounds = true;
     }
+    
     
 }
 - (IBAction)editButtonPressed:(UIButton *)sender {

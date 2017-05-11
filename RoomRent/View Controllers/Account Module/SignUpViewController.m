@@ -110,28 +110,48 @@
 -(void) onCancel{
     [self dismissViewControllerAnimated:NO completion:nil];
 }
-
-#pragma-mark - add profile photo
-- (IBAction)addPhoto:(id)sender {
+-(IBAction)addPhoto:(id)sender{
     
-        UIImagePickerController *pickerController = [[UIImagePickerController alloc]
-                                                     init];
-        pickerController.delegate = self ;
-        //__weak SignUpViewController *weakself;
-        //pickerController.delegate = weakself;
-        pickerController.allowsEditing = true;
+    UIImagePickerController *pickerController = [[UIImagePickerController alloc]
+                                                 init];
+    pickerController.delegate = self ;
+    pickerController.allowsEditing = true;
+    
+    UIAlertAction *takePhoto = [UIAlertAction actionWithTitle:@"Take a Photo" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        if([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]){
+                pickerController.sourceType = UIImagePickerControllerSourceTypeCamera;
+        
         [self presentViewController:pickerController animated:YES completion:nil];
-    }
+        }else{
+            //[self dismissViewControllerAnimated:true completion:nil];
+            [[Alerter sharedInstance] createAlert:@"Error" message:@"Camera not found" viewController:self completion:^{}];
+        }
+        
+    }];
+    
+    UIAlertAction *chooseFromGallery = [UIAlertAction actionWithTitle:@"Choose photo from gallery" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        pickerController.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+        [self presentViewController:pickerController animated:YES completion:nil];
+    }];
+    
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Title" message:@"Choose Image" preferredStyle:UIAlertControllerStyleActionSheet];
+    
+    [alertController addAction:takePhoto];
+    [alertController addAction:chooseFromGallery];
+    
+    [self presentViewController:alertController animated:true completion:nil];
+}
+#pragma-mark - add profile photo
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info{
-    
+
     UIImage *editedImage = [info objectForKey:UIImagePickerControllerEditedImage];
     NSURL *imageFileURL = [info objectForKey:UIImagePickerControllerReferenceURL];
     _imageName = [imageFileURL lastPathComponent];
 
     PHFetchResult *result = [PHAsset fetchAssetsWithALAssetURLs:@[imageFileURL] options:nil];
     _imageName = [[result firstObject] filename];
-    
+
     if(editedImage!= nil){
         self.profileImage = editedImage;
         [self.profileImageButton setImage:editedImage forState:UIControlStateNormal];
@@ -139,9 +159,9 @@
         self.profileImage = nil;
         [self.profileImageButton setImage:nil forState:UIControlStateNormal];
     }
-    
+
     [self dismissViewControllerAnimated:true completion:nil];
 }
-    
+
 
 @end

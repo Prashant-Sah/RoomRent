@@ -16,17 +16,19 @@
 #import "DashBoardViewController.h"
 
 @interface DashBoardViewController ()
-@property (weak, nonatomic) IBOutlet UITableView *offersTableView;
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *addPostButton;
+@property (weak, nonatomic) IBOutlet UISegmentedControl *offerOrRequestSegmentedControl;
 @property NSMutableArray *postArray;
 @property BOOL isLastPage;
 @property int offsetValue;
 @property UIRefreshControl *refresher;
-@property (weak, nonatomic) IBOutlet UISegmentedControl *offerOrRequestSegmentedControl;
 
 @end
+
 NSString *username;
 NSDictionary *responseObjectDict;
+NSString *postType;
 BOOL offers = 0;
 BOOL asks = 1;
 
@@ -38,23 +40,27 @@ BOOL asks = 1;
     NSData *userDataDict = [[NSUserDefaults standardUserDefaults] objectForKey:@"userDataKey"];
     NSDictionary *userDict = [NSKeyedUnarchiver unarchiveObjectWithData:userDataDict];
     username = [userDict valueForKey:@"username"];
-
+    
+    self.tableView.estimatedRowHeight = 320;
     [self loadPosts:offers];
-    UINib *cellNib = [UINib nibWithNibName:@"OffersTableViewCell" bundle:nil];
-    [self.offersTableView registerNib:cellNib forCellReuseIdentifier:@"OffersTableViewCell"];
-    self.offersTableView.dataSource = self;
-    self.offersTableView.delegate = self;
-    self.offersTableView.rowHeight = UITableViewAutomaticDimension;
-    self.offersTableView.estimatedRowHeight = 320;
+   
+    self.tableView.dataSource = self;
+    self.tableView.delegate = self;
+    self.tableView.rowHeight = UITableViewAutomaticDimension;
+    
+    UINib *offersCellNib = [UINib nibWithNibName:@"OffersTableViewCell" bundle:nil];
+    UINib *requestsCellNib = [UINib nibWithNibName:@"RequestsTableViewCell" bundle:nil];
+    [self.tableView registerNib:offersCellNib forCellReuseIdentifier:@"OffersTableViewCell"];
+    [self.tableView registerNib:requestsCellNib forCellReuseIdentifier:@"RequestsTableViewCell"];
     
     [self.revealViewController panGestureRecognizer];
     
     self.refresher = [[UIRefreshControl alloc] init];
     self.refresher.attributedTitle = [[NSMutableAttributedString alloc] initWithString:@"Pull to refresh!!"];
-    [self.offersTableView addSubview:self.refresher];
+    [self.tableView addSubview:self.refresher];
     [self.refresher addTarget:self action:@selector(refreshTable) forControlEvents:UIControlEventValueChanged];
     
-        self.isLastPage = false;
+    self.isLastPage = false;
 }
 
 - (IBAction)offerOrRequestSelected:(UISegmentedControl *)sender {
@@ -62,10 +68,12 @@ BOOL asks = 1;
     switch (sender.selectedSegmentIndex) {
             
         case 0:
+            self.tableView.estimatedRowHeight = 320;
             [self loadPosts:offers];
             break;
             
         case 1:
+            self.tableView.estimatedRowHeight = 190;
             [self loadPosts:asks];
             break;
             
@@ -82,7 +90,7 @@ BOOL asks = 1;
 -(void)loadPosts:(BOOL) offersOrAsks{
     self.postArray = [[NSMutableArray alloc] init];
     [self.postArray removeAllObjects];
-    [self.offersTableView reloadData];
+    [self.tableView reloadData];
     
     NSDictionary *params = @{
                              };
@@ -94,6 +102,7 @@ BOOL asks = 1;
             
             NSString *code = [responseObjectDictionary valueForKey:@"code"];
             if ([code isEqualToString:POSTS_FOUND]){
+                postType = OFFER;
                 [self addData:responseObjectDictionary];
             }
         }];
@@ -103,6 +112,7 @@ BOOL asks = 1;
             NSLog(@"%@",responseObjectDictionary);
             NSString *code = [responseObjectDictionary valueForKey:@"code"];
             if ([code isEqualToString:POSTS_FOUND]){
+                postType = REQUEST;
                 [self addData:responseObjectDictionary];
             }
         }];
@@ -120,42 +130,11 @@ BOOL asks = 1;
     }
     self.isLastPage = [[responseObjectDict valueForKey:@"is_last_page"] boolValue];
     self.offsetValue = [[responseObjectDict valueForKey:@"offset"] intValue];
-    [self.offersTableView reloadData];
+    [self.tableView reloadData];
 }
 
 
-
-
-//-(void)loadPosts{
-//    self.postArray = [[NSMutableArray alloc] init];
-//    
-//    NSDictionary *params = @{
-//                             };
-//    
-//    [[APICaller sharedInstance] callAPiToGetAllPosts:[[@"user/" stringByAppendingString:username]stringByAppendingString:@"/posts/offers"] parameters:params viewController:self completion:^(NSDictionary *responseObjectDictionary) {
-//        
-//        NSLog(@"%@",responseObjectDictionary);
-//        
-//        NSString *code = [responseObjectDictionary valueForKey:@"code"];
-//        if ([code isEqualToString:POSTS_FOUND]){
-//            
-//            NSDictionary *postData = [responseObjectDictionary valueForKey:@"data"];
-//            
-//            for (NSDictionary *singlePost in postData) {
-//                
-//                Post *post = [[Post alloc] initPostFromJson:singlePost];
-//                [self.postArray addObject:post];
-//                
-//            }
-//            self.isLastPage = [[responseObjectDictionary valueForKey:@"is_last_page"] boolValue];
-//            self.offsetValue = [[responseObjectDictionary valueForKey:@"offset"] intValue];
-//            
-//            [self.offersTableView reloadData];
-//        }
-//    }];
-//}
-
-//MARK: TableView DataSource and Delegate Functions
+///MARK: TableView DataSource and Delegate Functions
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     return 1;
 }
@@ -164,17 +143,24 @@ BOOL asks = 1;
     
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    OffersTableViewCell *cell  = (OffersTableViewCell *)  [tableView dequeueReusableCellWithIdentifier:@"OffersTableViewCell"];
-    [cell configureCellWithPost:self.postArray[indexPath.row]];
-    [cell.roomPhotosCollectionView reloadData];
+    if([postType isEqualToString:OFFER]){
+        OffersTableViewCell *cell  = (OffersTableViewCell *)  [tableView dequeueReusableCellWithIdentifier:@"OffersTableViewCell" forIndexPath:indexPath];
+        [cell configureCellWithPost:self.postArray[indexPath.row]];
+        [cell.roomPhotosCollectionView reloadData];
+        return cell;
+    }else{
+        RequestsTableViewCell *cell = (RequestsTableViewCell *) [tableView dequeueReusableCellWithIdentifier:@"RequestsTableViewCell" forIndexPath:indexPath];
+        [cell configureCellWithPost:self.postArray[indexPath.row]];
+        return cell;
+    }
     
-    return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
     SinglePostViewController *singlePostVC = [self.storyboard instantiateViewControllerWithIdentifier:@"SinglePostViewController"];
     singlePostVC.postId = [self.postArray[indexPath.row] postid];
+    singlePostVC.postType = postType;
     [self.navigationController pushViewController:singlePostVC animated:true];
 }
 
@@ -183,13 +169,18 @@ BOOL asks = 1;
     UIAlertController *aLertController = [UIAlertController alertControllerWithTitle:(@"Alert") message:@"Select the type of Post" preferredStyle:UIAlertControllerStyleAlert];
     
     UIAlertAction *addOffer = [UIAlertAction actionWithTitle:@"Add Offer" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        [[Navigator sharedInstance] presentWithNavigationController:self viewController:@"AddPostViewController"];
-    }];
+        
+        AddPostViewController *addPostVC = [self.storyboard instantiateViewControllerWithIdentifier:@"AddPostViewController"];
+        addPostVC.postType = OFFER;
+        UINavigationController *navVC = [[UINavigationController alloc] initWithRootViewController:addPostVC];
+        [self presentViewController:navVC animated:true completion:nil];    }];
     
     
     UIAlertAction *addRequest = [UIAlertAction actionWithTitle:@"Add Request" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        [self dismissViewControllerAnimated:true completion:nil];
-        
+        AddPostViewController *addPostVC = [self.storyboard instantiateViewControllerWithIdentifier:@"AddPostViewController"];
+        addPostVC.postType = REQUEST;
+        UINavigationController *navVC = [[UINavigationController alloc] initWithRootViewController:addPostVC];
+        [self presentViewController:navVC animated:true completion:nil];
     }];
     
     UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"Cancel?" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
@@ -202,44 +193,5 @@ BOOL asks = 1;
     
     [self presentViewController:aLertController animated:true completion:nil];
 }
-
-//- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
-//
-//    float bottom = scrollView.contentSize.height - scrollView.frame.size.height;
-//    float buffer = 600.0f;
-//    float scrollPosition = scrollView.contentOffset.y;
-//
-//    //NSLog(@"%lu",(unsigned long)postArray.count);
-//
-//    //Reached bottom of list
-//    if (scrollPosition > (bottom - buffer) && !self.isLastPage) {
-//
-//        //Add more posts
-//
-//        NSDictionary *params = @{
-//                                 @"offset":[NSNumber numberWithInt:self.offsetValue]
-//                                 };
-//
-//        [[APICaller sharedInstance] callAPiToGetAllPosts:[[@"user/" stringByAppendingString:username]stringByAppendingString:@"/posts/offers"] parameters:params viewController:self completion:^(NSDictionary *responseObjectDictionary) {
-//
-//            NSDictionary *postData = [responseObjectDictionary valueForKey:@"data"];
-//            self.isLastPage = [[responseObjectDictionary valueForKey:@"is_last_page"] boolValue];
-//            self.offsetValue = [[responseObjectDictionary valueForKey:@"offset"] intValue];
-//
-//            for (NSDictionary *singlePost in postData) {
-//
-//                Post *post = [[Post alloc] initPostFromJson:singlePost];
-//                [self.postArray addObject:post];
-//
-//            }
-//            [self.offersTableView reloadData];
-//
-//            self.isLastPage = [[responseObjectDictionary valueForKey:@"is_last_page"] boolValue];
-//            self.offsetValue = [[responseObjectDictionary valueForKey:@"offset"] intValue];
-//
-//            //[refresher endRefreshing];
-//        }];
-//    }
-//}
 
 @end

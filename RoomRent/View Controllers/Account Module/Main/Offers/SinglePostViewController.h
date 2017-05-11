@@ -11,9 +11,11 @@
 #import <CoreLocation/CoreLocation.h>
 #import "APICaller.h"
 #import "Post.h"
+#import "Constants.h"
 
 @interface SinglePostViewController : UIViewController <UICollectionViewDataSource,UICollectionViewDelegate >
 
 @property int postId;
+@property NSString *postType;
 
 @end

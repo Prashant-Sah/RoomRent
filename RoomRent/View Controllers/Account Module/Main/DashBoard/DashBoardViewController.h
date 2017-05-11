@@ -10,10 +10,11 @@
 #import "APICaller.h"
 #import "Navigator.h"
 #import "OffersTableViewCell.h"
+#import "RequestsTableViewCell.h"
 #import "CustomRevealViewController.h"
 #import "Post.h"
 #import "SinglePostViewController.h"
-
+#import "AddPostViewController.h"
 
 @interface DashBoardViewController : CustomRevealViewController <UITableViewDataSource , UITableViewDelegate,  UIScrollViewDelegate>
 

@@ -18,6 +18,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *descriptionLabel;
 @property (weak, nonatomic) IBOutlet UILabel *priceLabel;
 @property (weak, nonatomic) IBOutlet UILabel *numberOfRoomsLabel;
+@property (weak, nonatomic) IBOutlet UILabel *postIdLabel;
 @property (weak, nonatomic) IBOutlet UILabel *userLabel;
 @property NSArray *collectionViewImagesArray;
 

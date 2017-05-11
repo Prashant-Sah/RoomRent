@@ -10,7 +10,6 @@
 
 @interface OffersViewController ()
 @property (weak, nonatomic) IBOutlet UITableView *offersTableView;
-@property (weak, nonatomic) IBOutlet UIBarButtonItem *addPostButton;
 @end
 
 @implementation OffersViewController
@@ -19,10 +18,11 @@ NSMutableArray *postArray = nil;
 BOOL isLastPage;
 int offsetValue = 0;
 UIRefreshControl *refresher;
+UIActivityIndicatorView *activityIndicator;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    [self loadPosts];
     _offersTableView.dataSource = self;
     _offersTableView.delegate = self;
     self.offersTableView.rowHeight = UITableViewAutomaticDimension;
@@ -45,12 +45,17 @@ UIRefreshControl *refresher;
     [self loadPosts];
     [refresher endRefreshing];
 }
--(void)viewWillAppear:(BOOL)animated{
-    
-    [self loadPosts];
+
+-(void) showActivityIndicator{
+    activityIndicator.center = self.view.center;
+    activityIndicator.hidesWhenStopped = true;
+    activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyleWhiteLarge;
+    [activityIndicator startAnimating];
+    [self.view addSubview:activityIndicator];
 }
 
 -(void)loadPosts{
+    //[self showActivityIndicator];
     postArray = [[NSMutableArray alloc] init];
     
     NSDictionary *params = @{
@@ -74,6 +79,7 @@ UIRefreshControl *refresher;
             offsetValue = [[responseObjectDictionary valueForKey:@"offset"] intValue];
             
             [self.offersTableView reloadData];
+            //[activityIndicator stopAnimating];
         }
     }];
 }
@@ -100,35 +106,11 @@ UIRefreshControl *refresher;
     
     SinglePostViewController *singlePostVC = [self.storyboard instantiateViewControllerWithIdentifier:@"SinglePostViewController"];
     singlePostVC.postId = [postArray[indexPath.row] postid];
+    singlePostVC.postType = OFFER;
     [self.navigationController pushViewController:singlePostVC animated:true];
 }
 
-- (IBAction)addPostButtonPressed:(UIBarButtonItem *)sender {
-    
-    UIAlertController *aLertController = [UIAlertController alertControllerWithTitle:(@"Alert") message:@"Select the type of Post" preferredStyle:UIAlertControllerStyleAlert];
-    
-    UIAlertAction *addOffer = [UIAlertAction actionWithTitle:@"Add Offer" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        [[Navigator sharedInstance] presentWithNavigationController:self viewController:@"AddPostViewController"];
-    }];
-    
-    
-    UIAlertAction *addRequest = [UIAlertAction actionWithTitle:@"Add Request" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        [self dismissViewControllerAnimated:true completion:nil];
-        
-    }];
-    
-    UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"Cancel?" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-        [self dismissViewControllerAnimated:true completion:nil];
-    }];
-    
-    [aLertController addAction:addOffer];
-    [aLertController addAction:addRequest];
-    [aLertController addAction:cancel];
-    
-    [self presentViewController:aLertController animated:true completion:nil];
-}
-
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
     
     float bottom = scrollView.contentSize.height - scrollView.frame.size.height;
     float buffer = 600.0f;

@@ -11,8 +11,6 @@
 
 @interface ImagePicker : NSObject <UIImagePickerControllerDelegate>
 
-
-
 - (void)pickImagefromViewController : (UIViewController *) presentVC completion :(void (^) (UIImage * image)) completionBlock ;
 
 @end

@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import <Photos/Photos.h>
+#import <AFNetworking.h>
+
 #import "APICaller.h"
 #import "KeyboardAvoidingViewController.h"
 #import "UserLocationViewController.h"
@@ -16,6 +18,8 @@
 #import "LocalDatabase.h"
 
 @interface AddPostViewController : KeyboardAvoidingViewController <UICollectionViewDelegate, UICollectionViewDataSource , UIImagePickerControllerDelegate, UIGestureRecognizerDelegate, UserLocationDelegate, UITextFieldDelegate>
+
+@property NSString *postType;
 
 - (void) setImageForCellwithImage : (UIImage *) selectedImage;
 

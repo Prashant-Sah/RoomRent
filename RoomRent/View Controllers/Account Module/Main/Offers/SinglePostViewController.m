@@ -11,6 +11,7 @@
 @interface SinglePostViewController ()
 
 @property (weak, nonatomic) IBOutlet UICollectionView *roomPhotosCollectionView;
+
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 @property (weak, nonatomic) IBOutlet UILabel *descriptionLabel;
 @property (weak, nonatomic) IBOutlet UILabel *numberOfRoomsLabel;
@@ -18,6 +19,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *userLabel;
 @property (weak, nonatomic) IBOutlet UILabel *locationLabel;
 @property (weak, nonatomic) IBOutlet MKMapView *singlePostMapView;
+@property (weak, nonatomic) IBOutlet UIView *scrollContentView;
+@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 
 @end
 
@@ -30,16 +33,38 @@ NSArray *imagesArray = nil;
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.roomPhotosCollectionView.dataSource = self;
-    self.roomPhotosCollectionView.delegate = self;
-    
-    UICollectionViewFlowLayout *layout = (UICollectionViewFlowLayout *) self.roomPhotosCollectionView.collectionViewLayout;
-    layout.itemSize = CGSizeMake(self.view.frame.size.width, 200);
-    layout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
-    layout.minimumLineSpacing = 0.0;
-    layout.minimumInteritemSpacing = 0.0;
-    self.roomPhotosCollectionView.showsHorizontalScrollIndicator = false;
-    self.roomPhotosCollectionView.pagingEnabled = true;
+    if([self.postType isEqualToString:OFFER]){
+        
+        self.roomPhotosCollectionView.dataSource = self;
+        self.roomPhotosCollectionView.delegate = self;
+        
+        UICollectionViewFlowLayout *layout = (UICollectionViewFlowLayout *) self.roomPhotosCollectionView.collectionViewLayout;
+        layout.itemSize = CGSizeMake(self.view.frame.size.width, 200);
+        layout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
+        layout.minimumLineSpacing = 0.0;
+        layout.minimumInteritemSpacing = 0.0;
+        self.roomPhotosCollectionView.showsHorizontalScrollIndicator = false;
+        self.roomPhotosCollectionView.pagingEnabled = true;
+    }
+    else{
+        //[self.titleLabel setTranslatesAutoresizingMaskIntoConstraints:true];
+        //NSLayoutConstraint *verticalSpace =[NSLayoutConstraint constraintWithItem:self.titleLabel attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self.contentView attribute:NSLayoutAttributeTop multiplier:1 constant:50];
+        //NSArray *array = [[NSArray alloc] initWithObjects:verticalSpace, nil];
+        //[NSLayoutConstraint activateConstraints:array];
+        //[self.view addConstraint:verticalSpace];
+        //[self.titleLabel.topAnchor constraintEqualToAnchor:self.topLayoutGuide constant:30];
+        CGRect newFrame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height - self.roomPhotosCollectionView.frame.size.height) ;
+        [self.roomPhotosCollectionView removeFromSuperview];
+        self.view.frame = newFrame;
+        self.scrollContentView.frame = newFrame;
+//        NSLayoutConstraint *xconstraint = [NSLayoutConstraint constraintWithItem:self.titleLabel attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self.roomPhotosCollectionView attribute:NSLayoutAttributeBottom multiplier:1 constant:40];
+//        NSArray *xarray = [[NSArray alloc] initWithObjects:xconstraint, nil];
+//        [NSLayoutConstraint deactivateConstraints:xarray];
+        NSLayoutConstraint *newConstraint = [NSLayoutConstraint constraintWithItem:self.titleLabel attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self.topLayoutGuide attribute:NSLayoutAttributeTop multiplier:1 constant:90];
+        NSArray *narray = [[NSArray alloc] initWithObjects:newConstraint, nil];
+        [self.titleLabel setTranslatesAutoresizingMaskIntoConstraints:false];
+        [NSLayoutConstraint activateConstraints:narray];
+    }
     
 }
 -(void)viewWillAppear:(BOOL)animated{

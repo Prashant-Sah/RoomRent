@@ -40,6 +40,7 @@
         [self.profileImageButton setContentMode:UIViewContentModeScaleAspectFit];
         
         self.profileImageButton.layer.borderColor = [UIColor whiteColor].CGColor;
+         self.profileImageButton.layer.cornerRadius = self.profileImageButton.frame.size.height/2;
         self.profileImageButton.layer.borderWidth = 2.0f;
         
     }

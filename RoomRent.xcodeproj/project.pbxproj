@@ -10,6 +10,8 @@
 		18DD39C8802283CF8C721A8A /* libPods-RoomRent.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8950A843D8D5D7990219AC35 /* libPods-RoomRent.a */; };
 		8F04E4971EB1BA4E001E1972 /* LocalDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F04E4961EB1BA4E001E1972 /* LocalDatabase.m */; };
 		8F0CBB2E1EA4B8C50069F1ED /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F0CBB2D1EA4B8C50069F1ED /* ProfileViewController.m */; };
+		8F15B3B81EC0171D0011FD6B /* RequestsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F15B3B61EC0171D0011FD6B /* RequestsTableViewCell.m */; };
+		8F15B3B91EC0171D0011FD6B /* RequestsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8F15B3B71EC0171D0011FD6B /* RequestsTableViewCell.xib */; };
 		8F1EA3A81EA7307E00E8C34E /* ImagePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F1EA3A71EA7307E00E8C34E /* ImagePicker.m */; };
 		8F248DCA1E935ACD00786B69 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8F248DC91E935ACC00786B69 /* Main.storyboard */; };
 		8F248DD51E9393E000786B69 /* KeyboardAvoidingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F248DD41E9393DF00786B69 /* KeyboardAvoidingViewController.m */; };
@@ -25,7 +27,7 @@
 		8F628AE81EB756D700B320A7 /* UserLocationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F628AE21EB756D700B320A7 /* UserLocationViewController.m */; };
 		8F628AE91EB756D700B320A7 /* SideBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F628AE41EB756D700B320A7 /* SideBarViewController.m */; };
 		8F628AEC1EB757A700B320A7 /* DashBoardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F628AEB1EB757A700B320A7 /* DashBoardViewController.m */; };
-		8F628AEF1EB7585900B320A7 /* AskViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F628AEE1EB7585900B320A7 /* AskViewController.m */; };
+		8F628AEF1EB7585900B320A7 /* RequestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F628AEE1EB7585900B320A7 /* RequestViewController.m */; };
 		8F63C1051E95FC82000790D6 /* Validator.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F63C1041E95FC82000790D6 /* Validator.m */; };
 		8F63C1081E962D90000790D6 /* APICaller.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F63C1071E962D90000790D6 /* APICaller.m */; };
 		8F85F3951E94A44B00812C10 /* Alerter.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F85F3941E94A44B00812C10 /* Alerter.m */; };
@@ -50,6 +52,9 @@
 		8F04E4961EB1BA4E001E1972 /* LocalDatabase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocalDatabase.m; sourceTree = "<group>"; };
 		8F0CBB2C1EA4B8C50069F1ED /* ProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileViewController.h; sourceTree = "<group>"; };
 		8F0CBB2D1EA4B8C50069F1ED /* ProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileViewController.m; sourceTree = "<group>"; };
+		8F15B3B51EC0171D0011FD6B /* RequestsTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RequestsTableViewCell.h; sourceTree = "<group>"; };
+		8F15B3B61EC0171D0011FD6B /* RequestsTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RequestsTableViewCell.m; sourceTree = "<group>"; };
+		8F15B3B71EC0171D0011FD6B /* RequestsTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RequestsTableViewCell.xib; sourceTree = "<group>"; };
 		8F1EA3A61EA7307E00E8C34E /* ImagePicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImagePicker.h; sourceTree = "<group>"; };
 		8F1EA3A71EA7307E00E8C34E /* ImagePicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImagePicker.m; sourceTree = "<group>"; };
 		8F248DC91E935ACC00786B69 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
@@ -77,8 +82,8 @@
 		8F628AE41EB756D700B320A7 /* SideBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SideBarViewController.m; sourceTree = "<group>"; };
 		8F628AEA1EB757A700B320A7 /* DashBoardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DashBoardViewController.h; sourceTree = "<group>"; };
 		8F628AEB1EB757A700B320A7 /* DashBoardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DashBoardViewController.m; sourceTree = "<group>"; };
-		8F628AED1EB7585900B320A7 /* AskViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AskViewController.h; sourceTree = "<group>"; };
-		8F628AEE1EB7585900B320A7 /* AskViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AskViewController.m; sourceTree = "<group>"; };
+		8F628AED1EB7585900B320A7 /* RequestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RequestViewController.h; sourceTree = "<group>"; };
+		8F628AEE1EB7585900B320A7 /* RequestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RequestViewController.m; sourceTree = "<group>"; };
 		8F63C1031E95FC82000790D6 /* Validator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Validator.h; sourceTree = "<group>"; };
 		8F63C1041E95FC82000790D6 /* Validator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Validator.m; sourceTree = "<group>"; };
 		8F63C1061E962D90000790D6 /* APICaller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APICaller.h; sourceTree = "<group>"; };
@@ -141,6 +146,9 @@
 				8FF2CE0E1E9E024D0059E3F5 /* OffersTableViewCell.h */,
 				8FF2CE0F1E9E024D0059E3F5 /* OffersTableViewCell.m */,
 				8FF2CE101E9E024D0059E3F5 /* OffersTableViewCell.xib */,
+				8F15B3B51EC0171D0011FD6B /* RequestsTableViewCell.h */,
+				8F15B3B61EC0171D0011FD6B /* RequestsTableViewCell.m */,
+				8F15B3B71EC0171D0011FD6B /* RequestsTableViewCell.xib */,
 			);
 			path = "Custom Views";
 			sourceTree = "<group>";
@@ -236,8 +244,8 @@
 		8F628AD81EB756D700B320A7 /* Ask */ = {
 			isa = PBXGroup;
 			children = (
-				8F628AED1EB7585900B320A7 /* AskViewController.h */,
-				8F628AEE1EB7585900B320A7 /* AskViewController.m */,
+				8F628AED1EB7585900B320A7 /* RequestViewController.h */,
+				8F628AEE1EB7585900B320A7 /* RequestViewController.m */,
 			);
 			path = Ask;
 			sourceTree = "<group>";
@@ -397,6 +405,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8FF2CE121E9E024D0059E3F5 /* OffersTableViewCell.xib in Resources */,
+				8F15B3B91EC0171D0011FD6B /* RequestsTableViewCell.xib in Resources */,
 				8F4D2D371E8CFBE800347F9A /* LaunchScreen.storyboard in Resources */,
 				8F4D2D341E8CFBE800347F9A /* Assets.xcassets in Resources */,
 				8F4D2D321E8CFBE800347F9A /* Account.storyboard in Resources */,
@@ -464,6 +473,7 @@
 				8F248DD51E9393E000786B69 /* KeyboardAvoidingViewController.m in Sources */,
 				8F93E3B51E8E272C008C02D4 /* ForgotPasswordViewController.m in Sources */,
 				8F248DDF1E93AF2200786B69 /* User.m in Sources */,
+				8F15B3B81EC0171D0011FD6B /* RequestsTableViewCell.m in Sources */,
 				8F93E3B81E8E4F3E008C02D4 /* SignUpViewController.m in Sources */,
 				8FF2CE111E9E024D0059E3F5 /* OffersTableViewCell.m in Sources */,
 				8F628AE61EB756D700B320A7 /* OffersViewController.m in Sources */,
@@ -473,7 +483,7 @@
 				8FF2CE0C1E9E018B0059E3F5 /* CustomButton.m in Sources */,
 				8F04E4971EB1BA4E001E1972 /* LocalDatabase.m in Sources */,
 				8F85F3951E94A44B00812C10 /* Alerter.m in Sources */,
-				8F628AEF1EB7585900B320A7 /* AskViewController.m in Sources */,
+				8F628AEF1EB7585900B320A7 /* RequestViewController.m in Sources */,
 				8F0CBB2E1EA4B8C50069F1ED /* ProfileViewController.m in Sources */,
 				8F93E3B21E8E267E008C02D4 /* SignInViewController.m in Sources */,
 				8F628AE71EB756D700B320A7 /* SinglePostViewController.m in Sources */,

@@ -19,9 +19,9 @@ enum {
     PRICE_TEXTFIELD = 7
 };
 
-static NSString *PUSP_BASE_URL = @"http://192.168.0.143:81/api/v1/";
+static NSString *PUSP_BASE_URL = @"http://192.168.0.143:82/api/v1/";
 static NSString *PUSP_FILE_URL = @"http://192.168.0.143:81/api/v1/getfile/";
-static NSString *BASE_URL = @"http://192.168.0.157:81/api/";
+//static NSString *BASE_URL = @"http://192.168.0.157:81/api/";
 
 static NSString *USER_API_TOKEN;
 static NSString *DEVICE_TYPE = @"1";
@@ -37,5 +37,5 @@ static NSString *REQUEST = @"2";
 
 static NSString *NO_POSTS_FOUND = @"0071";
 static NSString *POSTS_FOUND = @"0072";
-static NSString *OFFER_POSTED_SUCCESSFULLY = @"0073";
+static NSString *POST_POSTED_SUCCESSFULLY = @"0073";
 

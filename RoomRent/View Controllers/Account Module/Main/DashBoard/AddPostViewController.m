@@ -10,12 +10,18 @@
 
 @interface AddPostViewController ()
 @property (weak, nonatomic) IBOutlet UICollectionView *photosCollectionView;
+@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
+@property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 @property (weak, nonatomic) IBOutlet UIView *contentView;
 @property (weak, nonatomic) IBOutlet UITextField *titleTextField;
 @property (weak, nonatomic) IBOutlet UITextView *descriptionTextField;
 @property (weak, nonatomic) IBOutlet UITextField *roomsTextField;
 @property (weak, nonatomic) IBOutlet UITextField *priceTextField;
 @property (weak, nonatomic) IBOutlet UILabel *addressLabel;
+@property (weak, nonatomic) IBOutlet UILabel *numberOfRoomsLabel;
+@property (weak, nonatomic) IBOutlet UILabel *addPhotosLabel;
+@property (weak, nonatomic) IBOutlet UIStackView *addPhotosStackView;
+@property (weak, nonatomic) IBOutlet UIButton *addPostButton;
 
 @property  NSIndexPath *selectedIndexPath;
 @property NSInteger lastRowIndex;
@@ -36,23 +42,6 @@ int selectedItemIndex;
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    _photosCollectionView.delegate = self;
-    _photosCollectionView.dataSource = self;
-    
-    photoMutableArray  = [[NSMutableArray alloc] initWithObjects:[UIImage imageNamed:@"addPhotosIcon.png"], nil];
-    photoNameArray = [[NSMutableArray alloc] init];
-    photoDataArray = [[NSMutableArray alloc] init];
-    
-    _photosCollectionView.layer.borderWidth = 5.0f;
-    _photosCollectionView.layer.borderColor = [UIColor grayColor].CGColor;
-    _photosCollectionView.layer.cornerRadius = 5.0f;
-    
-    UICollectionViewFlowLayout *layout = (UICollectionViewFlowLayout *) self.photosCollectionView.collectionViewLayout;
-    [layout setScrollDirection: UICollectionViewScrollDirectionHorizontal];
-    layout.minimumLineSpacing = 0.0f;
-    layout.minimumInteritemSpacing = 0.0f;
-    
-    
     //Cancel Button with background clear
     UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithTitle:@"Cancel" style:UIBarButtonItemStylePlain target:self action:@selector(onCancel)];
     self.navigationItem.leftBarButtonItem = cancelButton;
@@ -67,15 +56,51 @@ int selectedItemIndex;
     lpgr.delaysTouchesBegan = YES;
     [self.photosCollectionView addGestureRecognizer:lpgr];
     
-    _roomsTextField.tag = ROOMS_TEXTFIELD;
-    _priceTextField.tag = PRICE_TEXTFIELD;
+    self.roomsTextField.tag = ROOMS_TEXTFIELD;
+    self.priceTextField.tag = PRICE_TEXTFIELD;
     
     //[_contentView addGestureRecognizer:[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(onTap)]];
     
     _titleTextField.text =@"room at narayantar";
     _descriptionTextField.text = @"free of cost for one special person";
     _roomsTextField.text =@"1";
-    _priceTextField.text = @"Rs.1000";
+    
+    
+    if([self.postType isEqualToString:OFFER]){
+        
+        self.photosCollectionView.delegate = self;
+        self.photosCollectionView.dataSource = self;
+        
+        photoMutableArray  = [[NSMutableArray alloc] initWithObjects:[UIImage imageNamed:@"addPhotosIcon.png"], nil];
+        photoNameArray = [[NSMutableArray alloc] init];
+        photoDataArray = [[NSMutableArray alloc] init];
+        
+        self.photosCollectionView.layer.borderWidth = 5.0f;
+        self.photosCollectionView.layer.borderColor = [UIColor grayColor].CGColor;
+        self.photosCollectionView.layer.cornerRadius = 5.0f;
+        
+        UICollectionViewFlowLayout *layout = (UICollectionViewFlowLayout *) self.photosCollectionView.collectionViewLayout;
+        layout.itemSize = CGSizeMake(100, 100);
+        [layout setScrollDirection: UICollectionViewScrollDirectionHorizontal];
+        layout.minimumLineSpacing = 0.0f;
+        layout.minimumInteritemSpacing = 0.0f;
+        
+        self.photosCollectionView.translatesAutoresizingMaskIntoConstraints = false;
+        
+    } else{
+        self.titleLabel.text = @"ADD REQUEST";
+        self.numberOfRoomsLabel.text = @"Number of Rooms Needed";
+        
+        CGRect newFrame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height - self.photosCollectionView.frame.size.height - self.addPhotosLabel.frame.size.height) ;
+        [self.photosCollectionView removeFromSuperview];
+        [self.addPhotosLabel removeFromSuperview];
+        self.view.frame = newFrame;
+        self.contentView.frame = newFrame;
+        NSLayoutConstraint *newConstraint = [NSLayoutConstraint constraintWithItem:self.addPostButton attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self.addressLabel   attribute:NSLayoutAttributeBottom multiplier:1 constant:30];
+        NSArray *narray = [[NSArray alloc] initWithObjects:newConstraint, nil];
+        [self.addPostButton setTranslatesAutoresizingMaskIntoConstraints:false];
+        [NSLayoutConstraint activateConstraints:narray];
+    }
 }
 
 //MARK - Button Handlers
@@ -108,8 +133,8 @@ int selectedItemIndex;
         //double lon = userAnnotationCoordinate.longitude;
         NSString *lat = [NSString stringWithFormat:@"%.8f",userAnnotationCoordinate.latitude];
         NSString *lon =[NSString stringWithFormat:@"%.8f", userAnnotationCoordinate.longitude];
+        
         NSDictionary *params = @{
-                                 @"post_type" : OFFER,
                                  @"title" : _titleTextField.text,
                                  @"description" : _descriptionTextField.text,
                                  @"no_of_rooms" : self.roomsTextField.text,
@@ -118,13 +143,20 @@ int selectedItemIndex;
                                  @"latitude" :  lat,
                                  @"longitude" : lon
                                  };
+        NSMutableDictionary *parameters;
+        parameters = [[NSMutableDictionary alloc] initWithDictionary:params];
+        if(self.postType == OFFER){
+            [parameters setObject:OFFER forKey:@"post_type"];
+        }else{
+            [parameters setObject:REQUEST forKey:@"post_type"];
+        }
         
-        [[APICaller sharedInstance] callApiToCreatePost:@"post/create" parameters:params imageDataArray:photoDataArray fileNameArray:photoNameArray viewController:self completion:^(NSDictionary *responseObjectDictionary)  {
+        [[APICaller sharedInstance] callApiToCreatePost:@"post/create" parameters:parameters imageDataArray:photoDataArray fileNameArray:photoNameArray viewController:self completion:^(NSDictionary *responseObjectDictionary)  {
             
             NSLog(@"%@", responseObjectDictionary);
             
             NSString *code = [responseObjectDictionary valueForKey:@"code"];
-            if([code isEqualToString:OFFER_POSTED_SUCCESSFULLY]){
+            if([code isEqualToString:POST_POSTED_SUCCESSFULLY]){
                 
                 //[[Alerter sharedInstance] createAlert:@"Success" message:@"Offer Posted Successfully" viewController:self completion:^{}];
                 
@@ -155,7 +187,9 @@ int selectedItemIndex;
     [self presentViewController:pickerController animated:YES completion:nil];
     
 }
-
+- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView{
+    return 1;
+}
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     if(photoMutableArray.count == 6){
         [photoMutableArray removeLastObject];
@@ -274,11 +308,24 @@ int selectedItemIndex;
         NSLog(@"placemark.subThoroughfare %@",placemark.subThoroughfare);
         
         _addressLabel.hidden = false;
-        self.addressLabel.text = placemark.country;
+        
+        NSString *latlon = [[[NSString stringWithFormat:@"%f", annotationCoordinate.latitude] stringByAppendingString:@","] stringByAppendingString:[NSString stringWithFormat:@"%f", annotationCoordinate.longitude]];
+        
+        AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+        manager.responseSerializer = [AFJSONResponseSerializer serializer];
+        [manager GET: [@"http://maps.googleapis.com/maps/api/geocode/json?latlng=" stringByAppendingString:latlon] parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+            
+            NSString *resultsDict = [responseObject valueForKey:@"results"];
+            NSArray *place = [resultsDict valueForKey:@"formatted_address"];
+            self.addressLabel.text = place.firstObject;
+            
+        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+            NSLog(@"%@",error);
+        }];
+        
     }];
     
 }
-
 
 //TEXT Field delegate functions
 -(BOOL) textFieldShouldReturn:(UITextField *)textField{
@@ -310,13 +357,13 @@ int selectedItemIndex;
 }
 - (void)textFieldDidBeginEditing:(UITextField *)textField{
     if(textField.tag == PRICE_TEXTFIELD){
-        _priceTextField.text = @"Rs.";
+        self.priceTextField.text = @"Rs.";
     }
 }
 
 - (void)textFieldDidEndEditing:(UITextField *)textField{
-    if(textField.tag == PRICE_TEXTFIELD && [_priceTextField.text isEqualToString:@"Rs."] ){
-        _priceTextField.text = @"";
+    if(textField.tag == PRICE_TEXTFIELD && [self.priceTextField.text isEqualToString:@"Rs."] ){
+        self.priceTextField.text = @"";
     }
 }
 

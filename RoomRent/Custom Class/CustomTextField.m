@@ -32,7 +32,6 @@
 }
 
 -(BOOL) textFieldShouldReturn:(UITextField *)textField{
-    
     [self resignFirstResponder];
     return true;
 }
@@ -49,6 +48,7 @@
     if(![textField.text  isEqual: @""]){
     [[Validator sharedInstance] startValidation:textField];
     }
+    
     return true;
 }
 

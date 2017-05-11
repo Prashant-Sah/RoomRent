@@ -67,7 +67,12 @@ static Validator * instance = nil;
     }
     
     y = [self validateText:textfield.text regularExpression:regEx];
-    textfield.textColor = y ?  [UIColor blackColor] : [UIColor redColor] ;
+    
+    if(textfield.tag == ROOMS_TEXTFIELD || textfield.tag == PRICE_TEXTFIELD){
+        textfield.textColor = y ?  [UIColor blackColor] : [UIColor redColor] ;
+    }else{
+        textfield.textColor = y ?  [UIColor whiteColor] : [UIColor redColor] ;
+    }
     if (!y) {
         [self addErrorButton:textfield];
     }

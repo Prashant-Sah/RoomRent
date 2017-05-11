@@ -58,5 +58,6 @@
     self.priceLabel.text = [@"@Rs." stringByAppendingString:[NSString stringWithFormat:@"%d",(int) post.price]] ;
     self.numberOfRoomsLabel.text = [[NSString stringWithFormat:@"%ld",(long)post.numberOfRooms]  stringByAppendingString:@" Rooms"];
     self.userLabel.text = post.postUser.username;
+    self.postIdLabel.text = [NSString stringWithFormat:@"%d", post.postid];
 }
 @end
