@@ -8,9 +8,11 @@
 
 #import <UIKit/UIKit.h>
 #import <SDWebImage/UIButton+WebCache.h>
+#import <Photos/Photos.h>
 #import "Navigator.h"
 #import "APICaller.h"
+#import "Constants.h"
 
-@interface ProfileViewController : UIViewController
+@interface ProfileViewController : UIViewController <UIImagePickerControllerDelegate>
 
 @end

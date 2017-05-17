@@ -14,6 +14,6 @@
 #import "OffersTableViewCell.h"
 #import "SinglePostViewController.h"
 
-@interface OffersViewController : CustomRevealViewController <UITableViewDataSource , UITableViewDelegate,  UIScrollViewDelegate>
+@interface OffersViewController : CustomRevealViewController <UITableViewDataSource , UITableViewDelegate,  UIScrollViewDelegate , UIGestureRecognizerDelegate>
 
 @end

@@ -72,7 +72,7 @@
     }else{
         self.imageData = nil;
     }
-    [[APICaller sharedInstance] callApi:@"register" headerFlag:false parameters:params imageData: _imageData fileName: self.imageName  viewController:self completion:^(NSDictionary *responseObjectDictionary) {
+    [[APICaller sharedInstance] callApi:@"register" useToken:false parameters:params imageData: _imageData fileName: self.imageName  viewController:self completion:^(NSDictionary *responseObjectDictionary) {
         
         NSLog(@"%@", responseObjectDictionary);
         

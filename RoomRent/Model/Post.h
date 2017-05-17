@@ -20,7 +20,7 @@
 @property double latitude;
 @property double longitude;
 @property NSArray *imagesArray;
-
+@property NSString *postCreatedOn;
 @property User *postUser;
 
 - (Post*) initPostFromJson : (NSDictionary *) postDict;

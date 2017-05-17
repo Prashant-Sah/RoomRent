@@ -39,7 +39,8 @@ UIActivityIndicatorView *activityIndicator;
     [refresher addTarget:self action:@selector(refreshTable) forControlEvents:UIControlEventValueChanged];
     
     isLastPage = false;
-}
+    
+    }
 
 -(void) refreshTable{
     [self loadPosts];
@@ -55,12 +56,12 @@ UIActivityIndicatorView *activityIndicator;
 }
 
 -(void)loadPosts{
-    //[self showActivityIndicator];
+    [self showActivityIndicator];
     postArray = [[NSMutableArray alloc] init];
     
     NSDictionary *params = @{
                              };
-    [[APICaller sharedInstance] callAPiToGetAllPosts:@"posts/offers" parameters:params viewController:self completion:^(NSDictionary *responseObjectDictionary) {
+    [[APICaller sharedInstance] callAPiToGetPost:@"posts/offers" parameters:params viewController:self completion:^(NSDictionary *responseObjectDictionary) {
         
         NSLog(@"%@",responseObjectDictionary);
         
@@ -79,10 +80,11 @@ UIActivityIndicatorView *activityIndicator;
             offsetValue = [[responseObjectDictionary valueForKey:@"offset"] intValue];
             
             [self.offersTableView reloadData];
-            //[activityIndicator stopAnimating];
+            [activityIndicator stopAnimating];
         }
     }];
 }
+
 
 //MARK: TableView DataSource and Delegate Functions
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
@@ -98,10 +100,9 @@ UIActivityIndicatorView *activityIndicator;
     OffersTableViewCell *cell  = (OffersTableViewCell *)  [tableView dequeueReusableCellWithIdentifier:@"OffersTableViewCell"];
     [cell configureCellWithPost:postArray[indexPath.row]];
     [cell.roomPhotosCollectionView reloadData];
-    
     return cell;
-    
 }
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
     SinglePostViewController *singlePostVC = [self.storyboard instantiateViewControllerWithIdentifier:@"SinglePostViewController"];
@@ -127,7 +128,7 @@ UIActivityIndicatorView *activityIndicator;
                                  @"offset":[NSNumber numberWithInt:offsetValue]
                                  };
         
-        [[APICaller sharedInstance] callAPiToGetAllPosts:@"posts/offers" parameters:params viewController:self completion:^(NSDictionary *responseObjectDictionary) {
+        [[APICaller sharedInstance] callAPiToGetPost:@"posts/offers" parameters:params viewController:self completion:^(NSDictionary *responseObjectDictionary) {
 
             
             NSDictionary *postData = [responseObjectDictionary valueForKey:@"data"];

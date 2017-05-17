@@ -21,12 +21,15 @@
 @property (weak, nonatomic) IBOutlet MKMapView *singlePostMapView;
 @property (weak, nonatomic) IBOutlet UIView *scrollContentView;
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
+@property (weak, nonatomic) IBOutlet UIButton *infoButton;
+@property (weak, nonatomic) IBOutlet UILabel *postedOnLabel;
 
 @end
 
 CLLocationDegrees latitude = 0;
 CLLocationDegrees longitude = 0;
 NSArray *imagesArray = nil;
+Post *singlePost  = nil;
 
 @implementation SinglePostViewController
 
@@ -47,62 +50,57 @@ NSArray *imagesArray = nil;
         self.roomPhotosCollectionView.pagingEnabled = true;
     }
     else{
-        //[self.titleLabel setTranslatesAutoresizingMaskIntoConstraints:true];
-        //NSLayoutConstraint *verticalSpace =[NSLayoutConstraint constraintWithItem:self.titleLabel attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self.contentView attribute:NSLayoutAttributeTop multiplier:1 constant:50];
-        //NSArray *array = [[NSArray alloc] initWithObjects:verticalSpace, nil];
-        //[NSLayoutConstraint activateConstraints:array];
-        //[self.view addConstraint:verticalSpace];
-        //[self.titleLabel.topAnchor constraintEqualToAnchor:self.topLayoutGuide constant:30];
+        
         CGRect newFrame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height - self.roomPhotosCollectionView.frame.size.height) ;
         [self.roomPhotosCollectionView removeFromSuperview];
         self.view.frame = newFrame;
         self.scrollContentView.frame = newFrame;
-//        NSLayoutConstraint *xconstraint = [NSLayoutConstraint constraintWithItem:self.titleLabel attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self.roomPhotosCollectionView attribute:NSLayoutAttributeBottom multiplier:1 constant:40];
-//        NSArray *xarray = [[NSArray alloc] initWithObjects:xconstraint, nil];
-//        [NSLayoutConstraint deactivateConstraints:xarray];
+        
         NSLayoutConstraint *newConstraint = [NSLayoutConstraint constraintWithItem:self.titleLabel attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self.topLayoutGuide attribute:NSLayoutAttributeTop multiplier:1 constant:90];
-        NSArray *narray = [[NSArray alloc] initWithObjects:newConstraint, nil];
+        NSArray *constraintArray = [[NSArray alloc] initWithObjects:newConstraint, nil];
         [self.titleLabel setTranslatesAutoresizingMaskIntoConstraints:false];
-        [NSLayoutConstraint activateConstraints:narray];
+        [NSLayoutConstraint activateConstraints:constraintArray];
+
     }
     
 }
 -(void)viewWillAppear:(BOOL)animated{
     
-    [[APICaller sharedInstance] callApiToGetSinglePost:[@"post/" stringByAppendingString: [NSString stringWithFormat:@"%d", self.postId]] viewController:self completion:^(NSDictionary *responseObjectDictionary) {
+    
+    [[APICaller sharedInstance] callAPiToGetPost:[@"post/" stringByAppendingString: [NSString stringWithFormat:@"%d", self.postId]] parameters:nil viewController:self completion:^(NSDictionary *responseObjectDictionary) {
         
-        NSLog(@"%@", responseObjectDictionary);
-        Post *singlePost = [[Post alloc] initPostFromJson:responseObjectDictionary];
-        imagesArray = singlePost.imagesArray;
-        [self.roomPhotosCollectionView reloadData];
-        self.titleLabel.text = singlePost.title;
-        self.descriptionLabel.text = singlePost.offerDescription;
-        self.numberOfRoomsLabel.text = [NSString stringWithFormat:@"%d", singlePost.numberOfRooms];
-        self.priceLabel.text = [NSString stringWithFormat:@"%d", (int) singlePost.price];
-        self.locationLabel.text = singlePost.location ;
-        
-        self.userLabel.text = singlePost.postUser.username;
-        
-        NSDictionary *userDict = [responseObjectDictionary valueForKey:@"user"];
-        self.userLabel.text = [userDict valueForKey:@"username"];
-        
-        static dispatch_once_t onceToken;
-        dispatch_once(&onceToken, ^{
+        if( [[responseObjectDictionary valueForKey:@"code"] isEqualToString:SUCCESS]){
+            
+            NSLog(@"%@", [responseObjectDictionary valueForKey:@"post"]);
+            singlePost = [[Post alloc] initPostFromJson:[responseObjectDictionary valueForKey:@"post"]];
+            imagesArray = singlePost.imagesArray;
             [self.roomPhotosCollectionView reloadData];
-        });
-        latitude = singlePost.latitude;
-        longitude = singlePost.longitude;
-        
-        MKCoordinateRegion region;
-        CLLocationCoordinate2D roomLocation = CLLocationCoordinate2DMake(latitude , longitude);
-        region.center = roomLocation;
-        region.span = MKCoordinateSpanMake(0.01, 0.01);
-        
-        region = [self.singlePostMapView regionThatFits:region];
-        [self.singlePostMapView setRegion:region animated:YES];
-        MKPointAnnotation *annotationPoint= [[MKPointAnnotation alloc] init];
-        annotationPoint.coordinate = roomLocation;
-        [self.singlePostMapView addAnnotation: annotationPoint];
+            self.titleLabel.text = singlePost.title;
+            self.descriptionLabel.text = singlePost.offerDescription;
+            self.numberOfRoomsLabel.text = [NSString stringWithFormat:@"%d", singlePost.numberOfRooms];
+            self.priceLabel.text = [NSString stringWithFormat:@"%d", (int) singlePost.price];
+            self.locationLabel.text = singlePost.location ;
+            self.userLabel.text = singlePost.postUser.username;
+            self.postedOnLabel.text = singlePost.postCreatedOn;
+            
+            static dispatch_once_t onceToken;
+            dispatch_once(&onceToken, ^{
+                [self.roomPhotosCollectionView reloadData];
+            });
+            latitude = singlePost.latitude;
+            longitude = singlePost.longitude;
+            
+            MKCoordinateRegion region;
+            CLLocationCoordinate2D roomLocation = CLLocationCoordinate2DMake(latitude , longitude);
+            region.center = roomLocation;
+            region.span = MKCoordinateSpanMake(0.01, 0.01);
+            
+            region = [self.singlePostMapView regionThatFits:region];
+            [self.singlePostMapView setRegion:region animated:YES];
+            MKPointAnnotation *annotationPoint= [[MKPointAnnotation alloc] init];
+            annotationPoint.coordinate = roomLocation;
+            [self.singlePostMapView addAnnotation: annotationPoint];
+        }
         
     }];
     
@@ -125,7 +123,7 @@ NSArray *imagesArray = nil;
         NSString *userApiToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"userApiToken"];
         SDWebImageDownloader *manager = [SDWebImageManager sharedManager].imageDownloader;
         [manager setValue:[@"Bearer " stringByAppendingString:userApiToken] forHTTPHeaderField:@"Authorization"];
-        NSURL *url = [NSURL URLWithString:[[PUSP_BASE_URL stringByAppendingString:@"getfile/"] stringByAppendingString:imagesArray[indexPath.row] ]];
+        NSURL *url = [NSURL URLWithString:[[BASE_URL stringByAppendingString:@"getfile/"] stringByAppendingString:imagesArray[indexPath.row] ]];
         [photosImageView sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"noPhotos.jpeg"] options:SDWebImageScaleDownLargeImages];
     }else{
         [photosImageView setImage:[UIImage imageNamed:@"noPhotos"]];
@@ -133,5 +131,11 @@ NSArray *imagesArray = nil;
     [cell.contentView addSubview:photosImageView ];
     return cell;
 }
+
+
+- (IBAction)infoButtonPressed:(UIButton *)sender {
+    [[Alerter sharedInstance] createAlert:@"User Info" message:[NSString stringWithFormat:@"FullName  %@ \n Mobile %@ \n Email %@ ", singlePost.postUser.fullname, singlePost.postUser.mobile , singlePost.postUser.email ] viewController:self completion:^{}];
+}
+
 
 @end

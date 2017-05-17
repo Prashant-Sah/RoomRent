@@ -16,6 +16,6 @@
 #import "SinglePostViewController.h"
 #import "AddPostViewController.h"
 
-@interface DashBoardViewController : CustomRevealViewController <UITableViewDataSource , UITableViewDelegate,  UIScrollViewDelegate>
+@interface DashBoardViewController : CustomRevealViewController <UITableViewDataSource , UITableViewDelegate,  UIScrollViewDelegate, CellSelectedProtocol>
 
 @end

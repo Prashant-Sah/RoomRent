@@ -330,43 +330,43 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "RoomRent/Helpers/APICaller.m"
-            timestampString = "515670353.737712"
+            timestampString = "516537313.30726"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "40"
-            endingLineNumber = "40"
-            landmarkName = "-callCommonAlertWithError:viewController:"
+            startingLineNumber = "69"
+            endingLineNumber = "69"
+            landmarkName = "-callApi:useToken:parameters:imageData:fileName:viewController:completion:"
             landmarkType = "7">
             <Locations>
                <Location
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "-[APICaller callCommonAlertWithError:viewController:]"
+                  symbolName = "-[APICaller callApi:useToken:parameters:imageData:fileName:viewController:completion:]"
                   moduleName = "RoomRent"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/prashnant/Projects/RoomRent/RoomRent/Helpers/APICaller.m"
-                  timestampString = "516195374.36203"
+                  timestampString = "516695593.539341"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "40"
-                  endingLineNumber = "40"
-                  offsetFromSymbolStart = "435">
+                  startingLineNumber = "69"
+                  endingLineNumber = "69"
+                  offsetFromSymbolStart = "1136">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "__53-[APICaller callCommonAlertWithError:viewController:]_block_invoke_3"
+                  symbolName = "__86-[APICaller callApi:useToken:parameters:imageData:fileName:viewController:completion:]_block_invoke.83"
                   moduleName = "RoomRent"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/prashnant/Projects/RoomRent/RoomRent/Helpers/APICaller.m"
-                  timestampString = "516195374.363728"
+                  timestampString = "516695593.541701"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "40"
-                  endingLineNumber = "40"
-                  offsetFromSymbolStart = "12">
+                  startingLineNumber = "69"
+                  endingLineNumber = "69"
+                  offsetFromSymbolStart = "16">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -377,45 +377,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "RoomRent/View Controllers/Account Module/Main/Offers/SinglePostViewController.m"
-            timestampString = "516176167.342009"
+            filePath = "RoomRent/Helpers/APICaller.m"
+            timestampString = "516537316.899322"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "64"
-            endingLineNumber = "64"
-            landmarkName = "-viewDidLoad"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "RoomRent/View Controllers/Account Module/Main/Offers/SinglePostViewController.m"
-            timestampString = "516176167.342009"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "66"
-            endingLineNumber = "66"
-            landmarkName = "-viewDidLoad"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "RoomRent/View Controllers/Account Module/Main/Offers/SinglePostViewController.m"
-            timestampString = "516176167.342009"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "65"
-            endingLineNumber = "65"
-            landmarkName = "-viewDidLoad"
+            startingLineNumber = "73"
+            endingLineNumber = "73"
+            landmarkName = "-callApi:useToken:parameters:imageData:fileName:viewController:completion:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

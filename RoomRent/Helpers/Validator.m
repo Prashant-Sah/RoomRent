@@ -57,7 +57,6 @@ static Validator * instance = nil;
             break;
             
         case PRICE_TEXTFIELD: // needs to be highly modified
-            //regEx = @"\\Rs.(([0-9]{1,3}),?.?\\d{0,2})(([0-9]{1,3})?,?.?\\d{0,2})";
             regEx = @"Rs.(\\d{1,5}([.]\\d{1,3})?|[.]\\d{1,3})";
             break;
             

@@ -13,12 +13,14 @@
 -(void)awakeFromNib{
     [super awakeFromNib];
     
+    self.offersCellCheckButton.hidden = true;
     self.roomPhotosCollectionView.delegate = self;
     self.roomPhotosCollectionView.dataSource = self;
     [[self roomPhotosCollectionView] registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"PhotosCell"];
 }
 
 -(void)drawRect:(CGRect)rect {
+    self.isSelected = false;
     UICollectionViewFlowLayout *layout = (UICollectionViewFlowLayout *) self.roomPhotosCollectionView.collectionViewLayout;
     layout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
     layout.minimumInteritemSpacing = 5.0;
@@ -43,7 +45,7 @@
     SDWebImageDownloader *manager = [SDWebImageManager sharedManager].imageDownloader;
     [manager setValue:[@"Bearer " stringByAppendingString:userApiToken] forHTTPHeaderField:@"Authorization"];
     
-    NSURL *url = [NSURL URLWithString:[[PUSP_BASE_URL stringByAppendingString:@"getfile/"] stringByAppendingString:self.collectionViewImagesArray[indexPath.row]]];
+    NSURL *url = [NSURL URLWithString:[[BASE_URL stringByAppendingString:@"getfile/"] stringByAppendingString:self.collectionViewImagesArray[indexPath.row]]];
     [photosImageView  sd_setImageWithURL: url];
     
     [singlePhotoCell.contentView addSubview:photosImageView];
@@ -59,5 +61,8 @@
     self.numberOfRoomsLabel.text = [[NSString stringWithFormat:@"%ld",(long)post.numberOfRooms]  stringByAppendingString:@" Rooms"];
     self.userLabel.text = post.postUser.username;
     self.postIdLabel.text = [NSString stringWithFormat:@"%d", post.postid];
+    self.createdOnLabel.text = post.postCreatedOn;
+    
 }
+
 @end

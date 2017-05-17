@@ -37,7 +37,7 @@
     NSDictionary *params = @{
                              @"email" : _emailAddressTextField.text
                              };
-    [[APICaller sharedInstance] callApi:@"forgetpassword" headerFlag:false parameters:params imageData:nil fileName:nil viewController:self completion:^(NSDictionary *responseObjectDictionary) {
+    [[APICaller sharedInstance] callApi:@"forgetpassword" useToken:false parameters:params imageData:nil fileName:nil viewController:self completion:^(NSDictionary *responseObjectDictionary) {
 
         NSString *code = [responseObjectDictionary valueForKey:@"code"];
         

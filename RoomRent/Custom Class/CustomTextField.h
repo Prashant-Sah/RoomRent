@@ -12,5 +12,6 @@
 #import "Constants.h"
 
 @interface CustomTextField : UITextField <UITextFieldDelegate>
+@property (weak, nonatomic) IBOutlet UITextField *nextField;
 
 @end

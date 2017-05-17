@@ -28,7 +28,7 @@ static Navigator *instance = nil;
 }
 
 - (void)makeRootViewControllerWithStoryBoard:(NSString *)storyBoard viewController:(NSString *)VC tabBarController:(NSString *)tabBC{
-//    UIWindow *window = [[[UIApplication sharedApplication] delegate] window];
+
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:storyBoard bundle:nil];
     
     if(VC == nil){
@@ -45,8 +45,6 @@ static Navigator *instance = nil;
 }
 
 - (void)setRevealViewControllerWithFrontTabViewController:(NSString *)tabVC sideViewController:(NSString *)sideVC storyBoard:(NSString *)storyboard{
-    
-    //UIWindow *window = [[[UIApplication sharedApplication] delegate] window];
     
     UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:storyboard bundle:nil];
     UITabBarController *tabViewController = [storyBoard instantiateViewControllerWithIdentifier:tabVC];

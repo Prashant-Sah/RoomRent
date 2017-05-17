@@ -10,9 +10,11 @@
 
 @interface AddPostViewController ()
 @property (weak, nonatomic) IBOutlet UICollectionView *photosCollectionView;
+
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 @property (weak, nonatomic) IBOutlet UIView *contentView;
+
 @property (weak, nonatomic) IBOutlet UITextField *titleTextField;
 @property (weak, nonatomic) IBOutlet UITextView *descriptionTextField;
 @property (weak, nonatomic) IBOutlet UITextField *roomsTextField;
@@ -96,6 +98,7 @@ int selectedItemIndex;
         [self.addPhotosLabel removeFromSuperview];
         self.view.frame = newFrame;
         self.contentView.frame = newFrame;
+        
         NSLayoutConstraint *newConstraint = [NSLayoutConstraint constraintWithItem:self.addPostButton attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self.addressLabel   attribute:NSLayoutAttributeBottom multiplier:1 constant:30];
         NSArray *narray = [[NSArray alloc] initWithObjects:newConstraint, nil];
         [self.addPostButton setTranslatesAutoresizingMaskIntoConstraints:false];
@@ -173,8 +176,6 @@ int selectedItemIndex;
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
     
     _selectedIndexPath = indexPath;
-    
-    selectedItemIndex = indexPath.row;
     
     UIImagePickerController *pickerController = [[UIImagePickerController alloc]
                                                  init];
@@ -292,37 +293,21 @@ int selectedItemIndex;
 - (void)didSelectLocation:(CLLocationCoordinate2D)annotationCoordinate{
     
     userAnnotationCoordinate = annotationCoordinate;
-    CLGeocoder *geocoder = [[CLGeocoder alloc]init];
-    CLLocation *annotationLocation =  [[CLLocation alloc] initWithLatitude:annotationCoordinate.latitude longitude:annotationCoordinate.longitude];
+    //CLGeocoder *geocoder = [[CLGeocoder alloc]init];
+    //CLLocation *annotationLocation =  [[CLLocation alloc] initWithLatitude:annotationCoordinate.latitude longitude:annotationCoordinate.longitude];
     
-    [geocoder reverseGeocodeLocation:annotationLocation completionHandler:^(NSArray<CLPlacemark *> * _Nullable placemarks, NSError * _Nullable error) {
+    NSString *latlon = [[[NSString stringWithFormat:@"%f", annotationCoordinate.latitude] stringByAppendingString:@","] stringByAppendingString:[NSString stringWithFormat:@"%f", annotationCoordinate.longitude]];
+    
+    NSDictionary *params = @{
+                             @"latlng" : latlon
+                             };
+    
+    [[APICaller sharedInstance] callApiForGETRawUrl:@"http://maps.googleapis.com/maps/api/geocode/json" parameters:params viewController:self completion:^(id responseObject) {
         
-        CLPlacemark *placemark = [placemarks objectAtIndex:0];
-        NSLog(@"placemark.ISOcountryCode %@",placemark.ISOcountryCode);
-        NSLog(@"placemark.country %@",placemark.country);
-        NSLog(@"placemark.locality %@",placemark.locality );
-        NSLog(@"placemark.postalCode %@",placemark.postalCode);
-        NSLog(@"placemark.administrativeArea %@",placemark.administrativeArea);
-        NSLog(@"placemark.locality %@",placemark.locality);
-        NSLog(@"placemark.subLocality %@",placemark.subLocality);
-        NSLog(@"placemark.subThoroughfare %@",placemark.subThoroughfare);
-        
-        _addressLabel.hidden = false;
-        
-        NSString *latlon = [[[NSString stringWithFormat:@"%f", annotationCoordinate.latitude] stringByAppendingString:@","] stringByAppendingString:[NSString stringWithFormat:@"%f", annotationCoordinate.longitude]];
-        
-        AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
-        manager.responseSerializer = [AFJSONResponseSerializer serializer];
-        [manager GET: [@"http://maps.googleapis.com/maps/api/geocode/json?latlng=" stringByAppendingString:latlon] parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-            
-            NSString *resultsDict = [responseObject valueForKey:@"results"];
-            NSArray *place = [resultsDict valueForKey:@"formatted_address"];
-            self.addressLabel.text = place.firstObject;
-            
-        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-            NSLog(@"%@",error);
-        }];
-        
+        NSString *resultsDict = [responseObject valueForKey:@"results"];
+        NSArray *place = [resultsDict valueForKey:@"formatted_address"];
+        self.addressLabel.hidden = false;
+        self.addressLabel.text = place.firstObject;
     }];
     
 }

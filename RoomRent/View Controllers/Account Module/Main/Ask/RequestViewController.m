@@ -59,7 +59,7 @@
     NSDictionary *params = @{
                              @"offset": offsetParam
                              };
-    [[APICaller sharedInstance] callAPiToGetAllPosts:@"posts/asks" parameters:params viewController:self completion:^(NSDictionary *responseObjectDictionary) {
+    [[APICaller sharedInstance] callAPiToGetPost:@"posts/asks" parameters:params viewController:self completion:^(NSDictionary *responseObjectDictionary) {
         
         NSString *code = [responseObjectDictionary valueForKey:@"code"];
         if ([code isEqualToString:POSTS_FOUND]){
@@ -95,7 +95,11 @@
     
     RequestsTableViewCell *cell  = (RequestsTableViewCell *)  [tableView dequeueReusableCellWithIdentifier:@"RequestsTableViewCell"];
     [cell configureCellWithPost:self.requestsPostArray[indexPath.row]];
-    
+    if (indexPath.row % 2) {
+        cell.contentView.backgroundColor = [UIColor colorWithRed:0.82 green:0.93 blue:0.99 alpha:1.0];
+    } else {
+        cell.contentView.backgroundColor =[UIColor colorWithRed:0.84 green:0.81 blue:0.76 alpha:1.0];
+    }
     return cell;
     
 }

@@ -19,7 +19,10 @@
 @property (weak, nonatomic) IBOutlet UILabel *locationLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *userImageView;
 @property (weak, nonatomic) IBOutlet UILabel *usernameLabel;
-@property (weak, nonatomic) IBOutlet UILabel *postIdLabel;
+@property (weak, nonatomic) IBOutlet UIButton *requestsCellCheckButton;
+@property (weak, nonatomic) IBOutlet UILabel *postCreatedOnLabel;
+
+@property BOOL isSelected;
 
 -(void) configureCellWithPost:(Post *) post;
 @end

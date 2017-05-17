@@ -46,7 +46,7 @@
                              @"device_type": DEVICE_TYPE,
                              @"device_token": DEVICE_TOKEN};
     
-    [[APICaller sharedInstance] callApi:@"login" headerFlag:false parameters:params imageData:nil fileName:nil viewController:self completion:^(NSDictionary *responseObjectDictionary) {
+    [[APICaller sharedInstance] callApi:@"login" useToken:false parameters:params imageData:nil fileName:nil viewController:self completion:^(NSDictionary *responseObjectDictionary) {
         
         NSLog(@"%@",responseObjectDictionary);
         NSString *code = [responseObjectDictionary valueForKey:@"code"];
@@ -57,8 +57,6 @@
             NSData *userData = [NSKeyedArchiver archivedDataWithRootObject:[responseObjectDictionary valueForKey:@"user" ]];
             [[NSUserDefaults standardUserDefaults] setObject:userData forKey:@"userDataKey"];
             
-            //NSDictionary *userDict = [responseObjectDictionary valueForKey:@"user"];
-            //[[User alloc] initUserFromJson:userDict];
             [self gotoMain];
             
         }

@@ -34,7 +34,7 @@
         SDWebImageDownloader *manager = [SDWebImageManager sharedManager].imageDownloader;
         [manager setValue:[@"Bearer " stringByAppendingString:userApiToken] forHTTPHeaderField:@"Authorization"];
         
-        NSURL *url = [NSURL URLWithString:[[PUSP_BASE_URL stringByAppendingString:@"getfile/"] stringByAppendingString:[userDict valueForKey:@"profile_image"]]];
+        NSURL *url = [NSURL URLWithString:[[BASE_URL stringByAppendingString:@"getfile/"] stringByAppendingString:[userDict valueForKey:@"profile_image"]]];
         
         [self.profileImageButton sd_setImageWithURL:url forState:UIControlStateNormal];
         [self.profileImageButton setContentMode:UIViewContentModeScaleAspectFit];
@@ -52,7 +52,7 @@
 
 - (IBAction)logoutBtnPressed:(UIButton *)sender {
     
-    [[APICaller sharedInstance] callApi:@"logout" headerFlag:true parameters:nil imageData:nil fileName:nil viewController:self completion:^(NSDictionary *responseObjectDictionary) {
+    [[APICaller sharedInstance] callApi:@"logout" useToken:true parameters:nil imageData:nil fileName:nil viewController:self completion:^(NSDictionary *responseObjectDictionary) {
         
         NSString *code = [responseObjectDictionary valueForKey:@"code"];
         if([code isEqualToString:USER_LOGGED_OUT]){

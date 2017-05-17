@@ -16,6 +16,7 @@
 #import "Validator.h"
 #import "Post.h"
 #import "LocalDatabase.h"
+#import "CustomTextField.h"
 
 @interface AddPostViewController : KeyboardAvoidingViewController <UICollectionViewDelegate, UICollectionViewDataSource , UIImagePickerControllerDelegate, UIGestureRecognizerDelegate, UserLocationDelegate, UITextFieldDelegate>
 

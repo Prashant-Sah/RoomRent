@@ -25,7 +25,7 @@
     self.longitude = [[postDict valueForKey:@"longitude"] doubleValue];
     self.location = [postDict valueForKey:@"address"];
     self.imagesArray = [postDict valueForKey:@"images"];
-    
+    self.postCreatedOn = [postDict valueForKey:@"created_at"];
     self.postUser = [[User alloc] initUserFromJson:[postDict valueForKey:@"user"]];
     
     

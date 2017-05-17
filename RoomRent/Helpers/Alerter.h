@@ -11,7 +11,16 @@
 
 @interface Alerter : NSObject
 
+// create a shared instance for Alerter
 +(Alerter *)sharedInstance;
+
+/*
+Creates alert on the passed viewcontroller
+ 
+@param alertTitle       title to be shown in alert
+@param alertmessage     message to be shown
+@param VC               the view controller alertcontroller is to be shown on
+ */
 
 -(void)createAlert:(NSString*)alertTitle message:(NSString*)alertMessage viewController:(UIViewController*)VC  completion:(void (^)(void))completionBlock;
 

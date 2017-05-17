@@ -31,11 +31,17 @@
     }
 }
 
--(BOOL) textFieldShouldReturn:(UITextField *)textField{
-    [self resignFirstResponder];
-    return true;
-}
+- (BOOL)textFieldShouldReturn:(CustomTextField *)textField {
 
+    if ([textField nextField]){
+        [[textField nextField] becomeFirstResponder];
+    }
+    else{
+        [textField resignFirstResponder];
+    }
+    
+    return YES;
+}
 // gets rectangle of textfield and passes it to keyboardavoidingviewcontroller
 - (BOOL)textFieldShouldBeginEditing:(CustomTextField *)textField{
     
