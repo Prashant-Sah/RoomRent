@@ -50,13 +50,13 @@
     textField.textColor = [UIColor whiteColor];
     return true;
 }
+
 -(BOOL) textFieldShouldEndEditing:(UITextField *)textField{
+    
     if(![textField.text  isEqual: @""]){
     [[Validator sharedInstance] startValidation:textField];
     }
-    
     return true;
 }
-
 
 @end

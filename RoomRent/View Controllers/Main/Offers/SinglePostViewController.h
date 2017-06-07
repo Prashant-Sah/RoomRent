@@ -10,9 +10,23 @@
 #import <MapKit/MapKit.h>
 #import <CoreLocation/CoreLocation.h>
 #import "APICaller.h"
+#import "Post.h"
+#import "Constants.h"
+#import "AddPostViewController.h"
+#import "DashBoardViewController.h"
+#import <SDWebImage/UIImageView+WebCache.h>
 
-@interface SinglePostViewController : UIViewController <UICollectionViewDataSource,UICollectionViewDelegate >
+@interface SinglePostViewController : UIViewController <UICollectionViewDataSource,UICollectionViewDelegate, AddPostVCDelegate >
 
-@property int postId;
+@property (weak) id singlePostVCDelegate;
+@property NSString *slug;
+@property NSString *postType;
+
+@end
+
+@protocol SinglePostVCDelegate <NSObject>
+
+@optional
+-(void) didFinishDeleting;
 
 @end

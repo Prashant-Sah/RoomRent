@@ -9,18 +9,18 @@
 #import "KeyboardAvoidingViewController.h"
 
 @interface KeyboardAvoidingViewController ()
-
-
 @end
 
 @implementation KeyboardAvoidingViewController
 
 static CGPoint activeTextFieldPosition;
+
 +(void)setActiveTextFieldPosition:(CGPoint)textFieldPosition{
-    
     activeTextFieldPosition = textFieldPosition;
 }
+
 - (void)viewDidLoad {
+    
     [super viewDidLoad];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector: @selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
@@ -30,9 +30,11 @@ static CGPoint activeTextFieldPosition;
     
     CGRect keyboardSize = [notification.userInfo[UIKeyboardFrameBeginUserInfoKey] CGRectValue];
     
-    if(activeTextFieldPosition.y > keyboardSize.origin.y - keyboardSize.size.height - 35 ){
-    
-    [self.view setFrame:CGRectMake(0, -keyboardSize.size.height , self.view.frame.size.width, self.view.frame.size.height)];
+    if(!(activeTextFieldPosition.y < keyboardSize.origin.y)){
+        [self.view setFrame:CGRectMake(0, -keyboardSize.size.height , self.view.frame.size.width, self.view.frame.size.height)];
+    }else{
+        
+        
     }
 }
 

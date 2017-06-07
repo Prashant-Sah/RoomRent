@@ -8,7 +8,9 @@
 
 #import <Foundation/Foundation.h>
 #import <FMDB.h>
+
 #import "Alerter.h"
+#import "Post.h"
 
 @interface LocalDatabase : NSObject
 
@@ -17,5 +19,5 @@
 
 - (void) executeQueryOrUpdate :(NSString *) statement queryUpdateFlag:(BOOL) queryUpdateFlag;
 
--(void) pushPostToDatabase : (NSDictionary *) postDict viewController :(UIViewController *) VC;
+-(void) pushPostToDatabase : (Post *) post viewController :(UIViewController *) VC;
 @end

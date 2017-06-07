@@ -15,6 +15,10 @@
 #import "Navigator.h"
 #import "Constants.h"
 
-@interface RequestViewController : CustomRevealViewController <UITableViewDelegate ,UITableViewDataSource, UIScrollViewDelegate>
-//-(void) loadPostsWithOffset :(int) offset;
+@interface RequestViewController : CustomRevealViewController <UITableViewDelegate ,UITableViewDataSource, UIScrollViewDelegate, SinglePostVCDelegate>
+
+-(void) refreshTable;
+-(void)loadPostswithOffset:(int ) offset;
+
+
 @end

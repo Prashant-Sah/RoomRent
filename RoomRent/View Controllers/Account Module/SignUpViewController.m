@@ -30,18 +30,18 @@
     [super viewDidLoad];
     
     //Assigning tags to textfields
-    _nameTextField.tag = NAME_TEXTFIELD;
-    _mobileTextField.tag = MOBILE_TEXTFIELD;
-    _userNameTextField.tag = USERNAME_TEXTFIELD;
-    _emailAddTextField.tag = EMAIL_ADDRESS_TEXTFIELD;
-    _passwordTextField.tag = PASSWORD_TEXTFIELD;
+    self.nameTextField.tag = NAME_TEXTFIELD;
+    self.mobileTextField.tag = MOBILE_TEXTFIELD;
+    self.userNameTextField.tag = USERNAME_TEXTFIELD;
+    self.emailAddTextField.tag = EMAIL_ADDRESS_TEXTFIELD;
+    self.passwordTextField.tag = PASSWORD_TEXTFIELD;
     
     
-    _nameTextField.text = @"Puspa Raaz";
-    _mobileTextField.text =@"9876543210";
-    _userNameTextField.text =@"Puspi";
-    _emailAddTextField.text = @"069bct429@gmail.com";
-    _passwordTextField.text = @"Puspa123#";
+    self.nameTextField.text = @"Puspa Raaz";
+    self.mobileTextField.text =@"9876543210";
+    self.userNameTextField.text =@"Puspa";
+    self.emailAddTextField.text = @"069bct429@gmail.com";
+    self.passwordTextField.text = @"Puspa123#";
     
     //navigation Bar clear
     UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithTitle:@"Cancel" style:UIBarButtonItemStylePlain target:self action:@selector(onCancel)];
@@ -67,7 +67,7 @@
                              @"phone" : mobile,
                              };
     
-    if(_profileImage != nil){
+    if(self.profileImage != nil){
         self.imageData = UIImageJPEGRepresentation(self.profileImage, 0.5);
     }else{
         self.imageData = nil;
@@ -96,11 +96,9 @@
                     
                     errorMessage = [errorMessage stringByAppendingString:@"\n"];
                     errorMessage = [errorMessage stringByAppendingString:msg];
-                    
                 }
-                
             }
-            [[Alerter sharedInstance] createAlert:@"Error" message:errorMessage viewController:self completion:^{
+            [[Alerter sharedInstance] createAlert:@"Error" message:errorMessage useCancelButton:false viewController:self completion:^{
             }];
         }
     }];
@@ -110,6 +108,7 @@
 -(void) onCancel{
     [self dismissViewControllerAnimated:NO completion:nil];
 }
+
 -(IBAction)addPhoto:(id)sender{
     
     UIImagePickerController *pickerController = [[UIImagePickerController alloc]
@@ -118,18 +117,19 @@
     pickerController.allowsEditing = true;
     
     UIAlertAction *takePhoto = [UIAlertAction actionWithTitle:@"Take a Photo" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        if([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]){
-                pickerController.sourceType = UIImagePickerControllerSourceTypeCamera;
         
-        [self presentViewController:pickerController animated:YES completion:nil];
+        if([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]){
+            pickerController.sourceType = UIImagePickerControllerSourceTypeCamera;
+            
+            [self presentViewController:pickerController animated:YES completion:nil];
         }else{
-            //[self dismissViewControllerAnimated:true completion:nil];
-            [[Alerter sharedInstance] createAlert:@"Error" message:@"Camera not found" viewController:self completion:^{}];
+            [[Alerter sharedInstance] createAlert:@"Error" message:@"Camera not found" useCancelButton:false viewController:self completion:^{}];
         }
         
     }];
     
     UIAlertAction *chooseFromGallery = [UIAlertAction actionWithTitle:@"Choose photo from gallery" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        
         pickerController.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
         [self presentViewController:pickerController animated:YES completion:nil];
     }];
@@ -141,17 +141,18 @@
     
     [self presentViewController:alertController animated:true completion:nil];
 }
+
 #pragma-mark - add profile photo
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info{
-
+    
     UIImage *editedImage = [info objectForKey:UIImagePickerControllerEditedImage];
     NSURL *imageFileURL = [info objectForKey:UIImagePickerControllerReferenceURL];
     _imageName = [imageFileURL lastPathComponent];
-
+    
     PHFetchResult *result = [PHAsset fetchAssetsWithALAssetURLs:@[imageFileURL] options:nil];
     _imageName = [[result firstObject] filename];
-
+    
     if(editedImage!= nil){
         self.profileImage = editedImage;
         [self.profileImageButton setImage:editedImage forState:UIControlStateNormal];
@@ -159,7 +160,7 @@
         self.profileImage = nil;
         [self.profileImageButton setImage:nil forState:UIControlStateNormal];
     }
-
+    
     [self dismissViewControllerAnimated:true completion:nil];
 }
 

@@ -20,13 +20,17 @@
 }
 
 -(void)drawRect:(CGRect)rect {
+    
     self.isSelected = false;
     UICollectionViewFlowLayout *layout = (UICollectionViewFlowLayout *) self.roomPhotosCollectionView.collectionViewLayout;
     layout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
-    layout.minimumInteritemSpacing = 5.0;
-    layout.minimumLineSpacing = 5.0;
+    layout.minimumInteritemSpacing = 0.0;
+    layout.minimumLineSpacing = 0.0;
+    layout.itemSize = CGSizeMake(self.superview.frame.size.width, 200);
     self.roomPhotosCollectionView.showsHorizontalScrollIndicator = false;
     self.roomPhotosCollectionView.userInteractionEnabled = true;
+    self.roomPhotosCollectionView.pagingEnabled = true;
+   
 }
 
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
@@ -37,8 +41,11 @@
     
     UICollectionViewCell *singlePhotoCell = [collectionView dequeueReusableCellWithReuseIdentifier:@"PhotosCell" forIndexPath:indexPath];
     
-    CGRect imageRect = CGRectMake(0, 0 , 100, 100);
+    CGRect imageRect = CGRectMake(0, 0 , self.superview.frame.size.width , 200);
     UIImageView *photosImageView = [[UIImageView alloc] initWithFrame:imageRect];
+    photosImageView.contentMode = UIViewContentModeScaleAspectFit;
+    
+    // using caching with authorization
     
     NSString *userApiToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"userApiToken"];
     
@@ -46,23 +53,41 @@
     [manager setValue:[@"Bearer " stringByAppendingString:userApiToken] forHTTPHeaderField:@"Authorization"];
     
     NSURL *url = [NSURL URLWithString:[[BASE_URL stringByAppendingString:@"getfile/"] stringByAppendingString:self.collectionViewImagesArray[indexPath.row]]];
-    [photosImageView  sd_setImageWithURL: url];
+//    __block UIActivityIndicatorView *activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+//    activityIndicator.center = photosImageView.center;
+//    activityIndicator.hidesWhenStopped = YES;
     
+    //[photosImageView  sd_setImageWithURL: url];
+    [photosImageView sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"no-photos"] options:SDWebImageProgressiveDownload completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
+        //[activityIndicator stopAnimating];
+    }];
+    //[photosImageView addSubview:activityIndicator];
+    //[activityIndicator startAnimating];
     [singlePhotoCell.contentView addSubview:photosImageView];
     return singlePhotoCell;
-    
+        
 }
 - (void)configureCellWithPost:(Post *)post{
     
     self.collectionViewImagesArray = post.imagesArray;
     self.titleLabel.text = post.title;
-    self.descriptionLabel.text = post.offerDescription;
+    self.descriptionLabel.text = post.postDescription;
     self.priceLabel.text = [@"@Rs." stringByAppendingString:[NSString stringWithFormat:@"%d",(int) post.price]] ;
     self.numberOfRoomsLabel.text = [[NSString stringWithFormat:@"%ld",(long)post.numberOfRooms]  stringByAppendingString:@" Rooms"];
     self.userLabel.text = post.postUser.username;
     self.postIdLabel.text = [NSString stringWithFormat:@"%d", post.postid];
-    self.createdOnLabel.text = post.postCreatedOn;
+    self.createdOnLabel.text = [@"on  " stringByAppendingString:post.postCreatedOn];
+    
+    self.slug = post.postSlug;
     
 }
+
+// delegate method 
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
+    
+    [self.offersTableVCDelegate didSelectCellWithPost:self.slug];
+    
+}
+
 
 @end

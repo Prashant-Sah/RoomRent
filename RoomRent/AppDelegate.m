@@ -17,16 +17,17 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
-    NSURLCache *sharedCache = [[NSURLCache alloc] initWithMemoryCapacity:2*1024*1024 diskCapacity:100*1024*1024 diskPath:nil];
-    [NSURLCache setSharedURLCache:sharedCache];
-    
-    NSData *userData = [[NSUserDefaults standardUserDefaults] objectForKey:@"userDataKey"];
+    [FIRApp configure];
+    LocalDatabase *data = [[LocalDatabase alloc] initLocalDatabase];
+    NSLog(@"%@",data);
+    NSData *userData = [[NSUserDefaults standardUserDefaults] objectForKey:USER_DATA_KEY];
     if (userData!= nil){
         
         [[Navigator sharedInstance] setRevealViewControllerWithFrontTabViewController:@"MyTabBarController" sideViewController:@"SideBarViewController" storyBoard:@"Main"];
         [self.window makeKeyAndVisible];
-        }else{
-            
+        
+    }else{
+        
         [[Navigator sharedInstance] makeRootViewControllerWithStoryBoard:@"Account" viewController:@"SignInViewController" tabBarController:nil];
     }
     return YES;

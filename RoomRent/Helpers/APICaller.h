@@ -11,9 +11,11 @@
 #import <SDWebImage/UIImageView+WebCache.h>
 #import"Constants.h"
 #import "Alerter.h"
+#import "ProgressIndicator.h"
 
 @interface APICaller : NSObject
 
+@property NSString *userApiToken;
 // return shared instance for APICaller
 +(APICaller *) sharedInstance;
 
@@ -58,6 +60,19 @@ General calls to the api
  */
 -(void) callAPiToGetPost : (NSString *) appendString parameters :(NSDictionary *) params viewController :(UIViewController *) VC completion:(void (^)(NSDictionary *responseObjectDictionary))completionBlock;
 
+/*
+ call API to edit post
+ */
+-(void) callApiToEditPost : (NSString *) appendString parameters:(NSDictionary *) params viewController :(UIViewController *) VC completion:(void (^)(NSDictionary * responseObjectDictionary))completionBlock;
+
+/*
+ call API to delete post
+ method type = DELETE
+ 
+ @param appendString        the string to be added to the baseurl
+ @param VC                  the view controller calling this function
+ */
+-(void) callApiForDelete : (NSString *) appendString parameters:(NSDictionary *) params viewController :(UIViewController *) VC completion:(void (^)(NSDictionary * responseObjectDictionary))completionBlock;
 
 /*
  call API to get image
@@ -65,12 +80,15 @@ General calls to the api
  
  @param appendString        the string to be added to the baseurl
  @param VC                  the view controller calling this function
-
+ 
  */
-
 -(void) callApiForReceivingImage : (NSString *) appendString viewController :(UIViewController *) VC completion : (void (^) (id responseObjectFromApi)) completionBlock;
 
+/*
+ Perform API get call for any raw URL
+ */
 
+-(void)callApiForGETRawUrl:(NSString*)url parameters:(NSDictionary*)params viewController :(UIViewController *) VC completion:(void (^)(id responseObject))completionBlock;
 /*
  Error hnadler for all the above methods
  
@@ -87,5 +105,8 @@ General calls to the api
  @param VC          the view controller calling this function
  */
 
--(void)callApiForGETRawUrl:(NSString*)url parameters:(NSDictionary*)params viewController :(UIViewController *) VC completion:(void (^)(id responseObject))completionBlock;
+-(void) sendUserApiToken;
+
+-(void) callApiToEditProfileImage : (NSString *) appendString imageData:(NSData *)imageData fileName:(NSString *)fileName viewController:(UIViewController *)VC completion:(void (^)(NSDictionary * responseObjectDictionary))completionBlock;
+
 @end

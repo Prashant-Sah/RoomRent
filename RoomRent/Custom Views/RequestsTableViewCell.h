@@ -12,6 +12,7 @@
 #import "Constants.h"
 
 @interface RequestsTableViewCell : UITableViewCell
+
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 @property (weak, nonatomic) IBOutlet UILabel *descriptionLabel;
 @property (weak, nonatomic) IBOutlet UILabel *numberofRoomsLabel;
@@ -25,4 +26,5 @@
 @property BOOL isSelected;
 
 -(void) configureCellWithPost:(Post *) post;
+
 @end

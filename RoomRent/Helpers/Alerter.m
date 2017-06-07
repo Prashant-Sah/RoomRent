@@ -15,19 +15,26 @@ static Alerter *instance = nil;
 +(Alerter*) sharedInstance {
     if (instance == nil){
         instance = [[Alerter alloc] init];
-        return instance;
     }
     return instance;
 }
 
--(void)createAlert:(NSString*)alertTitle message:(NSString*)alertMessage viewController:(UIViewController*)VC  completion:(void (^)(void))completionBlock {
+-(void)createAlert:(NSString*)alertTitle message:(NSString*)alertMessage useCancelButton :(BOOL) useCancelButton viewController:(UIViewController*)VC  completion:(void (^)(void))completionBlock {
     
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:alertTitle message:alertMessage preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction *actionOk = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction* action) {
         completionBlock();
     }];
     
+    UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        
+        [VC dismissViewControllerAnimated:true  completion:nil];
+    }];
+    
     [alert addAction:actionOk];
+    if(useCancelButton){
+        [alert addAction:cancel];
+    }
     [VC presentViewController: alert animated:true completion:nil];
 }
 @end

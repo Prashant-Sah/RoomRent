@@ -12,7 +12,7 @@
 
 @property (weak, nonatomic) IBOutlet UITextField *emailAddTextField;
 @property (weak, nonatomic) IBOutlet UITextField *passwordTextField;
-
+@property UIActivityIndicatorView *activityIndicator;
 @property BOOL emailisValid;
 @property BOOL mobileisValid;
 
@@ -27,8 +27,8 @@
     _emailAddTextField.keyboardType = UIKeyboardTypeEmailAddress;
     _emailAddTextField.tag = EMAIL_ADDRESS_TEXTFIELD;
     _passwordTextField.tag = PASSWORD_TEXTFIELD;
-    self.emailAddTextField.text = @"Puspa";
-    self.passwordTextField.text = @"Puspa123#";
+    self.emailAddTextField.text = @"baby";
+    self.passwordTextField.text = @"baby";
     
     [self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
     self.navigationController.navigationBar.shadowImage = [UIImage new];
@@ -54,15 +54,18 @@
         if ([code isEqualToString:LOGIN_SUCCESS ]){
             
             [[NSUserDefaults standardUserDefaults] setObject:[responseObjectDictionary valueForKey:@"api_token"] forKey:@"userApiToken"];
-            NSData *userData = [NSKeyedArchiver archivedDataWithRootObject:[responseObjectDictionary valueForKey:@"user" ]];
-            [[NSUserDefaults standardUserDefaults] setObject:userData forKey:@"userDataKey"];
             
+            User *user = [[User alloc] initUserFromJson:[responseObjectDictionary valueForKey:@"user"]];
+            NSData *userData = [NSKeyedArchiver archivedDataWithRootObject:user];
+            [[NSUserDefaults standardUserDefaults] setObject:userData forKey:USER_DATA_KEY];
+            [self.activityIndicator stopAnimating];
             [self gotoMain];
             
         }
         else{
+            
             NSString *errorMessage = [responseObjectDictionary valueForKey:@"message"];
-            [[Alerter sharedInstance] createAlert:@"Error" message:errorMessage viewController:self completion:^{
+            [[Alerter sharedInstance] createAlert:@"Error" message:errorMessage useCancelButton:false viewController:self completion:^{
             }];
         }
     }];
@@ -77,7 +80,6 @@
 // MARK: button handlers
 
 - (IBAction)forgotPasswordPressed:(UIButton *)sender {
-    
     [[Navigator sharedInstance] presentWithNavigationController:self viewController:@"ForgotPasswordViewController"];
 }
 
@@ -87,9 +89,8 @@
 }
 
 - (IBAction)signInPressed:(UIButton *)sender {
-    
     [self makelogin];
-    
 }
+
 
 @end

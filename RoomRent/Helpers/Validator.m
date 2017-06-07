@@ -15,7 +15,6 @@ static Validator * instance = nil;
 + (Validator *)sharedInstance{
     if (instance == nil){
         instance = [[Validator alloc] init];
-        return instance;
     }
     return instance;
 }

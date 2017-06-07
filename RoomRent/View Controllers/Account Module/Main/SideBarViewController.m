@@ -12,6 +12,7 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *userNameLabel;
 @property (weak, nonatomic) IBOutlet UIButton *profileImageButton;
+@property UIActivityIndicatorView *activityIndicator;
 
 @end
 
@@ -20,21 +21,21 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    _profileImageButton.userInteractionEnabled = false;
+    self.profileImageButton.userInteractionEnabled = false;
     
-    NSData *userDataDict = [[NSUserDefaults standardUserDefaults] objectForKey:@"userDataKey"];
-    NSDictionary *userDict = [NSKeyedUnarchiver unarchiveObjectWithData:userDataDict];
-    NSString *username = [userDict valueForKey:@"username"];
-    self.userNameLabel.text = username;
+    NSData *userData = [[NSUserDefaults standardUserDefaults] objectForKey:USER_DATA_KEY];
+    User *user = [NSKeyedUnarchiver unarchiveObjectWithData:userData];
+
+    self.userNameLabel.text = user.username;
     
-    if (![[userDict valueForKey:@"profile_image"] isEqual:[NSNull null]]) {
+    if (user.profileImageURL != nil) {
         
         NSString *userApiToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"userApiToken"];
         
         SDWebImageDownloader *manager = [SDWebImageManager sharedManager].imageDownloader;
         [manager setValue:[@"Bearer " stringByAppendingString:userApiToken] forHTTPHeaderField:@"Authorization"];
         
-        NSURL *url = [NSURL URLWithString:[[BASE_URL stringByAppendingString:@"getfile/"] stringByAppendingString:[userDict valueForKey:@"profile_image"]]];
+        NSURL *url = [NSURL URLWithString:[[BASE_URL stringByAppendingString:@"getfile/"] stringByAppendingString:[NSString stringWithFormat:@"%@", user.profileImageURL]]];
         
         [self.profileImageButton sd_setImageWithURL:url forState:UIControlStateNormal];
         [self.profileImageButton setContentMode:UIViewContentModeScaleAspectFit];
@@ -52,23 +53,39 @@
 
 - (IBAction)logoutBtnPressed:(UIButton *)sender {
     
-    [[APICaller sharedInstance] callApi:@"logout" useToken:true parameters:nil imageData:nil fileName:nil viewController:self completion:^(NSDictionary *responseObjectDictionary) {
+    [self showActivityIndicator];
+    
+    [[APICaller sharedInstance] callApiForDelete:@"logout" parameters:nil viewController:self completion:^(NSDictionary *responseObjectDictionary){
         
         NSString *code = [responseObjectDictionary valueForKey:@"code"];
         if([code isEqualToString:USER_LOGGED_OUT]){
             
+            [self.activityIndicator stopAnimating];
+            
             [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"userApiToken"];
-            [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"userDataKey"];
+            [[NSUserDefaults standardUserDefaults] removeObjectForKey:USER_DATA_KEY];
             [[Navigator sharedInstance] makeRootViewControllerWithStoryBoard:@"Account" viewController:@"SignInViewController" tabBarController:nil];
         }
     }];
     
 }
 - (IBAction)clear:(UIButton *)sender {
+    
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"userApiToken"];
-    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"userDataKey"];
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:USER_DATA_KEY];
     [[Navigator sharedInstance] makeRootViewControllerWithStoryBoard:@"Account" viewController:@"SignInViewController" tabBarController:nil];
 }
 
+-(void) showActivityIndicator{
+    
+    self.activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+    self.activityIndicator.frame = CGRectMake(0, 0, 100, 100);
+    self.activityIndicator.center = self.view.center;
+    
+    [self.view addSubview:self.activityIndicator];
+    [self.activityIndicator bringSubviewToFront:self.view];
+    [self.activityIndicator startAnimating];
+    
+}
 
 @end

@@ -14,6 +14,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>GoogleToolboxForMac.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods-RoomRent.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -32,12 +37,7 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>63F00904BF8AD3A41424BC29B66BE742</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>6BB781159C4E0943507E42FA07ED56D3</key>
+		<key>75136790FADED3FC297DE78B2EBF4CBE</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -52,7 +52,17 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>BC622C112A43664024F2497598E262BA</key>
+		<key>AC91F0A8460F62054CB73663E8B0DC32</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>BAE5FC24A5842C9D1B4658A5508C3AFD</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>E1BBB76ADBF2EF4EF2CE5DF6BBC77296</key>
 		<dict>
 			<key>primary</key>
 			<true/>

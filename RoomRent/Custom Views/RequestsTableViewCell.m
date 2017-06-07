@@ -16,29 +16,17 @@
     
 }
 
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
-    [super setSelected:selected animated:animated];
-
-}
 -(void) configureCellWithPost:(Post *) post{
+    
     self.titleLabel.text = post.title;
-    self.descriptionLabel.text = post.offerDescription;
+    self.descriptionLabel.text = post.postDescription;
     self.numberofRoomsLabel.text = [NSString stringWithFormat:@"%d", post.numberOfRooms];
     self.priceLabel.text = self.priceLabel.text = [@"@Rs." stringByAppendingString:[NSString stringWithFormat:@"%d",(int) post.price]] ;
     self.locationLabel.text = post.location;
     self.postCreatedOnLabel.text = post.postCreatedOn;
-    
-    NSString *userProfileImageURL = post.postUser.profileImageURL;
-    
-    NSString *userApiToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"userApiToken"];
-    SDWebImageDownloader *manager = [SDWebImageManager sharedManager].imageDownloader;
-    [manager setValue:[@"Bearer " stringByAppendingString:userApiToken] forHTTPHeaderField:@"Authorization"];
-    
-    NSURL *url = [NSURL URLWithString:[[BASE_URL stringByAppendingString:@"getfile/"] stringByAppendingString:userProfileImageURL]];
-    [self.userImageView  sd_setImageWithURL: url];
-    self.userImageView.contentMode = UIViewContentModeScaleAspectFit;
-    
     self.usernameLabel.text = post.postUser.username;
     self.postCreatedOnLabel.text = post.postCreatedOn;
 }
+
+
 @end

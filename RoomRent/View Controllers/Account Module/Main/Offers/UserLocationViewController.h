@@ -12,6 +12,7 @@
 #import "Alerter.h"
 
 @interface UserLocationViewController : UIViewController <CLLocationManagerDelegate , UIGestureRecognizerDelegate>
+
 @property id userLocationdelegate;
 
 -(void) addAnnotation :(UIGestureRecognizer *) gesture;

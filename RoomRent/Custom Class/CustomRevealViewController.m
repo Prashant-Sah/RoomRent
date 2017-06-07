@@ -12,12 +12,14 @@
 #import <SWRevealViewController.h>
 
 @interface CustomRevealViewController () <SWRevealViewControllerDelegate>
-
+@property UIView *activityIndicatorBackgroundView;
+@property UIActivityIndicatorView *activityIndicator;
 @end
 
 @implementation CustomRevealViewController
 
 - (void)viewDidLoad {
+    
     [super viewDidLoad];
     
     SWRevealViewController *revealViewController = self.revealViewController;
@@ -27,7 +29,7 @@
     UIBarButtonItem *sideBarButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"menu-icon.png"] style:UIBarButtonItemStylePlain target:revealViewController action:@selector(revealToggle:)];
     self.navigationItem.leftBarButtonItem = sideBarButton;
     [self.view addGestureRecognizer: revealViewController.panGestureRecognizer];
-
+    
     revealViewController.rearViewRevealOverdraw = 0.0f;
 }
 

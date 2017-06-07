@@ -13,7 +13,12 @@
 #import "Post.h"
 #import "OffersTableViewCell.h"
 #import "SinglePostViewController.h"
+#import "PostsOnMapViewController.h"
+#import <CoreLocation/CoreLocation.h>
 
-@interface OffersViewController : CustomRevealViewController <UITableViewDataSource , UITableViewDelegate,  UIScrollViewDelegate , UIGestureRecognizerDelegate>
+@interface OffersViewController : CustomRevealViewController <UITableViewDataSource , UITableViewDelegate,  UIScrollViewDelegate, OffersCellSelectedProtocol>
+
+-(void)loadPostswithOffset:(int ) offset;
+-(void) refreshTable;
 
 @end

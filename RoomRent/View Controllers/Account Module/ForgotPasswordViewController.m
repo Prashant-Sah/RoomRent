@@ -35,24 +35,19 @@
 - (IBAction)sendPasswordButtonPressed:(UIButton *)sender {
     
     NSDictionary *params = @{
-                             @"email" : _emailAddressTextField.text
+                             @"email" : self.emailAddressTextField.text
                              };
-    [[APICaller sharedInstance] callApi:@"forgetpassword" useToken:false parameters:params imageData:nil fileName:nil viewController:self completion:^(NSDictionary *responseObjectDictionary) {
-
-        NSString *code = [responseObjectDictionary valueForKey:@"code"];
+    
+    [[APICaller sharedInstance] callApi:@"forgotpassword" useToken:false parameters:params imageData:nil fileName:nil viewController:self completion:^(NSDictionary *responseObjectDictionary) {
         
-        if ([code isEqualToString:USER_REGISTERED ]){
+        NSLog(@"%@",responseObjectDictionary);
             
-            NSString *message = [responseObjectDictionary valueForKey:@"message"];
-            [[Alerter sharedInstance] createAlert:@"Success" message:message viewController:self completion:^{
-            }];
-            [self dismissViewControllerAnimated:true  completion:nil];
-            
+        if([[responseObjectDictionary valueForKey:@"code"] isEqualToString:PASSWORD_RESET_LINK_SENT]){
+            [self dismissViewControllerAnimated:true completion:nil];
         }
         else{
-            
             NSString *errorMessage = [responseObjectDictionary valueForKey:@"message"];
-            [[Alerter sharedInstance] createAlert:@"Error" message:errorMessage viewController:self completion:^{
+            [[Alerter sharedInstance] createAlert:@"Error" message:errorMessage useCancelButton:false viewController:self completion:^{
             }];
         }
     }];

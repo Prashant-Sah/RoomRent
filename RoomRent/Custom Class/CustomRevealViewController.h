@@ -11,4 +11,6 @@
 
 @interface CustomRevealViewController : UIViewController <SWRevealViewControllerDelegate>
 
+-(void) showActivityIndicator;
+-(void) stopAndHideActivityIndicator;
 @end

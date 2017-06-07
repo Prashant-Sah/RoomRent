@@ -32,27 +32,24 @@ CLLocationManager *locationManager;
     self.mapView.delegate = self;
     myAnnotation = [[MKPointAnnotation alloc]init];
     UILongPressGestureRecognizer *longPressGesture = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(addAnnotation:)];
+    longPressGesture.minimumPressDuration = 0.5;
     [self.mapView addGestureRecognizer:longPressGesture];
     
     
 }
 
 //MARK - CLLocationManager Delegate Functions
-- (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation
-{
-    NSLog(@"didUpdateToLocation: %@", newLocation);
+- (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation{
+    
     _currentLocation = newLocation;
     if (self.currentLocation != nil) {
         [locationManager stopUpdatingLocation];
-        //NSLog(@"%.8f",_currentLocation.coordinate.latitude);
-        //NSLog(@"%.8f",_currentLocation.coordinate.longitude);
-        
-        MKCoordinateRegion region;
+               MKCoordinateRegion region;
         region.center = self.currentLocation.coordinate;
         region.span = MKCoordinateSpanMake(0.05, 0.05);
         
         region = [_mapView regionThatFits:region];
-        [_mapView setRegion:region animated:YES];
+        [self.mapView setRegion:region animated:YES];
         
     }
 }
@@ -61,10 +58,10 @@ CLLocationManager *locationManager;
 {
     NSLog(@"didFailWithError: %@", error);
     
-    [[Alerter sharedInstance] createAlert:@"Error" message:@"Faield to get your location" viewController:self completion:nil];
+    [[Alerter sharedInstance] createAlert:@"Error" message:@"Faield to get your location" useCancelButton:false viewController:self completion:nil];
 }
 
-
+// Add Annotation on longpres
 -(void)addAnnotation:(UIGestureRecognizer *)gesture{
     
     if (gesture.state != UIGestureRecognizerStateEnded) {

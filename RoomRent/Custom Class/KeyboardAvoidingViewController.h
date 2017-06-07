@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface KeyboardAvoidingViewController : UIViewController
+@interface KeyboardAvoidingViewController : UIViewController 
 
 +(void) setActiveTextFieldPosition: (CGPoint) textFieldPosition;
 

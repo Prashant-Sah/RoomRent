@@ -10,169 +10,146 @@
 
 @interface OffersViewController ()
 @property (weak, nonatomic) IBOutlet UITableView *offersTableView;
-@property (weak, nonatomic) IBOutlet UIBarButtonItem *addPostButton;
+@property UIRefreshControl *refresher;
+
+@property  NSMutableArray *offersPostArray;
+@property  NSMutableArray *postsLocation;
+@property  BOOL isLastPage;
+@property  int offsetValue;
+
 @end
 
 @implementation OffersViewController
 
-NSMutableArray *postArray = nil;
-NSArray *imagesForASinglePost = nil;
-UIRefreshControl *refresher;
-
 - (void)viewDidLoad {
-    [super viewDidLoad];
     
-    [self loadPosts];
+    [super viewDidLoad];
+    [self loadPostswithOffset:0];
     _offersTableView.dataSource = self;
     _offersTableView.delegate = self;
     self.offersTableView.rowHeight = UITableViewAutomaticDimension;
     self.offersTableView.estimatedRowHeight = 320;
     
+    // register nibfile
     UINib *cellNib = [UINib nibWithNibName:@"OffersTableViewCell" bundle:nil];
     [self.offersTableView registerNib:cellNib forCellReuseIdentifier:@"OffersTableViewCell"];
     
     [self.revealViewController panGestureRecognizer];
     
-    refresher = [[UIRefreshControl alloc] init];
-    refresher.attributedTitle = [[NSMutableAttributedString alloc] initWithString:@"Pull to refresh!!"];
-    [self.offersTableView addSubview:refresher];
-    [refresher addTarget:self action:@selector(refreshTable) forControlEvents:UIControlEventValueChanged];
+    //Add refresher control
+    self.refresher = [[UIRefreshControl alloc] init];
+    self.refresher.attributedTitle = [[NSMutableAttributedString alloc] initWithString:@"Pull to refresh!!"];
+    [self.offersTableView addSubview:self.refresher];
+    [self.refresher addTarget:self action:@selector(refreshTable) forControlEvents:UIControlEventValueChanged];
+    
+    self.isLastPage = false;
+    self.offersPostArray = [[NSMutableArray alloc] init];
+    self.postsLocation = [[NSMutableArray alloc] init];
+    
+    
 }
-
 
 -(void) refreshTable{
-    [self loadPosts];
-    [refresher endRefreshing];
-}
--(void)viewWillAppear:(BOOL)animated{
     
-    //[self loadPosts];
+    [self loadPostswithOffset:0];
+    [self.refresher endRefreshing];
+    self.isLastPage = false;
 }
 
--(void)loadPosts{
-    postArray = [[NSMutableArray alloc] init];
+-(void)loadPostswithOffset:(int ) offset{
     
-    NSDictionary *params = @{
-                             @"post_type" : OFFER,
-                             @"offset" : @0
-                             };
     
-    [[APICaller sharedInstance] callApi:@"post/all" headerFlag:true parameters:params imageData:nil fileName:nil viewController:self completion:^(NSDictionary *responseObjectDictionary) {
+    
+    if(!self.isLastPage){
+        if(offset == 0){
+            [self.offersPostArray removeAllObjects];
+        }
         
-        NSLog(@"%@",responseObjectDictionary);
-        
-        NSString *code = [responseObjectDictionary valueForKey:@"code"];
-        if ([code isEqualToString:POSTS_FOUND]){
+        NSNumber *offsetParam = [NSNumber numberWithInt:offset];
+        NSDictionary *params = @{
+                                 @"type" : @"offers",
+                                 @"offset": offsetParam
+                                 };
+        [[APICaller sharedInstance] callAPiToGetPost:@"posts" parameters:params viewController:self completion:^(NSDictionary *responseObjectDictionary) {
             
-            NSDictionary *postData = [responseObjectDictionary valueForKey:@"data"];
-            for (NSDictionary *singlePost in postData) {
+            NSLog(@"%@",responseObjectDictionary);
+            
+            NSString *code = [responseObjectDictionary valueForKey:@"code"];
+            if ([code isEqualToString:POSTS_FOUND]){
                 
-                Post *post = [[Post alloc] initPostFromJson:singlePost];
-                [postArray addObject:post];
+                NSDictionary *postData = [responseObjectDictionary valueForKey:@"data"];
+                
+                for (NSDictionary *singlePost in postData) {
+                    
+                    Post *post = [[Post alloc] initPostFromJson:singlePost];
+                    [self.offersPostArray addObject:post];
+                    CLLocation *postLocation = [[CLLocation alloc] initWithLatitude:post.latitude longitude:post.longitude];
+                    [self.postsLocation addObject:postLocation];
+                    
+                }
+                self.isLastPage = [[responseObjectDictionary valueForKey:@"is_last_page"] boolValue];
+                self.offsetValue = [[responseObjectDictionary valueForKey:@"offset"] intValue];
+                
+                [self.offersTableView reloadData];
                 
             }
-            [self.offersTableView reloadData];
-        }
-    }];
-    
-}
-
-//MARK- CollectionView DataSource and Delegate Functions
-- (NSInteger)numberOfSectionsInCollectionView:(RoomPhotosCollectionView *)collectionView{
-    return 1;
-}
-
-- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
-    return imagesForASinglePost.count;
-}
-
-- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
-    
-    UICollectionViewCell *singlePhotoCell = [collectionView dequeueReusableCellWithReuseIdentifier:collectionViewCellIdentifier forIndexPath:indexPath];
-    
-    for (NSString *singleImageURL in imagesForASinglePost) {
-        
-        [[APICaller sharedInstance] callApiForReceivingImage:[@"getfile/" stringByAppendingString:singleImageURL] viewController:self completion:^(id responseObjectFromApi) {
-            
-            CGSize destinationSize = CGSizeMake(100, 100);
-            UIGraphicsBeginImageContext(destinationSize);
-            [responseObjectFromApi drawInRect:CGRectMake(0,0,destinationSize.width,destinationSize.height)];
-            UIImage *resizedImage = UIGraphicsGetImageFromCurrentImageContext();
-            
-            CGRect imageRect = CGRectMake(0, 0 , 100, 100);
-            UIImageView *photosImageView = [[UIImageView alloc] initWithFrame:imageRect];
-            
-            [singlePhotoCell.contentView addSubview:[photosImageView initWithImage:resizedImage]];
-
         }];
     }
-    return singlePhotoCell;
 }
 
 
-
-//MARK- TableView DataSource and Delegate Functions
+//MARK: TableView DataSource and Delegate Functions
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return postArray.count;
-}
-
-- (void)tableView:(UITableView *)tableView willDisplayCell:(OffersTableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
-    
-    [cell setCollectionViewDataSourceDelegate:self forRow:(int)indexPath.row];
-    
+    return self.offersPostArray.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
     OffersTableViewCell *cell  = (OffersTableViewCell *)  [tableView dequeueReusableCellWithIdentifier:@"OffersTableViewCell"];
-    [[cell roomPhotosCollectionView] registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:collectionViewCellIdentifier];
-    cell.roomPhotosCollectionView.contentSize = CGSizeMake(self.view.frame.size.width, 100) ;
-    cell.titleLabel.text = [postArray[indexPath.row] title];
-    cell.descriptionLabel.text = [postArray[indexPath.row] offerDescription];
-    cell.priceLabel.text = [@"@Rs." stringByAppendingString:[NSString stringWithFormat:@"%d",(int) [postArray[indexPath.row] price]]] ;
-    cell.numberOfRoomsLabel.text = [[NSString stringWithFormat:@"%ld",(long)[postArray[indexPath.row] numberOfRooms]]  stringByAppendingString:@" Rooms"];
-    cell.userLabel.text = [postArray[indexPath.row] user];
-    imagesForASinglePost = [postArray[indexPath.row] imagesArray];
-    
+    cell.offersTableVCDelegate = self;
+    [cell configureCellWithPost:self.offersPostArray[indexPath.row]];
+    [cell.roomPhotosCollectionView reloadData];
     return cell;
-    
 }
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    
     SinglePostViewController *singlePostVC = [self.storyboard instantiateViewControllerWithIdentifier:@"SinglePostViewController"];
-    singlePostVC.postId = [postArray[indexPath.row] postid];
-    NSLog(@"%d", [postArray[indexPath.row] postid]);
+    //singlePostVC.postId = [postArray[indexPath.row] postid];
+    singlePostVC.slug = [self.offersPostArray[indexPath.row] postSlug];
+    singlePostVC.postType = OFFER;
     [self.navigationController pushViewController:singlePostVC animated:true];
 }
 
-- (IBAction)addPostButtonPressed:(UIBarButtonItem *)sender {
+// Delegate function of OffersCellSelectedProtocol
+-(void)didSelectCellWithPost:(NSString *)postSlug{
     
-    UIAlertController *aLertController = [UIAlertController alertControllerWithTitle:(@"Alert") message:@"Select the type of Post" preferredStyle:UIAlertControllerStyleAlert];
+    SinglePostViewController *singlePostVC = [self.storyboard instantiateViewControllerWithIdentifier:@"SinglePostViewController"];
+    singlePostVC.slug = postSlug;
+    singlePostVC.postType = OFFER;
+    [self.navigationController pushViewController:singlePostVC animated:true];
+}
+
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
     
-    UIAlertAction *addOffer = [UIAlertAction actionWithTitle:@"Add Offer" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        [[Navigator sharedInstance] presentWithNavigationController:self viewController:@"AddPostViewController"];
-    }];
+    float endScrolling = scrollView.contentOffset.y + scrollView.frame.size.height;
     
-    
-    UIAlertAction *addRequest = [UIAlertAction actionWithTitle:@"Add Request" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        [self dismissViewControllerAnimated:true completion:nil];
+    if (endScrolling >= scrollView.contentSize.height){
         
-    }];
+        [self loadPostswithOffset:self.offsetValue];
+    }
     
-    UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"Cancel??" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-        [self dismissViewControllerAnimated:true completion:nil];
-    }];
+}
+
+- (IBAction)allOffersLocationButtonPressed:(UIButton*)sender {
     
-    [aLertController addAction:addOffer];
-    [aLertController addAction:addRequest];
-    [aLertController addAction:cancel];
-    
-    [self presentViewController:aLertController animated:true completion:nil];
+    PostsOnMapViewController *postsOnMapVC = [self.storyboard instantiateViewControllerWithIdentifier:@"PostsOnMapViewController"];
+    postsOnMapVC.postsLocationArray = self.postsLocation;
+    [self.navigationController pushViewController:postsOnMapVC animated:true];
 }
 
 @end

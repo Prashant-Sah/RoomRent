@@ -12,7 +12,7 @@
 		8F0CBB2E1EA4B8C50069F1ED /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F0CBB2D1EA4B8C50069F1ED /* ProfileViewController.m */; };
 		8F15B3B81EC0171D0011FD6B /* RequestsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F15B3B61EC0171D0011FD6B /* RequestsTableViewCell.m */; };
 		8F15B3B91EC0171D0011FD6B /* RequestsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8F15B3B71EC0171D0011FD6B /* RequestsTableViewCell.xib */; };
-		8F1EA3A81EA7307E00E8C34E /* ImagePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F1EA3A71EA7307E00E8C34E /* ImagePicker.m */; };
+		8F15DB5A1EE5307B00B3A8D6 /* DBManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F15DB591EE5307B00B3A8D6 /* DBManager.m */; };
 		8F248DCA1E935ACD00786B69 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8F248DC91E935ACC00786B69 /* Main.storyboard */; };
 		8F248DD51E9393E000786B69 /* KeyboardAvoidingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F248DD41E9393DF00786B69 /* KeyboardAvoidingViewController.m */; };
 		8F248DDF1E93AF2200786B69 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F248DDE1E93AF2200786B69 /* User.m */; };
@@ -26,14 +26,17 @@
 		8F628AE71EB756D700B320A7 /* SinglePostViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F628AE01EB756D700B320A7 /* SinglePostViewController.m */; };
 		8F628AE81EB756D700B320A7 /* UserLocationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F628AE21EB756D700B320A7 /* UserLocationViewController.m */; };
 		8F628AE91EB756D700B320A7 /* SideBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F628AE41EB756D700B320A7 /* SideBarViewController.m */; };
-		8F628AEC1EB757A700B320A7 /* DashBoardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F628AEB1EB757A700B320A7 /* DashBoardViewController.m */; };
 		8F628AEF1EB7585900B320A7 /* RequestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F628AEE1EB7585900B320A7 /* RequestViewController.m */; };
 		8F63C1051E95FC82000790D6 /* Validator.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F63C1041E95FC82000790D6 /* Validator.m */; };
 		8F63C1081E962D90000790D6 /* APICaller.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F63C1071E962D90000790D6 /* APICaller.m */; };
+		8F77245D1ED434A500136556 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8F77245C1ED434A500136556 /* GoogleService-Info.plist */; };
 		8F85F3951E94A44B00812C10 /* Alerter.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F85F3941E94A44B00812C10 /* Alerter.m */; };
 		8F93E3B21E8E267E008C02D4 /* SignInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F93E3B11E8E267E008C02D4 /* SignInViewController.m */; };
 		8F93E3B51E8E272C008C02D4 /* ForgotPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F93E3B41E8E272C008C02D4 /* ForgotPasswordViewController.m */; };
 		8F93E3B81E8E4F3E008C02D4 /* SignUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F93E3B71E8E4F3E008C02D4 /* SignUpViewController.m */; };
+		8F964FFA1ED2A27000E51991 /* MyPostViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F964FF91ED2A26F00E51991 /* MyPostViewController.m */; };
+		8FD09E331EE1171200E09D2A /* ProgressIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FD09E321EE1171200E09D2A /* ProgressIndicator.m */; };
+		8FD95AF21ED8007700E92DC1 /* PostsOnMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FD95AF11ED8007700E92DC1 /* PostsOnMapViewController.m */; };
 		8FDD48E91EA8800F003DDEE9 /* Post.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FDD48E81EA8800F003DDEE9 /* Post.m */; };
 		8FDD48EE1EA88467003DDEE9 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8FDD48ED1EA88467003DDEE9 /* CoreLocation.framework */; };
 		8FDD48F01EA88474003DDEE9 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8FDD48EF1EA88474003DDEE9 /* MapKit.framework */; };
@@ -55,8 +58,8 @@
 		8F15B3B51EC0171D0011FD6B /* RequestsTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RequestsTableViewCell.h; sourceTree = "<group>"; };
 		8F15B3B61EC0171D0011FD6B /* RequestsTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RequestsTableViewCell.m; sourceTree = "<group>"; };
 		8F15B3B71EC0171D0011FD6B /* RequestsTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RequestsTableViewCell.xib; sourceTree = "<group>"; };
-		8F1EA3A61EA7307E00E8C34E /* ImagePicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImagePicker.h; sourceTree = "<group>"; };
-		8F1EA3A71EA7307E00E8C34E /* ImagePicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImagePicker.m; sourceTree = "<group>"; };
+		8F15DB581EE5307B00B3A8D6 /* DBManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBManager.h; sourceTree = "<group>"; };
+		8F15DB591EE5307B00B3A8D6 /* DBManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBManager.m; sourceTree = "<group>"; };
 		8F248DC91E935ACC00786B69 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		8F248DD31E9393DF00786B69 /* KeyboardAvoidingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeyboardAvoidingViewController.h; sourceTree = "<group>"; };
 		8F248DD41E9393DF00786B69 /* KeyboardAvoidingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeyboardAvoidingViewController.m; sourceTree = "<group>"; };
@@ -74,20 +77,19 @@
 		8F628ADB1EB756D700B320A7 /* AddPostViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddPostViewController.m; sourceTree = "<group>"; };
 		8F628ADD1EB756D700B320A7 /* OffersViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OffersViewController.h; sourceTree = "<group>"; };
 		8F628ADE1EB756D700B320A7 /* OffersViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OffersViewController.m; sourceTree = "<group>"; };
-		8F628ADF1EB756D700B320A7 /* SinglePostViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SinglePostViewController.h; sourceTree = "<group>"; };
-		8F628AE01EB756D700B320A7 /* SinglePostViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SinglePostViewController.m; sourceTree = "<group>"; };
+		8F628ADF1EB756D700B320A7 /* SinglePostViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SinglePostViewController.h; path = Offers/SinglePostViewController.h; sourceTree = "<group>"; };
+		8F628AE01EB756D700B320A7 /* SinglePostViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SinglePostViewController.m; path = Offers/SinglePostViewController.m; sourceTree = "<group>"; };
 		8F628AE11EB756D700B320A7 /* UserLocationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserLocationViewController.h; sourceTree = "<group>"; };
 		8F628AE21EB756D700B320A7 /* UserLocationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserLocationViewController.m; sourceTree = "<group>"; };
 		8F628AE31EB756D700B320A7 /* SideBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SideBarViewController.h; sourceTree = "<group>"; };
 		8F628AE41EB756D700B320A7 /* SideBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SideBarViewController.m; sourceTree = "<group>"; };
-		8F628AEA1EB757A700B320A7 /* DashBoardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DashBoardViewController.h; sourceTree = "<group>"; };
-		8F628AEB1EB757A700B320A7 /* DashBoardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DashBoardViewController.m; sourceTree = "<group>"; };
 		8F628AED1EB7585900B320A7 /* RequestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RequestViewController.h; sourceTree = "<group>"; };
 		8F628AEE1EB7585900B320A7 /* RequestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RequestViewController.m; sourceTree = "<group>"; };
 		8F63C1031E95FC82000790D6 /* Validator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Validator.h; sourceTree = "<group>"; };
 		8F63C1041E95FC82000790D6 /* Validator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Validator.m; sourceTree = "<group>"; };
 		8F63C1061E962D90000790D6 /* APICaller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APICaller.h; sourceTree = "<group>"; };
 		8F63C1071E962D90000790D6 /* APICaller.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APICaller.m; sourceTree = "<group>"; };
+		8F77245C1ED434A500136556 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		8F85F3931E94A44B00812C10 /* Alerter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Alerter.h; sourceTree = "<group>"; };
 		8F85F3941E94A44B00812C10 /* Alerter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Alerter.m; sourceTree = "<group>"; };
 		8F85F3961E94B08E00812C10 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
@@ -97,7 +99,13 @@
 		8F93E3B41E8E272C008C02D4 /* ForgotPasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForgotPasswordViewController.m; sourceTree = "<group>"; };
 		8F93E3B61E8E4F3E008C02D4 /* SignUpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignUpViewController.h; sourceTree = "<group>"; };
 		8F93E3B71E8E4F3E008C02D4 /* SignUpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignUpViewController.m; sourceTree = "<group>"; };
+		8F964FF81ED2A26F00E51991 /* MyPostViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyPostViewController.h; sourceTree = "<group>"; };
+		8F964FF91ED2A26F00E51991 /* MyPostViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyPostViewController.m; sourceTree = "<group>"; };
 		8FAA4C7C1EA5C51200B55334 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
+		8FD09E311EE1171100E09D2A /* ProgressIndicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProgressIndicator.h; sourceTree = "<group>"; };
+		8FD09E321EE1171200E09D2A /* ProgressIndicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProgressIndicator.m; sourceTree = "<group>"; };
+		8FD95AF01ED8007700E92DC1 /* PostsOnMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PostsOnMapViewController.h; sourceTree = "<group>"; };
+		8FD95AF11ED8007700E92DC1 /* PostsOnMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PostsOnMapViewController.m; sourceTree = "<group>"; };
 		8FDD48E71EA8800F003DDEE9 /* Post.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Post.h; sourceTree = "<group>"; };
 		8FDD48E81EA8800F003DDEE9 /* Post.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Post.m; sourceTree = "<group>"; };
 		8FDD48ED1EA88467003DDEE9 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
@@ -136,6 +144,8 @@
 			children = (
 				8F04E4951EB1BA48001E1972 /* LocalDatabase.h */,
 				8F04E4961EB1BA4E001E1972 /* LocalDatabase.m */,
+				8F15DB581EE5307B00B3A8D6 /* DBManager.h */,
+				8F15DB591EE5307B00B3A8D6 /* DBManager.m */,
 			);
 			path = Database;
 			sourceTree = "<group>";
@@ -215,6 +225,7 @@
 				8F4D2D351E8CFBE800347F9A /* LaunchScreen.storyboard */,
 				8F4D2D331E8CFBE800347F9A /* Assets.xcassets */,
 				8F4D2D381E8CFBE800347F9A /* Info.plist */,
+				8F77245C1ED434A500136556 /* GoogleService-Info.plist */,
 				8F4D2D271E8CFBE800347F9A /* Supporting Files */,
 			);
 			path = RoomRent;
@@ -234,8 +245,12 @@
 				8F628AD81EB756D700B320A7 /* Ask */,
 				8F628AD91EB756D700B320A7 /* DashBoard */,
 				8F628ADC1EB756D700B320A7 /* Offers */,
+				8F628ADF1EB756D700B320A7 /* SinglePostViewController.h */,
+				8F628AE01EB756D700B320A7 /* SinglePostViewController.m */,
 				8F628AE31EB756D700B320A7 /* SideBarViewController.h */,
 				8F628AE41EB756D700B320A7 /* SideBarViewController.m */,
+				8FD95AF01ED8007700E92DC1 /* PostsOnMapViewController.h */,
+				8FD95AF11ED8007700E92DC1 /* PostsOnMapViewController.m */,
 			);
 			name = Main;
 			path = "Account Module/Main";
@@ -255,8 +270,8 @@
 			children = (
 				8F628ADA1EB756D700B320A7 /* AddPostViewController.h */,
 				8F628ADB1EB756D700B320A7 /* AddPostViewController.m */,
-				8F628AEA1EB757A700B320A7 /* DashBoardViewController.h */,
-				8F628AEB1EB757A700B320A7 /* DashBoardViewController.m */,
+				8F964FF81ED2A26F00E51991 /* MyPostViewController.h */,
+				8F964FF91ED2A26F00E51991 /* MyPostViewController.m */,
 			);
 			path = DashBoard;
 			sourceTree = "<group>";
@@ -266,8 +281,6 @@
 			children = (
 				8F628ADD1EB756D700B320A7 /* OffersViewController.h */,
 				8F628ADE1EB756D700B320A7 /* OffersViewController.m */,
-				8F628ADF1EB756D700B320A7 /* SinglePostViewController.h */,
-				8F628AE01EB756D700B320A7 /* SinglePostViewController.m */,
 				8F628AE11EB756D700B320A7 /* UserLocationViewController.h */,
 				8F628AE21EB756D700B320A7 /* UserLocationViewController.m */,
 			);
@@ -317,8 +330,8 @@
 				8F63C1071E962D90000790D6 /* APICaller.m */,
 				8FF2CE051E9DF0920059E3F5 /* Navigator.h */,
 				8FF2CE061E9DF0920059E3F5 /* Navigator.m */,
-				8F1EA3A61EA7307E00E8C34E /* ImagePicker.h */,
-				8F1EA3A71EA7307E00E8C34E /* ImagePicker.m */,
+				8FD09E311EE1171100E09D2A /* ProgressIndicator.h */,
+				8FD09E321EE1171200E09D2A /* ProgressIndicator.m */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -410,6 +423,7 @@
 				8F4D2D341E8CFBE800347F9A /* Assets.xcassets in Resources */,
 				8F4D2D321E8CFBE800347F9A /* Account.storyboard in Resources */,
 				8F248DCA1E935ACD00786B69 /* Main.storyboard in Resources */,
+				8F77245D1ED434A500136556 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -477,23 +491,25 @@
 				8F93E3B81E8E4F3E008C02D4 /* SignUpViewController.m in Sources */,
 				8FF2CE111E9E024D0059E3F5 /* OffersTableViewCell.m in Sources */,
 				8F628AE61EB756D700B320A7 /* OffersViewController.m in Sources */,
+				8F15DB5A1EE5307B00B3A8D6 /* DBManager.m in Sources */,
 				8F628AE81EB756D700B320A7 /* UserLocationViewController.m in Sources */,
-				8F1EA3A81EA7307E00E8C34E /* ImagePicker.m in Sources */,
 				8F4D2D2C1E8CFBE800347F9A /* AppDelegate.m in Sources */,
 				8FF2CE0C1E9E018B0059E3F5 /* CustomButton.m in Sources */,
+				8FD95AF21ED8007700E92DC1 /* PostsOnMapViewController.m in Sources */,
 				8F04E4971EB1BA4E001E1972 /* LocalDatabase.m in Sources */,
 				8F85F3951E94A44B00812C10 /* Alerter.m in Sources */,
 				8F628AEF1EB7585900B320A7 /* RequestViewController.m in Sources */,
 				8F0CBB2E1EA4B8C50069F1ED /* ProfileViewController.m in Sources */,
 				8F93E3B21E8E267E008C02D4 /* SignInViewController.m in Sources */,
 				8F628AE71EB756D700B320A7 /* SinglePostViewController.m in Sources */,
+				8F964FFA1ED2A27000E51991 /* MyPostViewController.m in Sources */,
 				8FDD71521EA47CAD006C0020 /* CustomRevealViewController.m in Sources */,
 				8F628AE91EB756D700B320A7 /* SideBarViewController.m in Sources */,
 				8FDD48E91EA8800F003DDEE9 /* Post.m in Sources */,
 				8F63C1051E95FC82000790D6 /* Validator.m in Sources */,
 				8F4D2D291E8CFBE800347F9A /* main.m in Sources */,
 				8F63C1081E962D90000790D6 /* APICaller.m in Sources */,
-				8F628AEC1EB757A700B320A7 /* DashBoardViewController.m in Sources */,
+				8FD09E331EE1171200E09D2A /* ProgressIndicator.m in Sources */,
 				8F628AE51EB756D700B320A7 /* AddPostViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -617,7 +633,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = RoomRent/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = ebpearls.RoomRent;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ebpearls.roomrent;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -629,7 +645,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = RoomRent/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = ebpearls.RoomRent;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ebpearls.roomrent;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;

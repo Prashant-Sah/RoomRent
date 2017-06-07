@@ -22,17 +22,22 @@
 @property (weak, nonatomic) IBOutlet UILabel *numberOfRoomsLabel;
 @property (weak, nonatomic) IBOutlet UILabel *postIdLabel;
 @property (weak, nonatomic) IBOutlet UILabel *userLabel;
-@property NSArray *collectionViewImagesArray;
 @property (weak, nonatomic) IBOutlet UILabel *createdOnLabel;
 
+@property NSArray *collectionViewImagesArray;
 @property BOOL isSelected;
-@property id delegate;
+@property (weak) id offersTableVCDelegate;
+@property NSString *slug;
+
 -(void)configureCellWithPost :(Post *) post;
 
 @end
 
-@protocol CellSelectedProtocol <NSObject>
+@protocol OffersCellSelectedProtocol <NSObject>
 
--(void) didSelectCell:(OffersTableViewCell *) selectedCell;
+// defining delegate method for redirecting to the singlePost VC from the tableview
+//implemented in OffersViewController
+
+-(void) didSelectCellWithPost :(NSString *) postSlug;
 
 @end

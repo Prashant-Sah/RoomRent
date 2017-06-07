@@ -7,9 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <Firebase/Firebase.h>
 #import <SWRevealViewController.h>
 #import "Navigator.h"
-#import "OffersViewController.h"
+#import "Constants.h"
+#import "LocalDatabase.h"
+
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 

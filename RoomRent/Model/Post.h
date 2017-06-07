@@ -13,7 +13,7 @@
 
 @property int postid;
 @property NSString *title;
-@property NSString *offerDescription;
+@property NSString *postDescription;
 @property int numberOfRooms;
 @property double price;
 @property NSString *location;
@@ -21,9 +21,11 @@
 @property double longitude;
 @property NSArray *imagesArray;
 @property NSString *postCreatedOn;
+@property int postType;
 @property User *postUser;
+
+@property NSString *postSlug;
 
 - (Post*) initPostFromJson : (NSDictionary *) postDict;
 
 @end
-

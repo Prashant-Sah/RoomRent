@@ -19,7 +19,6 @@
     self.mobile = [userDict valueForKey:@"phone"];
     self.profileImageURL = [userDict valueForKey:@"profile_image"];
 
-    
     return self;
 }
 

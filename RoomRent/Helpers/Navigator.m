@@ -17,7 +17,6 @@ static Navigator *instance = nil;
 +(Navigator *)sharedInstance{
     if(instance == nil){
         instance = [[Navigator alloc] initNavigator];
-        return instance;
     }
     return  instance;
 }

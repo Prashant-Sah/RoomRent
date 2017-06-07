@@ -12,6 +12,7 @@
 #import "Navigator.h"
 #import "APICaller.h"
 #import "Constants.h"
+#import "User.h"
 
 @interface ProfileViewController : UIViewController <UIImagePickerControllerDelegate>
 

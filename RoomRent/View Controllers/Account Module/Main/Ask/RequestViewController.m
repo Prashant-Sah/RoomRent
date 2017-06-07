@@ -14,72 +14,77 @@
 @property BOOL isLastPage;
 @property int offsetValue;
 @property UIRefreshControl *refresher;
-@property UIActivityIndicatorView *activityIndicator;
 @end
 
 @implementation RequestViewController
 
 - (void)viewDidLoad {
+    
     [super viewDidLoad];
-    [self loadPostswithOffset:0];
     self.requestTableView.dataSource = self;
     self.requestTableView.delegate = self;
     self.requestTableView.rowHeight = UITableViewAutomaticDimension;
-    self.requestTableView.estimatedRowHeight = 190;
+    self.requestTableView.estimatedRowHeight = 200;
     
+    //register nib
     UINib *cellNib = [UINib nibWithNibName:@"RequestsTableViewCell" bundle:nil];
     [self.requestTableView registerNib:cellNib forCellReuseIdentifier:@"RequestsTableViewCell"];
     
     [self.revealViewController panGestureRecognizer];
     
-    self.self.refresher = [[UIRefreshControl alloc] init];
+    self.refresher = [[UIRefreshControl alloc] init];
     self.refresher.attributedTitle = [[NSMutableAttributedString alloc] initWithString:@"Pull to refresh!!"];
     [self.requestTableView addSubview:self.refresher];
     [self.refresher addTarget:self action:@selector(refreshTable) forControlEvents:UIControlEventValueChanged];
+    
     self.requestsPostArray = [[NSMutableArray alloc] init];
-
     self.isLastPage = false;
+    [self loadPostswithOffset:0];
 }
 
 -(void) refreshTable{
+    
     [self loadPostswithOffset:0];
     [self.refresher endRefreshing];
-}
-
--(void) showActivityIndicator{
-    self.activityIndicator.center = self.view.center;
-    self.activityIndicator.hidesWhenStopped = true;
-    self.activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyleWhiteLarge;
-    [self.view addSubview:self.activityIndicator];
+    self.isLastPage = false;
 }
 
 -(void)loadPostswithOffset:(int ) offset {
     
-    NSNumber *offsetParam = [NSNumber numberWithInt:offset];
-    NSDictionary *params = @{
-                             @"offset": offsetParam
-                             };
-    [[APICaller sharedInstance] callAPiToGetPost:@"posts/asks" parameters:params viewController:self completion:^(NSDictionary *responseObjectDictionary) {
-        
-        NSString *code = [responseObjectDictionary valueForKey:@"code"];
-        if ([code isEqualToString:POSTS_FOUND]){
-            
-            NSDictionary *postData = [responseObjectDictionary valueForKey:@"data"];
-            
-            for (NSDictionary *singlePost in postData) {
-                
-                Post *post = [[Post alloc] initPostFromJson:singlePost];
-                [self.requestsPostArray addObject:post];
-                
-            }
-            self.isLastPage = [[responseObjectDictionary valueForKey:@"is_last_page"] boolValue];
-            self.offsetValue = [[responseObjectDictionary valueForKey:@"offset"] intValue];
-            NSLog(@"%d", self.offsetValue);
-            
-            [self.requestTableView reloadData];
-            [self.activityIndicator stopAnimating];
+    if(!self.isLastPage){
+        if(offset == 0){
+            [self.requestsPostArray removeAllObjects];
         }
-    }];
+        
+        NSNumber *offsetParam = [NSNumber numberWithInt:offset];
+        NSDictionary *params = @{
+                                 @"type" : @"asks",
+                                 @"offset": offsetParam
+                                 };
+        [[APICaller sharedInstance] callAPiToGetPost:@"posts" parameters:params viewController:self completion:^(NSDictionary *responseObjectDictionary) {
+            
+            NSLog(@"%@",responseObjectDictionary);
+            NSString *code = [responseObjectDictionary valueForKey:@"code"];
+            if ([code isEqualToString:POSTS_FOUND]){
+                
+                NSDictionary *postData = [responseObjectDictionary valueForKey:@"data"];
+                
+                for (NSDictionary *singlePost in postData) {
+                    
+                    Post *post = [[Post alloc] initPostFromJson:singlePost];
+                    [self.requestsPostArray addObject:post];
+                    
+                }
+                self.isLastPage = [[responseObjectDictionary valueForKey:@"is_last_page"] boolValue];
+                self.offsetValue = [[responseObjectDictionary valueForKey:@"offset"] intValue];
+                
+                [self.requestTableView reloadData];
+            }
+            else if ([code isEqualToString:NO_POSTS_FOUND]){
+                // code to show something 
+            }
+        }];
+    }
 }
 
 //MARK: TableView DataSource and Delegate Functions
@@ -106,45 +111,25 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
     SinglePostViewController *singlePostVC = [self.storyboard instantiateViewControllerWithIdentifier:@"SinglePostViewController"];
-    singlePostVC.postId = [self.requestsPostArray[indexPath.row] postid];
     singlePostVC.postType = REQUEST;
+    singlePostVC.slug = [self.requestsPostArray[indexPath.row] postSlug];
+    singlePostVC.singlePostVCDelegate = self;
     [self.navigationController pushViewController:singlePostVC animated:true];
 }
 
-- (IBAction)addPostButtonPressed:(UIBarButtonItem *)sender {
-    
-    UIAlertController *aLertController = [UIAlertController alertControllerWithTitle:(@"Alert") message:@"Select the type of Post" preferredStyle:UIAlertControllerStyleAlert];
-    
-    UIAlertAction *addOffer = [UIAlertAction actionWithTitle:@"Add Offer" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        [[Navigator sharedInstance] presentWithNavigationController:self viewController:@"AddPostViewController"];
-    }];
-    
-    
-    UIAlertAction *addRequest = [UIAlertAction actionWithTitle:@"Add Request" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        [self dismissViewControllerAnimated:true completion:nil];
-        
-    }];
-    
-    UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"Cancel?" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-        [self dismissViewControllerAnimated:true completion:nil];
-    }];
-    
-    [aLertController addAction:addOffer];
-    [aLertController addAction:addRequest];
-    [aLertController addAction:cancel];
-    
-    [self presentViewController:aLertController animated:true completion:nil];
-}
-
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
-
+    
     float endScrolling = scrollView.contentOffset.y + scrollView.frame.size.height;
     
     if (endScrolling >= scrollView.contentSize.height){
         
         [self loadPostswithOffset:self.offsetValue];
     }
+    
+}
 
+- (void)didFinishDeleting{
+    [self loadPostswithOffset:0];
 }
 
 @end

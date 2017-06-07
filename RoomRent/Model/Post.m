@@ -18,16 +18,17 @@
     
     self.postid = [[postDict valueForKey:@"id"] intValue];
     self.title = [postDict valueForKey:@"title"];
-    self.offerDescription = [postDict valueForKey:@"description"];
+    self.postDescription = [postDict valueForKey:@"description"];
     self.numberOfRooms = [[postDict valueForKey:@"no_of_rooms"] intValue];
     self.price = [[postDict valueForKey:@"price"] doubleValue];
     self.latitude = [[postDict valueForKey:@"latitude"] doubleValue];
     self.longitude = [[postDict valueForKey:@"longitude"] doubleValue];
     self.location = [postDict valueForKey:@"address"];
-    self.imagesArray = [postDict valueForKey:@"images"];
     self.postCreatedOn = [postDict valueForKey:@"created_at"];
+    self.imagesArray = [postDict valueForKey:@"images"];
+    self.postSlug = [postDict valueForKey:@"slug"];
+    self.postType = [[postDict valueForKey:@"post_type"] intValue];
     self.postUser = [[User alloc] initUserFromJson:[postDict valueForKey:@"user"]];
-    
     
     return self;
 }

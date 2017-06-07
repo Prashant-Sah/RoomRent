@@ -22,6 +22,6 @@ Creates alert on the passed viewcontroller
 @param VC               the view controller alertcontroller is to be shown on
  */
 
--(void)createAlert:(NSString*)alertTitle message:(NSString*)alertMessage viewController:(UIViewController*)VC  completion:(void (^)(void))completionBlock;
+-(void)createAlert:(NSString*)alertTitle message:(NSString*)alertMessage useCancelButton :(BOOL) useCancelButton viewController:(UIViewController*)VC  completion:(void (^)(void))completionBlock;
 
 @end
