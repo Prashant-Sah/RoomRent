@@ -15,7 +15,7 @@
 @interface LocalDatabase : NSObject
 
 +(LocalDatabase*) sharedInstance;
--(LocalDatabase *) initLocalDatabase;
+-(void) initLocalDatabase;
 
 - (void) executeQueryOrUpdate :(NSString *) statement queryUpdateFlag:(BOOL) queryUpdateFlag;
 

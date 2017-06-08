@@ -10,7 +10,7 @@
 
 @interface User : NSObject <NSCoding>
 
-@property NSNumber *userId;
+@property int userId;
 @property NSString *fullname;
 @property NSString *username;
 @property NSString *password;

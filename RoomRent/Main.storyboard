@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina5_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -873,11 +873,11 @@
             </objects>
             <point key="canvasLocation" x="-854" y="521"/>
         </scene>
-        <!--Offers-->
+        <!--OFFERS-->
         <scene sceneID="gs7-Ob-SIY">
             <objects>
                 <navigationController storyboardIdentifier="FrontNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="axe-LZ-g02" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Offers" id="iyE-2w-FuU"/>
+                    <tabBarItem key="tabBarItem" title="OFFERS" id="iyE-2w-FuU"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="2QB-Rq-JYn">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -892,11 +892,13 @@
             </objects>
             <point key="canvasLocation" x="152.80000000000001" y="-409.7451274362819"/>
         </scene>
-        <!--Request-->
+        <!--REQUESTS-->
         <scene sceneID="GWa-bw-NbH">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="ahY-Ic-z41" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Request" id="6YN-fB-gad"/>
+                    <tabBarItem key="tabBarItem" title="REQUESTS" id="6YN-fB-gad">
+                        <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="0.0"/>
+                    </tabBarItem>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="suX-9g-oOi">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -911,11 +913,11 @@
             </objects>
             <point key="canvasLocation" x="152.80000000000001" y="245.12743628185908"/>
         </scene>
-        <!--DashBoard-->
+        <!--DASHBOARD-->
         <scene sceneID="QiY-0d-MD0">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="hah-mX-wAW" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="DashBoard" id="92i-OI-nE4"/>
+                    <tabBarItem key="tabBarItem" title="DASHBOARD" id="92i-OI-nE4"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="WGe-gw-Lv0">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>

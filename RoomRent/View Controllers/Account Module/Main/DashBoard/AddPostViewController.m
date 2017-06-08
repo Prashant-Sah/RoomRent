@@ -149,8 +149,8 @@ int selectedItemIndex;
                           self.titleTextField,
                           self.descriptionTextField,
                           self.roomsTextField,
-                          self.priceTextField
-                          //self.addressLabel
+                          self.priceTextField,
+                          self.addressLabel
                           ];
     
     if([[required valueForKeyPath:@"text.@min.length"] intValue] == 0){
@@ -187,13 +187,11 @@ int selectedItemIndex;
                 
                 NSLog(@"%@", responseObjectDictionary);
                 
-                Post *addedPost = [[Post alloc] initPostFromJson:[responseObjectDictionary valueForKey:@"data"]];
-                addedPost.postid = 1;
-                addedPost.location = @"Baneshwor";
-                [[LocalDatabase alloc] pushPostToDatabase:addedPost viewController:self];
-                
                 NSString *code = [responseObjectDictionary valueForKey:@"code"];
                 if([code isEqualToString:ITEM_POSTED_SUCCESSFULLY]){
+                    
+                    Post *addedPost = [[Post alloc] initPostFromJson:[responseObjectDictionary valueForKey:@"data"]];
+                    [[LocalDatabase alloc] pushPostToDatabase:addedPost viewController:self];
                     
                     [[Alerter sharedInstance] createAlert:@"Success" message:@"Post Uploaded Successfully" useCancelButton:false viewController:self completion:^{
                         [self dismissViewControllerAnimated:true completion:nil];
@@ -324,7 +322,7 @@ int selectedItemIndex;
         }];
         
         UIAlertAction *no = [UIAlertAction actionWithTitle:@"No" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-            [self dismissViewControllerAnimated:true completion:nil];
+            //[self dismissViewControllerAnimated:true completion:nil];
             
         }];
         
@@ -341,7 +339,7 @@ int selectedItemIndex;
     
     CGPoint tapPoint = [recognizer locationInView:self.view];
     
-    CGRect photosCollectionViewInSuperview = [self.photosCollectionView.superview convertRect:self.photosCollectionView.frame toView:self.view];
+    CGRect photosCollectionViewInSuperview = self.photosCollectionView.frame;
     if(!(CGRectContainsPoint(photosCollectionViewInSuperview, tapPoint))){
         [self.view endEditing:true];
     }

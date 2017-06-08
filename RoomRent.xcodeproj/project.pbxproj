@@ -12,7 +12,6 @@
 		8F0CBB2E1EA4B8C50069F1ED /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F0CBB2D1EA4B8C50069F1ED /* ProfileViewController.m */; };
 		8F15B3B81EC0171D0011FD6B /* RequestsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F15B3B61EC0171D0011FD6B /* RequestsTableViewCell.m */; };
 		8F15B3B91EC0171D0011FD6B /* RequestsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8F15B3B71EC0171D0011FD6B /* RequestsTableViewCell.xib */; };
-		8F15DB5A1EE5307B00B3A8D6 /* DBManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F15DB591EE5307B00B3A8D6 /* DBManager.m */; };
 		8F248DCA1E935ACD00786B69 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8F248DC91E935ACC00786B69 /* Main.storyboard */; };
 		8F248DD51E9393E000786B69 /* KeyboardAvoidingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F248DD41E9393DF00786B69 /* KeyboardAvoidingViewController.m */; };
 		8F248DDF1E93AF2200786B69 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F248DDE1E93AF2200786B69 /* User.m */; };
@@ -58,8 +57,6 @@
 		8F15B3B51EC0171D0011FD6B /* RequestsTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RequestsTableViewCell.h; sourceTree = "<group>"; };
 		8F15B3B61EC0171D0011FD6B /* RequestsTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RequestsTableViewCell.m; sourceTree = "<group>"; };
 		8F15B3B71EC0171D0011FD6B /* RequestsTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RequestsTableViewCell.xib; sourceTree = "<group>"; };
-		8F15DB581EE5307B00B3A8D6 /* DBManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBManager.h; sourceTree = "<group>"; };
-		8F15DB591EE5307B00B3A8D6 /* DBManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBManager.m; sourceTree = "<group>"; };
 		8F248DC91E935ACC00786B69 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		8F248DD31E9393DF00786B69 /* KeyboardAvoidingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeyboardAvoidingViewController.h; sourceTree = "<group>"; };
 		8F248DD41E9393DF00786B69 /* KeyboardAvoidingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeyboardAvoidingViewController.m; sourceTree = "<group>"; };
@@ -144,8 +141,6 @@
 			children = (
 				8F04E4951EB1BA48001E1972 /* LocalDatabase.h */,
 				8F04E4961EB1BA4E001E1972 /* LocalDatabase.m */,
-				8F15DB581EE5307B00B3A8D6 /* DBManager.h */,
-				8F15DB591EE5307B00B3A8D6 /* DBManager.m */,
 			);
 			path = Database;
 			sourceTree = "<group>";
@@ -491,7 +486,6 @@
 				8F93E3B81E8E4F3E008C02D4 /* SignUpViewController.m in Sources */,
 				8FF2CE111E9E024D0059E3F5 /* OffersTableViewCell.m in Sources */,
 				8F628AE61EB756D700B320A7 /* OffersViewController.m in Sources */,
-				8F15DB5A1EE5307B00B3A8D6 /* DBManager.m in Sources */,
 				8F628AE81EB756D700B320A7 /* UserLocationViewController.m in Sources */,
 				8F4D2D2C1E8CFBE800347F9A /* AppDelegate.m in Sources */,
 				8FF2CE0C1E9E018B0059E3F5 /* CustomButton.m in Sources */,

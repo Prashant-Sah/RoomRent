@@ -18,8 +18,8 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
     [FIRApp configure];
-    LocalDatabase *data = [[LocalDatabase alloc] initLocalDatabase];
-    NSLog(@"%@",data);
+    [[LocalDatabase sharedInstance] initLocalDatabase];
+    
     NSData *userData = [[NSUserDefaults standardUserDefaults] objectForKey:USER_DATA_KEY];
     if (userData!= nil){
         

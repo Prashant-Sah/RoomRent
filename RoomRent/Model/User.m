@@ -12,7 +12,7 @@
 
 - (User*)initUserFromJson:(NSDictionary *)userDict{
     
-    self.userId = [userDict valueForKey:@"id"];
+    self.userId = [[userDict valueForKey:@"id"] intValue];
     self.fullname = [userDict valueForKey:@"name"];
     self.username = [userDict valueForKey:@"username"];
     self.email = [userDict valueForKey:@"email"];
@@ -24,7 +24,7 @@
 
 - (void)encodeWithCoder:(NSCoder *)aCoder{
     
-    [aCoder encodeObject:self.userId forKey:@"userId"];
+    [aCoder encodeObject:[NSString stringWithFormat:@"%d", self.userId] forKey:@"userId"];
     [aCoder encodeObject:self.fullname forKey:@"fullname"];
     [aCoder encodeObject:self.username forKey:@"username"];
     [aCoder encodeObject:self.email forKey:@"email"];
@@ -35,7 +35,7 @@
 - (instancetype)initWithCoder:(NSCoder *)aDecoder{
     if(self = [super init]){
     
-        self.userId = [aDecoder decodeObjectForKey:@"userId"];
+        self.userId = [[aDecoder decodeObjectForKey:@"userId"] intValue];
         self.fullname = [aDecoder decodeObjectForKey:@"fullname"];
         self.username = [aDecoder decodeObjectForKey:@"username"];
         self.email = [aDecoder decodeObjectForKey:@"email"];

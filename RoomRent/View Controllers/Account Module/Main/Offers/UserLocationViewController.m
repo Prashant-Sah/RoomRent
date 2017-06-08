@@ -58,7 +58,8 @@ CLLocationManager *locationManager;
 {
     NSLog(@"didFailWithError: %@", error);
     
-    [[Alerter sharedInstance] createAlert:@"Error" message:@"Faield to get your location" useCancelButton:false viewController:self completion:nil];
+    [[Alerter sharedInstance] createAlert:@"Error" message:@"Faield to get your location" useCancelButton:false viewController:self completion:^
+    {}];
 }
 
 // Add Annotation on longpres
