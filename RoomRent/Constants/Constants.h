@@ -19,7 +19,7 @@ typedef enum{
 
 } textFieldType;
 
-static NSString *BASE_URL = @"http://192.168.0.143:81/api/v1/";
+static NSString *BASE_URL = @"http://192.168.0.143:82/api/v1/";
 
 static NSString *OFFER = @"1";
 static NSString *REQUEST = @"2";
@@ -28,6 +28,32 @@ static NSString *DEVICE_TYPE = @"1";
 static NSString *DEVICE_TOKEN = @"faVINfpTooo:APA91bETPN5L4UjfJ6q3UiOxWT2dHrMMJpeOU0SyDJi4mVRHqDkMT4gjXD4-wYhXThyRcQVv2GXkbxShcQw2khnSRvJLhfHCRaZ2VADZegydkDbmM31iFX-2XrxHL6ggMZq_t8JpfrWv";
 
 static NSString *USER_DATA_KEY = @"user_data_key";
+
+static NSString *POSTS_ALL_STRING = @"all";
+static NSString *POSTS_OFFER_STRING = @"offers";
+static NSString *POSTS_REQUEST_STRING = @"asks";
+
+// URLs
+
+static NSString *LOGIN_PATH = @"login";
+static NSString *LOGOUT_PATH = @"logout";
+static NSString *FORGOT_PASSWORD_PATH = @"forgotpassword";
+static NSString *SIGNUP_PATH = @"register";
+
+static NSString *GETFILE_PATH = @"files";
+
+static NSString *UPDATE_AVATAR = @"updateavatar";
+
+static NSString *IMAGE_UPLOAD_PATH = @"upload";
+
+static NSString *POST_PATH = @"posts";
+static NSString *MY_POST_PATH = @"myposts";
+
+static NSString *USER_PATH = @"user";
+static NSString *USER_POST_PATH = @"user/posts";
+
+static NSString *POST_BULKDELETE = @"posts/bulkdelete";
+
 
 // DEFAULT MESSAGES
 static NSString *ERROR_OCCURED = @"0000";
@@ -60,3 +86,4 @@ static NSString *ITEM_DELETED_SUCCESSFULLY =@"0077";
 //FILE HANDLING
 static NSString *IMAGE_UPLOADED_SUCCESSFULLY = @"0064";
 
+static NSString *PostPostedSuccessKey = @"PostPostedSuccessKey";

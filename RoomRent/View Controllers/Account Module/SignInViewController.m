@@ -46,7 +46,7 @@
                              @"device_type": DEVICE_TYPE,
                              @"device_token": DEVICE_TOKEN};
     
-    [[APICaller sharedInstance] callApi:@"login" useToken:false parameters:params imageData:nil fileName:nil viewController:self completion:^(NSDictionary *responseObjectDictionary) {
+    [[APICaller sharedInstance] callApi:LOGIN_PATH useToken:false parameters:params imageData:nil fileName:nil viewController:self completion:^(NSDictionary *responseObjectDictionary) {
         
         NSLog(@"%@",responseObjectDictionary);
         NSString *code = [responseObjectDictionary valueForKey:@"code"];
@@ -63,17 +63,16 @@
             
         }
         else{
-            
             NSString *errorMessage = [responseObjectDictionary valueForKey:@"message"];
             [[Alerter sharedInstance] createAlert:@"Error" message:errorMessage useCancelButton:false viewController:self completion:^{
             }];
         }
     }];
-    
 }
 
 -(void)gotoMain{
     
+    [[DatabaseLoader sharedInstance] loadPostsToDatabaseWithTimeStamp:nil andOlder:@"false" andType:@"all"];
     [[Navigator sharedInstance] setRevealViewControllerWithFrontTabViewController:@"MyTabBarController" sideViewController:@"SideBarViewController" storyBoard:@"Main"];
 }
 

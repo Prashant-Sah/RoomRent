@@ -38,7 +38,7 @@
                              @"email" : self.emailAddressTextField.text
                              };
     
-    [[APICaller sharedInstance] callApi:@"forgotpassword" useToken:false parameters:params imageData:nil fileName:nil viewController:self completion:^(NSDictionary *responseObjectDictionary) {
+    [[APICaller sharedInstance] callApi:FORGOT_PASSWORD_PATH useToken:false parameters:params imageData:nil fileName:nil viewController:self completion:^(NSDictionary *responseObjectDictionary) {
         
         NSLog(@"%@",responseObjectDictionary);
             

@@ -55,15 +55,14 @@ NSString *filename;
 }
 
 
-
 -(void)callApi:(NSString *)appendString useToken:(BOOL)useToken parameters:(NSDictionary *)params imageData:(NSData *)imageData fileName:(NSString *)fileName viewController:(UIViewController *)VC completion:(void (^)(NSDictionary *))completionBlock{
     
     [[ProgressIndicator alloc] showActivityIndicatorOnView:VC.view];
     
-    manager.responseSerializer = [AFJSONResponseSerializer serializer];
-    manager.responseSerializer.acceptableContentTypes = nil;
-    [manager.requestSerializer setTimeoutInterval:10];
     manager.responseSerializer = [AFJSONResponseSerializer serializerWithReadingOptions:NSJSONReadingAllowFragments];
+    //manager.responseSerializer.acceptableContentTypes = nil;
+    [manager.requestSerializer setTimeoutInterval:10];
+    //manager.responseSerializer = [AFJSONResponseSerializer serializerWithReadingOptions:NSJSONReadingAllowFragments];
     
     if(useToken){
         [self sendUserApiToken];
@@ -72,7 +71,7 @@ NSString *filename;
     if(imageData == nil){
         [manager POST:[BASE_URL stringByAppendingString:appendString] parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
             
-             [[ProgressIndicator alloc] hideActivityIndicatorFromView:VC.view];
+            [[ProgressIndicator alloc] hideActivityIndicatorFromView:VC.view];
             completionBlock(responseObject);
             
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
@@ -86,7 +85,7 @@ NSString *filename;
             
         } progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
             
-           [[ProgressIndicator alloc] hideActivityIndicatorFromView:VC.view];
+            [[ProgressIndicator alloc] hideActivityIndicatorFromView:VC.view];
             completionBlock(responseObject);
             
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
@@ -147,7 +146,7 @@ NSString *filename;
  
  
  */
--(void) callAPiToGetPost : (NSString *) appendString parameters :(NSDictionary *) params viewController :(UIViewController *)  VC completion:(void (^)(NSDictionary *))completionBlock{
+-(void) callAPiToGetPost : (NSString *) appendString parameters :(NSDictionary *) params viewController :(UIViewController * _Nullable)  VC completion:(void (^)(NSDictionary *))completionBlock{
     
     [[ProgressIndicator alloc] showActivityIndicatorOnView:VC.view];
     

@@ -33,8 +33,6 @@ static CGPoint activeTextFieldPosition;
     if(!(activeTextFieldPosition.y < keyboardSize.origin.y)){
         [self.view setFrame:CGRectMake(0, -keyboardSize.size.height , self.view.frame.size.width, self.view.frame.size.height)];
     }else{
-        
-        
     }
 }
 

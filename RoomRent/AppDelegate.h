@@ -11,14 +11,14 @@
 #import <SWRevealViewController.h>
 #import "Navigator.h"
 #import "Constants.h"
+#import "APICaller.h"
 #import "LocalDatabase.h"
-
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 
 + (AppDelegate *)appDelegate;
-
+-(void) loadPostsToDatabaseWithTimeStamp:(NSString *)timeStamp;
 @end
 

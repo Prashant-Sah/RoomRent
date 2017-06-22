@@ -52,7 +52,7 @@
         SDWebImageDownloader *manager = [SDWebImageManager sharedManager].imageDownloader;
         [manager setValue:[@"Bearer " stringByAppendingString:userApiToken] forHTTPHeaderField:@"Authorization"];
         
-        NSURL *url = [NSURL URLWithString:[[BASE_URL stringByAppendingString:@"getfile/"] stringByAppendingString:[NSString stringWithFormat:@"%@", user.profileImageURL]]];
+        NSURL *url = [NSURL URLWithString:[[BASE_URL stringByAppendingString:GETFILE_PATH] stringByAppendingString:[NSString stringWithFormat:@"%@", user.profileImageURL]]];
         
         [self.profileImageButton sd_setImageWithURL:url forState:UIControlStateNormal];
     }
@@ -87,7 +87,7 @@
                              @"name" : self.fullnameTextField.text,
                              @"phone" : self.mobileTextField.text
                              };
-    [[APICaller sharedInstance] callApiToEditPost:@"user" parameters:params viewController:self completion:^(NSDictionary *responseObjectDictionary) {
+    [[APICaller sharedInstance] callApiToEditPost:USER_PATH parameters:params viewController:self completion:^(NSDictionary *responseObjectDictionary) {
         
         NSLog(@"%@",responseObjectDictionary);
         
@@ -180,7 +180,7 @@
     
     NSData *imageData = UIImageJPEGRepresentation(editedImage, 0.5);
     
-    [[APICaller sharedInstance] callApi:@"updateavatar" useToken:true parameters:nil imageData:imageData fileName:imageName viewController:self completion:^(NSDictionary *responseObjectDictionary) {
+    [[APICaller sharedInstance] callApi:UPDATE_AVATAR useToken:true parameters:nil imageData:imageData fileName:imageName viewController:self completion:^(NSDictionary *responseObjectDictionary) {
         
         if([[responseObjectDictionary valueForKey:@"code"] isEqualToString:IMAGE_UPLOADED_SUCCESSFULLY]){
             

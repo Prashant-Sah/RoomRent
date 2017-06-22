@@ -10,6 +10,8 @@
 #import "CustomRevealViewController.h"
 #import <UIKit/UIKit.h>
 #import <SWRevealViewController.h>
+#import "APICaller.h"
+#import "LocalDatabase.h"
 
 @interface CustomRevealViewController () <SWRevealViewControllerDelegate>
 @property UIView *activityIndicatorBackgroundView;

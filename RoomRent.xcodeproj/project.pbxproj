@@ -40,6 +40,7 @@
 		8FDD48EE1EA88467003DDEE9 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8FDD48ED1EA88467003DDEE9 /* CoreLocation.framework */; };
 		8FDD48F01EA88474003DDEE9 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8FDD48EF1EA88474003DDEE9 /* MapKit.framework */; };
 		8FDD71521EA47CAD006C0020 /* CustomRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FDD71511EA47CAD006C0020 /* CustomRevealViewController.m */; };
+		8FE115671EFB6E5D00789E7A /* DatabaseLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FE115661EFB6E5D00789E7A /* DatabaseLoader.m */; };
 		8FF2CE071E9DF0920059E3F5 /* Navigator.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FF2CE061E9DF0920059E3F5 /* Navigator.m */; };
 		8FF2CE0C1E9E018B0059E3F5 /* CustomButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FF2CE091E9E018B0059E3F5 /* CustomButton.m */; };
 		8FF2CE0D1E9E018B0059E3F5 /* CustomTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FF2CE0B1E9E018B0059E3F5 /* CustomTextField.m */; };
@@ -109,6 +110,8 @@
 		8FDD48EF1EA88474003DDEE9 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		8FDD71501EA47CAD006C0020 /* CustomRevealViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomRevealViewController.h; sourceTree = "<group>"; };
 		8FDD71511EA47CAD006C0020 /* CustomRevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomRevealViewController.m; sourceTree = "<group>"; };
+		8FE115651EFB6E5D00789E7A /* DatabaseLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DatabaseLoader.h; sourceTree = "<group>"; };
+		8FE115661EFB6E5D00789E7A /* DatabaseLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DatabaseLoader.m; sourceTree = "<group>"; };
 		8FE2E79F1EA9BE89008ED312 /* Location.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Location.gpx; sourceTree = "<group>"; };
 		8FF2CE051E9DF0920059E3F5 /* Navigator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Navigator.h; sourceTree = "<group>"; };
 		8FF2CE061E9DF0920059E3F5 /* Navigator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Navigator.m; sourceTree = "<group>"; };
@@ -141,6 +144,8 @@
 			children = (
 				8F04E4951EB1BA48001E1972 /* LocalDatabase.h */,
 				8F04E4961EB1BA4E001E1972 /* LocalDatabase.m */,
+				8FE115651EFB6E5D00789E7A /* DatabaseLoader.h */,
+				8FE115661EFB6E5D00789E7A /* DatabaseLoader.m */,
 			);
 			path = Database;
 			sourceTree = "<group>";
@@ -206,6 +211,11 @@
 		8F4D2D261E8CFBE800347F9A /* RoomRent */ = {
 			isa = PBXGroup;
 			children = (
+				8F4D2D2A1E8CFBE800347F9A /* AppDelegate.h */,
+				8F4D2D2B1E8CFBE800347F9A /* AppDelegate.m */,
+				8F248DC91E935ACC00786B69 /* Main.storyboard */,
+				8F4D2D301E8CFBE800347F9A /* Account.storyboard */,
+				8F4D2D351E8CFBE800347F9A /* LaunchScreen.storyboard */,
 				8F04E4941EB1B9E5001E1972 /* Database */,
 				8F93E3AF1E8E260E008C02D4 /* Helpers */,
 				8F93E3AE1E8E2609008C02D4 /* Constants */,
@@ -213,11 +223,6 @@
 				8F248DC21E9345D000786B69 /* Custom Views */,
 				8F248DD21E9393AF00786B69 /* Custom Class */,
 				8F93E3AC1E8E25FE008C02D4 /* View Controllers */,
-				8F4D2D2A1E8CFBE800347F9A /* AppDelegate.h */,
-				8F4D2D2B1E8CFBE800347F9A /* AppDelegate.m */,
-				8F248DC91E935ACC00786B69 /* Main.storyboard */,
-				8F4D2D301E8CFBE800347F9A /* Account.storyboard */,
-				8F4D2D351E8CFBE800347F9A /* LaunchScreen.storyboard */,
 				8F4D2D331E8CFBE800347F9A /* Assets.xcassets */,
 				8F4D2D381E8CFBE800347F9A /* Info.plist */,
 				8F77245C1ED434A500136556 /* GoogleService-Info.plist */,
@@ -504,6 +509,7 @@
 				8F4D2D291E8CFBE800347F9A /* main.m in Sources */,
 				8F63C1081E962D90000790D6 /* APICaller.m in Sources */,
 				8FD09E331EE1171200E09D2A /* ProgressIndicator.m in Sources */,
+				8FE115671EFB6E5D00789E7A /* DatabaseLoader.m in Sources */,
 				8F628AE51EB756D700B320A7 /* AddPostViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

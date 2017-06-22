@@ -18,19 +18,74 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
     [FIRApp configure];
-    [[LocalDatabase sharedInstance] initLocalDatabase];
     
     NSData *userData = [[NSUserDefaults standardUserDefaults] objectForKey:USER_DATA_KEY];
     if (userData!= nil){
         
+        NSString *timeStampForLastPost = [[NSUserDefaults standardUserDefaults] objectForKey:@"updatedDateOfLastPostAmongAllPosts"];
+        
+        [self loadPostsToDatabaseWithTimeStamp: timeStampForLastPost ? timeStampForLastPost : nil ];
         [[Navigator sharedInstance] setRevealViewControllerWithFrontTabViewController:@"MyTabBarController" sideViewController:@"SideBarViewController" storyBoard:@"Main"];
         [self.window makeKeyAndVisible];
-        
     }else{
         
         [[Navigator sharedInstance] makeRootViewControllerWithStoryBoard:@"Account" viewController:@"SignInViewController" tabBarController:nil];
     }
     return YES;
+}
+
+-(void) loadPostsToDatabaseWithTimeStamp:(NSString *) timeStamp{
+    
+    NSDictionary *params = nil;
+    
+    if(timeStamp != nil){
+        params = @{
+                   @"type" : @"all",
+                   @"older" : @"false",
+                   @"timestamp" : timeStamp
+                   };
+        
+        [[APICaller sharedInstance] callAPiToGetPost:@"posts" parameters:params viewController:nil completion:^(NSDictionary *responseObjectDictionary) {
+            
+            NSLog(@"%@",responseObjectDictionary);
+            if ([[responseObjectDictionary valueForKey:@"code" ] isEqualToString:POSTS_FOUND]){
+                
+                NSDictionary *updatedPostDictionary = [responseObjectDictionary valueForKey:@"updated"];
+                NSDictionary *updatedpostData = [updatedPostDictionary valueForKey:@"data"];
+                if(updatedpostData != nil){
+                    [[LocalDatabase sharedInstance] pushUpdatedPostsToDatabase:updatedpostData];
+                }
+                
+                NSDictionary *createdPostsDictionary = [responseObjectDictionary valueForKey:@"created"];
+                
+                NSDictionary *createdpostData = [createdPostsDictionary valueForKey:@"data"];
+                if(createdpostData != nil){
+                    
+                    NSString *updatedDateOfLastPostAmongAllPosts = [[LocalDatabase sharedInstance] pushPostToDatabase:createdpostData];
+                    [[NSUserDefaults standardUserDefaults] setObject:updatedDateOfLastPostAmongAllPosts forKey:@"updatedDateOfLastPostAmongAllPosts"];
+                }
+                
+                NSDictionary *deletedPostDictionary = [responseObjectDictionary valueForKey:@"deleted"];
+                NSDictionary *deletedPostData = [deletedPostDictionary valueForKey:@"data"];
+                if(deletedPostData != nil){
+                    [[LocalDatabase sharedInstance] deletePostsFromDatabase:deletedPostData];
+                }
+            }
+        }];
+        
+    }else{
+        [[APICaller sharedInstance] callAPiToGetPost:@"posts" parameters:params viewController:nil completion:^(NSDictionary *responseObjectDictionary) {
+            
+            if ([[responseObjectDictionary valueForKey:@"code" ] isEqualToString:POSTS_FOUND]){
+                NSLog(@"%@",responseObjectDictionary);
+
+                NSDictionary *postData = [responseObjectDictionary valueForKey:@"data"];
+                
+                NSString *updatedDateOfLastPostAmongAllPosts = [[LocalDatabase sharedInstance] pushPostToDatabase:postData];
+                [[NSUserDefaults standardUserDefaults] setObject:updatedDateOfLastPostAmongAllPosts forKey:@"updatedDateOfLastPostAmongAllPosts"];
+            }
+        }];
+    }
 }
 
 + (AppDelegate *)appDelegate

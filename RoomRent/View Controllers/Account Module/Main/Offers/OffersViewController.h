@@ -7,6 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <CoreLocation/CoreLocation.h>
+
 #import "APICaller.h"
 #import "Navigator.h"
 #import "CustomRevealViewController.h"
@@ -14,7 +16,7 @@
 #import "OffersTableViewCell.h"
 #import "SinglePostViewController.h"
 #import "PostsOnMapViewController.h"
-#import <CoreLocation/CoreLocation.h>
+#import "DatabaseLoader.h"
 
 @interface OffersViewController : CustomRevealViewController <UITableViewDataSource , UITableViewDelegate,  UIScrollViewDelegate, OffersCellSelectedProtocol>
 

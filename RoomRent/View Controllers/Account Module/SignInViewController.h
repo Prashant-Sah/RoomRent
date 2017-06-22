@@ -17,6 +17,7 @@
 #import "APICaller.h"
 #import "User.h"
 #import "Navigator.h"
+#import "DatabaseLoader.h"
 
 @interface SignInViewController : KeyboardAvoidingViewController
 

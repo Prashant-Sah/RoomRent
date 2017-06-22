@@ -15,6 +15,7 @@
 #import "Post.h"
 #import "SinglePostViewController.h"
 #import "AddPostViewController.h"
+#import "LocalDatabase.h"
 
 @interface MyPostViewController :CustomRevealViewController <UITableViewDataSource , UITableViewDelegate,  UIScrollViewDelegate , AddPostVCDelegate, SinglePostVCDelegate>
 

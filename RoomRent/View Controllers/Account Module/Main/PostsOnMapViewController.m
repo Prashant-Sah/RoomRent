@@ -30,7 +30,7 @@ CLLocationDegrees centerLongitude = 0.0;
                              @"type" : @"all"
                              };
     
-    [[APICaller sharedInstance] callAPiToGetPost:@"posts" parameters:params viewController:self completion:^(NSDictionary *responseObjectDictionary) {
+    [[APICaller sharedInstance] callAPiToGetPost:POST_PATH parameters:params viewController:self completion:^(NSDictionary *responseObjectDictionary) {
         
         NSString *code = [responseObjectDictionary valueForKey:@"code"];
         if ([code isEqualToString:POSTS_FOUND]){

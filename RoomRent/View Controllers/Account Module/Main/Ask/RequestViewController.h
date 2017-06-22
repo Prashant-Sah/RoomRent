@@ -12,13 +12,13 @@
 #import "Post.h"
 #import "RequestsTableViewCell.h"
 #import "SinglePostViewController.h"
-#import "Navigator.h"
 #import "Constants.h"
+#import "DatabaseLoader.h"
 
 @interface RequestViewController : CustomRevealViewController <UITableViewDelegate ,UITableViewDataSource, UIScrollViewDelegate, SinglePostVCDelegate>
 
 -(void) refreshTable;
 -(void)loadPostswithOffset:(int ) offset;
-
+-(void) loadPostsToDatabaseWithTimeStamp:(NSString *) timeStamp andOlder :(NSString *) older;
 
 @end

@@ -12,6 +12,9 @@
 @interface Post : NSObject
 
 @property int postid;
+@property NSString *postSlug;
+@property int postType;
+
 @property NSString *title;
 @property NSString *postDescription;
 @property int numberOfRooms;
@@ -19,12 +22,16 @@
 @property NSString *location;
 @property double latitude;
 @property double longitude;
-@property NSArray *imagesArray;
-@property NSString *postCreatedOn;
-@property int postType;
-@property User *postUser;
+@property NSMutableArray *imagesArray;
 
-@property NSString *postSlug;
+@property NSString *postCreatedOn;
+@property NSString *postUpdatedOn;
+@property NSString *postDeletedOn;
+
+@property User *postUser;
+@property int userid;
+
+
 
 - (Post*) initPostFromJson : (NSDictionary *) postDict;
 

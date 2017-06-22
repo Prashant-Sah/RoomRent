@@ -14,6 +14,10 @@
 @property BOOL isLastPage;
 @property int offsetValue;
 @property UIRefreshControl *refresher;
+
+@property NSString *firstPostDate;
+@property NSString *lastPostDate;
+
 @end
 
 @implementation RequestViewController
@@ -21,6 +25,9 @@
 - (void)viewDidLoad {
     
     [super viewDidLoad];
+    
+    //[self loadPostswithOffset:0];
+    [self loadPostsFromDatabase];
     self.requestTableView.dataSource = self;
     self.requestTableView.delegate = self;
     self.requestTableView.rowHeight = UITableViewAutomaticDimension;
@@ -36,16 +43,26 @@
     self.refresher.attributedTitle = [[NSMutableAttributedString alloc] initWithString:@"Pull to refresh!!"];
     [self.requestTableView addSubview:self.refresher];
     [self.refresher addTarget:self action:@selector(refreshTable) forControlEvents:UIControlEventValueChanged];
-    
-    self.requestsPostArray = [[NSMutableArray alloc] init];
+
     self.isLastPage = false;
-    [self loadPostswithOffset:0];
+    
+}
+
+-(void) loadPostsFromDatabase{
+    
+    NSString *sql = @"Select * from Posts_table where post_type = 2 order by updated_at desc ";
+    self.requestsPostArray = [[LocalDatabase sharedInstance] getPostsFromDatabaseWithQuery:sql];
+    self.lastPostDate = [[self.requestsPostArray firstObject] postUpdatedOn];
+    self.firstPostDate = [[self.requestsPostArray lastObject] postUpdatedOn];
+    [self.requestTableView reloadData];
 }
 
 -(void) refreshTable{
     
-    [self loadPostswithOffset:0];
+    //[self loadPostswithOffset:0];
+    [[DatabaseLoader sharedInstance] loadPostsToDatabaseWithTimeStamp:self.lastPostDate andOlder:@"false" andType:REQUEST];
     [self.refresher endRefreshing];
+    [self loadPostsFromDatabase];
     self.isLastPage = false;
 }
 
@@ -113,7 +130,6 @@
     SinglePostViewController *singlePostVC = [self.storyboard instantiateViewControllerWithIdentifier:@"SinglePostViewController"];
     singlePostVC.postType = REQUEST;
     singlePostVC.slug = [self.requestsPostArray[indexPath.row] postSlug];
-    singlePostVC.singlePostVCDelegate = self;
     [self.navigationController pushViewController:singlePostVC animated:true];
 }
 
@@ -123,13 +139,11 @@
     
     if (endScrolling >= scrollView.contentSize.height){
         
-        [self loadPostswithOffset:self.offsetValue];
+        //[self loadPostswithOffset:self.offsetValue];
+        [[DatabaseLoader sharedInstance] loadPostsToDatabaseWithTimeStamp:self.firstPostDate andOlder:@"true" andType:REQUEST];
+        [self loadPostsFromDatabase];
     }
     
-}
-
-- (void)didFinishDeleting{
-    [self loadPostswithOffset:0];
 }
 
 @end

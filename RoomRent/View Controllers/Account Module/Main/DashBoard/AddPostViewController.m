@@ -65,10 +65,10 @@ int selectedItemIndex;
     tapGesture.cancelsTouchesInView = NO;
     [self.contentView addGestureRecognizer: tapGesture];
     
-    self.titleTextField.text =@"room at narayantar";
-    self.descriptionTextField.text = @"free of cost for one special person";
+    self.titleTextField.text =@"Room needed around baneshwor for a family of 4";
+    self.descriptionTextField.text = @"Water abundance and clean rooms";
     self.roomsTextField.text =@"1";
-    
+    self.priceTextField.text = @"5500";
     
     if([self.postType isEqualToString:OFFER] && self.passedPost==nil){
         
@@ -183,7 +183,8 @@ int selectedItemIndex;
         }
         
         if(self.passedPost == nil){
-            [[APICaller sharedInstance] callApiToCreatePost:@"posts" parameters:parameters imageDataArray:photoDataArray fileNameArray:photoNameArray viewController:self completion:^(NSDictionary *responseObjectDictionary)  {
+            
+            [[APICaller sharedInstance] callApiToCreatePost:POST_PATH parameters:parameters imageDataArray:photoDataArray fileNameArray:photoNameArray viewController:self completion:^(NSDictionary *responseObjectDictionary) {
                 
                 NSLog(@"%@", responseObjectDictionary);
                 
@@ -191,24 +192,24 @@ int selectedItemIndex;
                 if([code isEqualToString:ITEM_POSTED_SUCCESSFULLY]){
                     
                     Post *addedPost = [[Post alloc] initPostFromJson:[responseObjectDictionary valueForKey:@"data"]];
-                    [[LocalDatabase alloc] pushPostToDatabase:addedPost viewController:self];
+                    [[LocalDatabase sharedInstance] pushSinglePostToDatabase:addedPost];
                     
                     [[Alerter sharedInstance] createAlert:@"Success" message:@"Post Uploaded Successfully" useCancelButton:false viewController:self completion:^{
                         [self dismissViewControllerAnimated:true completion:nil];
                     }];
-                    
-                    
                     [self.addPostVCDelegate didFinishAddingPost];
                     //[self dismissViewControllerAnimated:true completion:nil];
                 }
             }];
         }else{
             
-            [[APICaller sharedInstance] callApiToEditPost:[@"posts/" stringByAppendingString:self.passedPost.postSlug] parameters:params viewController:self completion:^(NSDictionary *responseObjectDictionary) {
+            [[APICaller sharedInstance] callApiToEditPost:[[POST_PATH stringByAppendingString:@"/"] stringByAppendingString:self.passedPost.postSlug] parameters:parameters viewController:self completion:^(NSDictionary *responseObjectDictionary) {
                 
                 NSLog(@"%@", responseObjectDictionary);
                 
                 if([[responseObjectDictionary valueForKey:@"code"] isEqualToString:ITEM_UPDATED_SUCCESSFULLY]){
+                    Post *post = [responseObjectDictionary valueForKey:@"data"];
+                    [[LocalDatabase sharedInstance] pushSinglePostToDatabase:post];
                     [self.addPostVCDelegate didFinishEditingPost];
                     [self dismissViewControllerAnimated:true completion:nil];
                 }
@@ -264,8 +265,6 @@ int selectedItemIndex;
     UIGraphicsBeginImageContext(destinationSize);
     [selectedImage drawInRect:CGRectMake(0,0,destinationSize.width,destinationSize.height)];
     UIImage *selectedResizedImage = UIGraphicsGetImageFromCurrentImageContext();
-    
-    
     
     if(self.selectedIndexPath.row == self.lastRowIndex){
         [photoMutableArray insertObject:selectedResizedImage atIndex:0];

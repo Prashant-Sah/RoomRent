@@ -46,23 +46,14 @@
     photosImageView.contentMode = UIViewContentModeScaleAspectFit;
     
     // using caching with authorization
-    
     NSString *userApiToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"userApiToken"];
     
     SDWebImageDownloader *manager = [SDWebImageManager sharedManager].imageDownloader;
     [manager setValue:[@"Bearer " stringByAppendingString:userApiToken] forHTTPHeaderField:@"Authorization"];
     
-    NSURL *url = [NSURL URLWithString:[[BASE_URL stringByAppendingString:@"getfile/"] stringByAppendingString:self.collectionViewImagesArray[indexPath.row]]];
-//    __block UIActivityIndicatorView *activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-//    activityIndicator.center = photosImageView.center;
-//    activityIndicator.hidesWhenStopped = YES;
+    NSURL *url = [NSURL URLWithString:[[[BASE_URL stringByAppendingString:GETFILE_PATH] stringByAppendingString:@"/"] stringByAppendingString:self.collectionViewImagesArray[indexPath.row]]];
     
-    //[photosImageView  sd_setImageWithURL: url];
-    [photosImageView sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"no-photos"] options:SDWebImageProgressiveDownload completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
-        //[activityIndicator stopAnimating];
-    }];
-    //[photosImageView addSubview:activityIndicator];
-    //[activityIndicator startAnimating];
+    [photosImageView sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"noPhotos"]];
     [singlePhotoCell.contentView addSubview:photosImageView];
     return singlePhotoCell;
         

@@ -11,13 +11,22 @@
 
 #import "Alerter.h"
 #import "Post.h"
+#import "Constants.h"
 
 @interface LocalDatabase : NSObject
 
 +(LocalDatabase*) sharedInstance;
--(void) initLocalDatabase;
+-(LocalDatabase*) initLocalDatabase;
 
-- (void) executeQueryOrUpdate :(NSString *) statement queryUpdateFlag:(BOOL) queryUpdateFlag;
+-(void) pushSinglePostToDatabase:(Post*) post;
+-(NSString *) pushPostToDatabase : (NSDictionary *) postsDict;
 
--(void) pushPostToDatabase : (Post *) post viewController :(UIViewController *) VC;
+-(void) pushUpdatedPostToDatabase:(Post *) updatedPost;
+-(void) pushUpdatedPostsToDatabase:(NSDictionary *) postsDict;
+
+-(void)deleteSinglePostFromDatabase :(int) postid;
+-(void)deletePostsFromDatabase:(NSDictionary *) postsDict;
+
+- (NSMutableArray *)getPostsFromDatabaseWithQuery:(NSString *)query;
+
 @end

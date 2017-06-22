@@ -81,24 +81,28 @@
     
     [super viewWillAppear:false];
     
-    [[APICaller sharedInstance] callAPiToGetPost:[@"posts/" stringByAppendingString: [NSString stringWithFormat:@"%@", self.slug]] parameters:nil viewController:self completion:^(NSDictionary *responseObjectDictionary) {
-        
-        if( [[responseObjectDictionary valueForKey:@"code"] isEqualToString:SUCCESS]){
-            
-            NSLog(@"%@", [responseObjectDictionary valueForKey:@"data"]);
-            
-            self.singlePost = [[Post alloc] initPostFromJson:[responseObjectDictionary valueForKey:@"data"]];
-            [self initWithPost:self.singlePost];
-            
-        }
-        
-    }];
+    //    [[APICaller sharedInstance] callAPiToGetPost:[POST_PATH stringByAppendingString: [NSString stringWithFormat:@"%@", self.slug]] parameters:nil viewController:self completion:^(NSDictionary *responseObjectDictionary) {
+    //
+    //        if( [[responseObjectDictionary valueForKey:@"code"] isEqualToString:SUCCESS]){
+    //
+    //            NSLog(@"%@", [responseObjectDictionary valueForKey:@"data"]);
+    //
+    //            self.singlePost = [[Post alloc] initPostFromJson:[responseObjectDictionary valueForKey:@"data"]];
+    //            [self initWithPost:self.singlePost];
+    //
+    //        }
+    //
+    //    }];
+    NSString *sql = [NSString stringWithFormat: @"Select * from Posts_table where slug = \"%@\"", self.slug];
     
+    self.singlePost = [[[LocalDatabase sharedInstance] getPostsFromDatabaseWithQuery:sql] firstObject];
+    [self initWithPost:self.singlePost];
 }
 
 // cofigure view with post details
 -(void) initWithPost :(Post*) singlePost{
     
+    self.imagesArray = [[NSArray alloc] init];
     self.imagesArray = singlePost.imagesArray;
     [self.roomPhotosCollectionView reloadData];
     self.titleLabel.text = singlePost.title;
@@ -152,7 +156,7 @@
     NSString *userApiToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"userApiToken"];
     SDWebImageDownloader *manager = [SDWebImageManager sharedManager].imageDownloader;
     [manager setValue:[@"Bearer " stringByAppendingString:userApiToken] forHTTPHeaderField:@"Authorization"];
-    NSURL *url = [NSURL URLWithString:[[BASE_URL stringByAppendingString:@"getfile/"] stringByAppendingString:self.imagesArray[indexPath.row] ]];
+    NSURL *url = [NSURL URLWithString:[[[BASE_URL stringByAppendingString:GETFILE_PATH] stringByAppendingString:@"/"] stringByAppendingString:self.imagesArray[indexPath.row]]];
     photosImageView.contentMode = UIViewContentModeScaleAspectFill;
     [photosImageView sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"noPhotos.jpeg"] options:SDWebImageScaleDownLargeImages];
     
@@ -178,12 +182,12 @@
     
     [imageView sd_setImageWithURL:url];
     [alert.view addSubview:imageView];
-
+    
     UIAlertAction *actionOk = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil];
-  
+    
     [imageView sd_setImageWithURL:url completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
         
-        //UIImage *image = image;//[UIImage imageNamed:@"avatar.png"];
+        //UIImage *image = image;  //[UIImage imageNamed:@"avatar.png"];
         [actionOk setValue:[image imageWithRenderingMode:UIImageRenderingModeAutomatic] forKey:@"image"];
         [alert addAction:actionOk];
         [self presentViewController:alert animated:true completion:nil];
@@ -206,11 +210,11 @@
 -(void) deletePostButtonPressed{
     [[Alerter sharedInstance] createAlert:@"Confirmation Needed" message:@"Do you really want to delete this post?" useCancelButton:true viewController:self completion:^{
         
-        
-        [[APICaller sharedInstance] callApiForDelete:[@"posts/" stringByAppendingString:[NSString stringWithFormat:@"%@", self.slug]] parameters:nil viewController:self completion:^(NSDictionary *responseObjectDictionary) {
+        [[APICaller sharedInstance] callApiForDelete:[POST_PATH stringByAppendingString:[NSString stringWithFormat:@"/%@", self.slug]] parameters:nil viewController:self completion:^(NSDictionary *responseObjectDictionary) {
             NSLog(@"%@",responseObjectDictionary);
             
             if( [[responseObjectDictionary valueForKey:@"code"] isEqualToString:ITEM_DELETED_SUCCESSFULLY]){
+                [[LocalDatabase sharedInstance] deleteSinglePostFromDatabase:self.singlePost.postid];
                 [self.singlePostVCDelegate didFinishDeleting];
                 [self.navigationController popViewControllerAnimated:true ];
             }else{
@@ -223,9 +227,6 @@
 -(void)didFinishEditingPost{
     
 }
--(void)dealloc{
-    NSLog(@"single post vc deallocated");
-    
-}
+
 
 @end

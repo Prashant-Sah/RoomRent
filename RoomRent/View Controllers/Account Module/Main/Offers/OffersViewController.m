@@ -17,6 +17,9 @@
 @property  BOOL isLastPage;
 @property  int offsetValue;
 
+@property NSString *firstPostDate;
+@property NSString *lastPostDate;
+
 @end
 
 @implementation OffersViewController
@@ -24,9 +27,11 @@
 - (void)viewDidLoad {
     
     [super viewDidLoad];
-    [self loadPostswithOffset:0];
-    _offersTableView.dataSource = self;
-    _offersTableView.delegate = self;
+    
+    [self loadPostsFromDatabase];
+    //[self loadPostswithOffset:0];
+    self.offersTableView.dataSource = self;
+    self.offersTableView.delegate = self;
     self.offersTableView.rowHeight = UITableViewAutomaticDimension;
     self.offersTableView.estimatedRowHeight = 320;
     
@@ -43,22 +48,30 @@
     [self.refresher addTarget:self action:@selector(refreshTable) forControlEvents:UIControlEventValueChanged];
     
     self.isLastPage = false;
-    self.offersPostArray = [[NSMutableArray alloc] init];
-    self.postsLocation = [[NSMutableArray alloc] init];
-    
-    
+    //    self.offersPostArray = [[NSMutableArray alloc] init];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loadPostsFromDatabase) name:PostPostedSuccessKey object:nil];
 }
+
+-(void) loadPostsFromDatabase{
+    
+    NSString *sql = @"Select * from Posts_table where post_type = 1 order by updated_at desc ";
+    self.offersPostArray = [[LocalDatabase sharedInstance] getPostsFromDatabaseWithQuery:sql];
+    self.lastPostDate = [[self.offersPostArray firstObject] postUpdatedOn];
+    self.firstPostDate = [[self.offersPostArray lastObject] postUpdatedOn];
+    [self.offersTableView reloadData];
+}
+
 
 -(void) refreshTable{
     
-    [self loadPostswithOffset:0];
+    //[self loadPostswithOffset:0];
+    [[DatabaseLoader sharedInstance] loadPostsToDatabaseWithTimeStamp:self.lastPostDate andOlder:@"false" andType:OFFER];
     [self.refresher endRefreshing];
+    [self loadPostsFromDatabase];
     self.isLastPage = false;
 }
 
 -(void)loadPostswithOffset:(int ) offset{
-    
-    
     
     if(!self.isLastPage){
         if(offset == 0){
@@ -84,14 +97,11 @@
                     Post *post = [[Post alloc] initPostFromJson:singlePost];
                     [self.offersPostArray addObject:post];
                     CLLocation *postLocation = [[CLLocation alloc] initWithLatitude:post.latitude longitude:post.longitude];
-                    [self.postsLocation addObject:postLocation];
-                    
                 }
                 self.isLastPage = [[responseObjectDictionary valueForKey:@"is_last_page"] boolValue];
                 self.offsetValue = [[responseObjectDictionary valueForKey:@"offset"] intValue];
                 
                 [self.offersTableView reloadData];
-                
             }
         }];
     }
@@ -139,8 +149,10 @@
     float endScrolling = scrollView.contentOffset.y + scrollView.frame.size.height;
     
     if (endScrolling >= scrollView.contentSize.height){
-        
-        [self loadPostswithOffset:self.offsetValue];
+        //[self loadPostswithOffset:self.offsetValue];
+        [[DatabaseLoader sharedInstance] loadPostsToDatabaseWithTimeStamp:self.firstPostDate andOlder:@"true" andType:OFFER];
+
+        [self loadPostsFromDatabase];
     }
     
 }

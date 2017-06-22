@@ -14,6 +14,7 @@
 #import "APICaller.h"
 #import "Navigator.h"
 #import "CustomButton.h"
+#import "LocalDatabase.h"
 
 @interface SideBarViewController : UIViewController <SWRevealViewControllerDelegate>
 
