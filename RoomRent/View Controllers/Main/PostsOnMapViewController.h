@@ -10,9 +10,10 @@
 #import <MapKit/MapKit.h>
 #import <CoreLocation/CoreLocation.h>
 #import "APICaller.h"
+#import "Post.h"
 
-@interface PostsOnMapViewController : UIViewController
+@interface PostsOnMapViewController : UIViewController <MKMapViewDelegate>
 
-@property NSArray *postsLocationArray;
-
+@property NSMutableArray *postsLocationArray;
+-(MKPinAnnotationView *) returnPointView :(CLLocationCoordinate2D) location andTitle: (NSString *) title  andColor :(UIColor *) color;
 @end

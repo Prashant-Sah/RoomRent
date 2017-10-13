@@ -9,12 +9,12 @@
 #import "MyPostViewController.h"
 
 @interface MyPostViewController ()
+
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *offerOrRequestSegmentedControl;
 @property UIRefreshControl *refresher;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *deletePostButton;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *cancelButton;
-
 
 @property NSMutableIndexSet *selectedRequestsIndices;
 @property NSMutableArray *offersPostsArray;
@@ -27,6 +27,7 @@
 @property int offsetValueforOffers;
 @property int offsetValueforRequests;
 
+@property int userid;
 @end
 
 NSString *postType;
@@ -43,6 +44,9 @@ BOOL requestsIsRefreshing = false;
     [super viewDidLoad];
     
     self.userApiToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"userApiToken"];
+    NSData *userData = [[NSUserDefaults standardUserDefaults] objectForKey:USER_DATA_KEY];
+    User *user = [NSKeyedUnarchiver unarchiveObjectWithData:userData];
+    self.userid = user.userId;
     
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
@@ -71,8 +75,8 @@ BOOL requestsIsRefreshing = false;
     [self.tableView addGestureRecognizer:lpgr];
     
     //Initialize arrays
-    self.offersPostsArray = [[NSMutableArray alloc] init];
-    self.requestsPostsArray = [[NSMutableArray alloc] init];
+    //self.offersPostsArray = [[NSMutableArray alloc] init];
+    //self.requestsPostsArray = [[NSMutableArray alloc] init];
     self.selectedOffersIndices = [[NSMutableIndexSet alloc] init];
     self.selectedRequestsIndices = [[NSMutableIndexSet alloc] init];
     
@@ -116,7 +120,8 @@ BOOL requestsIsRefreshing = false;
             
             postType = OFFER;
             self.tableView.estimatedRowHeight = 320;
-            [self loadPostsWithType:self.offerOrRequestSegmentedControl.selectedSegmentIndex andOffset: [NSNumber numberWithInt:self.offsetValueforOffers] ];
+            //[self loadPostsWithType:self.offerOrRequestSegmentedControl.selectedSegmentIndex andOffset: [NSNumber numberWithInt:self.offsetValueforOffers] ];
+            [self loadPostsFromDatabaseOfType:offers];
             [self.tableView reloadData];
             if(self.selectedOffersIndices.count > 0){
                 [self whenSomePostsMarked];
@@ -130,7 +135,8 @@ BOOL requestsIsRefreshing = false;
             
             postType = REQUEST;
             self.tableView.estimatedRowHeight = 190;
-            [self loadPostsWithType:self.offerOrRequestSegmentedControl.selectedSegmentIndex andOffset:[NSNumber numberWithInt:self.offsetValueforRequests]];
+            //[self loadPostsWithType:self.offerOrRequestSegmentedControl.selectedSegmentIndex andOffset:[NSNumber numberWithInt:self.offsetValueforRequests]];
+            [self loadPostsFromDatabaseOfType:asks];
             [self.tableView reloadData];
             if(self.selectedRequestsIndices.count > 0){
                 [self whenSomePostsMarked];
@@ -144,6 +150,18 @@ BOOL requestsIsRefreshing = false;
             break;
     }
 }
+
+-(void)loadPostsFromDatabaseOfType:(BOOL) type{
+    NSString *sql;
+    if (type == offers){
+        sql = [NSString stringWithFormat:@"Select * from posts_table where user_id = %d and post_type = 1", self.userid];
+        self.offersPostsArray = [[LocalDatabase sharedInstance] getPostsFromDatabaseWithQuery:sql];
+    }else{
+        sql = [NSString stringWithFormat:@"Select * from posts_table where user_id = %d and post_type = 2", self.userid];
+        self.requestsPostsArray = [[LocalDatabase sharedInstance] getPostsFromDatabaseWithQuery:sql];
+    }
+}
+
 
 -(void) loadPostsWithType: (BOOL) type andOffset:(nullable NSNumber*) offset{
     
@@ -161,7 +179,7 @@ BOOL requestsIsRefreshing = false;
         //[parameters setObject:[NSNumber numberWithInt:self.offsetValueforOffers] forKey:@"offset"];
         
         if(!(self.offersPostsArray.count > 0)){
-            [[APICaller sharedInstance] callAPiToGetPost:@"myposts/" parameters:parameters viewController:self completion:^(NSDictionary *responseObjectDictionary) {
+            [[APICaller sharedInstance] callAPiToGetPost:MY_POST_PATH parameters:parameters viewController:self completion:^(NSDictionary *responseObjectDictionary) {
                 
                 NSLog(@"%@",responseObjectDictionary);
                 NSString *code = [responseObjectDictionary valueForKey:@"code"];
@@ -178,7 +196,7 @@ BOOL requestsIsRefreshing = false;
         //[parameters setObject:[NSNumber numberWithInt:self.offsetValueforRequests] forKey:@"offset"];
         if(!(self.requestsPostsArray.count > 0)){
             
-            [[APICaller sharedInstance] callAPiToGetPost:@"myposts/" parameters:parameters viewController:self completion:^(NSDictionary *responseObjectDictionary) {
+            [[APICaller sharedInstance] callAPiToGetPost:MY_POST_PATH parameters:parameters viewController:self completion:^(NSDictionary *responseObjectDictionary) {
                 
                 NSLog(@"%@",responseObjectDictionary);
                 NSString *code = [responseObjectDictionary valueForKey:@"code"];
@@ -197,20 +215,21 @@ BOOL requestsIsRefreshing = false;
     for (NSDictionary *singlePost in postData) {
         
         Post *post = [[Post alloc] initPostFromJson:singlePost];
+        
         if(postType == OFFER){
             [self.offersPostsArray addObject:post];
-            self.isLastPageforOffers = [[postDict valueForKey:@"is_last_page"] boolValue];
-            self.offsetValueforOffers = [[postDict valueForKey:@"offset"] intValue];
+            //self.isLastPageforOffers = [[postDict valueForKey:@"is_last_page"] boolValue];
+            //self.offsetValueforOffers = [[postDict valueForKey:@"offset"] intValue];
         }else{
             [self.requestsPostsArray addObject:post];
-            self.isLastPageforRequests = [[postDict valueForKey:@"is_last_page"] boolValue];
-            self.offsetValueforRequests = [[postDict valueForKey:@"offset"] intValue];
+            //self.isLastPageforRequests = [[postDict valueForKey:@"is_last_page"] boolValue];
+            //self.offsetValueforRequests = [[postDict valueForKey:@"offset"] intValue];
         }
     }
     
     [self.tableView reloadData];
     
-   
+    
 }
 
 ///MARK: TableView DataSource and Delegate Functions
@@ -249,7 +268,7 @@ BOOL requestsIsRefreshing = false;
         } else {
             cell.contentView.backgroundColor =[UIColor colorWithRed:0.84 green:0.81 blue:0.76 alpha:1.0];
         }
-
+        
         if([self.selectedRequestsIndices containsIndex:indexPath.row]){
             cell.requestsCellCheckButton.hidden = false;
         }else{
@@ -292,9 +311,7 @@ BOOL requestsIsRefreshing = false;
                 cell.offersCellCheckButton.hidden = true;
                 [self.selectedOffersIndices removeIndex:indexPath.row];
                 if(self.selectedOffersIndices.count == 0){
-                    
                     [self whenNoPostsMarked];
-                    
                 }
             }
             
@@ -309,11 +326,9 @@ BOOL requestsIsRefreshing = false;
                 cell.requestsCellCheckButton.hidden = true;
                 [self.selectedRequestsIndices removeIndex:indexPath.row];
                 if(self.selectedRequestsIndices.count == 0){
-                    
                     [self whenNoPostsMarked];
                 }
             }
-            
         }
     }
     
@@ -387,18 +402,37 @@ BOOL requestsIsRefreshing = false;
         
     }
     
-    [[APICaller sharedInstance] callApiForDelete:@"posts/bulkdelete" parameters:parameters viewController:self completion:^(NSDictionary *responseObjectDictionary) {
+    [[APICaller sharedInstance] callApiForDelete:POST_BULKDELETE parameters:parameters viewController:self completion:^(NSDictionary *responseObjectDictionary) {
         
-        if( [[responseObjectDictionary valueForKey:@"code"] isEqualToString: SUCCESS]){
-            if(self.offerOrRequestSegmentedControl.selectedSegmentIndex == offers){
-                [self.selectedOffersIndices removeAllIndexes];
-            }else{
-                [self.selectedRequestsIndices removeAllIndexes];
-            }
-            [self refreshTable];
+        
+        // Online version
+        int nonDeletedPostsCount = 0;
+        
+        NSDictionary *statusDict = [responseObjectDictionary valueForKey:@"status"];
+        NSArray *statusKeys = [statusDict allKeys];
+        for (NSString *key in statusKeys){
             
+            if([[statusDict valueForKey:key] isEqualToString:@"Unable to delete item"]){
+                nonDeletedPostsCount += 1;
+            }
         }
+        
+        NSString *msg;
+        if( nonDeletedPostsCount >0){
+            msg = [NSString stringWithFormat:@" %d posts could not be deleted", nonDeletedPostsCount];
+        }else{
+            msg = @"All posts have been deleted successfully";
+        }
+        [[Alerter sharedInstance] createAlert:@"" message:msg useCancelButton:false viewController:self completion:^{}];
+        
+        if(self.offerOrRequestSegmentedControl.selectedSegmentIndex == offers){
+            [self.selectedOffersIndices removeAllIndexes];
+        }else{
+            [self.selectedRequestsIndices removeAllIndexes];
+        }
+        [self refreshTable];
     }];
+    
     
 }
 

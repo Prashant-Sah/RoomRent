@@ -14,8 +14,7 @@
 #import "LocalDatabase.h"
 
 @interface CustomRevealViewController () <SWRevealViewControllerDelegate>
-@property UIView *activityIndicatorBackgroundView;
-@property UIActivityIndicatorView *activityIndicator;
+
 @end
 
 @implementation CustomRevealViewController

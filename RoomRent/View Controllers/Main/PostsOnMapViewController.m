@@ -10,67 +10,114 @@
 
 @interface PostsOnMapViewController ()
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
-
+@property NSMutableArray *postsArray;
+@property CLLocation *postLocation;
 @end
 
 @implementation PostsOnMapViewController
 
+CLLocationDegrees centerLatitude = 0.0;
+CLLocationDegrees centerLongitude = 0.0;
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    CLLocationDegrees centerLatitude = 0.0;
-    CLLocationDegrees centerLongitude = 0.0;
     
-
+    NSMutableArray *annotationArray = [[NSMutableArray alloc] init];
     
-    @autoreleasepool {
+    NSDictionary *params = @{
+                             @"offset" :  @"0",
+                             @"type" : @"all"
+                             };
+    
+    [[APICaller sharedInstance] callAPiToGetPost:POST_PATH parameters:params viewController:self completion:^(NSDictionary *responseObjectDictionary) {
         
-        NSMutableArray *annotationArray = [[NSMutableArray alloc] init];
-        for (CLLocation *singlePostLocation in self.postsLocationArray) {
+        NSString *code = [responseObjectDictionary valueForKey:@"code"];
+        if ([code isEqualToString:POSTS_FOUND]){
             
-            MKPointAnnotation *annotationPoint = [[MKPointAnnotation alloc] init];
+            NSDictionary *postData = [responseObjectDictionary valueForKey:@"data"];
+            NSLog(@"%@",responseObjectDictionary);
+            for (NSDictionary *singlePost in postData) {
+                
+                Post *post = [[Post alloc] initPostFromJson:singlePost];
+                [self.postsArray addObject:post];
+                CLLocation *postLocation = [[CLLocation alloc] initWithLatitude:post.latitude longitude:post.longitude];
+                [self.postsLocationArray addObject:postLocation];
+                MKPointAnnotation *annotationPoint = [[MKPointAnnotation alloc] init];
+                annotationPoint.coordinate = postLocation.coordinate;
+                annotationPoint.title = post.title;
+                [annotationArray addObject:annotationPoint];
+                
+                if(post.postType == 1){
+                    annotationPoint.subtitle = [NSString stringWithFormat:@"%d rooms availabe for Rs. %d", post.numberOfRooms,(int)post.price];
+                }else{
+                    annotationPoint.subtitle = [NSString stringWithFormat:@"%d rooms required for Rs. %d", post.numberOfRooms,(int)post.price];
+                }
+//                UIColor *pinColor;
+//                if(post.postType == 1){
+//                    pinColor = [UIColor greenColor];
+//                }else{
+//                    pinColor = [UIColor redColor];
+//                }
+//                
+//                MKPinAnnotationView *pin = [self returnPointView:postLocation.coordinate andTitle:[NSString stringWithFormat:@"%d rooms at Rs. %d", post.numberOfRooms,(int)post.price] andColor:pinColor];
+//                [annotationArray addObject:pin.annotation];
+                
+                centerLatitude += annotationPoint.coordinate.latitude;
+                centerLongitude += annotationPoint.coordinate.longitude;
+            }
             
-            annotationPoint.coordinate = singlePostLocation.coordinate;
-            [annotationArray addObject:annotationPoint];
-            centerLatitude = annotationPoint.coordinate.latitude + centerLatitude;
-            centerLongitude = annotationPoint.coordinate.longitude + centerLongitude;
+            centerLatitude = centerLatitude/(annotationArray.count);
+            centerLongitude = centerLongitude/(annotationArray.count);
+            
+                        NSLog(@"%f",centerLatitude);
+                        NSLog(@"%f",centerLongitude);
+                        NSLog(@"%lu", (unsigned long)annotationArray.count);
+            [self.mapView addAnnotations:annotationArray];
+            
+                        MKCoordinateRegion region;
+                        region.center = CLLocationCoordinate2DMake(centerLatitude, centerLongitude);
+                        region.span = MKCoordinateSpanMake(0.05, 0.05);
+                        region = [self.mapView regionThatFits:region];
+                        [self.mapView setRegion:region animated:YES];
+            
         }
-        centerLatitude = centerLatitude/(annotationArray.count);
-        centerLongitude = centerLongitude/(annotationArray.count);
-        
-        NSLog(@"%f",centerLatitude);
-        NSLog(@"%f",centerLongitude);
-        
-        MKCoordinateRegion region;
-        region.center = CLLocationCoordinate2DMake(centerLatitude, centerLongitude);
-        region.span = MKCoordinateSpanMake(0.05, 0.05);
-        region = [self.mapView regionThatFits:region];
-        [self.mapView setRegion:region animated:YES];
-        [self.mapView addAnnotations:annotationArray];
-
-    }
-   
+        else if ([code isEqualToString:NO_POSTS_FOUND]){
+            // code to show something
+        }
+    }];
+    
+    //
+    //        NSMutableArray *annotationArray = [[NSMutableArray alloc] init];
+    //        for (CLLocation *singlePostLocation in self.postsLocationArray) {
+    //
+    //            MKPointAnnotation *annotationPoint = [[MKPointAnnotation alloc] init];
+    //
+    //            annotationPoint.coordinate = singlePostLocation.coordinate;
+    //            [annotationArray addObject:annotationPoint];
+    //            centerLatitude = annotationPoint.coordinate.latitude + centerLatitude;
+    //            centerLongitude = annotationPoint.coordinate.longitude + centerLongitude;
+    //        }
+    //        centerLatitude = centerLatitude/(annotationArray.count);
+    //        centerLongitude = centerLongitude/(annotationArray.count);
+    //
+    //        NSLog(@"%f",centerLatitude);
+    //        NSLog(@"%f",centerLongitude);
+    //        NSLog(@"%lu", (unsigned long)annotationArray.count);
+    
+    
+    
 }
 
-
-
-
-
-
-
-
-- (void)zoomToFitMapAnnotations {
+-(MKPinAnnotationView *) returnPointView :(CLLocationCoordinate2D) location andTitle: (NSString *) title  andColor :(UIColor *) color{
     
-    int i = 0;
-    MKMapPoint points[[self.mapView.annotations count]];
+    MKPointAnnotation *resultPin = [[MKPointAnnotation alloc] init];
+    MKPinAnnotationView *result = [[MKPinAnnotationView alloc] initWithAnnotation:resultPin reuseIdentifier:Nil];
+    [resultPin setCoordinate:location];
     
-    //build array of annotation points
-    for (id<MKAnnotation> annotation in [self.mapView annotations])
-        points[i++] = MKMapPointForCoordinate(annotation.coordinate);
-    
-    MKPolygon *poly = [MKPolygon polygonWithPoints:points count:i];
-    
-    [self.mapView setRegion:MKCoordinateRegionForMapRect([poly boundingMapRect]) animated:YES];
+    resultPin.title = title;
+    result.pinTintColor = color;
+    return result;
 }
-    
+
 @end

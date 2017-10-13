@@ -35,7 +35,7 @@
         SDWebImageDownloader *manager = [SDWebImageManager sharedManager].imageDownloader;
         [manager setValue:[@"Bearer " stringByAppendingString:userApiToken] forHTTPHeaderField:@"Authorization"];
         
-        NSURL *url = [NSURL URLWithString:[[BASE_URL stringByAppendingString:@"getfile/"] stringByAppendingString:[NSString stringWithFormat:@"%@", user.profileImageURL]]];
+        NSURL *url = [NSURL URLWithString:[[BASE_URL stringByAppendingString:GETFILE_PATH] stringByAppendingString:[NSString stringWithFormat:@"%@", user.profileImageURL]]];
         
         [self.profileImageButton sd_setImageWithURL:url forState:UIControlStateNormal];
         [self.profileImageButton setContentMode:UIViewContentModeScaleAspectFit];
@@ -45,7 +45,7 @@
         self.profileImageButton.layer.borderWidth = 2.0f;
         
     }
-    
+    //[self loadPostsToDatabase];
 }
 - (IBAction)profileBtnPressed:(UIButton *)sender {
     [[Navigator sharedInstance] makeRootViewControllerWithStoryBoard:@"Account" viewController:@"ProfileViewController" tabBarController:nil];
@@ -53,9 +53,7 @@
 
 - (IBAction)logoutBtnPressed:(UIButton *)sender {
     
-    [self showActivityIndicator];
-    
-    [[APICaller sharedInstance] callApiForDelete:@"logout" parameters:nil viewController:self completion:^(NSDictionary *responseObjectDictionary){
+    [[APICaller sharedInstance] callApiForDelete:LOGOUT_PATH parameters:nil viewController:self completion:^(NSDictionary *responseObjectDictionary){
         
         NSString *code = [responseObjectDictionary valueForKey:@"code"];
         if([code isEqualToString:USER_LOGGED_OUT]){
@@ -67,25 +65,14 @@
             [[Navigator sharedInstance] makeRootViewControllerWithStoryBoard:@"Account" viewController:@"SignInViewController" tabBarController:nil];
         }
     }];
-    
 }
 - (IBAction)clear:(UIButton *)sender {
     
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"userApiToken"];
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:USER_DATA_KEY];
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"updatedDateOfLastPostAmongAllPosts"];
     [[Navigator sharedInstance] makeRootViewControllerWithStoryBoard:@"Account" viewController:@"SignInViewController" tabBarController:nil];
 }
 
--(void) showActivityIndicator{
-    
-    self.activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
-    self.activityIndicator.frame = CGRectMake(0, 0, 100, 100);
-    self.activityIndicator.center = self.view.center;
-    
-    [self.view addSubview:self.activityIndicator];
-    [self.activityIndicator bringSubviewToFront:self.view];
-    [self.activityIndicator startAnimating];
-    
-}
 
 @end
